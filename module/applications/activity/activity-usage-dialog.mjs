@@ -430,7 +430,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         options: spellSlotOptions
       };
 
-      if ( !spellSlotOptions.some(o => !o.disabled) ) context.notes.push({
+      if ( consumeSlot && !spellSlotOptions.some(o => !o.disabled) ) context.notes.push({
         type: "warn", message: _loc("DND5E.SpellCastNoSlotsLeft", {
           name: this.item.name
         })
