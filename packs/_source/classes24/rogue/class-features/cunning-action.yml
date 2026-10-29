@@ -15,8 +15,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -26,9 +26,10 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities:
     NtS3iThuWWwm8O62:
       type: utility
@@ -45,10 +46,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -59,6 +62,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -76,6 +80,17 @@ system:
         name: ''
         formula: ''
       name: Dash
+      img: systems/dnd5e/icons/svg/action/dash.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
     AeCciDTvw3kS583a:
       type: utility
       name: Disengage
@@ -92,10 +107,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -106,6 +123,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -122,6 +140,17 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/disengage.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
     NiI5qEhg9TepZxMh:
       type: utility
       _id: NiI5qEhg9TepZxMh
@@ -137,12 +166,18 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: YLfpwyCVUObRTopP
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -152,10 +187,12 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: true
       uses:
@@ -169,17 +206,40 @@ system:
         name: ''
         formula: ''
       name: Hide
+      img: systems/dnd5e/icons/svg/action/hide.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: cunning-action
+  advancement: {}
+  crewed: false
 effects:
   - name: Hiding
     img: icons/skills/movement/figure-running-gray.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+    origin: null
     transfer: false
     _id: YLfpwyCVUObRTopP
     type: base
     system:
       changes: []
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -190,34 +250,31 @@ effects:
     tint: '#ffffff'
     statuses:
       - hiding
+      - invisible
     sort: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.1.0
+      createdTime: 1793387103833
+      modifiedTime: 1793387103833
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbrgeCunningAct.YLfpwyCVUObRTopP'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764143
+  systemVersion: 6.1.0
+  createdTime: 1793387103833
+  modifiedTime: 1793387103833
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

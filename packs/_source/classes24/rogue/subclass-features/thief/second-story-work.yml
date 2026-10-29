@@ -7,20 +7,19 @@ system:
   description:
     value: >-
       <p>You've trained to get into especially hard-to-reach places, granting
-      you these benefits.</p><p><strong>Climber.</strong> You gain a Climb Speed
-      equal to your Speed.</p><p><strong>Jumper.</strong> You can determine your
-      &amp;Reference[Jumping]{jump} distance using your Dexterity rather than
-      your Strength.</p><section class="secret"
-      id="secret-7BCLTkAFUjinYhJw"><p><strong>Foundry Note</strong></p><p>This
-      feature does not automatically add the Climb Speed and will have to be
-      added manually.</p></section>
+      you these benefits.</p><p><em><strong>Climber.</strong></em> You gain a
+      Climb Speed equal to your
+      &amp;Reference[Speed].</p><p><em><strong>Jumper.</strong></em> You can
+      determine your &amp;Reference[Jumping]{jump} distance using your Dexterity
+      rather than your Strength.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -30,26 +29,42 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
-  properties: []
-  requirements: ''
+  properties:
+    - trait
+  requirements: Thief
   activities: {}
   enchant: {}
   identifier: second-story-work
+  advancement: {}
+  crewed: false
 effects:
   - name: Second-Story Work
     img: icons/environment/settlement/stone-stairs.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
-    _id: qPdh1z9RMd6oBcoj
+    origin: null
     type: base
+    _id: ctlSR3WUH2w9ID9Q
     system:
       changes:
-        - key: system.attributes.movement.climb
+        - key: system.attributes.movement.speeds.climb
           value: '@attributes.movement.speed'
           priority: null
           type: upgrade
           phase: initial
-          _id: vnUh9ixjuVAI47bg
+          _id: bm3NY9Cs5PPxOYvd
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -63,34 +78,29 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1768932179578
-      modifiedTime: 1783544103257
+      systemVersion: 6.1.0
+      createdTime: 1793387106482
+      modifiedTime: 1793387106482
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
     folder: null
-    _key: '!items.effects!phbrgeSecondstor.qPdh1z9RMd6oBcoj'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+    _key: '!items.effects!phbrgeSecondstor.ctlSR3WUH2w9ID9Q'
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866560489
-  modifiedTime: 1783544103257
+  systemVersion: 6.1.0
+  createdTime: 1793387106482
+  modifiedTime: 1793387106482
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

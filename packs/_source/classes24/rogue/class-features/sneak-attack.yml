@@ -14,19 +14,15 @@ system:
       least one of your allies is within 5 feet of the target, the ally doesn't
       have the Incapacitated condition, and you don't have Disadvantage on the
       attack roll.</p><p>The extra damage increases as you gain Rogue levels, as
-      shown in the Sneak Attack column of the Rogue Features
-      table.</p><p><strong>Current Sneak Attack Damage:</strong> [[lookup
-      @scale.rogue.sneak-attack]]</p><section class="secret"
-      id="secret-ulLpai4CguAExpmN"><p><strong>Foundry Note</strong></p><p>Your
-      sneak attack damage will automatically scale as you level up. You can
-      select the damage type in the damage roll's dialog box.</p></section>
+      shown in the Sneak Attack column of the Rogue Features table.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -36,9 +32,10 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities:
     a1T6nHaqmvbLpyJr:
       type: damage
@@ -48,24 +45,24 @@ system:
         condition: ''
         override: false
       consumption:
-        targets:
-          - type: activityUses
-            value: '1'
+        targets: []
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
       effects: []
       range:
-        units: self
+        units: any
         special: ''
         override: false
       target:
@@ -76,7 +73,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -95,46 +93,140 @@ system:
             number: null
             denomination: null
             bonus: ''
+            modifiers: []
             types:
-              - acid
               - bludgeoning
+              - piercing
+              - slashing
+              - acid
               - cold
               - fire
               - force
               - lightning
               - necrotic
-              - piercing
               - poison
               - psychic
               - radiant
-              - slashing
               - thunder
             scaling:
               number: 1
       uses:
         spent: 0
-        recovery:
-          - period: turn
-            type: recoverAll
-        max: '1'
+        recovery: []
+        max: ''
       sort: 0
       _id: a1T6nHaqmvbLpyJr
-      name: ''
+      name: Sneak Attack
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+    OSqczTpo02034fSg:
+      type: damage
+      name: Cunning Sneak Attack
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@scale.rogue.sneak-attack.number'
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: true
+              formula: (@scale.rogue.sneak-attack.number - @scaling)d6
+            number: null
+            denomination: 0
+            bonus: ''
+            modifiers: []
+            types:
+              - bludgeoning
+              - piercing
+              - slashing
+              - acid
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - poison
+              - psychic
+              - radiant
+              - thunder
+            scaling:
+              mode: ''
+              number: 1
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: 5
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: rogue
+      _id: OSqczTpo02034fSg
   enchant: {}
   identifier: sneak-attack
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764486
+  systemVersion: 6.1.0
+  createdTime: 1793387103832
+  modifiedTime: 1793387103832
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

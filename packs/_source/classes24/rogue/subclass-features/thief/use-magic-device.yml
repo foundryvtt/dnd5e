@@ -7,29 +7,23 @@ system:
   description:
     value: >-
       <p>You've learned how to maximize use of magic items, granting you the
-      following benefits.</p><p><strong>Attunement.</strong> You can attune to
-      up to four magic items at once.</p><p><strong>Charges.</strong> Whenever
-      you use a magic item property that expends charges, roll [[/r 1d6]]. On a
-      roll of 6, you use the property without expending the
-      charges.</p><p><strong>Scrolls.</strong> You can use any <em>Spell
-      Scroll,</em> using Intelligence as your spellcasting ability for the
-      spell. If the spell is a cantrip or a level 1 spell, you can cast it
-      reliably. If the scroll contains a higher-level spell, you must first
-      succeed on an [[/skill arc]] check (DC 10 plus the spell's level). On a
-      successful check, you cast the spell from the scroll. On a failed check,
-      the scroll disintegrates.</p><section class="secret"
-      id="secret-2tHTpsolDU6Nggvo"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect that automatically increases your
-      attunement maximum.</p><p>When using an item property that expends charges
-      roll the d6 and uncheck the consumption box to use it for
-      free.</p></section>
+      following benefits.</p><p><em><strong>Attunement.</strong></em> You can
+      attune to up to four magic items at
+      once.</p><p><em><strong>Charges.</strong></em> Whenever you use a magic
+      item property that expends charges, roll [[/r 1d6]]. On a roll of 6, you
+      use the property without expending the
+      charges.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe.Activity.mrK57dSVtwgDGh3F
+      caption=false cite=false nameStyle=inline]{Scrolls}</p><section
+      id="secret-2tHTpsolDU6Nggvo" class="secret"><p><strong>Foundry
+      Note</strong></p><p>When using an item property that expends charges roll
+      the d6 and uncheck the consumption box to use it for free.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -39,12 +33,85 @@ system:
     subtype: ''
   prerequisites:
     level: 13
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
-  activities: {}
+  requirements: Thief
+  activities:
+    mrK57dSVtwgDGh3F:
+      type: check
+      name: Use Scroll
+      _id: mrK57dSVtwgDGh3F
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: false
+        condition: When you attemp to use a Spell Scroll higher than level 1
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>You can use any <em>Spell Scroll,</em> using Intelligence as your
+          spellcasting ability for the spell. If the spell is a cantrip or a
+          level 1 spell, you can cast it reliably. If the scroll contains a
+          higher-level spell, you must first succeed on an Intelligence (Arcana)
+          check (DC 10 plus the spell’s level). On a successful check, you cast
+          the spell from the scroll. On a failed check, the scroll
+          disintegrates.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      check:
+        associated:
+          - arc
+        dc:
+          calculation: ''
+          formula: 10 + @scaling
+        visible: true
+        ability: ''
+        bonus: ''
   enchant: {}
   identifier: use-magic-device
+  advancement: {}
+  crewed: false
 effects:
   - name: Attunement Bonus
     img: icons/magic/symbols/star-solid-gold.webp
@@ -57,7 +124,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: oxRZBTBdVy7jar8F
+          _id: WeYOVNR5R5fgq3LK
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -76,29 +155,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103346
-      modifiedTime: 1783544103346
+      systemVersion: 6.1.0
+      createdTime: 1793387106483
+      modifiedTime: 1793387106483
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbrgeUseMagicDe.FZWFvTtuOvMIj003'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866560489
-  modifiedTime: 1783544103346
+  systemVersion: 6.1.0
+  createdTime: 1793387106483
+  modifiedTime: 1793387106483
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
