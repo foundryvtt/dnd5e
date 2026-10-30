@@ -4,6 +4,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
+import EmbeddableDocumentMixin from "./mixins/embeddable.mjs";
 import Scaling from "./scaling.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -22,7 +23,9 @@ const ATTACK_ABILITY_SHIM_REGEX = new RegExp(/system\.activities\.\w+\.attack\.a
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
-export default class ActiveEffect5e extends DependentDocumentMixin(foundry.documents.ActiveEffect) {
+export default class ActiveEffect5e extends DependentDocumentMixin(
+  EmbeddableDocumentMixin(foundry.documents.ActiveEffect)
+) {
 
   /**
    * The default icon used for newly created Active Effect documents.
@@ -1337,6 +1340,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
     }, dialogOptions);
     if ( sheet ) return sheet._confirmDialog(config);
     return foundry.applications.api.DialogV2.confirm(config);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _buildEmbedHTML(config, options={}) {
+    const embedHTML = await super._buildEmbedHTML(config, options);
+    if ( embedHTML ) return embedHTML;
+    const enriched = await TextEditor.enrichHTML(this.description ?? "", {
+      ...options,
+      relativeTo: this
+      // TODO: Use this once https://github.com/foundryvtt/dnd5e/issues/5758 is resolved
+      // rollData: this.getRollData()
+    });
+    const container = document.createElement("div");
+    container.innerHTML = enriched;
+    return container.children;
   }
 
   /* -------------------------------------------- */
