@@ -2833,6 +2833,7 @@
   },
   "Tab": "Effects",
   "Warning": {
+    "DependentsWithoutGM": "Removing {name} also removes associated items, activities, or effects and requires an active GM.",
     "RollCondition": "Effect conditions cannot reference 'roll.' properties. Move this condition into the individual changes for the effect to be applied.",
     "StatusCondition": "Effects that grant statuses cannot also be conditional on statuses. Move this condition into the individual changes for the effect to be applied."
   }
