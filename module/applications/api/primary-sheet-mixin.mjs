@@ -555,7 +555,19 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     _sortEffects(effects, mode) {
-      return effects;
+      return effects.sort((lhs, rhs) => {
+        // Actor effects should sort before effects on items
+        if ( lhs.item && !rhs.item ) return 1;
+        if ( rhs.item && !lhs.item ) return -1;
+
+        // Effects on different items should sort using item's name
+        if ( lhs.item && rhs.item && (lhs.item !== rhs.item) ) {
+          return lhs.item.name.localeCompare(rhs.item.name, game.i18n.lang);
+        }
+
+        // Otherwise use the sorting value
+        return lhs.sort - rhs.sort;
+      });
     }
 
     /* -------------------------------------------- */

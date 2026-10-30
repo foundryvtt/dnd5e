@@ -442,4 +442,45 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     if ( !parentId ) return this.document.effects.get(effectId);
     return this.document.items.get(parentId).effects.get(effectId);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle a drop event for an existing embedded Active Effect to sort that Active Effect relative to its siblings.
+   * @param {DragEvent} event        The initiating drop event.
+   * @param {ActiveEffect5e} effect  The dropped Active Effect document.
+   * @returns {Promise<ActiveEffect5e[]>|void}
+   */
+  static sortActiveEffect(event, effect) {
+    const effects = effect.item ? effect.item.effects : effect.actor?.effects;
+    if ( !effects ) return;
+    const source = effects.get(effect.id);
+
+    // Confirm the drop target
+    const dropTarget = event.target.closest("[data-effect-id]");
+    if ( !dropTarget ) return;
+    const target = effects.get(dropTarget.dataset.effectId);
+    if ( !target || (source.id === target.id) ) return;
+
+    // Identify sibling items based on adjacent HTML elements
+    const siblings = [];
+    const onItem = event.target.closest(".item.sheet");
+    for ( const element of dropTarget.parentElement.children ) {
+      const { effectId: siblingId, parentId } = element.dataset;
+      if ( siblingId && (siblingId !== source.id) && (onItem || (parentId === effect.item?.id)) ) {
+        siblings.push(effects.get(siblingId));
+      }
+    }
+
+    // Perform the sort
+    const sortUpdates = foundry.utils.performIntegerSort(source, { target, siblings });
+    const updateData = sortUpdates.map(u => {
+      const update = u.update;
+      update._id = u.target._id;
+      return update;
+    });
+
+    // Perform the update
+    return effect.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
+  }
 }
