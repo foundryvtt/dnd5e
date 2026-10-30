@@ -12,7 +12,7 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import PropertyField from "../data/shared/property-field.mjs";
-import { staticID } from "../utils.mjs";
+import { nextSortValue, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -959,9 +959,7 @@ export default class Item5e extends SystemDocumentMixin(foundry.documents.Item) 
     const activity = new cls({ type, ...data }, { parent: this });
     if ( activity._preCreate(createData) === false ) return;
 
-    const sort = this.system.activities.size
-      ? Math.max(...this.system.activities.map(a => a.sort)) + CONST.SORT_INTEGER_DENSITY
-      : 0;
+    const sort = nextSortValue(this.system.activities);
     await this.update({ [`system.activities.${activity.id}`]: { ...activity.toObject(), sort } });
     const created = this.system.activities.get(activity.id);
     if ( renderSheet ) return created.sheet?.render({ force: true });

@@ -1259,7 +1259,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
     const special = this.getSpecialDurationParts();
     return {
       id, name, img, disabled, duration, source,
-      changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
+      changes: (await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort),
       durationIcon: special?.icon ?? "fa-clock",
       durationParts: special ? [special.label] : this.getDurationParts(),
       showDuration: !this.expirySupportsDuration() || Number.isFinite(this.duration.value),
