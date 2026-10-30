@@ -14,8 +14,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -25,25 +25,48 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Champion
   activities: {}
   enchant: {}
   identifier: additional-fighting-style
+  advancement:
+    F4BJnjlTZ7nAuzjg:
+      _id: F4BJnjlTZ7nAuzjg
+      type: ItemChoice
+      configuration:
+        choices:
+          '7':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool: []
+        spell: null
+        restriction:
+          type: feat
+          subtype: fightingStyle
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>@Embed[Compendium.dnd5e.classes24.Item.phbftrAdditional inline]</p>
+      name: Choose Fighting Style
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1745256761434
+  systemVersion: 6.1.0
+  createdTime: 1793335083328
+  modifiedTime: 1793335083328
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -13,9 +13,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -25,14 +26,17 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
   requirements: Fighter
   activities: {}
   enchant: {}
   identifier: tactical-master
+  advancement: {}
+  crewed: false
 effects:
-  - name: Tactial Master
+  - name: Tactical Master
     img: icons/sundries/documents/blueprint-axe.webp
     _id: 9Dwnc4r39iE997j0
     type: base
@@ -43,19 +47,35 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 6JfjUZqSei2xTTDa
+          _id: Rdu6aATnIc4UcU9e
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.weaponProf.mastery.bonus
           value: sap
           priority: null
           type: add
           phase: initial
-          _id: KxJcRhqy7VUbWiW0
+          _id: 51HwyfMgplyJL8uq
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.weaponProf.mastery.bonus
           value: slow
           priority: null
           type: add
           phase: initial
-          _id: d3cAe1ruUwtUPmAw
+          _id: wmSoobpNJJXw05k9
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -68,33 +88,31 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102061
-      modifiedTime: 1783544102061
+      systemVersion: 6.1.0
+      createdTime: 1793299626341
+      modifiedTime: 1793299626341
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbftrTacticalMa.9Dwnc4r39iE997j0'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1783544102061
+  systemVersion: 6.1.0
+  createdTime: 1793299626341
+  modifiedTime: 1793299626341
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

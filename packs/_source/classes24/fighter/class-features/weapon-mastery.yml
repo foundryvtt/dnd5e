@@ -13,19 +13,19 @@ system:
       ability to use the mastery properties of more kinds of weapons, as shown
       in the Weapon Mastery column of the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000.JournalEntryPage.wDELe3k25FQvYdrq#class-features]{Fighter
-      Features} table.</p><section class="secret"
-      id="secret-Qfoze6XoZUYIlAnw"><p><strong>Foundry Note</strong></p><p>To
-      change your masteries toggle on the "Edit" mode of your sheet. On the
-      "Details" tab click on the cog icon next to "Weapons" in the bottom right.
-      You can place a check in the mastery column of your chosen
-      weapons.</p></section>
+      Features} table.</p><section id="secret-Qfoze6XoZUYIlAnw"
+      class="secret"><p><strong>Foundry Note</strong></p><p>To change your
+      masteries toggle on the "Edit" mode of your sheet. On the "Details" tab
+      click on the cog icon next to "Weapons" in the bottom right. You can place
+      a check in the mastery column of your chosen weapons.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -35,25 +35,106 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities: {}
   enchant: {}
   identifier: weapon-mastery
+  advancement:
+    mJnrjhWpEz2lMDq4:
+      _id: mJnrjhWpEz2lMDq4
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - weapon:sim:*
+              - weapon:mar:*
+      value:
+        chosen: []
+      level: 1
+      hint: >-
+        <p>Your training with weapons allows you to use the mastery properties
+        of three kinds of Simple or Martial weapons of your choice. Whenever you
+        finish a Long Rest, you can practice weapon drills and change one of
+        those weapon choices.</p>
+      name: Weapon Mastery
+      flags: {}
+    oQeuiFaWAVOPtJPt:
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - weapon:sim:*
+              - weapon:mar:*
+      value:
+        chosen: []
+      level: 4
+      hint: >-
+        <p>When you reach certain Fighter levels, you gain the ability to use
+        the mastery properties of more kinds of weapons.</p>
+      _id: oQeuiFaWAVOPtJPt
+      name: Weapon Mastery
+      flags: {}
+    4QKhDAuuM8x78quv:
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - weapon:sim:*
+              - weapon:mar:*
+      value:
+        chosen: []
+      level: 10
+      hint: >-
+        <p>When you reach certain Fighter levels, you gain the ability to use
+        the mastery properties of more kinds of weapons.</p>
+      _id: 4QKhDAuuM8x78quv
+      name: Weapon Mastery
+      flags: {}
+    YSAbsXV9zn9eX9p7:
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - weapon:sim:*
+              - weapon:mar:*
+      value:
+        chosen: []
+      level: 16
+      hint: >-
+        <p>When you reach certain Fighter levels, you gain the ability to use
+        the mastery properties of more kinds of weapons.</p>
+      _id: YSAbsXV9zn9eX9p7
+      name: Weapon Mastery
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761920
+  systemVersion: 6.1.0
+  createdTime: 1793299626339
+  modifiedTime: 1793299626339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

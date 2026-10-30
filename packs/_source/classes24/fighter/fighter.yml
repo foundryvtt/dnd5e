@@ -5,14 +5,27 @@ folder: FCphxnvdYmavFNkr
 img: systems/dnd5e/icons/classes/fighter.webp
 system:
   description:
-    value: "<h3>Core Fighter Traits</h3><table class=\"core-class-traits\"><tbody><tr><th scope=\"row\"><p><strong>Primary Ability</strong></p></th><td><p>Strength or Dexterity</p></td></tr><tr><th scope=\"row\"><p><strong>Hit Point Die</strong></p></th><td><p>D10 per Fighter level</p></td></tr><tr><th scope=\"row\"><p><strong>Saving Throw Proficiencies</strong></p></th><td><p>Strength and Constitution</p></td></tr><tr><th scope=\"row\"><p><strong>Skill Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Persuasion, Perception, or Survival</p></td></tr><tr><th scope=\"row\"><p><strong>Weapon Proficiencies</strong></p></th><td><p>Simple and Martial\_weapons</p></td></tr><tr><th scope=\"row\"><p><strong>Armor Training</strong></p></th><td><p>Light, Medium, and Heavy armor and Shields</p></td></tr><tr><th scope=\"row\"><p><strong>Starting Equipment</strong></p></th><td><p><em>Choose A, B, or C:</em> (A) @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainMail0]{Chain Mail}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepFlail00000]{Flail}, 8 @UUID[Compendium.dnd5e.equipment24.Item.phbwepJavelin000]{Javelins}, @UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer's Pack}, and [[/award 4GP]]; (B) @UUID[Compendium.dnd5e.equipment24.Item.phbarmStuddedLea]{Studded Leather Armor}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Short­sword}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow}, 20 @UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows}, @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver}, @UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer's Pack}, and [[/award 11GP]]; or (C) [[/award 155GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbftrFighter000 inline classes=\"free-rules-embed\"]</p><h2>Becoming a Fighter …</h2><h3>As a Level 1 Character</h3><ul><li>Gain all the traits in the Core Fighter Traits table.</li><li>Gain the Fighter's level 1 features, which are listed in the Fighter Features table.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain the following traits from the Core Fighter Traits table: Hit Point Die, proficiency with Martial weapons, and training with Light and Medium armor and Shields.</li><li>Gain the Fighter's level 1 features, which are listed in the Fighter Features table.</li></ul>"
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbftrFighter000
+      inline classes="free-rules-embed"]</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000]{Class
+      Details}</em></p><h3>Becoming a Fighter …</h3><h4>As a Level 1
+      Character</h4><ul><li><p>Gain all the traits in the Core Fighter Traits
+      table.</p></li><li><p>Gain the Fighter's level 1 features, which are
+      listed in the Fighter Features table.</p></li></ul><h4>As a Multiclass
+      Character</h4><ul><li><p>Gain the following traits from the Core Fighter
+      Traits table: Hit Point Die, proficiency with Martial weapons, and
+      training with Light and Medium armor and Shields.</p></li><li><p>Gain the
+      Fighter's level 1 features, which are listed in the Fighter Features
+      table.</p></li></ul>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   startingEquipment:
     - type: OR
       requiresProficiency: false
@@ -26,35 +39,35 @@ system:
       sort: 200000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmChainMail0
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmChainMail0
       requiresProficiency: false
       _id: 2AgjcVGUTGP1cqCS
       group: NgcVsnjvVJsL3xLw
       sort: 400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepGreatsword
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepGreatsword
       requiresProficiency: false
       _id: B4b5Em0xc9EDUtan
       group: NgcVsnjvVJsL3xLw
       sort: 500000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepFlail00000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepFlail00000
       requiresProficiency: false
       _id: eMuasr6qhYhh0zsn
       group: NgcVsnjvVJsL3xLw
       sort: 600000
     - type: linked
       count: 8
-      key: Compendium.dnd5e.equipment24.Item.phbwepJavelin000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepJavelin000
       requiresProficiency: false
       _id: iLcbTWDnJuSDtfC1
       group: NgcVsnjvVJsL3xLw
       sort: 700000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagDungeoneers
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagDungeoneers
       requiresProficiency: false
       _id: HXnWybFbmiQJ7jxw
       group: NgcVsnjvVJsL3xLw
@@ -63,7 +76,7 @@ system:
       count: 4
       key: gp
       requiresProficiency: false
-      _id: a1YXCzXv1aGDIw86
+      _id: p1ZUaxjV31PhyHR8
       group: NgcVsnjvVJsL3xLw
       sort: 1600000
     - type: AND
@@ -73,49 +86,49 @@ system:
       sort: 300000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmStuddedLea
       requiresProficiency: false
       _id: 07VK1qiy28AWgHWE
       group: mXHlWriN3u7VGUmQ
       sort: 900000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepScimitar00
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepScimitar00
       requiresProficiency: false
       _id: q8p43JwNYPAJFk0v
       group: mXHlWriN3u7VGUmQ
       sort: 1000000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepShortsword
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepShortsword
       requiresProficiency: false
       _id: Z0BQ8xiUO9TdCpeY
       group: mXHlWriN3u7VGUmQ
       sort: 1100000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepLongbow000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepLongbow000
       requiresProficiency: false
       _id: 7UT2I5hEuyETwaw8
       group: mXHlWriN3u7VGUmQ
       sort: 1200000
     - type: linked
       count: 20
-      key: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbamoArrows0000
       requiresProficiency: false
       _id: RAZO2ywuqreGQheI
       group: mXHlWriN3u7VGUmQ
       sort: 1300000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagQuiver00000
       requiresProficiency: false
       _id: jzEWEiEKl0djfd2u
       group: mXHlWriN3u7VGUmQ
       sort: 1400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagDungeoneers
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagDungeoneers
       requiresProficiency: false
       _id: gf3zQAZHgglaMuN1
       group: mXHlWriN3u7VGUmQ
@@ -124,104 +137,148 @@ system:
       count: 11
       key: gp
       requiresProficiency: false
-      _id: N6FXv4CBSpxAodCH
+      _id: iKY1fXbUjuUt6zaT
       group: mXHlWriN3u7VGUmQ
       sort: 1700000
   identifier: fighter
   levels: 1
   advancement:
-    - _id: zvm19nuuM9qRHGrR
+    zvm19nuuM9qRHGrR:
+      _id: zvm19nuuM9qRHGrR
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: 15eBHWfn4f7qB8mA
+      flags: {}
+      hint: ''
+    15eBHWfn4f7qB8mA:
+      _id: 15eBHWfn4f7qB8mA
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrFightingSt
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrSecondWind
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrWeaponMast
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
-      title: Class Features
-    - _id: T2FovyKDjcIGMPCW
+      name: ''
+      flags: {}
+      hint: ''
+    T2FovyKDjcIGMPCW:
+      _id: T2FovyKDjcIGMPCW
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrActionSurg
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrTacticalMi
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
-      title: Class Features
-    - _id: 9UkcNtQ0HwJhmwKQ
+      name: ''
+      flags: {}
+      hint: ''
+    9UkcNtQ0HwJhmwKQ:
+      _id: 9UkcNtQ0HwJhmwKQ
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrExtraAttac
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrTacticalSh
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
-      title: Class Features
-    - _id: wKoM6KOIKl1HWVpR
+      name: ''
+      flags: {}
+      hint: ''
+    wKoM6KOIKl1HWVpR:
+      _id: wKoM6KOIKl1HWVpR
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrIndomitabl
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrTacticalMa
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 9
-      title: Class Features
-    - _id: gxbvTuKFKDsuzCmp
+      name: ''
+      flags: {}
+      hint: ''
+    gxbvTuKFKDsuzCmp:
+      _id: gxbvTuKFKDsuzCmp
       type: ItemGrant
       configuration:
         items:
           - optional: false
             uuid: Compendium.dnd5e.classes24.Item.phbftrTwoExtraAt
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 11
-      title: Class Features
-    - _id: pUT3XfEF6U1xeY18
+      name: ''
+      flags: {}
+      hint: ''
+    pUT3XfEF6U1xeY18:
+      _id: pUT3XfEF6U1xeY18
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrStudiedAtt
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 13
-      title: Class Features
-    - _id: knLMZh9N1O50qEcV
+      name: ''
+      flags: {}
+      hint: ''
+    knLMZh9N1O50qEcV:
+      _id: knLMZh9N1O50qEcV
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrThreeExtra
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
-      title: Class Features
-    - _id: bwCLOdauuzoHofil
+      name: ''
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -235,10 +292,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
-      title: ''
-    - _id: mRSh9oUVjLU33e7p
+      name: ''
+      flags: {}
+      hint: ''
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -252,10 +313,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
-      title: ''
-    - _id: mhZh3LfLMa15tXee
+      name: ''
+      flags: {}
+      hint: ''
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -269,10 +334,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
-      title: ''
-    - _id: FOf5CkGnSs0OlppY
+      name: ''
+      flags: {}
+      hint: ''
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -286,10 +355,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
-      title: ''
-    - _id: 54UFgRZAnd1Qo9dp
+      name: ''
+      flags: {}
+      hint: ''
+    54UFgRZAnd1Qo9dp:
+      _id: 54UFgRZAnd1Qo9dp
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -303,10 +376,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 6
-      title: ''
-    - _id: a70EF7pL9l3Y48QL
+      name: ''
+      flags: {}
+      hint: ''
+    a70EF7pL9l3Y48QL:
+      _id: a70EF7pL9l3Y48QL
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -320,46 +397,18 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 14
-      title: ''
-    - _id: x1gr4ONIHZo6bjX8
-      type: ScaleValue
-      configuration:
-        identifier: ''
-        type: number
-        distance:
-          units: ''
-        scale:
-          '2':
-            value: 1
-          '17':
-            value: 2
-      value: {}
-      title: Action Surge
+      name: ''
+      flags: {}
       hint: ''
-    - _id: iJ9JidHgTldknGgK
+    yEH3vVRip4nzxnN9:
+      _id: yEH3vVRip4nzxnN9
       type: ScaleValue
       configuration:
-        identifier: ''
-        type: number
-        distance:
-          units: ''
-        scale:
-          '9':
-            value: 1
-          '13':
-            value: 2
-          '17':
-            value: 3
-      value: {}
-      title: Indomitable
-      hint: ''
-    - _id: yEH3vVRip4nzxnN9
-      type: ScaleValue
-      configuration:
-        identifier: ''
-        type: number
+        identifier: second-wind
+        type: usage
         distance:
           units: ''
         scale:
@@ -370,18 +419,23 @@ system:
           '10':
             value: 4
       value: {}
-      title: Second Wind
       hint: ''
-    - _id: mpkUwD60nPpNaKsg
+      name: Second Wind
+      flags: {}
+      classRestriction: ''
+    mpkUwD60nPpNaKsg:
+      _id: mpkUwD60nPpNaKsg
       type: Subclass
       configuration: {}
       value:
         document: null
         uuid: null
       level: 3
-      title: ''
       hint: ''
-    - _id: B05A1ijLPQMNlb3m
+      name: ''
+      flags: {}
+    B05A1ijLPQMNlb3m:
+      _id: B05A1ijLPQMNlb3m
       type: Trait
       configuration:
         mode: default
@@ -393,10 +447,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: UaSYMl2io5kbXNOY
+      name: Saving Throw Proficiencies
+      flags: {}
+    UaSYMl2io5kbXNOY:
+      _id: UaSYMl2io5kbXNOY
       type: Trait
       configuration:
         mode: default
@@ -417,10 +473,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: TsqDRDOepHDmgYjZ
+      name: Skill Proficiencies
+      flags: {}
+    TsqDRDOepHDmgYjZ:
+      _id: TsqDRDOepHDmgYjZ
       type: Trait
       configuration:
         mode: default
@@ -432,10 +490,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: XNba1RiASLSxoS8e
+      name: Weapon Proficiencies
+      flags: {}
+    XNba1RiASLSxoS8e:
+      _id: XNba1RiASLSxoS8e
       type: Trait
       configuration:
         mode: default
@@ -449,10 +509,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Armor Training
       hint: ''
       classRestriction: primary
-    - _id: fK62ORkG9cOsa3XL
+      name: Armor Training
+      flags: {}
+    fK62ORkG9cOsa3XL:
+      _id: fK62ORkG9cOsa3XL
       type: Trait
       configuration:
         mode: default
@@ -463,10 +525,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Weapon Proficiencies
       hint: ''
       classRestriction: secondary
-    - _id: Nl6NkDxsiWjv7MfC
+      name: Weapon Proficiencies
+      flags: {}
+    Nl6NkDxsiWjv7MfC:
+      _id: Nl6NkDxsiWjv7MfC
       type: Trait
       configuration:
         mode: default
@@ -479,107 +543,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Armor Training
       hint: ''
       classRestriction: secondary
-    - _id: mJnrjhWpEz2lMDq4
-      type: Trait
-      configuration:
-        mode: mastery
-        allowReplacements: false
-        grants: []
-        choices:
-          - count: 3
-            pool:
-              - weapon:sim:*
-              - weapon:mar:*
-      value:
-        chosen: []
-      level: 1
-      title: Weapon Mastery
-      hint: ''
-    - _id: EmTANp6x6GfXFTmU
-      type: ItemChoice
-      configuration:
-        choices:
-          '1':
-            count: 1
-            replacement: true
-          '2':
-            count: null
-            replacement: true
-          '3':
-            count: null
-            replacement: true
-          '4':
-            count: null
-            replacement: true
-          '5':
-            count: null
-            replacement: true
-          '6':
-            count: null
-            replacement: true
-          '7':
-            count: null
-            replacement: true
-          '8':
-            count: null
-            replacement: true
-          '9':
-            count: null
-            replacement: true
-          '10':
-            count: null
-            replacement: true
-          '11':
-            count: null
-            replacement: true
-          '12':
-            count: null
-            replacement: true
-          '13':
-            count: null
-            replacement: true
-          '14':
-            count: null
-            replacement: true
-          '15':
-            count: null
-            replacement: true
-          '16':
-            count: null
-            replacement: true
-          '17':
-            count: null
-            replacement: true
-          '18':
-            count: null
-            replacement: true
-          '19':
-            count: null
-            replacement: true
-          '20':
-            count: null
-            replacement: true
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
-        spell: null
-        restriction:
-          type: feat
-          subtype: fightingStyle
-          list: []
-      value:
-        added: {}
-        replaced: {}
-      title: Fighting Style
-      hint: ''
-    - _id: n08OgNequzQOoUMV
+      name: Armor Training
+      flags: {}
+    n08OgNequzQOoUMV:
+      _id: n08OgNequzQOoUMV
       type: ScaleValue
       configuration:
         identifier: mastery
@@ -596,58 +565,13 @@ system:
           '16':
             value: 6
       value: {}
-      title: Weapon Masteries Known
       hint: ''
-    - type: Trait
-      configuration:
-        mode: mastery
-        allowReplacements: false
-        grants: []
-        choices:
-          - count: 1
-            pool:
-              - weapon:sim:*
-              - weapon:mar:*
-      value:
-        chosen: []
-      level: 4
-      title: Weapon Mastery
-      hint: ''
-      _id: oQeuiFaWAVOPtJPt
-    - type: Trait
-      configuration:
-        mode: mastery
-        allowReplacements: false
-        grants: []
-        choices:
-          - count: 1
-            pool:
-              - weapon:sim:*
-              - weapon:mar:*
-      value:
-        chosen: []
-      level: 10
-      title: Weapon Mastery
-      hint: ''
-      _id: 4QKhDAuuM8x78quv
-    - type: Trait
-      configuration:
-        mode: mastery
-        allowReplacements: false
-        grants: []
-        choices:
-          - count: 1
-            pool:
-              - weapon:sim:*
-              - weapon:mar:*
-      value:
-        chosen: []
-      level: 16
-      title: Weapon Mastery
-      hint: ''
-      _id: YSAbsXV9zn9eX9p7
-    - type: AbilityScoreImprovement
-      _id: gf1iwlMYsK0HHV0X
+      name: Weapon Mastery
+      flags: {}
+      classRestriction: ''
+    F4xsrA82RQCn3gEF:
+      type: AbilityScoreImprovement
+      _id: F4xsrA82RQCn3gEF
       configuration:
         cap: 2
         fixed:
@@ -659,12 +583,14 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofCombatP
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
+      name: Epic Boon
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -680,18 +606,19 @@ system:
     denomination: d10
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866361253
-  modifiedTime: 1758045140128
+  systemVersion: 6.1.0
+  createdTime: 1793299626337
+  modifiedTime: 1793299626337
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 0
+sort: -100000
 ownership:
   default: 0
 _key: '!items!phbftrFighter000'

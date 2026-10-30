@@ -9,17 +9,16 @@ system:
       <p>You study your opponents and learn from each attack you make. If you
       make an attack roll against a creature and miss, you have Advantage on
       your next attack roll against that creature before the end of your next
-      turn.</p><section class="secret"
-      id="secret-JB6LwCHybmUrbihQ"><p><strong>Foundry Note</strong></p><p>This
-      feature does not automate the Advantage on your next attack
-      roll.</p></section>
+      turn.</p><section id="secret-JB6LwCHybmUrbihQ"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature does
+      not automate the Advantage on your next attack roll.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -29,25 +28,24 @@ system:
     subtype: ''
   prerequisites:
     level: 13
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities: {}
   enchant: {}
   identifier: studied-attacks
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761746
+  systemVersion: 6.1.0
+  createdTime: 1793299626340
+  modifiedTime: 1793299626340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

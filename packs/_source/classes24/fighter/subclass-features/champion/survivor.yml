@@ -7,23 +7,21 @@ system:
   description:
     value: >-
       <p>You attain the pinnacle of resilience in battle, giving you these
-      benefits.</p><p><strong>Defy Death.</strong> You have Advantage on Death
-      Saving Throws. Moreover, when you roll 18–20 on a Death Saving Throw, you
-      gain the benefit of rolling a 20 on it.</p><p><strong>Heroic
-      Rally.</strong> At the start of each of your turns, you regain Hit Points
-      equal to 5 plus your Constitution modifier if you are Bloodied and have at
-      least 1 Hit Point.</p><section id="secret-z1Nr871ifr67hchm"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature does
-      not automate the Death Saving Throw changes. It includes an activity for
-      healing but does not automatically add it when you are
-      Bloodied.</p></section>
+      benefits.</p><p><em><strong>Defy Death.</strong></em> You have Advantage
+      on Death Saving Throws. Moreover, when you roll 18–20 on a Death Saving
+      Throw, you gain the benefit of rolling a 20 on
+      it.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbftrSurvivor00.Activity.5Fo0QwzexIPyLP3W
+      caption=false cite=false nameStyle=inline]</p><section
+      id="secret-z1Nr871ifr67hchm" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature does not automate the Death Saving Throw
+      changes to rolling an 18 or 19.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -33,18 +31,19 @@ system:
     subtype: ''
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Champion
   activities:
     5Fo0QwzexIPyLP3W:
       type: heal
       _id: 5Fo0QwzexIPyLP3W
       activation:
-        type: ''
+        type: turnStart
         value: null
         override: false
-        condition: At the start of each of your turns
+        condition: if Bloodied
       consumption:
         targets: []
         scaling:
@@ -52,10 +51,15 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>At the start of each of your turns, you regain Hit Points equal to
+          5 plus your Constitution modifier if you are &amp;Reference[Bloodied
+          apply=false] and have at least 1 Hit Point.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -66,6 +70,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -80,31 +85,96 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '5'
+          formula: 5 + @abilities.con.mod
         scaling:
           number: 1
         bonus: ''
-      name: ''
+        modifiers: []
+      name: Heroic Rally
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: survivor
-effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+  advancement: {}
+  crewed: false
+effects:
+  - name: Defy Death
+    img: icons/skills/wounds/injury-eyes-blood-red-pink.webp
+    origin: null
+    _id: Pp5xPE2M5bTEdZWW
+    type: base
+    system:
+      changes:
+        - key: system.attributes.death.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 5NHGt06bf6vs95ME
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbftrSurvivor00
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    disabled: false
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p><strong>Note:</strong> This effect does not modify the behavior of
+      rolling an 18 or 19 on a Death Saving Throw.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.1.0
+      createdTime: 1793299629725
+      modifiedTime: 1793299629725
+      lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbftrSurvivor00.Pp5xPE2M5bTEdZWW'
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1745256761796
+  systemVersion: 6.1.0
+  createdTime: 1793299629725
+  modifiedTime: 1793299629725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

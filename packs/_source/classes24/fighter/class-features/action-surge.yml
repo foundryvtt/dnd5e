@@ -10,19 +10,17 @@ system:
       turn, you can take one additional action, except the Magic
       action.</p><p>Once you use this feature, you can't do so again until you
       finish a Short or Long Rest. Starting at level 17, you can use it twice
-      before a rest but only once on a turn.</p><section
-      id="secret-nYOY8k3V38g8mZIS" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes a limited use that increases
-      automatically at level 17.</p></section>
+      before a rest but only once on a turn.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
-    max: '@scale.fighter.action-surge'
+    max: '@scale.action-surge.uses'
     spent: 0
     recovery:
       - period: sr
@@ -32,9 +30,10 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities:
     jtpVG47zPBUI0CZ5:
       type: utility
@@ -57,12 +56,14 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
+        expiry: null
       effects: []
       range:
         units: self
@@ -76,7 +77,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -94,21 +96,45 @@ system:
         recovery: []
       sort: 0
       _id: jtpVG47zPBUI0CZ5
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: action-surge
+  advancement:
+    x1gr4ONIHZo6bjX8:
+      _id: x1gr4ONIHZo6bjX8
+      type: ScaleValue
+      configuration:
+        identifier: uses
+        type: usage
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 1
+            period: sr
+          '17':
+            value: 2
+      value: {}
+      hint: ''
+      name: Action Surge Uses
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761397
+  systemVersion: 6.1.0
+  createdTime: 1793299626339
+  modifiedTime: 1793299626339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
