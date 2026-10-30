@@ -86,7 +86,7 @@ system:
         visible: false
         name: ''
         formula: ''
-      img: ''
+      img: systems/dnd5e/icons/svg/action/reroll.svg
       visibility:
         level:
           min: null
@@ -104,7 +104,7 @@ system:
 effects:
   - name: Disciplined Survivor
     img: icons/skills/wounds/injury-pain-body-orange.webp
-    origin: Compendium.dnd5e.classes24.Item.phbmnkDiscipline
+    origin: null
     type: base
     _id: tKd3mh0VaGrzK0TS
     system:
@@ -114,17 +114,17 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: A95db7YXOLK9ZPDu
+          _id: OjVrLKc4m1s5IsuM
           conditions: '{}'
           replacement: ''
-      rider:
-        statuses: []
       origin:
+        item: Compendium.dnd5e.classes24.Item.phbmnkDiscipline
         actor: null
         behavior: null
         effect: null
-        item: null
         message: null
+      rider:
+        statuses: []
       conditions: '{}'
       magical: false
     disabled: false
@@ -147,9 +147,9 @@ effects:
       exportSource: null
       coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.6
-      createdTime: 1792691451179
-      modifiedTime: 1792691451179
+      systemVersion: 6.1.0
+      createdTime: 1793404352849
+      modifiedTime: 1793404352849
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
@@ -160,9 +160,9 @@ _stats:
   duplicateSource: null
   coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 6.0.6
-  createdTime: 1792691451179
-  modifiedTime: 1792691451179
+  systemVersion: 6.1.0
+  createdTime: 1793404352849
+  modifiedTime: 1793404352849
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000
