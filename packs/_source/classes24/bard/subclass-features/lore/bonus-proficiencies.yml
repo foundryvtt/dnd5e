@@ -10,9 +10,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -22,25 +23,41 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: College of Lore
   activities: {}
   enchant: {}
   identifier: bonus-proficiencies
+  advancement:
+    zXNjqYhloLv46FqV:
+      _id: zXNjqYhloLv46FqV
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 3
+      name: ''
+      flags: {}
+      hint: <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrdBonusProfi inline]</p>
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866506195
-  modifiedTime: 1745256760302
+  systemVersion: 6.1.0
+  createdTime: 1793220717311
+  modifiedTime: 1793220717311
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

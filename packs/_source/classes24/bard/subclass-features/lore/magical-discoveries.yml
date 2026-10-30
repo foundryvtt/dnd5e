@@ -21,9 +21,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -33,25 +34,99 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
   requirements: College of Lore
   activities: {}
   enchant: {}
   identifier: magical-discoveries
+  advancement:
+    oQwTWF2ZW1lXNbmd:
+      name: Choose Spells
+      type: ItemChoice
+      _id: oQwTWF2ZW1lXNbmd
+      configuration:
+        allowDrops: true
+        choices:
+          '6':
+            count: 2
+            replacement: false
+          '7':
+            count: null
+            replacement: true
+          '8':
+            count: null
+            replacement: true
+          '9':
+            count: null
+            replacement: true
+          '10':
+            count: null
+            replacement: true
+          '11':
+            count: null
+            replacement: true
+          '12':
+            count: null
+            replacement: true
+          '13':
+            count: null
+            replacement: true
+          '14':
+            count: null
+            replacement: true
+          '15':
+            count: null
+            replacement: true
+          '16':
+            count: null
+            replacement: true
+          '17':
+            count: null
+            replacement: true
+          '18':
+            count: null
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        pool: []
+        restriction:
+          list:
+            - class:cleric
+            - class:druid
+            - class:wizard
+          school: []
+          level: available
+        sorting: a
+        spell:
+          ability: []
+          method: spell
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+        type: spell
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrdMagicalDis inline]</p>
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866506195
-  modifiedTime: 1745256760479
+  systemVersion: 6.1.0
+  createdTime: 1793220717311
+  modifiedTime: 1793220717311
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

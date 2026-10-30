@@ -18,8 +18,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     recovery: []
@@ -29,6 +29,7 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: College of Lore
@@ -40,25 +41,28 @@ system:
         type: reaction
         value: 1
         condition: >-
-          Creature you can see within 60 feet makes a damage roll or succeeds on
-          an ability check or attack roll
+          When a creature you can see within 60 feet makes a damage roll or
+          succeeds on an ability check or attack roll
         override: false
       consumption:
         targets:
           - type: itemUses
             value: '1'
             target: feat:bardic-inspiration
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -74,7 +78,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -94,18 +99,29 @@ system:
       sort: 0
       name: Cut with Words
       img: systems/dnd5e/icons/svg/damage/psychic.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: cutting-words
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866506195
-  modifiedTime: 1759426664355
+  systemVersion: 6.1.0
+  createdTime: 1793220717311
+  modifiedTime: 1793220717311
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -15,8 +15,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     recovery: []
@@ -26,6 +26,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: College of Lore
@@ -43,17 +44,20 @@ system:
           - type: itemUses
             value: '1'
             target: feat:bardic-inspiration
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -68,7 +72,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -88,18 +93,29 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: peerless-skill
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866506195
-  modifiedTime: 1759426658945
+  systemVersion: 6.1.0
+  createdTime: 1793220717311
+  modifiedTime: 1793220717311
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
