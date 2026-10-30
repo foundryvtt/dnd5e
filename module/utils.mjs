@@ -99,7 +99,20 @@ export async function bulkFromUuid(uuids, { relative }={}) {
 
   await Promise.all(fetches);
 
-  return (await Promise.all(uuids.map(uuid => fromUuid(uuid, { relative })))).reduce((map, doc) => {
+  const _fromUuid = async uuid => {
+    let doc = await fromUuid(uuid, { relative });
+    if ( !doc && relative && uuid.startsWith(".") ) {
+      const { embedded } = foundry.utils.parseUuid(uuid, { relative });
+      doc = relative.parent;
+      while ( doc && (embedded.length > 1) ) {
+        const [embeddedName, embeddedId] = embedded.splice(0, 2);
+        doc = doc.getEmbeddedDocument(embeddedName, embeddedId);
+      }
+    }
+    return doc;
+  };
+
+  return (await Promise.all(uuids.map(uuid => _fromUuid(uuid)))).reduce((map, doc) => {
     if ( doc ) map.set(redirected.get(doc.uuid), doc);
     return map;
   }, new Map());
