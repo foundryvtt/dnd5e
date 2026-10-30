@@ -7,15 +7,15 @@ system:
   description:
     value: >-
       <p>The thrill of battle drives you toward victory. During combat, you can
-      give yourself Heroic Inspiration whenever you start your turn without
-      it.</p>
+      give yourself &amp;Reference[Heroic Inspiration] whenever you start your
+      turn without it.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -25,25 +25,24 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Champion
   activities: {}
   enchant: {}
   identifier: heroic-warrior
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1745256761620
+  systemVersion: 6.1.0
+  createdTime: 1793299629724
+  modifiedTime: 1793299629724
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
