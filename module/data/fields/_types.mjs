@@ -1,14 +1,16 @@
 /**
  * @typedef AdvantageModeData
- * @property {number|null} override               Whether the mode has been entirely overridden.
- * @property {AdvantageModeCounts} advantages     The advantage counts.
- * @property {AdvantageModeCounts} disadvantages  The disadvantage counts.
+ * @property {number|null} override                    Whether the mode has been entirely overridden.
+ * @property {EffectChangeData|null} [overrideSource]  Change responsible for the override.
+ * @property {AdvantageModeCounts} advantages          The advantage counts.
+ * @property {AdvantageModeCounts} disadvantages       The disadvantage counts.
  */
 
 /**
  * @typedef AdvantageModeCounts
- * @property {number} count          The number of applications of this mode.
- * @property {boolean} [suppressed]  Whether this mode is suppressed.
+ * @property {number} count                  The number of applications of this mode.
+ * @property {boolean} [suppressed]          Whether this mode is suppressed.
+ * @property {EffectChangeData[]} [sources]  Changes responsible for each count.
  */
 
 /**

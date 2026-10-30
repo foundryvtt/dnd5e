@@ -7,6 +7,7 @@ import AttributesFields from "../../data/actor/templates/attributes.mjs";
 import BastionTurnMessageData from "../../data/chat-message/bastion-turn-message-data.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { Filter } from "../../filter.mjs";
@@ -608,7 +609,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
   /**
    * Is this actor under the effect of this property from some status or due to its level of a condition?
    * @param {string} key      A key in `DND5E.conditionEffects`.
-   * @returns {boolean}       Whether the actor is affected.
+   * @returns {string|void}   The entry in `DND5E.conditionEffects` that applies, if any.
    */
   hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
@@ -634,7 +635,21 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       return Number(level) <= conditions[status];
     };
 
-    return props.some(applyCondition);
+    return props.find(applyCondition);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the label for an entry in `DND5E.conditionEffects`.
+   * @param {string} prop  An entry in `DND5E.conditionEffects`.
+   * @returns {string}     Label of the status or condition level.
+   * @protected
+   */
+  _getConditionEffectLabel(prop) {
+    const [status, level] = prop.split("-");
+    const { name } = CONFIG.statusEffects[status];
+    return level ? `${name} (${this.system.conditions[status]})` : name;
   }
 
   /* -------------------------------------------- */
@@ -2863,6 +2878,32 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       if ( value ) attributions.push({ value, label: source, document: e, type: "add" });
     }
     return attributions;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Break down the sources of advantage and disadvantage for one or more roll mode fields.
+   * @param {string[]} keyPaths           Paths to the roll mode fields.
+   * @returns {AttributionDescription[]}  Individual contributions to this roll's mode.
+   * @protected
+   */
+  _prepareRollModeAttributions(keyPaths) {
+    const { counts } = AdvantageModeField.combineFields(this.system, keyPaths);
+    const changes = [...counts.advantages.sources, ...counts.disadvantages.sources];
+    if ( counts.overrideSource ) changes.unshift(counts.overrideSource);
+    const unknown = _loc("COMMON.Unknown");
+    return changes.map(change => {
+      const { type } = change;
+      const value = Number(change.value);
+      const source = change.effect ?? change.source;
+      if ( source instanceof ActiveEffect5e ) {
+        let label = source.sourceName;
+        if ( !source.origin || source.matchesOrigin(this.uuid) || (label === unknown) ) label = source.name;
+        return { value, type, label, document: source };
+      }
+      return { value, type, label: source?.name ?? source ?? unknown, document: null };
+    });
   }
 
   /* -------------------------------------------- */
