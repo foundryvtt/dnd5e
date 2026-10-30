@@ -7,20 +7,14 @@ system:
   description:
     value: >-
       <p>You can use up to two Cunning Strike effects when you deal Sneak Attack
-      damage, paying the die cost for each effect.</p><section class="secret"
-      id="secret-8yelsP7k8fXkEA5W"><p><strong>Foundry Note</strong></p><p>After
-      using Cunning Strike effects use the [[/item Cunning Strike
-      activity=Cunning Sneak Attack]]{Cunning Sneak Attack} activity. It will
-      prompt you to select how many dice you expended on effects and deduct them
-      from your Sneak Attack roll automatically.</p><p>You can control the
-      damage type in the damage roll dialog box.</p></section>
+      damage, paying the die cost for each effect.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -30,25 +24,24 @@ system:
     subtype: ''
   prerequisites:
     level: 11
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities: {}
   enchant: {}
   identifier: improved-cunning-strike
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764346
+  systemVersion: 6.1.0
+  createdTime: 1793387103833
+  modifiedTime: 1793387103833
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

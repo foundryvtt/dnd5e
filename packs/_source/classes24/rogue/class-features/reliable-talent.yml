@@ -7,17 +7,14 @@ system:
   description:
     value: >-
       <p>Whenever you make an ability check that uses one of your skill or tool
-      proficiencies, you can treat a d20 roll of 9 or lower as a 10.</p><section
-      class="secret" id="secret-FOATC0HOce35kD20"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect which automates
-      the minimum roll of 10 on your skill and tool proficiencies.</p></section>
+      proficiencies, you can treat a d20 roll of 9 or lower as a 10.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -27,12 +24,15 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities: {}
   enchant: {}
   identifier: reliable-talent
+  advancement: {}
+  crewed: false
 effects:
   - _id: TIw25thHBYEPdKR1
     disabled: false
@@ -41,7 +41,7 @@ effects:
       units: seconds
       expiry: null
       expired: false
-    origin: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+    origin: null
     transfer: true
     flags: {}
     tint: '#ffffff'
@@ -49,13 +49,13 @@ effects:
     description: ''
     statuses: []
     _stats:
-      compendiumSource: Compendium.dnd5e.classfeatures.Item.YN9xm6MCvse4Y60u.ActiveEffect.vMMZHZQ0qT7MT4I4
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103229
-      modifiedTime: 1783544103229
+      systemVersion: 6.1.0
+      createdTime: 1793387103833
+      modifiedTime: 1793387103833
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
@@ -67,24 +67,32 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: 69Zcm7BOEgvBUtLW
+          _id: pNg91kRz6y6x1v5J
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbrgeReliableTa.TIw25thHBYEPdKR1'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1783544103229
+  systemVersion: 6.1.0
+  createdTime: 1793387103833
+  modifiedTime: 1793387103833
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

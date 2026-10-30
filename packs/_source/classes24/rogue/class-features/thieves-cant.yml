@@ -9,19 +9,16 @@ system:
       <p>You picked up various languages in the communities where you plied your
       roguish talents. You know Thieves' Cant and one other language of your
       choice, which you choose from the language tables in
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.t1WP9VEevo4TOTXw#choose-languages]{Character
-      Creation}.</p><section class="secret"
-      id="secret-xG1Y223QZRsrOTCZ"><p><strong>Foundry
-      Note</strong></p><p>Thieves' Cant will be added to your sheet
-      automatically and you will be prompted to choose the additional
-      language.</p></section>
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.t1WP9VEevo4TOTXw#choose-languages]{chapter
+      2}.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -31,25 +28,42 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities: {}
   enchant: {}
   identifier: thieves-cant
+  advancement:
+    IHbn6EXoBfxHdj7c:
+      _id: IHbn6EXoBfxHdj7c
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:exotic:cant
+        choices:
+          - count: 1
+            pool:
+              - languages:*
+      value:
+        chosen: []
+      level: 1
+      hint: <p>@Embed[Compendium.dnd5e.classes24.Item.phbrgeThievesCan inline]</p>
+      name: Thieves' Cant
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745514630350
+  systemVersion: 6.1.0
+  createdTime: 1793387103832
+  modifiedTime: 1793387103832
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
