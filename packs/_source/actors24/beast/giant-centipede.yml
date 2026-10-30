@@ -687,8 +687,7 @@ items:
     effects:
       - name: Poisoned
         img: systems/dnd5e/icons/svg/statuses/poisoned.svg
-        origin: >-
-          Compendium.dnd-monster-manual.actors.Actor.mmGiantCentipede.Item.mmBite0000000000
+        origin: Compendium.dnd-monster-manual.actors.Actor.mmGiantCentipede.Item.mmBite0000000000
         _id: PzxN1RHxvVfpYZxa
         type: base
         system:
@@ -721,8 +720,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!mmGiantCentipede.mmBite0000000000.PzxN1RHxvVfpYZxa
+        _key: '!actors.items.effects!mmGiantCentipede.mmBite0000000000.PzxN1RHxvVfpYZxa'
     flags:
       dnd5e:
         riders:

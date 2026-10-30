@@ -556,9 +556,10 @@ items:
           <p>As a Bonus Action on your later turns, you can move the force up to
           20 feet and repeat the attack against a creature within 5 feet of it.
           On a hit, the target takes Force damage equal to 1d8 plus your
-          spellcasting ability modifier.</p><p><strong>At Higher Levels.</strong>
-          When you cast this spell using a spell slot of 3rd level or higher, the
-          damage increases by 1d8 for every two slot levels above the 2nd.</p>
+          spellcasting ability modifier.</p><p><strong>At Higher
+          Levels.</strong> When you cast this spell using a spell slot of 3rd
+          level or higher, the damage increases by 1d8 for every two slot levels
+          above the 2nd.</p>
         chat: ''
       source:
         custom: ''
@@ -643,7 +644,9 @@ items:
             parts:
               - custom:
                   enabled: true
-                  formula: (floor(@flags.dnd5e.summon.level / 2))d8 + @flags.dnd5e.summon.mod
+                  formula: >-
+                    (floor(@flags.dnd5e.summon.level / 2))d8 +
+                    @flags.dnd5e.summon.mod
                 number: null
                 denomination: 8
                 bonus: ''
