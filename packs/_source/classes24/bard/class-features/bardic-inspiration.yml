@@ -9,37 +9,37 @@ system:
       <p>You can supernaturally inspire others through words, music, or dance.
       This inspiration is represented by your Bardic Inspiration die, which
       starts as a d6 (currently, [[lookup
-      @scale.bard.inspiration.die]]).</p><p><strong>Using Bardic
-      Inspiration.</strong> As a Bonus Action, you can inspire another creature
-      within 60 feet of yourself who can see or hear you. That creature gains
-      one of your Bardic Inspiration dice. A creature can have only one Bardic
-      Inspiration die at a time.</p><p>Once within the next hour when the
+      @scale.bard.inspiration.die]]).</p><p><em><strong>Using Bardic
+      Inspiration.</strong></em> As a Bonus Action, you can inspire another
+      creature within 60 feet of yourself who can see or hear you. That creature
+      gains one of your Bardic Inspiration dice. A creature can have only one
+      Bardic Inspiration die at a time.</p><p>Once within the next hour when the
       creature fails a D20 Test, the creature can roll the Bardic Inspiration
       die and add the number rolled to the d20, potentially turning the failure
       into a success. A Bardic Inspiration die is expended when it's
-      rolled.</p><p><strong>Number of Uses.</strong> You can confer a Bardic
-      Inspiration die a number of times equal to your Charisma modifier (minimum
-      of once), and you regain all expended uses when you finish a Long
-      Rest.</p><p><strong>At Higher Levels. </strong>Your Bardic Inspiration die
-      changes when you reach certain Bard levels, as shown in the Bardic Die
-      column of the Bard Features table. The die becomes a d8 at level 5, a d10
-      at level 10, and a d12 at level 15.</p><section class="secret"
-      id="secret-PtUXhUXS84HSdaew"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect for tracking when a character has Bardic
-      Inspiration to use.</p><p>Recovery is set to long rest (for levels before
-      @UUID[Compendium.dnd5e.classes24.Item.phbbrdFontOfInsp]{Font of
-      Inspiration} is gained). Please manually adjust as required.</p></section>
+      rolled.</p><p><em><strong>Number of Uses.</strong></em> You can confer a
+      Bardic Inspiration die a number of times equal to your Charisma modifier
+      (minimum of once), and you regain all expended uses when you finish a Long
+      Rest.</p><p><em><strong>At Higher Levels.</strong></em><strong>
+      </strong>Your Bardic Inspiration die changes when you reach certain Bard
+      levels, as shown in the Bardic Die column of the Bard Features table. The
+      die becomes a d8 at level 5, a d10 at level 10, and a d12 at level
+      15.</p><section id="secret-PtUXhUXS84HSdaew"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect for tracking when a character has Bardic
+      Inspiration to use.</p></section>
     chat: ''
   source:
     custom: ''
-    revision: 1
+    revision: 2
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: max(1, @abilities.cha.mod)
     recovery:
-      - period: lr
+      - period: '@scale.bardic-inspiration.recovery'
         type: recoverAll
     spent: 0
   type:
@@ -47,6 +47,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
@@ -71,14 +72,18 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: '1'
         units: hour
         special: ''
         override: false
         concentration: false
+        expiry: null
       effects:
         - _id: WIHaOwkGqnX71mK1
+          uuid: null
+          level: {}
       range:
         value: '60'
         units: ft
@@ -92,7 +97,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -112,11 +118,101 @@ system:
       sort: 0
       name: Inspire
       img: systems/dnd5e/icons/svg/damage/psychic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    ZVcQ7fRwFSESRA2N:
+      type: utility
+      name: Regain Inspiration
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
+      sort: 100000
+      activation:
+        type: encounter
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: min(0, @item.uses.value - 2)
+            target: ''
+            scaling: {}
+      description:
+        value: >-
+          <p>When you roll Initiative, you regain expended uses of Bardic
+          Inspiration until you have two if you have fewer than that.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: 18
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: bard
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: ZVcQ7fRwFSESRA2N
   enchant: {}
   identifier: bardic-inspiration
+  advancement:
+    mA15CAzvHJBfgcda:
+      name: Recovery
+      type: ScaleValue
+      _id: mA15CAzvHJBfgcda
+      configuration:
+        identifier: recovery
+        type: usage
+        distance:
+          units: ''
+        scale:
+          '1':
+            period: lr
+          '5':
+            period: sr
+      flags: {}
+      value: {}
+      hint: ''
+  crewed: false
 effects:
   - name: Inspired
-    origin: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+    origin: null
     duration:
       value: 3600
       units: seconds
@@ -129,6 +225,16 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: >-
       <p>You have received Bardic Inspiration. Once within the next hour when
       you fail a D20 Test, you can roll the Bardic Inspiration die and add the
@@ -141,29 +247,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.1.0
+      createdTime: 1793220715225
+      modifiedTime: 1793220715225
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrdBardicInsp.WIHaOwkGqnX71mK1'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1745256760271
+  systemVersion: 6.1.0
+  createdTime: 1793220715225
+  modifiedTime: 1793220715225
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
