@@ -1434,6 +1434,9 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     const pace = TravelField.getTravelPaceMode(config.pace, config.skill);
 
     const rollData = this.getRollData({ roll: true });
+    const sourceData = config.activity?.getRollData() ?? config.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     rollData.roll = {
       ability: abilityId,
       proficient: dnd5e.dataModels.actor.CommonTemplate
@@ -1449,7 +1452,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     ], {
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
       disadvantages: { count: Number(pace.disadvantage) },
-      rules: { category: "check", actor: this, rollData }
+      rules: { category: "check", actor: this, item: config.item, rollData }
     });
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1529,6 +1532,9 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     const originalProf = calculateSkillToolProficiency(hostActor, abilityId, process);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
     const rollData = this.getRollData({ roll: true });
+    const sourceData = process.activity?.getRollData() ?? process.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     Object.assign(rollData.roll, {
       ability: abilityId,
       proficient: prof.multiplier >= 1,
@@ -1541,7 +1547,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       "rolls.ability.check",
       `rolls.ability.${type}`,
       `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
-    ], { rules: { category: "check", actor: this, rollData } });
+    ], { rules: { category: "check", actor: this, item: process.item, rollData } });
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
@@ -1657,6 +1663,9 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
     const rollData = this.getRollData({ roll: true });
+    const sourceData = config.activity?.getRollData() ?? config.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     Object.assign(rollData.roll, {
       ability: config.ability,
       proficient: ability?.[type]?.prof?.multiplier >= 1,
@@ -1664,7 +1673,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     });
     const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
       `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
-    ], { rules: { category: type, actor: this, rollData } });
+    ], { rules: { category: type, actor: this, item: config.item, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[type].prof.hasProficiency ? ability[type].prof.term : null,
