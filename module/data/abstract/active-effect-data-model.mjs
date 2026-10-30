@@ -157,6 +157,31 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   /* -------------------------------------------- */
 
   /**
+   * Apply rider operations to actor & item in-memory.
+   * @param {DatabaseWriteOperation[]} operations  Database operations to apply.
+   */
+  applyRidersSource(operations) {
+    for ( const operation of operations ) {
+      const collectionName = getDocumentClass(operation.documentName)?.metadata.collection;
+      if ( operation.action === "create" ) {
+        if ( !operation.parent ) throw new Error("In-memory rider updates cannot create world documents.");
+        operation.data.forEach(d => d._id ??= foundry.utils.randomID());
+        operation.parent.updateSource({ [collectionName]: operation.data });
+      } else if ( operation.action === "update" ) {
+        const collection = operation.parent ? operation.parent[collectionName] : game[collectionName];
+        for ( const updateData of operation.updates ) {
+          const { _id, ...update } = updateData;
+          collection.get(_id)?.updateSource(update);
+        }
+      } else if ( operation.action === "delete" ) {
+        throw new Error("Delete operations not permitted for in-memory rider updates.");
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle creating rider documents when this active effect is created.
    * @param {DatabaseOperation} [options={}]       Options passed to the create or update operation.
    * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
