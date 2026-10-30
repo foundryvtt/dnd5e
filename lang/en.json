@@ -2493,7 +2493,8 @@
     "Radiant": "Radiant",
     "Slashing": "Slashing",
     "Thunder": "Thunder"
-  }
+  },
+  "Types": "Damage Types"
 },
 
 "DND5E.Damage": "Damage",
@@ -2529,7 +2530,6 @@
 "DND5E.DamageRoll": "Damage Roll",
 "DND5E.DamageThreshold": "Damage Threshold",
 "DND5E.DamageType": "Damage Type",
-"DND5E.DamageTypes": "Damage Types",
 
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
@@ -3670,6 +3670,7 @@
 "DND5E.HalfProficient": "Half Proficient",
 
 "DND5E.HEAL": {
+  "All": "All Healing",
   "FIELDS": {
     "healing": {
       "label": "Healing",
@@ -3728,7 +3729,14 @@
     "MaximumShort": "Max HP",
     "Temporary": "Temporary Hit Points",
     "TemporaryShort": "Temp HP"
-  }
+  },
+  "Types": "Healing Types"
+},
+
+"DND5E.HealingModification": {
+  "Label": "Healing Modification",
+  "Hint": "Formulas for amounts that will be added to typed healing applied to this actor. Negative values will reduce the healing given.",
+  "Formatter": "{name} Healing Modification"
 },
 
 "DND5E.Height": "Height",
@@ -5857,6 +5865,28 @@
     "one": "Trait",
     "other": "Traits",
     "title": "Traits"
+  },
+  "Healing": {
+    "Immunity": {
+      "one": "Healing Nullification",
+      "other": "Healing Nullifications",
+      "title": "Healing Nullification"
+    },
+    "Modification": {
+      "one": "Healing Modification",
+      "other": "Healing Modifications",
+      "title": "Healing Modification"
+    },
+    "Resistance": {
+      "one": "Healing Halving",
+      "other": "Healing Halvings",
+      "title": "Healing Halving"
+    },
+    "Vulnerability": {
+      "one": "Healing Doubling",
+      "other": "Healing Doublings",
+      "title": "Healing Doubling"
+    }
   },
   "Language": {
     "one": "Language",
