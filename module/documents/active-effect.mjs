@@ -831,7 +831,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
   async _preDelete(options, user) {
     const dependents = this.getDependents();
     if ( dependents.length && !game.users.activeGM ) {
-      ui.notifications.warn(_loc(this.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ? "DND5E.CONCENTRATION.Warning.BreakWithoutGM" : "DND5E.EFFECT.Warning.DependentsWithoutGM", { name: this.name }));
+      const warn = this.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING)
+        ? "DND5E.CONCENTRATION.Warning.BreakWithoutGM"
+        : "DND5E.EFFECT.Warning.DependentsWithoutGM";
+      ui.notifications.warn(warn, { format: { name: this.name } });
       return false;
     }
     return super._preDelete(options, user);
