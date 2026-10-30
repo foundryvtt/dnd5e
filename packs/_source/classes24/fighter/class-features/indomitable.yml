@@ -47,6 +47,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
+            target: ''
             scaling: {}
         scaling:
           allowed: false
@@ -88,7 +89,7 @@ system:
         name: Bonus
         formula: '@classes.fighter.levels'
       name: Reroll
-      img: ''
+      img: systems/dnd5e/icons/svg/action/reroll.svg
       behaviors: []
       flags: {}
       visibility:
@@ -130,8 +131,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793299626340
-  modifiedTime: 1793299626340
+  createdTime: 1793404309996
+  modifiedTime: 1793404309996
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
