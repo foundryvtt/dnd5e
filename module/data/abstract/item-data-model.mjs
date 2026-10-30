@@ -1,4 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
+import { convertCurrency, roundCurrency } from "../../utils.mjs";
 import PropertyField from "../shared/property-field.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
@@ -60,7 +61,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @type {Item5e|void}
    */
   get advancementRootItem() {
-    return this.parent?.actor?.items.get(this.parent.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
+    const origin = this.parent?.flags?.dnd5e?.advancementRoot ?? this.parent?.flags?.dnd5e?.advancementOrigin ?? "";
+    return this.parent?.actor?.items.get(origin.slice(0, 16));
   }
 
   /* -------------------------------------------- */
@@ -226,7 +228,7 @@ export default class ItemDataModel extends SystemDataModel {
     enrichmentOptions.relativeTo ??= this.parent;
 
     const source = (await activity?.getCardData()) ?? {};
-    const usage = this.getUsageData({ activity });
+    const usage = foundry.utils.deepClone(this.getUsageData({ activity }));
 
     if ( source.activity?.chatFlavor ) {
       source.activity.chatFlavor = await TextEditor.enrichHTML(source.activity.chatFlavor, enrichmentOptions);
@@ -314,6 +316,23 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Find the identifier for the class that granted this item, if any.
+   * @param {string} [sourceItemIdentifier]  Identifier for the item that directly granted this item (can be typed).
+   * @returns {string}
+   */
+  getClassIdentifier(sourceItemIdentifier) {
+    let source = sourceItemIdentifier ? this.parent.actor?.identifiedItems.get(sourceItemIdentifier)?.first()
+      : this.advancementRootItem;
+    if ( !source ) return "";
+    if ( (source.type !== "class") && (source.type !== "subclass") ) source = source.system.advancementRootItem;
+    if ( source?.type === "class" ) return source.identifier;
+    if ( source?.type === "subclass" ) return source.system.classIdentifier ?? "";
+    return "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine the cost to craft this Item.
    * @param {object} [options]
    * @param {"buy"|"craft"|"none"} [options.baseItem="craft"]  Ignore base item if "none". Include full base item gold
@@ -330,7 +349,13 @@ export default class ItemDataModel extends SystemDataModel {
     if ( !this.properties.has("mgc") || !rarities.size ) {
       const { mundane } = CONFIG.DND5E.crafting;
       const valueInGP = price.valueInGP ?? 0;
-      return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
+      const gold = convertCurrency(roundCurrency(price.value * mundane.gold, price.denomination), price.denomination, {
+        to: CONFIG.DND5E.defaultCurrency
+      });
+      return {
+        days: Math.ceil(valueInGP * mundane.days),
+        gold: gold.denomination === CONFIG.DND5E.defaultCurrency ? gold.value : 0
+      };
     }
 
     // Exceptions

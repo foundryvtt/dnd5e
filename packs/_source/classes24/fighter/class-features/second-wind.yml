@@ -14,17 +14,14 @@ system:
       Fighter levels, you gain more uses of this feature, as shown in the Second
       Wind column of the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000.JournalEntryPage.wDELe3k25FQvYdrq#class-features]{Fighter
-      Features} table.</p><section class="secret"
-      id="secret-GEvXAMpxWEFigqSc"><p><strong>Foundry Note</strong></p><p>This
-      feature automatically scales in usage and recovers the correct number of
-      uses on a Short and Long Rest.</p></section>
+      Features} table.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '@scale.fighter.second-wind'
     spent: 0
@@ -39,9 +36,10 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities:
     zumaUC11cpntqme1:
       type: heal
@@ -62,10 +60,12 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -76,6 +76,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -98,22 +99,29 @@ system:
         scaling:
           number: 1
         bonus: '@classes.fighter.levels'
+        modifiers: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: second-wind
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761713
+  systemVersion: 6.1.0
+  createdTime: 1793299626338
+  modifiedTime: 1793299626338
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

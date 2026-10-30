@@ -42,6 +42,17 @@ export default class ItemGrantAdvancement extends Advancement {
   static VALID_TYPES = new Set(["feat", "spell", "consumable", "container", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
+  /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _defaultTitle() {
+    if ( this.item.type === "class" ) return _loc("DND5E.ADVANCEMENT.ItemGrant.DefaultTitle.ClassFeatures");
+    if ( this.item.type === "subclass" ) return _loc("DND5E.ADVANCEMENT.ItemGrant.DefaultTitle.SubclassFeatures");
+    return super._defaultTitle;
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
@@ -111,7 +122,7 @@ export default class ItemGrantAdvancement extends Advancement {
     const existing = new Set(Object.values(added));
     for ( const uuid of selected ) {
       if ( existing.has(uuid) && skipExisting ) continue;
-      let itemData = retainedData.items?.find(i => i.flags?.dnd5e?.sourceId ?? i._stats?.compendiumSource);
+      let itemData = retainedData.items?.find(i => (i.flags?.dnd5e?.sourceId ?? i._stats?.compendiumSource) === uuid);
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;

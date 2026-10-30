@@ -40,6 +40,22 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Convert a currency value from one denomination to another.
+ * @param {number} value             The currency value.
+ * @param {string} from              The current denomination.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.round]  Round currency according to maximum decimal digits allowed by denomination.
+ * @returns {{ value: number, denomination: string }}
+ */
+export function convertCurrency(value, from, { round, ...options }={}) {
+  const message = unit => `Currency ${unit} not defined in CONFIG.DND5E.currencies`;
+  const r = _convertSystemUnits(value, from, CONFIG.DND5E.currencies, { ...options, message, invertConversion: true });
+  return { value: round ? roundCurrency(r.value, r.unit) : r.value, denomination: r.unit };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Round a specific denomination to the number of digits specified in the configuration.
  * @param {number} value         Currency value to round.
  * @param {string} denomination  Denomination that the value represents.
@@ -59,29 +75,31 @@ export function roundCurrency(value, denomination) {
 
 /**
  * Bulk version of `fromUuid` that performs only a single fetch per compendium.
- * @param {string[]} uuids           UUIDs of documents to retrieve.
- * @returns {Map<string, Document>}  Documents mapped to the provided UUID.
+ * @param {string[]} uuids               UUIDs of documents to retrieve.
+ * @param {object} [options={}]
+ * @param {Document} [options.relative]  A Document to resolve relative UUIDs against.
+ * @returns {Map<string, Document>}      Documents mapped to the provided UUID.
  */
-export async function bulkFromUuid(uuids) {
+export async function bulkFromUuid(uuids, { relative }={}) {
   const collections = new Map();
+  const fetches = [];
   const redirected = new Map();
 
   for ( const uuid of uuids ) {
-    const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
-    collections.getOrInsert(collection, []).push(id);
+    const { collection, id, primaryId, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid, { relative });
+    collections.getOrInsert(collection, []).push(primaryId ?? id);
     redirected.set(redirectedUuid, uuid);
   }
 
-  const fetches = [];
   for ( const [collection, ids] of collections.entries() ) {
     if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
       fetches.push(collection.getDocuments({ _id__in: ids }));
-    } else {
-      fetches.push(ids.map(id => collection.get(id)));
     }
   }
 
-  return (await Promise.all(fetches)).flat().reduce((map, doc) => {
+  await Promise.all(fetches);
+
+  return (await Promise.all(uuids.map(uuid => fromUuid(uuid, { relative })))).reduce((map, doc) => {
     if ( doc ) map.set(redirected.get(doc.uuid), doc);
     return map;
   }, new Map());
@@ -302,17 +320,6 @@ export function formatRange(min, max, options) {
 /* -------------------------------------------- */
 
 /**
- * A helper function to format textarea text to HTML with linebreaks.
- * @param {string} value  The text to format.
- * @returns {Handlebars.SafeString}
- */
-export function formatText(value) {
-  return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
-}
-
-/* -------------------------------------------- */
-
-/**
  * A helper function that formats a time in a human-readable format.
  * @param {number} value         Time to display.
  * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
@@ -507,7 +514,7 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
     const formula = replaceFormulaData(value, rollData, { item, property });
     const roll = new Roll(formula);
     foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
-  } catch (err) {
+  } catch ( err ) {
     if ( item.isEmbedded ) {
       const message = _loc("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
       item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
@@ -585,7 +592,7 @@ export function simplifyBonus(bonus, data={}, { strict }={}) {
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
-  } catch (err) {
+  } catch ( err ) {
     if ( strict ) throw err;
     console.error(err);
     return 0;
@@ -942,7 +949,9 @@ export function convertWeight(value, from, options={}, _options={}) {
  * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
  * @returns {{ value: number, unit: string }}
  */
-export function _convertSystemUnits(value, from, config, { message, strict, system, truncate, to, validTargetUnits }) {
+export function _convertSystemUnits(value, from, config, {
+  invertConversion, message, strict, system, truncate, to, validTargetUnits
+}) {
   if ( (from === to) || (!to && system && (config[from]?.type === system)) ) {
     return { value: truncate ? Math.floor(value) : value, unit: from };
   }
@@ -959,16 +968,19 @@ export function _convertSystemUnits(value, from, config, { message, strict, syst
     const unitOptions = Object.entries(config)
       .reduce((arr, [key, v]) => {
         if ( validTargetUnits && !validTargetUnits.has(key) ) return arr;
-        const fits = truncate ? base >= v.conversion : ((base % v.conversion === 0) || (base >= v.conversion * 2));
+        const conversion = invertConversion ? 1 / v.conversion : v.conversion;
+        const fits = truncate ? base >= conversion : ((base % conversion === 0) || (base >= conversion * 2));
         if ( fits && (config[from]?.type === v.type) ) arr.push({ key, conversion: v.conversion });
         return arr;
       }, [])
-      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+      .sort((lhs, rhs) => invertConversion ? lhs.conversion - rhs.conversion : rhs.conversion - lhs.conversion);
     to = unitOptions[0]?.key ?? from;
   }
 
   if ( !config[to] || (from === to) ) return { value: truncate ? Math.floor(value) : value, unit: from };
-  const converted = value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
+  const converted = value
+    * (config[invertConversion ? to : from].conversion ?? 1)
+    / (config[invertConversion ? from : to].conversion ?? 1);
   return { value: truncate ? Math.floor(converted) : converted, unit: to };
 }
 
@@ -1366,7 +1378,6 @@ export function registerHandlebarsHelpers() {
     "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
     "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
-    "dnd5e-textFormat": formatText,
     "dnd5e-tooltip": ({ hash }) => loadingTooltip(hash)
   });
 }
@@ -1568,9 +1579,17 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     if ( prefixItemName && (item instanceof Item) ) name = item.name;
     type = "item";
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
+    else if ( attr === "ability" ) label = "DND5E.ATTACK.FIELDS.attack.abilities.label";
+    else if ( attr === "attack.bonus" ) label = "DND5E.ATTACK.FIELDS.attack.bonus.label";
+    else if ( attr === "attack.flat" ) label = "DND5E.ATTACK.FIELDS.attack.flat.label";
+    else if ( attr === "damageBonus" ) label = "DND5E.BonusDamage";
+    else if ( attr === "damage.parts" ) label = "DND5E.DAMAGE.FIELDS.damage.parts.label";
+    else if ( attr === "damage.types" ) label = "DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.types.label";
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
     else if ( attr === "level" ) label = "DND5E.Level";
     else if ( attr === "properties" ) label = "DND5E.Properties";
+    else if ( attr === "save.dc" ) label = "DND5E.SAVE.FIELDS.save.dc.formula.label";
+    else if ( attr === "save.scaling" ) label = "DND5E.SAVE.FIELDS.save.dc.calculation.label";
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
     else label = getSchemaLabel(attr, "Item", item);
   }
@@ -1658,6 +1677,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     }
   }
 
+  // Status Effects
+  else if ( attr.startsWith("statuses.") ) {
+    const key = attr.slice(9);
+    label = CONFIG.statusEffects[key]?.name;
+  }
+
   // Subclasses
   else if ( attr.startsWith("subclasses.") ) {
     const [, identifier, ...rest] = attr.split(".");
@@ -1675,9 +1700,14 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
 
   // Traits
   else if ( attr.startsWith("traits.dm.amount.") ) {
-    const key = attr.replace("traits.dm.amount.", "");
+    const key = attr.slice(17);
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("traits.dm.amount");
     label = mapping.getFieldLabel(key);
+  }
+  else if ( attr.startsWith("traits.languages.communication.") ) {
+    const [key, ...path] = attr.slice(31).split(".");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("traits.languages.communication");
+    label = mapping.getFieldLabel(key, path.reverse());
   }
 
   // Attempt to find the attribute in a data model

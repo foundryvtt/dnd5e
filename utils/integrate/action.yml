@@ -12,7 +12,7 @@ runs:
           contents: read
 
     - name: Checkout Free Rules Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         path: _free/
         repository: foundryvtt/dnd-free-rules

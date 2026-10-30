@@ -2,17 +2,18 @@ name: Adrenaline Rush
 system:
   description:
     value: >-
-      <p>You can take the Dash action as a Bonus Action. When you do so, you
-      gain a number of Temporary Hit Points equal to your Proficiency Bonus. You
-      can use this trait a number of times equal to your Proficiency Bonus, and
-      you regain all expended uses when you finish a Short or Long Rest.</p>
+      <p>You can take the &amp;Reference[Dash] action as a Bonus Action. When
+      you do so, you gain a number of Temporary Hit Points equal to your
+      Proficiency Bonus. You can use this trait a number of times equal to your
+      Proficiency Bonus, and you regain all expended uses when you finish a
+      Short or Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
     book: ''
     license: CC-BY-4.0
+    revision: 1
   uses:
     max: '@prof'
     spent: 0
@@ -24,6 +25,7 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Orc
@@ -49,10 +51,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -63,6 +67,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -76,18 +81,30 @@ system:
         max: ''
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - temphp
         custom:
-          enabled: false
+          enabled: true
+          formula: '@prof'
         scaling:
           number: 1
-        bonus: '@prof'
+        bonus: ''
+        modifiers: []
+      img: systems/dnd5e/icons/svg/action/dash.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: adrenaline-rush
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 _id: phbsptAdrenaline
 type: feat
@@ -97,18 +114,14 @@ effects: []
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340861480
-  modifiedTime: 1745341994825
+  systemVersion: 6.0.6
+  createdTime: 1791578061041
+  modifiedTime: 1791578061041
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptAdrenaline'

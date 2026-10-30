@@ -40,6 +40,13 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  get _defaultTitle() {
+    return this.constructor.metadata.title;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.configuration.choices));
   }
@@ -156,7 +163,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
           level: level || this.actor.system.details?.level, throwError: true
         });
         items.push(item);
-      } catch (err) {
+      } catch ( err ) {
         messages.push(err.message);
       }
     }

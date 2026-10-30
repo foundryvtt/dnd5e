@@ -234,7 +234,7 @@ export default class UsesField extends SchemaField {
           roll.alter(Math.min(count, Math.ceil(this.uses.max / (minRoll.total || 1))), 0, { multiplyNumeric: true });
         }
         total = (await roll.evaluate()).total;
-      } catch (err) {
+      } catch ( err ) {
         Hooks.onError("UsesField#recoverUses", err, {
           msg: _loc("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name, formula: profile.formula, uuid: this.uuid ?? item.uuid

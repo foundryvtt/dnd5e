@@ -78,7 +78,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: HaoKvppKfss4ajTS
       range:
         override: false
       target:
@@ -121,7 +122,7 @@ system:
         type: special
         value: null
         override: true
-        condition: When you hit a creature with this spell.
+        condition: When a creature affected by this spell ends their turn.
       consumption:
         targets: []
         scaling:
@@ -134,12 +135,7 @@ system:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: HaoKvppKfss4ajTS
-          onSave: false
-          level:
-            min: null
-            max: null
+      effects: []
       range:
         override: true
         units: spec

@@ -12,19 +12,15 @@ system:
       skills, you can make it as a Strength check even if it normally uses a
       different ability: Acrobatics, Intimidation, Perception, Stealth, or
       Survival. When you use this ability, your Strength represents primal power
-      coursing through you, honing your agility, bearing, and
-      senses.</p><section class="secret"
-      id="secret-himIRZuFGInNkZgU"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which will cause those skills to
-      automatically use your Strength modifier if it is higher than the normal
-      Ability Score associated with the Skill.</p></section>
+      coursing through you, honing your agility, bearing, and senses.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -34,12 +30,39 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: primal-knowledge
+  advancement:
+    n7u8pfM928PJ8Mkd:
+      _id: n7u8pfM928PJ8Mkd
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:itm
+              - skills:nat
+              - skills:prc
+              - skills:sur
+      value:
+        chosen: []
+      level: 3
+      hint: >-
+        You gain proficiency in another skill of your choice from the skill list
+        available to Barbarians at level 1.
+      flags: {}
+      name: Primal Knowledge
+  crewed: false
 effects:
   - name: Primal Knowledge
     img: icons/creatures/birds/raptor-owl-flying-moon.webp
@@ -47,36 +70,56 @@ effects:
     type: base
     system:
       changes:
-        - key: system.skills.acr.bonuses.check
+        - key: system.skills.acr.roll.bonus
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: 6yJOQP9AU4koplCO
-        - key: system.skills.itm.bonuses.check
+          _id: 6lRF6fjrziyY9FC8
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.itm.roll.bonus
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: KP7skIT3vfjuhnap
-        - key: system.skills.prc.bonuses.check
+          _id: 6axbAhDGHvndBwiD
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.prc.roll.bonus
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: bm6RQcKQcWZTlKrL
-        - key: system.skills.ste.bonuses.check
+          _id: 9rrYaEKT9UBhNIsP
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.ste.roll.bonus
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: lJ4cad5bqdkb2yXi
-        - key: system.skills.sur.bonuses.check
+          _id: Fo7CXzG7LjJ89Grc
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.sur.roll.bonus
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: XTAJj2uPpnG0wOef
+          _id: Uz8OSIQyj1Z8zzcd
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -91,14 +134,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow.ActiveEffect.ktAO4M4jvixfzyuO
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544101247
-      modifiedTime: 1783544101247
+      systemVersion: 6.0.6
+      createdTime: 1792088967436
+      modifiedTime: 1792088967436
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start:
@@ -112,18 +154,14 @@ effects:
     folder: null
     _key: '!items.effects!phbbrbPrimalKnow.ufbJRsGGW3REMmJm'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1783544101246
+  systemVersion: 6.0.6
+  createdTime: 1792088967436
+  modifiedTime: 1792088967436
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

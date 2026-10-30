@@ -383,13 +383,24 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
     if ( !source ) return null;
     const { _stats } = game.items.fromCompendium(source);
     const advancementOrigin = `${this.item.id}.${this.id}`;
-    return source.clone({
+    const item = source.clone({
       _stats,
       _id: id ?? foundry.utils.randomID(),
       "flags.dnd5e.sourceId": uuid,
       "flags.dnd5e.advancementOrigin": advancementOrigin,
       "flags.dnd5e.advancementRoot": this.item.getFlag("dnd5e", "advancementRoot") ?? advancementOrigin
-    }, { keepId: true }).toObject();
+    }, { keepId: true });
+
+    /**
+     * A hook event that fires when an advancement prepares an item from a compendium.
+     * @function dnd5e.advancementCreateItemData
+     * @memberof hookEvents
+     * @param {Advancement} advancement  The advancement being run.
+     * @param {Item5e} item              Cloned item being created.
+     */
+    Hooks.callAll("dnd5e.advancementCreateItemData", this, item);
+
+    return item.toObject();
   }
 
   /* -------------------------------------------- */

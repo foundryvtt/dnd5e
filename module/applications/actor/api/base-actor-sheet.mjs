@@ -1685,7 +1685,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const t = foundry.utils.parseUuid(this.inventorySource.uuid);
     const base = d.embedded?.length ? "document" : "primary";
     return (d.collection === t.collection) && (d[`${base}Id`] === t[`${base}Id`])
-    && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
+      && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
   }
 
   /* -------------------------------------------- */
@@ -1906,7 +1906,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Filter out items already in containers to avoid creating duplicates
-    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    const containers = new Set(items.filter(i => (i.type === "container") && i._id).map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
 
     // Transform physical items from NPCs to their gear versions

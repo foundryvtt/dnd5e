@@ -1,5 +1,6 @@
 import Award from "./applications/award.mjs";
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
+import aggregateDamageRolls from "./dice/aggregate-damage-rolls.mjs";
 import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
@@ -52,7 +53,7 @@ export function chatMessage(message) {
   if ( !match ) return;
   let { type, config } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
-  switch (type) {
+  switch ( type ) {
     case "attack": handleAttackCommand(config); break;
     case "award": Award.handleAward(message); break;
     case "heal":
@@ -354,7 +355,7 @@ export async function enrichAward(config, label, options) {
   let parsed;
   try {
     parsed = Award.parseAwardCommand(command);
-  } catch (err) {
+  } catch ( err ) {
     logWarning(err.message, options);
     return null;
   }
@@ -1023,12 +1024,15 @@ export async function enrichDamage(configs, label, options) {
   if ( activity ) {
     config.activityUuid = activity.uuid;
     const damageConfig = activity.getDamageConfig({ attackMode: config.attackMode });
-    for ( const roll of damageConfig.rolls ) {
-      config.formulas.push(simplifyRollFormula(
-        Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data)
-      ));
-      if ( roll.data.scaling ) config.scaling ??= String(roll.data.scaling.increase);
-      config.damageTypes.push(roll.options.types?.join("|") ?? roll.options.type);
+    for ( const { data, options, parts } of damageConfig.rolls ) {
+      const type = options.types?.length === 1 ? options.types[0] : null;
+      const roll = new CONFIG.Dice.DamageRoll(parts.join(" + "), data, { ...options, type });
+      for ( const part of aggregateDamageRolls([roll]) ) {
+        part.simplify();
+        config.formulas.push(simplifyRollFormula(part.formula));
+        config.damageTypes.push(part.options.type ?? options.types?.join("|"));
+      }
+      if ( data.scaling ) config.scaling ??= String(data.scaling.increase);
     }
     delete config.activity;
   }

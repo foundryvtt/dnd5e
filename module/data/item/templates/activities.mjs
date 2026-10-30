@@ -253,7 +253,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     // If item doesn't have an action type or activation, then it doesn't need an activity
     if ( !source.system.actionType && !source.system.activation?.type
-      && (source.type !== "tool") ) return false;
+      && (foundry.data.operators.DataFieldOperator.get(source.type) !== "tool") ) return false;
 
     // If item was updated after `4.0.1`, it shouldn't need the migration
     if ( !foundry.utils.isNewerVersion("4.0.1", source._stats?.systemVersion ?? "0.0.0") ) return false;
@@ -271,6 +271,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #createInitialActivity(source) {
+    const itemType = foundry.data.operators.DataFieldOperator.get(source.type);
     let type = {
       mwak: "attack",
       rwak: "attack",
@@ -283,7 +284,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       heal: "heal"
     }[source.system.actionType] ?? "utility";
     if ( (type === "utility") && source.system.damage?.parts?.length ) type = "damage";
-    if ( source.type === "tool" ) type = "check";
+    if ( itemType === "tool" ) type = "check";
 
     const cls = CONFIG.DND5E.activityTypes[type].documentClass;
     cls.createInitialActivity(source);
@@ -291,7 +292,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( (type !== "save") && source.system.save?.ability ) {
       CONFIG.DND5E.activityTypes.save.documentClass.createInitialActivity(source, { offset: 1 });
     }
-    if ( (source.type !== "weapon") && source.system.damage?.versatile ) {
+    if ( (itemType !== "weapon") && source.system.damage?.versatile ) {
       CONFIG.DND5E.activityTypes.damage.documentClass.createInitialActivity(source, { offset: 2, versatile: true });
     }
     if ( (type !== "utility") && source.system.formula ) {
@@ -433,17 +434,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       });
       return riders;
     }, { activity: new Set(), effect: new Set() });
-    if ( !riders.activity.size && !riders.effect.size ) {
-      foundry.utils.setProperty(changed, "flags.dnd5e.riders", _del);
-    } else {
-      foundry.utils.setProperty(changed, "flags.dnd5e.riders", Object.entries(riders)
-        .reduce((updates, [key, value]) => {
-          if ( value.size ) updates[key] = Array.from(value);
-          else updates[key] = _del;
-          return updates;
-        }, {})
-      );
-    }
+    this.parent.updateRiderFlags(riders, changed);
 
     if ( !this.parent.isEmbedded ) return;
 

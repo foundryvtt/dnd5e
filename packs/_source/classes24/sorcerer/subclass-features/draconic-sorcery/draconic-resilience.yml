@@ -10,19 +10,15 @@ system:
       Your Hit Point maximum increases by 3, and it increases by 1 whenever you
       gain another Sorcerer level.</p><p>Parts of you are also covered by
       dragon-like scales. While you aren't wearing armor, your base Armor Class
-      equals 10 plus your Dexterity and Charisma modifiers.</p><section
-      class="secret" id="secret-uBlQVhOqmjWWiLc4"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect that
-      automatically increases your Hit Point maximum and sets up your Unarmored
-      Defense which can be disabled if you would prefer to use
-      armor.</p></section>
+      equals 10 plus your Dexterity and Charisma modifiers.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -32,12 +28,15 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Draconic Sorcery
   activities: {}
   enchant: {}
   identifier: draconic-resilience
+  advancement: {}
+  crewed: false
 effects:
   - _id: ZoJYjZ3KGM30khz3
     disabled: false
@@ -50,87 +49,64 @@ effects:
     transfer: true
     flags: {}
     tint: '#ffffff'
-    name: 'Draconic Resilience: Armor'
+    name: Draconic Resilience
     description: ''
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103586
-      modifiedTime: 1783544103586
+      systemVersion: 6.0.6
+      createdTime: 1792004148305
+      modifiedTime: 1792004148305
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/claws/claw-scaled-red.webp
     type: base
     system:
       changes:
-        - key: system.attributes.ac.calc
-          value: unarmoredBard
+        - key: system.attributes.ac.formulas
+          value:
+            formula: 10 + @abilities.dex.mod + @abilities.cha.mod
+            armored: false
           priority: null
-          type: override
+          type: add
           phase: initial
-          _id: F9WtikEbYNEGwDe4
+          _id: iNv4TJmAAqTAlJXZ
+          conditions: '{}'
+          replacement: ''
+        - key: system.attributes.hp.bonuses.overall
+          type: add
+          value: '@classes.sorcerer.levels'
+          phase: initial
+          _id: pdGnTmLf2sb5gkxy
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbscrDraconicRe.ZoJYjZ3KGM30khz3'
-  - disabled: false
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    origin: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
-    transfer: true
-    flags: {}
-    tint: '#ffffff'
-    name: 'Draconic Resilience: HP'
-    description: ''
-    statuses: []
-    _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103586
-      modifiedTime: 1783544103586
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    img: icons/magic/life/cross-area-circle-green-white.webp
-    type: base
-    system:
-      changes:
-        - key: system.attributes.hp.bonuses.overall
-          value: '@classes.sorcerer.levels'
-          priority: null
-          type: add
-          phase: initial
-          _id: vAmL09C0VhaCD8Yx
-    sort: 0
-    _id: vMrqtNbCcIgCcl1Q
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbscrDraconicRe.vMrqtNbCcIgCcl1Q'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866556244
-  modifiedTime: 1783544103586
+  systemVersion: 6.0.6
+  createdTime: 1792004148305
+  modifiedTime: 1792004148305
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

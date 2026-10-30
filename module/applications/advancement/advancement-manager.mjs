@@ -709,7 +709,7 @@ export default class AdvancementManager extends Application5e {
         }
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch (err) {
+    } catch ( err ) {
       if ( !(err instanceof Advancement.ERROR) ) throw err;
       ui.notifications.error(err.message);
       this.step.automatic = false;
@@ -832,7 +832,7 @@ export default class AdvancementManager extends Application5e {
         this.#preEmbeddedItems = null;
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch (err) {
+    } catch ( err ) {
       if ( !(err instanceof Advancement.ERROR) ) throw err;
       ui.notifications.error(err.message);
       this.step.automatic = false;

@@ -51,13 +51,18 @@
  * @property {number} value                          Amount of damage.
  * @property {string} type                           Type of damage.
  * @property {Set<string>} [properties]              Properties that affect damage application.
- * @property {object} [active]
- * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
- * @property {number} [active.multiplier]            Final calculated multiplier.
- * @property {Record<string, DamageAffectDescription>} [active.special]  How special resistance/etc. targeting this
- *                                                   damage affect the total (e.g. falling resistance).
- * @property {boolean} [active.threshold]            Did threshold affect this description?
- * @property {DamageAffectDescription} [active.type] How resistance/etc. targeting this type affected this total.
+ * @property {DamageChangesDescription} [active]     Active damage changes after application options.
+ * @property {DamageChangesDescription} [potential]  Potential damage changes before application options.
+ */
+
+/**
+ * @typedef DamageChangesDescription
+ * @property {{ [modification]: boolean }} [all]  Did modification for all types affect this total?
+ * @property {number} [multiplier]            Final calculated multiplier.
+ * @property {Record<string, DamageAffectDescription>} [special]  How special resistance/etc. targeting this
+ *                                            damage affect the total (e.g. falling resistance).
+ * @property {boolean} [threshold]            Did threshold affect this description?
+ * @property {DamageAffectDescription} [type] How resistance/etc. targeting this type affected this total.
  */
 
 /**
@@ -97,10 +102,11 @@
 
 /**
  * @typedef DamageCalc
- * @property {Record<string, Set<string>>} active  Active damage adjustment toggles.
- * @property {number} temp                         Temporary HP total.
- * @property {number} tempMax                      Temporary maximum HP total.
- * @property {number} total                        Total HP delta.
+ * @property {Record<string, Set<string>>} active     Active damage adjustment toggles.
+ * @property {Record<string, Set<string>>} potential  Potential damage adjustment toggles.
+ * @property {number} temp                            Temporary HP total.
+ * @property {number} tempMax                         Temporary maximum HP total.
+ * @property {number} total                           Total HP delta.
  */
 
 /**
@@ -187,6 +193,13 @@
  * @property {Proficiency} prof                 Actor's proficiency data.
  * @property {Record<string, number>} statuses  Status effects applied to the actor with a value of 1 if the effect is
  *                                              applied (or a higher number of statuses that have numeric value).
+ */
+
+/**
+ * @typedef {RollData & Maybe<ActorRollData> & Maybe<ItemRollData>} EffectRollData
+ * @property {object} effect        Object containing the effect's system data.
+ * @property {object} effect.flags  Flags set on the effect.
+ * @property {string} effect.name   Name of the effect.
  */
 
 /**

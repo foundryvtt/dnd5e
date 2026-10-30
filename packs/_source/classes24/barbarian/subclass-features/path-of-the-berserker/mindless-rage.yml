@@ -5,21 +5,22 @@ img: icons/magic/fire/flame-burning-eye.webp
 system:
   description:
     value: >-
-      <p>You have Immunity to the &amp;Reference[Charmed] and
-      &amp;Reference[Frightened] conditions while your Rage is active. If you're
-      Charmed or Frightened when you enter your Rage, the condition ends on
-      you.</p><section class="secret"
-      id="secret-CnCRD0Dyvx4FFGfV"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which grants the Charmed and Frightened
+      <p>You have Immunity to the &amp;Reference[Charmed apply=false] and
+      &amp;Reference[Frightened apply=false] conditions while your Rage is
+      active. If you're Charmed or Frightened when you enter your Rage, the
+      condition ends on you.</p><section id="secret-CnCRD0Dyvx4FFGfV"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which grants the Charmed and Frightened
       condition immunity. It is not applied automatically when you begin your
       Rage though.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,23 +30,89 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
   requirements: Path of the Berserker
-  activities: {}
+  activities:
+    ZRnAQqrljKUkjX3X:
+      type: utility
+      name: Apply
+      _id: ZRnAQqrljKUkjX3X
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects:
+        - _id: Y9LOXK6Q4vot2cxi
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   enchant: {}
   identifier: mindless-rage
+  advancement: {}
+  crewed: false
 effects:
   - name: Mindless Rage
     origin: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
     duration:
-      value: null
-      units: seconds
+      value: 10
+      units: minutes
       expiry: null
       expired: false
     disabled: true
     flags: {}
-    img: systems/dnd5e/icons/svg/items/feature.svg
+    img: icons/magic/fire/flame-burning-eye.webp
     _id: Y9LOXK6Q4vot2cxi
     type: base
     system:
@@ -55,13 +122,27 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: kipPk4MNHx4spTZB
+          _id: JT2ISxtIpG1izyYW
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.ci.value
           value: frightened
           priority: null
           type: add
           phase: initial
-          _id: pd26UsD7SmVjOQgo
+          _id: 7PB2knEaZ7ckTrfw
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -70,11 +151,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544101211
-      modifiedTime: 1783544101211
+      systemVersion: 6.0.6
+      createdTime: 1792692177228
+      modifiedTime: 1792692177228
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -82,18 +163,14 @@ effects:
     folder: null
     _key: '!items.effects!phbbrbMindlessRa.Y9LOXK6Q4vot2cxi'
 folder: bEMqmmgGROsTGe0J
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866492370
-  modifiedTime: 1783544101211
+  systemVersion: 6.0.6
+  createdTime: 1792692177228
+  modifiedTime: 1792692177228
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

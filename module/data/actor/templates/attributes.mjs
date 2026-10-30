@@ -2,7 +2,9 @@ import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import AppliedRules from "../../../documents/applied-rules.mjs";
 import { applyFallProne } from "../../../rules/falling.mjs";
-import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
+import {
+  convertCurrency, convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus
+} from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import ConditionData from "../../active-effect/condition.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
@@ -269,7 +271,7 @@ export default class AttributesFields {
 
     // Identify Equipped Items
     const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes)) return obj;
+      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes) ) return obj;
       if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
@@ -598,11 +600,9 @@ export default class AttributesFields {
    */
   static preparePrice() {
     const { price } = this.attributes;
-    const { conversion } = CONFIG.DND5E.currencies[price.denomination] ?? {};
-    const { conversion: defaultConversion } = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency] ?? {};
-    if ( (price.value !== null) && conversion && defaultConversion ) {
-      price.valueInGP = Math.floor(price.value * defaultConversion / conversion);
-    }
+    if ( price.value === null ) return;
+    const valueInGP = convertCurrency(price.value, price.denomination, { to: CONFIG.DND5E.defaultCurrency });
+    if ( valueInGP.denomination === CONFIG.DND5E.defaultCurrency ) price.valueInGP = valueInGP.value;
   }
 
   /* -------------------------------------------- */

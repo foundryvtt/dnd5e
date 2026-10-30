@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "6.0.6",
+  "version": "6.1.0",
   "compatibility": {
     "minimum": "14.367",
     "verified": "14"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-6.0.6/dnd5e-release-6.0.6.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-6.1.0/dnd5e-release-6.1.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -243,6 +243,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["character"]
         }
@@ -257,6 +258,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["npc"]
         }
@@ -271,6 +273,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
         }
@@ -285,6 +288,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["loot"]
         }
@@ -299,6 +303,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sorting": "m",
           "sourceBook": "SRD 5.1",
           "types": ["spell"]
@@ -314,6 +319,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["background", "feat"]
         }
@@ -328,6 +334,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["class"]
         }
@@ -342,6 +349,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["subclass"]
         }
@@ -356,6 +364,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
@@ -370,6 +379,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["race", "feat"]
         }
@@ -384,6 +394,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "rulesVersion": "legacy",
           "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
@@ -439,6 +450,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sourceBook": "SRD 5.2",
           "types": ["class", "subclass", "feat"]
         }
@@ -456,6 +468,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sourceBook": "SRD 5.2",
           "types": ["race", "background", "feat"]
         }
@@ -473,6 +486,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sourceBook": "SRD 5.2",
           "types": ["feat"]
         }
@@ -490,6 +504,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sorting": "m",
           "sourceBook": "SRD 5.2",
           "types": ["spell"]
@@ -508,6 +523,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sourceBook": "SRD 5.2",
           "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
         }
@@ -536,6 +552,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sorting": "m",
           "sourceBook": "SRD 5.2"
         }
@@ -552,6 +569,7 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
+          "rulesVersion": "modern",
           "sourceBook": "SRD 5.2",
           "types": ["feat", "weapon"]
         }

@@ -102,7 +102,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     if ( config.create?.summons ) {
       try {
         results.summoned = await this.placeSummons(config.summons);
-      } catch (err) {
+      } catch ( err ) {
         results.summoned = [];
         Hooks.onError("SummonActivity#use", err, { log: "error", notify: "error" });
       }
@@ -193,7 +193,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } catch (err) {
+    } catch ( err ) {
       Hooks.onError("SummonActivity#placeSummons", err, {
         msg: _loc("DND5E.SUMMON.Warning.PlaceTokens"),
         log: "error",
@@ -268,16 +268,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
     // Match proficiency
     if ( this.match.proficiency ) {
-      const proficiencyEffect = new ActiveEffect({
+      const proficiencyEffect = new ActiveEffect.implementation({
         _id: staticID("dnd5eMatchProficiency"),
-        changes: [{
-          key: "system.attributes.prof",
-          type: "override",
-          value: prof
-        }],
         disabled: false,
-        icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-        name: _loc("DND5E.SUMMON.FIELDS.match.proficiency.label")
+        img: "icons/skills/targeting/crosshair-bars-yellow.webp",
+        name: _loc("DND5E.SUMMON.FIELDS.match.proficiency.label"),
+        system: {
+          changes: [{
+            key: "system.attributes.prof",
+            type: "override",
+            value: prof
+          }]
+        }
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
@@ -296,16 +298,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         if ( actor.system.attributes.ac.calc === "flat" ) {
           actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
         } else {
-          actorUpdates.effects.push((new ActiveEffect({
+          actorUpdates.effects.push((new ActiveEffect.implementation({
             _id: staticID("dnd5eACBonus"),
-            changes: [{
-              key: "system.attributes.ac.bonus",
-              type: "add",
-              value: acBonus.total
-            }],
             disabled: false,
-            icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: _loc("DND5E.SUMMON.FIELDS.bonuses.ac.label")
+            img: "icons/magic/defensive/shield-barrier-blue.webp",
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.ac.label"),
+            system: {
+              changes: [{
+                key: "system.attributes.ac.bonus",
+                type: "add",
+                value: acBonus.total
+              }]
+            }
           })).toObject());
         }
       }
@@ -316,16 +320,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       const hdBonus = new Roll(this.bonuses.hd, rollData);
       await hdBonus.evaluate();
       if ( hdBonus.total ) {
-        actorUpdates.effects.push((new ActiveEffect({
+        actorUpdates.effects.push((new ActiveEffect.implementation({
           _id: staticID("dnd5eHDBonus"),
-          changes: [{
-            key: "system.attributes.hd.max",
-            type: "add",
-            value: hdBonus.total
-          }],
           disabled: false,
-          icon: "icons/sundries/gaming/dice-runed-brown.webp",
-          name: _loc("DND5E.SUMMON.FIELDS.bonuses.hd.label")
+          img: "icons/sundries/gaming/dice-runed-brown.webp",
+          name: _loc("DND5E.SUMMON.FIELDS.bonuses.hd.label"),
+          system: {
+            changes: [{
+              key: "system.attributes.hd.max",
+              type: "add",
+              value: hdBonus.total
+            }]
+          }
         })).toObject());
       }
     }
@@ -341,16 +347,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         // Helper function for modifying max HP ('bonuses.overall' or 'max')
         const maxHpEffect = hpField => {
-          return (new ActiveEffect({
+          return (new ActiveEffect.implementation({
             _id: staticID("dnd5eHPBonus"),
-            changes: [{
-              key: `system.attributes.hp.${hpField}`,
-              type: "add",
-              value: hpBonus.total
-            }],
             disabled: false,
-            icon: "icons/magic/life/heart-glowing-red.webp",
-            name: _loc("DND5E.SUMMON.FIELDS.bonuses.hp.label")
+            img: "icons/magic/life/heart-glowing-red.webp",
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.hp.label"),
+            system: {
+              changes: [{
+                key: `system.attributes.hp.${hpField}`,
+                type: "add",
+                value: hpBonus.total
+              }]
+            }
           })).toObject();
         };
 
@@ -397,9 +405,27 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }
     }
 
-    const attackDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
-    const saveDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
-    const healingBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
+    // Damage bonuses
+    const changes = [
+      ["attack", "attackDamage", "damage"],
+      ["save", "saveDamage", "damage"],
+      ["heal", "healing", "healing"]
+    ].map(([activityType, field, key]) => ({
+      key,
+      conditions: JSON.stringify({ k: "activity.type", v: activityType }),
+      type: "dnd5e.bonus",
+      value: CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses[field] ?? "", rollData)
+    })).filter(c => c.value);
+    if ( changes.length ) {
+      actorUpdates.effects.push((new ActiveEffect.implementation({
+        _id: staticID("dnd5eDamageChanges"),
+        disabled: false,
+        img: "icons/skills/melee/strike-slashes-orange.webp",
+        name: _loc("DND5E.SUMMON.DamageChanges.Label"),
+        system: { changes }
+      })).toObject());
+    }
+
     for ( const item of actor.items ) {
       if ( !item.system.activities?.size ) continue;
       const changes = [];
@@ -443,24 +469,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         });
       }
 
-      // Damage bonus
-      let damageBonus;
-      if ( item.hasAttack ) damageBonus = attackDamageBonus;
-      else if ( item.hasSave ) damageBonus = saveDamageBonus;
-      else if ( item.isHealing ) damageBonus = healingBonus;
-      if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
-        changes.push({
-          key: "system.damage.bonus",
-          type: "add",
-          value: damageBonus
-        });
-      }
-
       if ( changes.length ) {
-        const effect = (new ActiveEffect({
+        const effect = (new ActiveEffect.implementation({
           _id: staticID("dnd5eItemChanges"),
           disabled: false,
-          icon: "icons/skills/melee/strike-slashes-orange.webp",
+          img: "icons/skills/melee/strike-slashes-orange.webp",
           name: _loc("DND5E.SUMMON.ItemChanges.Label"),
           system: {
             changes,
@@ -474,7 +487,13 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add applied effects
-    actorUpdates.effects.push(...(await this.getApplicableEffects()).map(e => e.toObject()));
+    const effects = await this.getApplicableEffects();
+    for ( const effect of effects ?? [] ) {
+      const effectData = effect.toObject();
+      effectData.system.changes =
+        await ActiveEffect.implementation.forApplication(effectData.system.changes, this, actor);
+      actorUpdates.effects.push(effectData);
+    }
 
     return { actorUpdates, tokenUpdates };
   }
@@ -592,7 +611,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
     try {
       await this.placeSummons(config.summons);
-    } catch (err) {
+    } catch ( err ) {
       Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
     }
   }

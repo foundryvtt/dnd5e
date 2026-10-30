@@ -8,28 +8,21 @@ system:
       <p>If you use [[/item Reckless Attack]], you can forgo any Advantage on
       one Strength-based attack roll of your choice on your turn. The chosen
       attack roll mustn't have Disadvantage. If the chosen attack roll hits, the
-      target takes an extra [[lookup @scale.barbarian.brutal-strike]] damage of
-      the same type dealt by the weapon or Unarmed Strike, and you can cause one
-      Brutal Strike effect of your choice. You have the following effect
-      options.</p><p><strong>Forceful Blow. </strong>The target is pushed 15
-      feet straight away from you. You can then move up to half your Speed
-      straight toward the target without provoking &amp;Reference[Opportunity
-      Attacks].</p><p><strong>Hamstring Blow. </strong>The target's Speed is
-      reduced by 15 feet until the start of your next turn. A target can be
-      affected by only one Hamstring Blow at a time - the most recent
-      one.</p><section class="secret"
-      id="secret-vLb1SoKHWW2796Ko"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect for the Hamstring Blow which can be
-      applied to a target.</p><p>The <strong>damage</strong> activity
-      automatically scales when you gain Improved Brutal Strike
-      (2).</p></section>
+      target takes an extra [[lookup @scale.brutal-strike.damage]]{1d10} damage
+      of the same type dealt by the weapon or Unarmed Strike, and you can cause
+      one Brutal Strike effect of your choice. You have the following effect
+      options.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.WKgVJp5AQRLqOlDh
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.l33Ty0yfpOXRiLve
+      caption=false cite=false nameStyle=inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 4
   uses:
     max: ''
     spent: 0
@@ -39,13 +32,14 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities:
     nN5gsB6AcSQ4uQPN:
       type: damage
-      name: Brutal Strike
+      name: Extra Damage
       _id: nN5gsB6AcSQ4uQPN
       sort: 0
       activation:
@@ -60,12 +54,19 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>If you use [[/item Reckless Attack]], you can forgo any Advantage
+          on one Strength-based attack roll of your choice on your turn. The
+          chosen attack roll mustn't have Disadvantage. If the chosen attack
+          roll hits, the target takes an extra [[lookup
+          @scale.brutal-strike.damage]]{1d10} damage of the same type dealt by
+          the weapon or Unarmed Strike.</p>
       duration:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: bg9jWpPRIJ0Q2vPY
+        expiry: null
+      effects: []
       range:
         override: false
         units: self
@@ -75,6 +76,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,43 +90,349 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
               enabled: true
-              formula: '@scale.barbarian.brutal-strike'
+              formula: '@scale.brutal-strike.damage'
             number: null
             denomination: 0
             bonus: ''
+            modifiers: []
             types:
-              - acid
               - bludgeoning
+              - piercing
+              - slashing
+              - acid
               - cold
               - fire
               - force
               - lightning
               - necrotic
-              - piercing
               - poison
               - psychic
               - radiant
-              - slashing
               - thunder
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+    WKgVJp5AQRLqOlDh:
+      type: utility
+      name: Forceful Blow
+      _id: WKgVJp5AQRLqOlDh
+      img: systems/dnd5e/icons/svg/action/push.svg
+      sort: 100000
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The target is pushed 15 feet straight away from you. You can then
+          move up to half your &amp;Reference[Speed] straight toward the target
+          without provoking &amp;Reference[Opportunity Attacks].</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    l33Ty0yfpOXRiLve:
+      type: utility
+      name: Hamstring Blow
+      _id: l33Ty0yfpOXRiLve
+      img: systems/dnd5e/icons/svg/action/attack.svg
+      sort: 200000
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The target's &amp;Reference[Speed] is reduced by 15 feet until the
+          start of your next turn. A target can be affected by only one
+          Hamstring Blow at a time - the most recent one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects:
+        - _id: bg9jWpPRIJ0Q2vPY
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    vcAdrcmUKQWA68QT:
+      type: utility
+      name: Staggering Blow
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>The target has Disadvantage on the next saving throw it makes, and
+          it can't make &amp;Reference[Opportunity Attacks] until the start of
+          your next turn.</p>
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects:
+        - _id: uacly0JAXLVwAS6y
+          uuid: null
+          level:
+            min: null
+            max: null
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/bludgeoning.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: 13
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: barbarian
+      _id: vcAdrcmUKQWA68QT
+    MP1qQsApCj19F2M5:
+      type: utility
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>Before the start of your next turn, the next attack roll made by
+          another creature against the target gains a +5 bonus to the roll. An
+          attack roll can gain only one Sundering Blow bonus.</p>
+      duration:
+        units: inst
+        override: false
+        expiry: null
+        concentration: false
+      effects:
+        - _id: tUyuyTQGmpUqMcFe
+          uuid: null
+          level: {}
+        - _id: Q0ou16II1WEcCdyW
+          uuid: null
+          level: {}
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 400000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Sundering Blow
+      img: systems/dnd5e/icons/svg/properties/magical.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: 13
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: barbarian
+      _id: MP1qQsApCj19F2M5
   enchant: {}
   identifier: brutal-strike
+  advancement:
+    joUosIRgww6atx7N:
+      _id: joUosIRgww6atx7N
+      type: ScaleValue
+      configuration:
+        identifier: damage
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '9':
+            number: 1
+            faces: 10
+          '17':
+            number: 2
+      value: {}
+      hint: ''
+      flags: {}
+      name: Brutal Strike
+  crewed: false
 effects:
   - _id: bg9jWpPRIJ0Q2vPY
     disabled: false
     duration:
-      value: 1
+      value: null
       units: turns
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     origin: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
     transfer: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     tint: '#ffffff'
     name: Hamstrung
     description: >-
@@ -132,44 +440,146 @@ effects:
       feet until the start of the attacker's next turn.</p>
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2.ActiveEffect.TIBmPKKnAAiWYuN4
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544101037
-      modifiedTime: 1783544101037
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-axe-blood-red.webp
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
-          value: -15
+        - key: system.attributes.movement.bonus
+          value: 15
           priority: null
-          type: add
+          type: subtract
           phase: initial
-          _id: YI3aUDBag6iHUd63
+          _id: gFTJuyGkMWRCzpmE
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrbBrutalStri.bg9jWpPRIJ0Q2vPY'
+  - name: Staggered
+    origin: null
+    duration:
+      value: null
+      units: turns
+      expiry: sourceStart
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders: {}
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    _id: uacly0JAXLVwAS6y
+    type: base
+    system:
+      changes: []
+      rider:
+        statuses: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
+        message: null
+        actor: null
+        effect: null
+      conditions: '{}'
+      magical: false
+    description: >-
+      <p>Hit by a staggering blow, this character has Disadvantage on the next
+      Saving Throw it makes, and it can't make Opportunity Attacks until the
+      start of the attacker's next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.L9N4evZo1jt46dap
+      duplicateSource: null
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbbrbBrutalStri.uacly0JAXLVwAS6y'
+  - name: Sundered
+    origin: null
+    duration:
+      value: null
+      units: turns
+      expiry: sourceStart
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders: {}
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    _id: Q0ou16II1WEcCdyW
+    type: base
+    system:
+      changes: []
+      rider:
+        statuses: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
+        message: null
+        actor: null
+        effect: null
+      conditions: '{}'
+      magical: false
+    description: >-
+      <p>Hit by a sundering blow, the next attack roll made by another creature
+      against the target gains a +5 bonus to the roll.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.tUyuyTQGmpUqMcFe
+      duplicateSource: null
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbbrbBrutalStri.Q0ou16II1WEcCdyW'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1783544101036
+  systemVersion: 6.0.6
+  createdTime: 1792692286451
+  modifiedTime: 1792692286451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

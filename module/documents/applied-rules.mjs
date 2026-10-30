@@ -5,6 +5,9 @@ import { simplifyBonus } from "../utils.mjs";
  */
 
 const D20_TESTS = new Set(["attack", "check", "save"]);
+const DAMAGE_APPLICATION_OPTIONS = [
+  "damage.downgrade", "damage.ignore.immunity", "damage.ignore.resistance", "damage.ignore.vulnerability"
+];
 
 /**
  * @extends {Map<string, Map<string, ChangeData[]>>}
@@ -15,7 +18,7 @@ export default class AppliedRules extends Map {
    * @param {ActiveEffectChangeData} change
    */
   add(change) {
-    const type = change.type.startsWith("dnd5e.") ? change.type.split(".")[1] : change.type;
+    const type = change.type.startsWith("dnd5e.") ? change.type.slice(6) : change.type;
     this.getOrInsert(change.key, new Map()).getOrInsert(type, []).push(change);
   }
 
@@ -55,6 +58,12 @@ export default class AppliedRules extends Map {
    */
   static *#collect(rule, actor, item) {
     const [category, key] = rule.split(":");
+    if ( key === "damageApplicationOptions" ) {
+      for ( const option of DAMAGE_APPLICATION_OPTIONS ) {
+        yield* AppliedRules.#collect(`${category}:${option}`, actor, item);
+      }
+      return;
+    }
     if ( D20_TESTS.has(category) ) yield* AppliedRules.#collect(`d20:${key}`, actor, item);
     for ( const r of actor?.appliedRules.get(rule) ?? [] ) yield r;
     for ( const r of item?.appliedRules.get(rule) ?? [] ) yield r;
@@ -162,6 +171,29 @@ class RulesIterator extends Iterator {
       disadvantages: { count: 0, suppressed: false },
       override: null
     }, counts));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Turn damage protection bypass rules into application options.
+   * @param {object} [initial]  Starting options to extend.
+   * @returns {DefaultDamageApplicationOptions}
+   */
+  toDamageApplicationOptions(initial) {
+    const options = initial ? foundry.utils.deepClone(initial) : {};
+    for ( const option of this ) {
+      if ( option.type === "dnd5e.damage.downgrade" ) {
+        options.downgrade ??= new Set();
+        options.downgrade.add(option.value);
+      } else if ( option.type.startsWith("dnd5e.damage.ignore.") ) {
+        const key = option.type.slice(20);
+        options.ignore ??= {};
+        options.ignore[key] ??= new Set();
+        options.ignore[key].add(option.value);
+      }
+    }
+    return options;
   }
 
   /* -------------------------------------------- */

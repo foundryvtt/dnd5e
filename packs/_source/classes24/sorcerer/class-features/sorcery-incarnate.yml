@@ -9,17 +9,14 @@ system:
       <p>If you have no uses of Innate Sorcery left, you can use it if you spend
       2 Sorcery Points when you take the Bonus Action to activate it.</p><p>In
       addition, while your Innate Sorcery feature is active, you can use up to
-      two of your Metamagic options on each spell you cast.</p><section
-      id="secret-l8yUYHYrWEjQI4Q0" class="secret"><p><strong>Foundry
-      Note</strong></p><p>Use this feature to consume 2 Sorcery Points and
-      restore a use of Innate Sorcery.</p></section>
+      two of your Metamagic options on each spell you cast.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,9 +26,10 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Sorcerer
   activities:
     qSLk2DaH21SNZxve:
       type: utility
@@ -49,18 +47,20 @@ system:
         targets:
           - type: itemUses
             value: '2'
-            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            target: feat:font-of-magic
             scaling: {}
           - type: itemUses
             value: '-1'
-            target: Compendium.dnd5e.classes24.Item.phbscrInnateSorc
+            target: feat:innate-sorcery
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -71,6 +71,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -87,22 +88,30 @@ system:
         visible: false
         name: ''
         formula: ''
-      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: sorcery-incarnate
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1740680088718
+  systemVersion: 6.0.6
+  createdTime: 1792690435843
+  modifiedTime: 1792690435843
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

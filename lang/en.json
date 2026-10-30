@@ -667,6 +667,10 @@
     }
   },
   "ItemGrant": {
+    "DefaultTitle": {
+      "ClassFeatures": "Class Features",
+      "SubclassFeatures": "Subclass Features"
+    },
     "Details": "Grant Details",
     "DropHint": "Drop Items here to add them to the list granted by this advancement.",
     "FIELDS": {
@@ -2512,7 +2516,7 @@
   },
   "State": {
     "active": "Applied",
-    "downgrade": "Downgraded",
+    "downgrade": "Down&shy;graded",
     "ignore": "Ignored"
   }
 },
@@ -2719,6 +2723,7 @@
     "Configuration": "Change Configuration",
     "Group": {
       "Custom": "Custom",
+      "DamageApplicationOptions": "Damage Application Options",
       "Rules": "Rules",
       "Standard": "Standard"
     },
@@ -2738,6 +2743,18 @@
       },
       "Bonus": {
         "Label": "Bonus"
+      },
+      "DowngradeImmunityResistance": {
+        "Label": "Downgrade Immunity & Resistance"
+      },
+      "IgnoreImmunity": {
+        "Label": "Ignore Immunity"
+      },
+      "IgnoreResistance": {
+        "Label": "Ignore Resistance"
+      },
+      "IgnoreVulnerability": {
+        "Label": "Ignore Vulnerability"
       },
       "Maximum": {
         "Label": "Roll Maximum"
@@ -2816,6 +2833,7 @@
   },
   "Tab": "Effects",
   "Warning": {
+    "DependentsWithoutGM": "Removing {name} also removes associated items, activities, or effects and requires an active GM.",
     "RollCondition": "Effect conditions cannot reference 'roll.' properties. Move this condition into the individual changes for the effect to be applied.",
     "StatusCondition": "Effects that grant statuses cannot also be conditional on statuses. Move this condition into the individual changes for the effect to be applied."
   }
@@ -2928,6 +2946,21 @@
     "magical": {
       "hint": "This enchantment is magical and should be disabled when magic isn't available.",
       "label": "Magical"
+    },
+    "rider": {
+      "activities": {
+        "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed.",
+        "label": "Additional Activities"
+      },
+      "effects": {
+        "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed.",
+        "label": "Additional Effects"
+      },
+      "items": {
+        "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed.",
+        "label": "Additional Items"
+      },
+      "label": "Attached"
     }
   },
   "Items": {
@@ -2939,6 +2972,9 @@
     "LongRest": "Long Rest",
     "Never": "Never",
     "ShortRest": "Short Rest"
+  },
+  "Rider": {
+    "Activity": "Enchantment Rider Activity"
   },
   "Transfer": {
     "DisabledTooltip": "This Enchantment is currently selected in one or more of its Item's Enchant Activities, and therefore cannot apply directly to the Item.",
@@ -3952,6 +3988,10 @@
     "Standard": "Standard Languages"
   },
   "Communication": {
+    "Formatter": {
+      "Units": "{name} Units",
+      "Value": "{name} Range"
+    },
     "Label": "Ranged Communication",
     "Telepathy": "Telepathy"
   },
@@ -5272,6 +5312,9 @@
   "CreatureChanges": {
     "Label": "Creature Changes",
     "Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creatures' stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
+  },
+  "DamageChanges": {
+    "Label": "Damage Changes"
   },
   "Hint": "Summon a new creature to the scene.",
   "ItemChanges": {

@@ -80,6 +80,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.RollTable.documentClass = documents.RollTable5e;
+  CONFIG.Scene.documentClass = documents.Scene5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.hudClass = applications.hud.TokenHUD5e;
   CONFIG.Token.objectClass = canvas.Token5e;
@@ -536,7 +537,9 @@ function documentIndexLookup(query, { ignoreCompendiumFiltering, ...options }={}
     ...options,
     filterEntries: entry => {
       if ( entry.entry.system?.container ) return false;
-      if ( !ignoreCompendiumFiltering && (dnd5e.settings.packSourceConfiguration[entry.pack] === false) ) return false;
+      const pack = game.packs.get(entry.pack);
+      if ( !ignoreCompendiumFiltering && pack
+        && !applications.settings.CompendiumBrowserSettingsConfig.isSourceEnabled(pack) ) return false;
       return options.filterEntries?.(entry) ?? true;
     }
   });
@@ -560,7 +563,7 @@ Hooks.once("i18nInit", () => {
       },
       DND5E: {
         "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": _loc("DND5E.Feature.Species.LabelLegacy"),
+        "Feature.Species.Label": _loc("DND5E.Feature.Species.LabelLegacy"),
         FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
         FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
         ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),

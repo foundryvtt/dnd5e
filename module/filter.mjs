@@ -33,7 +33,7 @@ export class Filter {
     try {
       if ( foundry.utils.isEmpty(this.#definition) ) return true;
       else return performCheck(data, this.#definition);
-    } catch (err) {
+    } catch ( err ) {
       console.error(err);
       return false;
     }

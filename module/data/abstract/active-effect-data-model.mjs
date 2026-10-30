@@ -12,6 +12,11 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     const schema = {
@@ -123,6 +128,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    */
   get item() {
     return this.parent.parent instanceof Item ? this.parent.parent : undefined;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this active effect have rider activities or effects that should be tracked on the item.
+   * @type {boolean}
+   */
+  get trackRiders() {
+    return false;
   }
 
   /* -------------------------------------------- */

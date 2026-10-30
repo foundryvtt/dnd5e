@@ -1,0 +1,50 @@
+name: Flying Steed
+origin: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+disabled: false
+flags: {}
+img: icons/commodities/biological/wing-lizard-green.webp
+_id: phbeffFlyingStee
+type: base
+system:
+  changes:
+    - key: system.attributes.movement.speeds.fly
+      value: 60
+      priority: null
+      type: upgrade
+      phase: initial
+      _id: rA2Vxk7c088zbppZ
+      conditions: '{}'
+      replacement: ''
+  magical: true
+  rider:
+    statuses: []
+  origin:
+    actor: null
+    behavior: null
+    effect: null
+    item: null
+    message: null
+  conditions: '{}'
+description: <p>The steed has a Fly speed of 60ft. when summoned by a level 4+ spell.</p>
+tint: '#ffffff'
+transfer: false
+statuses: []
+_stats:
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1792789650150
+  modifiedTime: 1792789690890
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+start: null
+showIcon: 1
+folder: xOsCK7cF2ShkrOva
+sort: 0
+_key: '!effects!phbeffFlyingStee'

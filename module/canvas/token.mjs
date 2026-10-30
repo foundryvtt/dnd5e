@@ -158,7 +158,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   async _drawEffect(src, tint) {
     const icon = await super._drawEffect(src, tint);
-    if ( !game.user.isGM ) return icon;
+    if ( !game.user.isGM || dnd5e.settings.disableFalling ) return icon;
     if ( icon && src && (src === CONFIG.statusEffects.falling?.img) ) {
       icon.eventMode = "static";
       icon.cursor = "pointer";
@@ -214,13 +214,13 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     bar.beginFill(blk, 0.5).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, bw, bh, 3 * s);
 
     // Temporary maximum HP
-    if (tempmax > 0) {
+    if ( tempmax > 0 ) {
       const pct = max / effectiveMax;
       bar.beginFill(c.tempmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct * bw, 0, (1 - pct) * bw, bh, 2 * s);
     }
 
     // Maximum HP penalty
-    else if (tempmax < 0) {
+    else if ( tempmax < 0 ) {
       const pct = (max + tempmax) / max;
       bar.beginFill(c.negmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct * bw, 0, (1 - pct) * bw, bh, 2 * s);
     }

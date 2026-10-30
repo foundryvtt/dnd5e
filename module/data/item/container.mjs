@@ -106,7 +106,7 @@ export default class ContainerData extends ItemDataModel.mixin(
    * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
    */
   get contents() {
-    if ( !this.parent ) return new foundry.utils.Collection();
+    if ( !this.parent || !this.parent.id ) return new foundry.utils.Collection();
 
     // If in a compendium, fetch using getDocuments and return a promise
     if ( this.parent.pack && !this.parent.isEmbedded ) {

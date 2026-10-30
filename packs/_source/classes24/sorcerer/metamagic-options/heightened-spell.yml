@@ -5,17 +5,17 @@ img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
 system:
   description:
     value: >-
-      <blockquote><p>Cost: 2 Sorcery Points</p></blockquote><p>When you cast a
-      spell that forces a creature to make a saving throw, you can spend 2
-      Sorcery Points to give one target of the spell Disadvantage on saves
-      against the spell.</p>
+      <div class="item-entry-details"><p class="item-entry-tag">Cost: 2 Sorcery
+      Points</p></div><p>When you cast a spell that forces a creature to make a
+      saving throw, you can spend 2 Sorcery Points to give one target of the
+      spell Disadvantage on saves against the spell.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -25,6 +25,7 @@ system:
     subtype: metamagic
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -45,14 +46,16 @@ system:
         targets:
           - type: itemUses
             value: '2'
-            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            target: feat:font-of-magic
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -63,6 +66,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -79,22 +83,31 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: heightened-spell
+  advancement: {}
+  crewed: false
 effects: []
 folder: 6RKLEZHPbdWG3fZe
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1745256762751
+  systemVersion: 6.0.6
+  createdTime: 1792004130665
+  modifiedTime: 1792004130665
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

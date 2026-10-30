@@ -1,4 +1,4 @@
-import { convertWeight, defaultUnits } from "../../../utils.mjs";
+import { convertCurrency, convertWeight, defaultUnits } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -260,14 +260,8 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const converted = convertWeight(this.weight.value, this.weight.units, { system: unitSystem, legacy: false });
     Object.assign(this.weight, { value: converted.value, units: converted.unit });
 
-    if ( !(CONFIG.DND5E.defaultCurrency in CONFIG.DND5E.currencies) ) return;
-    const { value, denomination } = this.price;
-    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-    const defaultCurrency = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency];
-    if ( conversion ) {
-      const multiplier = defaultCurrency.conversion / conversion;
-      this.price.valueInGP = Math.floor(value * multiplier);
-    }
+    const valueInGP = convertCurrency(this.price.value, this.price.denomination, { to: CONFIG.DND5E.defaultCurrency });
+    if ( valueInGP.denomination === CONFIG.DND5E.defaultCurrency ) this.price.valueInGP = valueInGP.value;
   }
 
   /* -------------------------------------------- */

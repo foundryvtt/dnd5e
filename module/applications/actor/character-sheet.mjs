@@ -860,15 +860,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     await super._prepareItemFeature(item, ctx);
 
-    const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
-      ?.split(".") ?? [];
-    const group = item.parent.items.get(originId);
-    ctx.groups.origin = "other";
+    const group = item.system.advancementRootItem;
     switch ( group?.type ) {
       case "race": ctx.groups.origin = "species"; break;
       case "background": ctx.groups.origin = "background"; break;
       case "class": ctx.groups.origin = group.identifier; break;
       case "subclass": ctx.groups.origin = group.class?.identifier ?? "other"; break;
+      default: ctx.groups.origin = "other";
     }
 
     ctx.groups.activation = item.system.properties?.has("trait") || !item.system.activities?.size
@@ -1165,7 +1163,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     let data;
     try {
       data = JSON.parse(dragData);
-    } catch (err) {
+    } catch ( err ) {
       console.error(err);
       return;
     }

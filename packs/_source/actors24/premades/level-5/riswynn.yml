@@ -856,8 +856,7 @@ items:
           initiative: null
         showIcon: 1
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
+        _key: '!actors.items.effects!RiswynnLv0500000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87'
     folder: R0KprZdOrRDNsTBv
     flags:
       dnd5e:
@@ -1022,8 +1021,7 @@ items:
         start: null
         showIcon: 1
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
+        _key: '!actors.items.effects!RiswynnLv0500000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv'
     sort: 100000
     flags:
       dnd5e:
@@ -1915,7 +1913,9 @@ items:
             condition: ''
             override: false
           consumption:
-            targets: []
+            targets:
+              - type: activityUses
+                value: '1'
             scaling:
               allowed: false
               max: ''
@@ -1978,7 +1978,9 @@ items:
                   number: 1
           uses:
             spent: 0
-            recovery: []
+            recovery:
+              - period: turn
+                type: recoverAll
             max: '1'
           sort: 0
           _id: a1T6nHaqmvbLpyJr
@@ -3502,8 +3504,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
+        _key: '!actors.items.effects!RiswynnLv0500000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV'
     sort: 0
     flags: {}
     _stats:
@@ -4906,8 +4907,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP
+        _key: '!actors.items.effects!RiswynnLv0500000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP'
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
@@ -5452,8 +5452,7 @@ items:
         start: null
         showIcon: 1
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.JukrDNT9DUQvhsCn.169TouW3fJ1ZAdy6
+        _key: '!actors.items.effects!RiswynnLv0500000.JukrDNT9DUQvhsCn.169TouW3fJ1ZAdy6'
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
@@ -5826,8 +5825,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW
+        _key: '!actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW'
       - name: 'Cunning Strike: Tripped'
         img: icons/skills/melee/blade-tip-acid-poison-green.webp
         origin: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
@@ -5861,8 +5859,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9
+        _key: '!actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9'
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
@@ -6370,8 +6367,7 @@ items:
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.Asleuzhulo3Eeejn.05Lok63szRXdAafx
+        _key: '!actors.items.effects!RiswynnLv0500000.Asleuzhulo3Eeejn.05Lok63szRXdAafx'
     flags: {}
     _stats:
       duplicateSource: null
@@ -6695,8 +6691,7 @@ items:
         sort: 0
         flags:
           core:
-            originText: >-
-              Compendium.dnd5e.actors24.Actor.RiswynnLv0500000.Item.kIdGCeOaQIWUrlOH.Activity.4pBEpvS3jgCIhpUi
+            originText: Compendium.dnd5e.actors24.Actor.RiswynnLv0500000.Item.kIdGCeOaQIWUrlOH.Activity.4pBEpvS3jgCIhpUi
         _stats:
           compendiumSource: null
           duplicateSource: null
@@ -6716,8 +6711,7 @@ items:
           turn: null
         showIcon: 1
         folder: null
-        _key: >-
-          !actors.items.effects!RiswynnLv0500000.3uB3R7H2njpxEdOx.dnd5espellchange
+        _key: '!actors.items.effects!RiswynnLv0500000.3uB3R7H2njpxEdOx.dnd5espellchange'
     folder: pBaAAtXBCq9FVEnL
     sort: 1100000
     flags:

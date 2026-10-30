@@ -8,16 +8,16 @@ system:
     value: >-
       <p>You can use musical notes or words of power to disrupt mind-influencing
       effects. If you or a creature within 30 feet of you fails a saving throw
-      against an effect that applies the Charmed or Frightened condition, you
-      can take a Reaction to cause the save to be rerolled, and the new roll has
-      Advantage.</p>
+      against an effect that applies the &amp;Reference[Charmed apply=false] or
+      &amp;Reference[Frightened apply=false] condition, you can take a Reaction
+      to cause the save to be rerolled, and the new roll has Advantage.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     recovery: []
@@ -27,6 +27,7 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
@@ -49,11 +50,13 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -69,7 +72,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -87,22 +91,31 @@ system:
         recovery: []
         max: ''
       sort: 0
-      name: ''
+      name: Counter
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: countercharm
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1745256760326
+  systemVersion: 6.1.0
+  createdTime: 1793220715225
+  modifiedTime: 1793220715225
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

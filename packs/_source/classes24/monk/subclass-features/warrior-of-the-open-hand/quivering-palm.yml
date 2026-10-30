@@ -16,20 +16,14 @@ system:
       end them, the target must make a Constitution saving throw, taking 10d12
       Force damage on a failed save or half as much damage on a successful
       one.</p><p>You can have only one creature under the effect of this feature
-      at a time. You can end the vibrations harmlessly (no action
-      required).</p><section id="secret-BSTexn4tHp20evAQ"
-      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Instill
-      Vibrations</strong> activity expends 4 Focus Points and includes an Active
-      Effect which can be used to track the target you have set up lethal
-      vibrations in.</p><p>The <strong>End Vibrations</strong> activity includes
-      the Saving Throw and Damage rolls.</p></section>
+      at a time. You can end the vibrations harmlessly (no action required).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -39,9 +33,10 @@ system:
     subtype: ki
   prerequisites:
     level: 17
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warrior of the Open Hand
   activities:
     lBn87Q4yyJXWzLqg:
       type: save
@@ -59,11 +54,13 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: day
         concentration: false
         override: false
         value: '@classes.monk.levels'
+        expiry: null
       effects: []
       range:
         override: false
@@ -74,6 +71,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -96,6 +94,7 @@ system:
             bonus: ''
             types:
               - force
+            modifiers: []
             scaling:
               number: 1
         onSave: half
@@ -105,12 +104,21 @@ system:
         dc:
           calculation: wis
           formula: ''
+        visible: true
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     O1mQr2rPpzRpB3yJ:
       type: utility
       name: Instill Vibrations
       _id: O1mQr2rPpzRpB3yJ
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: When you hit a creature with an Unarmed Strike
@@ -121,17 +129,23 @@ system:
         targets:
           - type: itemUses
             value: '4'
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            target: feat:monks-focus
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: day
         concentration: false
         override: false
         value: '@classes.monk.levels'
+        expiry: null
       effects:
         - _id: GnIJc9uI54mfAQz8
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -141,6 +155,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -158,17 +173,40 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/help.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: quivering-palm
+  advancement: {}
+  crewed: false
 effects:
   - name: Lethal Vibrations
-    img: systems/dnd5e/icons/svg/items/feature.svg
+    img: icons/magic/unholy/hand-marked-pink.webp
     origin: Compendium.dnd5e.classes24.Item.phbmnkQuiveringP
     transfer: false
     _id: GnIJc9uI54mfAQz8
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -183,29 +221,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792443358648
+      modifiedTime: 1792443358648
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkQuiveringP.GnIJc9uI54mfAQz8'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866574822
-  modifiedTime: 1745256763321
+  systemVersion: 6.0.6
+  createdTime: 1792443358648
+  modifiedTime: 1792443358648
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

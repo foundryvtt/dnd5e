@@ -17,8 +17,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -28,14 +28,15 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities:
     VVEGPoQePVprCF9A:
       type: utility
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: When you fail an ability check
@@ -43,17 +44,19 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbftrSecondWind
+            target: feat:second-wind
             scaling: {}
         scaling:
           allowed: false
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -64,6 +67,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -80,24 +84,33 @@ system:
         prompt: false
         visible: false
         formula: 1d10
-        name: Bonus
-      name: Expend Second Wind
+        name: Check Bonus
+      name: Roll Bonus
       _id: VVEGPoQePVprCF9A
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: tactical-mind
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1740680083501
+  systemVersion: 6.1.0
+  createdTime: 1793299626339
+  modifiedTime: 1793299626339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

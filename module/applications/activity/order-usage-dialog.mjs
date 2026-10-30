@@ -295,10 +295,10 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    */
   async _calculateLivestockPrice(uuids) {
     const livestock = await bulkFromUuid(uuids);
-    return uuids.reduce((total, uuid) => {
+    return Math.floor(uuids.reduce((total, uuid) => {
       const { valueInGP=0 } = foundry.utils.getProperty(livestock.get(uuid) ?? {}, "system.attributes.price") ?? {};
       return total + valueInGP;
-    }, 0);
+    }, 0));
   }
 
   /* -------------------------------------------- */
@@ -355,7 +355,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
       const { days, gold } = await item.system.getCraftCost({
         baseItem: submitData.craft.buyBaseItem ? "buy" : "craft"
       });
-      Object.assign(submitData.costs, { days, gold });
+      Object.assign(submitData.costs, { days, gold: Math.floor(gold) });
     }
   }
 

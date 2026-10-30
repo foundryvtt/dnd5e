@@ -6,15 +6,15 @@ img: icons/skills/melee/swords-parry-block-yellow.webp
 system:
   description:
     value: >-
-      <p>You can attack three times instead of once whenever you take the Attack
-      action on your turn.</p>
+      <p>You can attack three times instead of once whenever you take the
+      &amp;Reference[Attack] action on your turn.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -24,25 +24,24 @@ system:
     subtype: ''
   prerequisites:
     level: 11
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fighter
   activities: {}
   enchant: {}
   identifier: two-extra-attacks
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761897
+  systemVersion: 6.1.0
+  createdTime: 1793299626340
+  modifiedTime: 1793299626340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

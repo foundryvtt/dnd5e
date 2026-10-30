@@ -358,7 +358,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     try {
       this.advancement._validateItemType(item);
       item.system.assertPrerequisites?.(this.advancement.actor, { level: this.featureLevel, throwError: true });
-    } catch (err) {
+    } catch ( err ) {
       ui.notifications.error(err.message);
       return null;
     }

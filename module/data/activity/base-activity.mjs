@@ -318,7 +318,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformActivationData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     return {
       type: source.system.activation?.type === "none" ? "" : (source.system.activation?.type ?? ""),
       value: source.system.activation?.cost ?? null,
@@ -449,7 +449,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformDurationData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     const concentration = !!source.system.properties?.findSplice(p => p === "concentration");
     return {
       concentration,
@@ -482,7 +482,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformRangeData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     return {
       value: source.system.range?.value ?? null,
       units: source.system.range?.units ?? "",
@@ -499,7 +499,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformTargetData(source, options) {
-    if ( source.type === "spell" ) return {
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {
       prompt: source.system.target?.prompt ?? true
     };
 
@@ -671,7 +671,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const formula = parts.join(" + ");
       try {
         return new CONFIG.Dice.DamageRoll(formula, data, { base, ...options });
-      } catch (err) {
+      } catch ( err ) {
         console.warn(`Unable to prepare formula "${formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);
@@ -683,7 +683,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       try {
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: false });
-      } catch (err) {
+      } catch ( err ) {
         console.warn(`Unable to simplify formula "${roll.formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);
@@ -848,6 +848,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         .concat(config.properties ?? [])
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
+
+    rollConfig.applicationOptions = AppliedRules
+      .collect(`${this.constructor.damageRuleCategory}:damageApplicationOptions`, this.actor, this.item)
+      .filterWith(rollData)
+      .toDamageApplicationOptions(rollConfig.applicationOptions);
+
     const rules = {
       bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
       consumed: new Set()

@@ -1,6 +1,6 @@
 import { linkForUuid, loadingTooltip, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
-import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
+import SpellsUnlinkedConfig from "./config/spells-unlinked-config.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
@@ -36,6 +36,7 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     },
     list: {
       classes: ["right", "spell-list"],
+      scrollable: [""],
       template: "systems/dnd5e/templates/journal/spell/list.hbs"
     }
   };

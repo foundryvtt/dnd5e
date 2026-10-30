@@ -3,39 +3,104 @@ name: Resourceful
 type: feat
 img: icons/tools/hand/hammer-and-nail.webp
 system:
-  activities: {}
+  activities:
+    IiqBiFB7i3JZPpXD:
+      type: utility
+      _id: IiqBiFB7i3JZPpXD
+      sort: 0
+      activation:
+        type: longRest
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
     max: ''
   description:
-    value: <p>You gain Heroic Inspiration whenever you finish a Long Rest.</p>
+    value: >-
+      <p>You gain
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.AQ1oTG7jHy5kZuN9]{Heroic
+      Inspiration} whenever you finish a Long Rest.</p><section
+      id="secret-76Fxj5ArEsAJk2ZO" class="secret"><p><strong>Foundry
+      Note</strong></p><p>Usage of this feature's activity does not
+      automatically grant Heroic Inspiration.</p></section>
     chat: ''
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - trait
   requirements: Human
   identifier: resourceful
+  advancement: {}
+  crewed: false
 effects: []
 folder: uCr9wkkriM8r4C9R
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866697989
-  modifiedTime: 1740680089952
+  systemVersion: 6.0.6
+  createdTime: 1791577976896
+  modifiedTime: 1791577976896
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

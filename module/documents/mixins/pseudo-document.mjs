@@ -8,7 +8,7 @@ const COPIED_METHODS = [
 
 /**
  * A mixin which extends a DataModel to provide behavior shared between activities & advancement.
- * @template {DataModel} T
+ * @template {foundry.abstract.DataModel} T
  * @param {typeof T} Base  The base DataModel to be mixed.
  * @returns {typeof PseudoDocument}
  * @mixin

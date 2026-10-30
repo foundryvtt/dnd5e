@@ -16,18 +16,18 @@
     "watch": "less-watch-compiler less/ ./ dnd5e.less --source-map"
   },
   "devDependencies": {
-    "@foundryvtt/foundryvtt-cli": "^3.0.4",
+    "@foundryvtt/foundryvtt-cli": "^3.0.5",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.6.0",
-    "eslint-plugin-jsdoc": "^63.0.10",
+    "eslint": "^10.13.0",
+    "eslint-plugin-jsdoc": "^65.4.1",
     "fancy-log": "^2.0.0",
-    "globals": "^17.7.0",
-    "js-yaml": "^5.4.1",
-    "less": "^4.6.7",
-    "less-watch-compiler": "^1.17.5",
-    "rollup": "^4.62.2",
-    "yargs": "^18.0.0"
+    "globals": "^17.13.0",
+    "js-yaml": "^5.5.0",
+    "less": "^4.9.1",
+    "less-watch-compiler": "^1.19.9",
+    "rollup": "^4.65.0",
+    "yargs": "^18.2.0"
   },
   "allowScripts": {
     "classic-level@3.0.0": true

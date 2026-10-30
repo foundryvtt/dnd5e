@@ -158,8 +158,9 @@ export default class BaseAttackActivityData extends BaseActivityData {
   static transformTypeData(source, activityData, options) {
     // For weapons and ammunition, separate the first part from the rest to be used as the base damage and keep the rest
     let damageParts = source.system.damage?.parts ?? [];
-    const hasBase = (source.type === "weapon")
-      || ((source.type === "consumable") && (source.system?.type?.value === "ammo"));
+    const itemType = foundry.data.operators.DataFieldOperator.get(source.type);
+    const hasBase = (itemType === "weapon")
+      || ((itemType === "consumable") && (source.system?.type?.value === "ammo"));
     if ( hasBase && damageParts.length && !source.system.damage?.base ) {
       const [base, ...rest] = damageParts;
       source.system.damage.parts = [base];

@@ -20,18 +20,22 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -59,7 +63,13 @@ system:
         parts: []
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Sl673lS0oweTsTHf:
       type: save
       name: Grapple/Shove
@@ -76,22 +86,30 @@ system:
         targets: []
       description:
         chatFlavor: Grapple or Shove attempt
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: OM3Rt1nQv3WKS0pc
           onSave: false
+          uuid: null
+          level: {}
         - _id: OgkonP6JL0AdFtQN
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -113,21 +131,22 @@ system:
         dc:
           calculation: ''
           formula: max(@abilities.str.dc, @abilities.dex.dc)
+        visible: true
       _id: Sl673lS0oweTsTHf
       img: ''
-      appliedEffects:
-        - OM3Rt1nQv3WKS0pc
-        - OgkonP6JL0AdFtQN
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
     max: ''
   description:
     value: >-
-      <p>You can use Dexterity instead of Strength for the attack and damage
-      rolls of your &amp;Reference[Unarmed Strike]{unarmed strikes}. You can
-      roll your Martial Arts die in place of the normal damage.</p>
-
       <p><em>See:
       @UUID[Compendium.dnd5e.classes24.Item.phbmnkMartialArt]{Martial Arts
       (Monk)}</em></p>
@@ -151,14 +170,12 @@ system:
   price:
     value: 0
     denomination: gp
-  rarity: ''
   attunement: ''
   attuned: false
   equipped: false
   armor:
     value: null
   cover: null
-  crewed: false
   hp:
     value: null
     max: null
@@ -180,6 +197,7 @@ system:
       scaling:
         number: 1
       bonus: ''
+      modifiers: []
     versatile:
       number: null
       denomination: null
@@ -188,7 +206,7 @@ system:
         enabled: false
       scaling:
         number: 1
-  magicalBonus: null
+      modifiers: []
   properties:
     - fin
   proficient: 1
@@ -198,6 +216,9 @@ system:
     reach: null
     units: ft
   mastery: ''
+  rarities: []
+  crew:
+    value: []
 effects:
   - name: Grappled
     img: systems/dnd5e/icons/svg/statuses/grappled.svg
@@ -207,6 +228,16 @@ effects:
     type: base
     system:
       changes: []
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -220,17 +251,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.bdG1d6kwc7F8Gbfg
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: 1736290806405
-      modifiedTime: 1755025523298
+      systemVersion: 6.0.6
+      createdTime: 1792443355978
+      modifiedTime: 1792443355978
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -245,6 +274,16 @@ effects:
     type: base
     system:
       changes: []
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -258,17 +297,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.SfM8X3xktY0PR0Kz
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: 1736290807662
-      modifiedTime: 1755025546429
+      systemVersion: 6.0.6
+      createdTime: 1792443355978
+      modifiedTime: 1792443355978
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -276,18 +313,14 @@ effects:
     folder: null
     _key: '!items.effects!phbmnkUnarmedStr.OgkonP6JL0AdFtQN'
 folder: kK77WX8hVJHRQRda
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.1
-  createdTime: 1726692994690
-  modifiedTime: 1755625475148
+  systemVersion: 6.0.6
+  createdTime: 1792443355978
+  modifiedTime: 1792443355978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

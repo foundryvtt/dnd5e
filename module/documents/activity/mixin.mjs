@@ -599,7 +599,7 @@ export default function ActivityMixin(Base) {
           if ( target.hasZeroCost(config) ) continue;
           try {
             await target.consume(config, updates);
-          } catch (err) {
+          } catch ( err ) {
             if ( err instanceof ConsumptionError ) errors.push(err);
             else throw err;
           }
@@ -931,7 +931,8 @@ export default function ActivityMixin(Base) {
       };
 
       config.data.roll ??= {};
-      config.data.roll.damageType = config.options.type;
+      config.data.roll.damage ??= {};
+      config.data.roll.damage.type = config.options.type;
       const ruleBonus = AppliedRules.createIterator(process.rules.bonus)
         .filterWith(config.data, { consumed: process.rules.consumed })
         .toFormula();
@@ -1026,7 +1027,7 @@ export default function ActivityMixin(Base) {
         else if ( action === "refundResource" ) await this.#refundResource(event, target, message);
         else if ( action === "placeTemplate" ) await this.#placeTemplate();
         else await activity._onChatAction(event, target, message);
-      } catch (err) {
+      } catch ( err ) {
         Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
       } finally {
         target.disabled = false;
@@ -1128,7 +1129,7 @@ export default function ActivityMixin(Base) {
       try {
         const result = await TemplatePlacement.fromActivity(this);
         if ( result ) templates.push(...result);
-      } catch (err) {
+      } catch ( err ) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
           log: "error",
