@@ -1040,6 +1040,11 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Rest",
     passive: true
   },
+  bothRest: {
+    label: "DND5E.ACTIVATION.Type.BothRest.Label",
+    group: "DND5E.ACTIVATION.Category.Rest",
+    passive: true
+  },
   encounter: {
     label: "DND5E.ACTIVATION.Type.Encounter.Label",
     group: "DND5E.ACTIVATION.Category.Combat",
@@ -3004,7 +3009,7 @@ DND5E.restTypes = {
     label: "DND5E.REST.Short.Label",
     icon: "fa-solid fa-utensils",
     dialogClass: ShortRestDialog,
-    activationPeriods: ["shortRest"],
+    activationPeriods: ["bothRest", "shortRest"],
     expiryEvents: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -3020,7 +3025,7 @@ DND5E.restTypes = {
     icon: "fa-solid fa-campground",
     dialogClass: LongRestDialog,
     newDay: true,
-    activationPeriods: ["longRest"],
+    activationPeriods: ["bothRest", "longRest"],
     expiryEvents: ["longRest", "shortRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
