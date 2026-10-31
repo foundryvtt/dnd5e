@@ -6,7 +6,7 @@
     {{#each rolls}}
     {{{ this }}}
     {{/each}}
-    {{#with buttonGroups.resist}}
+    {{#each buttonGroups}}
     {{#each entries}}
     <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
         {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action}}"
@@ -14,12 +14,19 @@
         {{ dnd5e-icon icon }}
     </button>
     {{/each}}
-    {{/with}}
+    {{/each}}
 </section>
 
 {{#if resisted}}
 <p class="supplement">
     <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
     {{ localize "DND5E.LegendaryResistance.Resisted" }}
+</p>
+{{/if}}
+
+{{#if concentrationBroken}}
+<p class="supplement">
+    <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+    {{ localize "DND5E.CONCENTRATION.Lost" }}
 </p>
 {{/if}}

@@ -47,6 +47,7 @@ export default class SaveSheet extends ActivitySheet {
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
       value, label: config.label
     }));
+    context.abilityOptions.push({ value: "concentration", label: _loc("DND5E.Concentration") });
     context.calculationOptions = [
       { value: "", label: _loc("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
       { rule: true },
