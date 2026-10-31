@@ -2733,34 +2733,47 @@
       "D20": "D20 Tests",
       "Damage": "Damage Rolls",
       "Healing": "Healing Rolls",
+      "HitPointDice": "Hit Point Dice Rolls",
       "Save": "Saving Throws"
     },
     "Label": "Change",
     "Title": "{effect} Change #{number}",
     "Type": {
       "Advantage": {
+        "Hint": "Add a source of advantage or disadvantage for a d20 roll.",
         "Label": "Advantage Mode"
       },
       "Bonus": {
+        "Hint": "Add a bonus to a roll.",
         "Label": "Bonus"
       },
       "DowngradeImmunityResistance": {
+        "Hint": "When applying damage, treat the target's immunity as resistance and ignore the target's resistance to a damage type.",
         "Label": "Downgrade Immunity & Resistance"
       },
       "IgnoreImmunity": {
+        "Hint": "When applying damage, ignore the target's immunity to a damage type.",
         "Label": "Ignore Immunity"
       },
       "IgnoreResistance": {
+        "Hint": "When applying damage, ignore the target's resistance to a damage type.",
         "Label": "Ignore Resistance"
       },
       "IgnoreVulnerability": {
+        "Hint": "When applying damage, ignore the target's vulnerability to a damage type.",
         "Label": "Ignore Vulnerability"
       },
       "Maximum": {
+        "Hint": "Set the maximum value that can be rolled by the main die.",
         "Label": "Roll Maximum"
       },
       "Minimum": {
+        "Hint": "Set the minimum value that can be rolled by the main die.",
         "Label": "Roll Minimum"
+      },
+      "Modifier": {
+        "Hint": "Add modifiers to the main dice of a roll such as 'xo' or 'rr'.",
+        "Label": "Roll Modifier"
       }
     }
   },
