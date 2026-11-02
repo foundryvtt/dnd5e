@@ -8,14 +8,14 @@ system:
     value: >-
       <p>You're so evasive that attackers rarely gain the upper hand against
       you. No attack roll can have Advantage against you unless you have the
-      Incapacitated condition.</p>
+      &amp;Reference[Incapacitated apply=false] condition.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -25,25 +25,24 @@ system:
     subtype: ''
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities: {}
   enchant: {}
   identifier: elusive
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764228
+  systemVersion: 6.1.0
+  createdTime: 1793387103833
+  modifiedTime: 1793387103833
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
