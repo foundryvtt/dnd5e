@@ -15,9 +15,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -27,25 +28,44 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities: {}
   enchant: {}
   identifier: weapon-mastery
+  advancement:
+    yp6ZCsT10nGs4J4q:
+      _id: yp6ZCsT10nGs4J4q
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 1
+      hint: >-
+        <p>Your training with weapons allows you to use the mastery properties
+        of two kinds of weapons of your choice with which you have proficiency,
+        such as Daggers and Shortbows.</p>
+      name: Weapon Mastery
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764696
+  systemVersion: 6.1.0
+  createdTime: 1793387103832
+  modifiedTime: 1793387103832
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
