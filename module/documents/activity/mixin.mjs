@@ -309,9 +309,8 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
-        const deltas = results.message?.system?.deltas ?? results.message?.data?.system?.deltas;
-        const consumed = this.createConsumedFlag(this.actor, deltas);
-        if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
+        const { deltas, scaling } = results.message?.system ?? results.message?.data?.system ?? {};
+        const activity = this.#createActionActivity(this.actor, deltas, scaling);
         activity._triggerSubsequentActions(usageConfig, results);
       }
 
@@ -1012,12 +1011,8 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async onChatAction(event, target, message) {
-      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
-      const scaling = message.system.scaling ?? 0;
-      const item = (consumed || scaling) ? this.item.clone({
-        "flags.dnd5e": { consumed, scaling }
-      }, { keepId: true }) : this.item;
-      const activity = item.system.activities.get(this.id);
+      const { deltas, scaling } = message.system;
+      const activity = this.#createActionActivity(message.getAssociatedActor(), deltas, scaling);
       const action = target.dataset.action ?? message.system.getButton(target)?.action;
       const handler = this.metadata.usage?.actions?.[action];
       target.disabled = true;
@@ -1181,6 +1176,23 @@ export default function ActivityMixin(Base) {
       const container = document.createElement("div");
       container.innerHTML = enriched;
       return container.children;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Create an activity clone with the proper flags that can be used to trigger an action.
+     * @param {Actor5e} actor             The actor performing the action.
+     * @param {ActorDeltasData} [deltas]  Deltas for the activity's consumption.
+     * @param {number} [scaling=0]        Scaling for the usage.
+     * @returns {Activity}
+     */
+    #createActionActivity(actor, deltas, scaling=0) {
+      const consumed = this.createConsumedFlag(actor, deltas);
+      const item = (consumed || scaling) ? this.item.clone({
+        "flags.dnd5e": { consumed, scaling }
+      }, { keepId: true }) : this.item;
+      return item.system.activities.get(this.id);
     }
 
     /* -------------------------------------------- */
