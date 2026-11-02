@@ -1,0 +1,219 @@
+folder: WJ4IXskgADlprLEA
+name: Polar Land
+type: feat
+_id: phbdrdLandPolar0
+img: icons/magic/water/water-iceberg-bubbles.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement:
+    gr3doNHG1mFLGGoL:
+      _id: gr3doNHG1mFLGGoL
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFogCloud00
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplHoldPerson
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplRayofFrost
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: a
+      value: {}
+      level: 3
+      hint: ''
+      name: Circle of the Land Spells
+      flags: {}
+    k5GlSJQuULYxgCe1:
+      _id: k5GlSJQuULYxgCe1
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSleetStorm
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: a
+      value: {}
+      level: 5
+      hint: ''
+      name: Circle of the Land Spells
+      flags: {}
+    vuWXaKhrGUjV2krQ:
+      _id: vuWXaKhrGUjV2krQ
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplIceStorm00
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: a
+      value: {}
+      level: 7
+      hint: ''
+      name: Circle of the Land Spells
+      flags: {}
+    u6jFGLueb9EL9e0k:
+      _id: u6jFGLueb9EL9e0k
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplConeofCold
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: a
+      value: {}
+      level: 9
+      hint: ''
+      name: Circle of the Land Spells
+      flags: {}
+  description:
+    value: >-
+      <table><caption><p>Polar Land</p></caption><thead><tr><td><p>Druid
+      Level</p></td><td><p>Circle
+      Spells</p></td></tr></thead><tbody><tr><td><p>3</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFogCloud00]{Fog
+      Cloud},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplHoldPerson]{Hold
+      Person},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplRayofFrost]{Ray of
+      Frost}</em></p></td></tr><tr><td><p>5</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSleetStorm]{Sleet
+      Storm}</em></p></td></tr><tr><td><p>7</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplIceStorm00]{Ice
+      Storm}</em></p></td></tr><tr><td><p>9</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplConeofCold]{Cone
+      of Cold}</em></p></td></tr></tbody></table>
+    chat: ''
+  identifier: polar-land
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    page: ''
+    custom: ''
+    license: CC-BY-4.0
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items: []
+    repeatable: false
+    level: null
+  properties: []
+  requirements: Circle of Land
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: 'Nature''s Ward: Polar'
+    origin: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders: {}
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: n8mNpKpvixE4tmtv
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: hX6S5Ppi2F3aabIN
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbdrdLandPolar0
+        behavior: null
+        message: null
+        actor: null
+        effect: null
+      rider:
+        statuses: []
+      conditions: |-
+        {
+          "k": "classes.druid.levels",
+          "o": "gte",
+          "v": 10
+        }
+      magical: false
+    description: >-
+      <p>When you reach level 10, you have &amp;Reference[Resistance] to a
+      damage type associated with your current land choice in the Circle Spells
+      feature.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.XLIRgAYPO1ARo5pb
+      duplicateSource: null
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.1.0
+      createdTime: 1793647063835
+      modifiedTime: 1793647063835
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbdrdLandPolar0.n8mNpKpvixE4tmtv'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.1.0
+  createdTime: 1793647063835
+  modifiedTime: 1793647787059
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!phbdrdLandPolar0'
