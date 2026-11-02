@@ -72,7 +72,20 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static _migrateData(source) {
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
+    SubclassData.#migrateMoonIdentifier(source);
     return source;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate Circle of the Moon identifier.
+   * Added in DnD5e 6.1.0.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateMoonIdentifier(source) {
+    if ( (source.identifier !== "moon") || (source.classIdentifier !== "druid") ) return;
+    source.identifier = "circle-moon";
   }
 
   /* -------------------------------------------- */

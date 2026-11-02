@@ -7,22 +7,16 @@ system:
     value: >-
       <p>Once on each of your turns when you hit a creature with an attack roll
       using a weapon or a Beast form's attack in Wild Shape, you can cause the
-      target to take an extra 1d8 [[/damage 1d8 type=cold]]{cold}, [[/damage 1d8
-      type=fire]]{fire}, [[/damage 1d8 type=lightning]]{lightning}, or [[/damage
-      1d8 type=thunder]]{thunder} damage (choose when you hit).</p><section
-      class="secret" id="secret-teMMREyPGTtod1kP"><p><strong>Foundry
-      Note</strong></p><p>This feature's damage will automatically increase when
-      you gain @UUID[Compendium.dnd5e.classes24.Item.phbdrdImprovedEl]{Improved
-      Elemental Fury}. If using the activity you will be able to select the
-      damage type when rolling. It will default to your previously chosen damage
-      type.</p></section>
+      target to take an extra 1d8 cold, fire, lightning, or thunder damage
+      (choose when you hit).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -32,6 +26,7 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
@@ -41,10 +36,12 @@ system:
       name: Primal Strike
       _id: lHdiTksQmeJBFrf7
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: ''
+        condition: >-
+          When you hit a creature with an attack roll using a weapon or a Beast
+          form's attack in Wild Shape
       consumption:
         targets: []
         scaling:
@@ -52,27 +49,28 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: any
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
           type: creature
-          special: >-
-            When you hit a creature with an attack roll using a weapon or a
-            Beast form's attack in Wild Shape
+          special: ''
         override: false
         prompt: false
       uses:
@@ -82,14 +80,16 @@ system:
       sort: 0
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
-              enabled: true
-              formula: '@scale.druid.elemental-fury'
-            number: null
-            denomination: 0
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
             bonus: ''
+            modifiers: []
             types:
               - cold
               - fire
@@ -97,22 +97,112 @@ system:
               - thunder
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: 14
+        identifier: druid
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+    M1utqL6xPlIX9JX3:
+      type: damage
+      name: Improved Primal Strike
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: >-
+          When you hit a creature with an attack roll using a weapon or a Beast
+          form's attack in Wild Shape
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>Once on each of your turns when you hit a creature with an attack
+          roll using a weapon or a Beast form's attack in Wild Shape, you can
+          cause the target to take an extra 2d8 cold, fire, lightning, or
+          thunder damage (choose when you hit).</p>
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            modifiers: []
+            types:
+              - cold
+              - fire
+              - lightning
+              - thunder
+            scaling:
+              number: 1
+      img: ''
+      visibility:
+        level:
+          min: 15
+          max: null
+        identifier: druid
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+      _id: M1utqL6xPlIX9JX3
   enchant: {}
-  identifier: elemental-fury-primal-strike
+  identifier: primal-strike
+  advancement: {}
+  crewed: false
 effects: []
 folder: EXYmwRGoNyMbByN1
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1740685844517
+  systemVersion: 6.1.0
+  createdTime: 1793647058190
+  modifiedTime: 1793647058190
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 625000

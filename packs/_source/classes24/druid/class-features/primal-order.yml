@@ -7,22 +7,18 @@ system:
   description:
     value: >-
       <p>You have dedicated yourself to one of the following sacred roles of
-      your choice.</p><p><strong>Magician.</strong> You know one extra cantrip
-      from the Druid spell list. In addition, your mystical connection to nature
-      gives you a bonus to your Intelligence (Arcana or Nature) checks. The
-      bonus equals your Wisdom modifier (minimum bonus of
-      +1).</p><p><strong>Warden.</strong> Trained for battle, you gain
-      proficiency with Martial weapons and training with Medium
-      armor.</p><section id="secret-SgYOtpnQW9hL4WJ8"
-      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
-      to choose during advancement.</p></section>
+      your choice.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbPrimalOrderMa
+      caption=false cite=false
+      nameStyle=inline]{Magician}</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
+      caption=false cite=false nameStyle=inline]{Warden}</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -32,25 +28,55 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - trait
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: primal-order
+  advancement:
+    NpBpNlHOO43gMD0U:
+      _id: NpBpNlHOO43gMD0U
+      type: ItemChoice
+      configuration:
+        choices:
+          '1':
+            count: 1
+            replacement: false
+        allowDrops: false
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classes24.Item.phbPrimalOrderMa
+            sort: 0
+          - uuid: Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
+            sort: 0
+        spell: null
+        restriction:
+          type: class
+          subtype: ''
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You have dedicated yourself to one of the following sacred roles of
+        your choice.</p>
+      name: Choose Primal Order
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1745256761285
+  systemVersion: 6.1.0
+  createdTime: 1793647058189
+  modifiedTime: 1793647058189
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 700000

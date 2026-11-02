@@ -6,27 +6,23 @@ img: icons/magic/nature/root-vines-grow-brown.webp
 system:
   description:
     value: >-
-      <p>As a Magic action, you can expend a use of your Wild Shape and choose a
-      point within 60 feet of yourself. Vitality-giving flowers and
-      life-draining thorns appear for a moment in a 10-foot-radius Sphere
-      centered on that point. Each creature of your choice in the Sphere must
-      make a Constitution saving throw against your spell save DC, taking 2d6
-      Necrotic damage on a failed save or half as much damage on a successful
-      one. One creature of your choice in that area regains [[/healing
-      @scale.land.lands-aid]]{[[lookup @scale.land.lands-aid]] Hit
-      Points}.</p><p>The damage and healing increase by 1d6 when you reach Druid
-      levels 10 (3d6) and 14 (4d6).</p><section class="secret"
-      id="secret-T1DFK6QJjzeJsysz"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an activity for the saving throw and the
-      healing.</p><p>The healing/damage values automatically scale as you level
-      up.</p></section>
+      <p>As a &amp;Reference[Magic] action, you can expend a use of your Wild
+      Shape and choose a point within 60 feet of yourself. Vitality-giving
+      flowers and life-draining thorns appear for a moment in a 10-foot-radius
+      Sphere centered on that point. Each creature of your choice in the Sphere
+      must make a Constitution saving throw against your spell save DC, taking
+      2d6 Necrotic damage on a failed save or half as much damage on a
+      successful one. One creature of your choice in that area regains 2d6 Hit
+      Points.</p><p>The damage and healing increase by 1d6 when you reach Druid
+      levels 10 (3d6) and 14 (4d6).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     recovery: []
@@ -36,8 +32,10 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Circle of Land
   activities:
     dnd5eactivity000:
@@ -52,7 +50,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            target: feat:wild-shape
             scaling: {}
         scaling:
           allowed: false
@@ -60,11 +58,13 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -81,6 +81,7 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: creature
@@ -93,10 +94,11 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: '@scale.land.lands-aid'
+              formula: '@scale.lands-aid.roll'
             number: null
             denomination: 0
             bonus: ''
+            modifiers: []
             types:
               - necrotic
             scaling:
@@ -107,12 +109,25 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
       sort: 0
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
     LI4RB1gsoHK0bS5n:
       type: heal
       _id: LI4RB1gsoHK0bS5n
@@ -128,25 +143,28 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: ft
-        special: ''
+        units: spec
+        special: Within the Sphere of damage
         value: '60'
       target:
         template:
           contiguous: false
           units: ft
-          type: sphere
+          type: ''
           size: '10'
           count: ''
+          stationary: false
         affects:
-          choice: true
+          choice: false
           count: '1'
           type: creature
           special: ''
@@ -159,31 +177,61 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '@scale.land.lands-aid'
+          formula: '@scale.lands-aid.roll'
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
   enchant: {}
   identifier: lands-aid
+  advancement:
+    3QzkY4MkeL5QLWfM:
+      _id: 3QzkY4MkeL5QLWfM
+      type: ScaleValue
+      configuration:
+        identifier: roll
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '3':
+            number: 2
+            faces: 6
+          '10':
+            number: 3
+          '14':
+            number: 4
+      value: {}
+      hint: ''
+      name: Damage & Healing
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866583501
-  modifiedTime: 1745256761196
+  systemVersion: 6.1.0
+  createdTime: 1793647063851
+  modifiedTime: 1793647063851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000
