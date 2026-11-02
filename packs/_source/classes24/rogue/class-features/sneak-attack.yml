@@ -24,9 +24,11 @@ system:
     license: CC-BY-4.0
     revision: 2
   uses:
-    max: ''
+    max: '1'
     spent: 0
-    recovery: []
+    recovery:
+      - period: turn
+        type: recoverAll
   type:
     value: class
     subtype: ''
@@ -45,7 +47,10 @@ system:
         condition: ''
         override: false
       consumption:
-        targets: []
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -141,7 +146,10 @@ system:
           allowed: true
           max: '@scale.rogue.sneak-attack.number'
         spellSlot: true
-        targets: []
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
       description:
         chatFlavor: ''
         value: ''
@@ -225,8 +233,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793387103832
-  modifiedTime: 1793387103832
+  createdTime: 1793649083823
+  modifiedTime: 1793649083823
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
