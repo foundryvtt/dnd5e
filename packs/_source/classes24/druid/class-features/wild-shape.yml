@@ -42,8 +42,8 @@ system:
       for those forms increases, as shown in the Beast Shapes table. In
       addition, starting at level 8, you can adopt a form that has a Fly
       Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
-      @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
-      [[lookup @scale.druid.wild-shape]]</p><p>When choosing known forms, you
+      @scale.wild-shape.forms]]{4}</p><p><strong>Current CR Limit:</strong>
+      [[lookup @scale.wild-shape.cr]]{1/4}</p><p>When choosing known forms, you
       may look in the <em>Monster Manual</em> or elsewhere for eligible Beasts
       if the Dungeon Master permits you to do so.</p><table><caption><p>Beast
       Shapes</p></caption><thead><tr><td><p>Druid Level</p></td><td><p>Known
@@ -159,7 +159,7 @@ system:
             - fly
           level:
             min: null
-            max: 5
+            max: 3
         - cr: '0.5'
           name: CR ½
           _id: 6SSHRda5Pf6fCKCf
@@ -170,7 +170,7 @@ system:
           movement:
             - fly
           level:
-            min: 6
+            min: 4
             max: 7
         - cr: '1'
           name: CR 1
@@ -251,8 +251,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793647868659
-  modifiedTime: 1793647868659
+  createdTime: 1793658068677
+  modifiedTime: 1793658068677
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

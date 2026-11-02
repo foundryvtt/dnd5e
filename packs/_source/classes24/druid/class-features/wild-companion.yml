@@ -6,8 +6,8 @@ system:
   description:
     value: >-
       <p>You can summon a nature spirit that assumes an animal form to aid you.
-      As a Magic action, you can expend a spell slot or a use of Wild Shape to
-      cast the
+      As a &amp;Reference[Magic] action, you can expend a spell slot or a use of
+      Wild Shape to cast the
       <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFindFamili]{Find
       Familiar}</em> spell without Material components.</p><p>When you cast the
       spell in this way, the familiar is Fey and disappears when you finish a
@@ -51,7 +51,7 @@ system:
       sort: 100000
       activation:
         type: action
-        override: false
+        override: true
       behaviors: []
       consumption:
         scaling:
@@ -64,6 +64,7 @@ system:
             target: '1'
             scaling:
               mode: level
+              formula: ''
       description:
         value: ''
         chatFlavor: ''
@@ -148,8 +149,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793647058189
-  modifiedTime: 1793647058189
+  createdTime: 1793658066697
+  modifiedTime: 1793658066697
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 900000
