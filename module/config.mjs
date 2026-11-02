@@ -3574,9 +3574,9 @@ DND5E.transformation = {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
         keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "tempHP", "type"]),
         merge: new Set(["saves", "skills"]),
-        minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
-        spellLists: new Set(["subclass:moon"]),
-        tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
+        minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.circle-moon.levels)",
+        spellLists: new Set(["subclass:circle-moon"]),
+        tempFormula: "max(@classes.druid.levels, @subclasses.circle-moon.levels * 3)"
       }
     },
     polymorph: {

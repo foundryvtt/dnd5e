@@ -9,21 +9,19 @@ system:
       <p>You know Druidic, the secret language of Druids. While learning this
       ancient tongue, you also unlocked the magic of communicating with animals;
       you always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with Animals}
-      spell prepared.</p><p>You can use Druidic to leave hidden messages. You
-      and others who know Druidic automatically spot such a message. Others spot
-      the message's presence with a successful [[/check inv 15]] check but can't
-      decipher it without magic.</p><section class="secret"
-      id="secret-5uD3Qi61JX7q2Fk8"><p><strong>Foundry
-      Note</strong></p><p>Druidic and Speak with Animals are automatically added
-      during advancement.</p></section>
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA]{Speak
+      with Animals}</em> spell prepared.</p><p>You can use Druidic to leave
+      hidden messages. You and others who know Druidic automatically spot such a
+      message. Others spot the message's presence with a successful [[/check inv
+      15]] check but can't decipher it without magic.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -33,25 +31,67 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: druidic
+  advancement:
+    SpGvDfOabbJrOR3K:
+      _id: SpGvDfOabbJrOR3K
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 1
+      hint: >-
+        <p>You know Druidic, the secret language of Druids. While learning this
+        ancient tongue, you also unlocked the magic of communicating with
+        animals; you always have the
+        <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA]{Speak
+        with Animals}</em> spell prepared.</p>
+      name: Speak with Animals
+      flags: {}
+    fwwJ7sF6UAsgWaLf:
+      _id: fwwJ7sF6UAsgWaLf
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:exotic:druidic
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      hint: <p>You know Druidic, the secret language of Druids.</p>
+      name: Druidic
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1745256761069
+  systemVersion: 6.1.0
+  createdTime: 1793647058188
+  modifiedTime: 1793647058188
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000
