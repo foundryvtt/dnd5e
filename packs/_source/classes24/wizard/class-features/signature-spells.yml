@@ -11,10 +11,10 @@ system:
       at level 3 without expending a spell slot. When you do so, you can't cast
       them in this way again until you finish a Short or Long Rest. To cast
       either spell at a higher level, you must expend a spell slot.</p><section
-      class="secret" id="secret-fzEf6z2A0SKM0qHw"><p><strong>Foundry
+      id="secret-fzEf6z2A0SKM0qHw" class="secret"><p><strong>Foundry
       Note</strong></p><p>The <strong>Make Signature</strong> activity can be
       used to enchant two spells which marks them as "Always Prepared" and adds
-      ", Signature" to their title for easy identification.</p><p>The
+      "(Signature)" to their title for easy identification.</p><p>The
       <strong>Expend First Spell</strong> and <strong>Expend Second
       Spell</strong> activities can be used for tracking your free use of each
       spell and refresh on a Short and Long Rest.</p></section>
@@ -23,8 +23,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -34,9 +34,10 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Wizard
   activities:
     XFWgZtgTNIvimlWz:
       type: enchant
@@ -55,10 +56,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: FTQVlTQlkrgD3rwq
           level:
@@ -68,6 +71,7 @@ system:
             activity: []
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -77,6 +81,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,12 +93,20 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories: []
         properties: []
         type: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     wdegZibcbQM4SzRI:
       type: utility
       name: Expend First Spell
@@ -114,10 +127,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -128,6 +143,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -145,6 +161,14 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     LKpjpqgxudgXOIIZ:
       type: utility
       name: Expend Second Spell
@@ -164,10 +188,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -178,6 +204,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -196,8 +223,18 @@ system:
         formula: ''
         name: ''
       _id: LKpjpqgxudgXOIIZ
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: signature-spells
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Signature
@@ -207,17 +244,32 @@ effects:
     system:
       changes:
         - key: name
-          value: ', Signature'
-          priority: null
-          type: add
-          phase: initial
-          _id: jBk4j7YiVFINn78w
-        - key: system.preparation.mode
-          value: always
+          value: '{} (Signature)'
           priority: null
           type: override
           phase: initial
-          _id: qIBFwGl3l97dZVky
+          _id: rflFm2zKGlWOIS19
+          conditions: '{}'
+          replacement: ''
+        - key: system.prepared
+          value: 2
+          priority: null
+          type: override
+          phase: initial
+          _id: h5IiwD4PT7DI1ZoF
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: true
+      rider:
+        activities: []
+        effects: []
+        items: []
     duration:
       value: null
       units: seconds
@@ -231,36 +283,32 @@ effects:
       either spell at a higher level, you must expend a spell slot.</p>
     origin: null
     tint: '#ffffff'
-    transfer: true
+    transfer: false
     statuses: []
     sort: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103945
-      modifiedTime: 1783544103945
+      systemVersion: 6.1.0
+      createdTime: 1793656986116
+      modifiedTime: 1793656986116
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbwzdSignatureS.FTQVlTQlkrgD3rwq'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866273692
-  modifiedTime: 1783544103945
+  systemVersion: 6.1.0
+  createdTime: 1793656986116
+  modifiedTime: 1793656986116
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
