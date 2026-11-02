@@ -5,23 +5,24 @@ img: icons/magic/perception/third-eye-blue-red.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>You can
-      use a Bonus Action to touch a willing creature and perceive through its
-      senses until the end of your next turn. As long as the creature is on the
-      same plane of existence as you, you can take a Bonus Action on subsequent
-      turns to maintain this connection, extending the duration until the end of
-      your next turn. The connection ends if you don't maintain it in this
-      way.</p><p>While perceiving through the other creature's senses, you
-      benefit from any special senses possessed by that creature, and you can
-      cast spells as if you were in your space or the other creature's space if
-      the two of you are within 60 feet of each other.</p>
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 5+ Warlock</p></div><p>You can use a Bonus Action to touch a willing
+      creature and perceive through its senses until the end of your next turn.
+      As long as the creature is on the same plane of existence as you, you can
+      take a Bonus Action on subsequent turns to maintain this connection,
+      extending the duration until the end of your next turn. The connection
+      ends if you don't maintain it in this way.</p><p>While perceiving through
+      the other creature's senses, you benefit from any special senses possessed
+      by that creature, and you can cast spells as if you were in your space or
+      the other creature's space if the two of you are within 60 feet of each
+      other.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -31,6 +32,7 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -51,10 +53,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -66,6 +70,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -84,22 +89,27 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/damage/psychic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: gaze-of-two-minds
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762213
+  systemVersion: 6.1.0
+  createdTime: 1793665214340
+  modifiedTime: 1793665214340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

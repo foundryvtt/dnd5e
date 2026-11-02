@@ -5,20 +5,17 @@ img: icons/creatures/magical/spirit-undead-masked-blue.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise Self}
-      without expending a spell slot.</p><section class="secret"
-      id="secret-vIzXrLvsSDtyMciU"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Cast</strong> activity can be used in-place of Disguise Self and
-      includes an Active Effect for tracking when you are
-      disguised.</p></section>
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 2+ Warlock</p></div><p>You can cast
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDisguiseSe]{Disguise
+      Self}</em> without expending a spell slot.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -28,20 +25,26 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities:
-    RgprqPZmHBQwULjl:
-      type: utility
-      name: ''
-      _id: RgprqPZmHBQwULjl
+    R0tyovCnSefEFyXw:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDisguiseSe
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 1
+      _id: R0tyovCnSefEFyXw
       sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -49,91 +52,51 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
         concentration: false
         override: false
-        value: '1'
-      effects:
-        - _id: swd1Kj9AAVBjVTCv
+        expiry: null
       range:
-        override: false
         units: self
-        special: ''
+        override: false
       target:
         template:
           contiguous: false
           units: ft
-          type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
-          type: self
-          special: ''
         override: false
-        prompt: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: mask-of-many-faces
-effects:
-  - name: Disguised
-    origin: Compendium.dnd5e.classes24.Item.phbinvMaskofMany
-    duration:
-      value: 3600
-      units: seconds
-      expiry: turnStart
-      expired: false
-    disabled: false
-    flags: {}
-    img: icons/magic/control/silhouette-aura-energy.webp
-    _id: swd1Kj9AAVBjVTCv
-    type: base
-    system:
-      changes: []
-    description: >-
-      <p><span style="font-family:Signika, sans-serif">To discern that you are
-      disguised, a creature must take the Study action to inspect your
-      appearance and succeed on an [[/check ability=int skill=inv]] check
-      against your spell save DC.</span></p>
-    tint: '#ffffff'
-    transfer: false
-    statuses: []
-    sort: 0
-    _stats:
-      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe.ActiveEffect.SrIb7dbaZs5F4zi9
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbinvMaskofMany.swd1Kj9AAVBjVTCv'
+  advancement: {}
+  crewed: false
+effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762364
+  systemVersion: 6.1.0
+  createdTime: 1793665214342
+  modifiedTime: 1793665214342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

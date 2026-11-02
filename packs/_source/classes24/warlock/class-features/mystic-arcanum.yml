@@ -20,8 +20,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -31,16 +31,18 @@ system:
     subtype: ''
   prerequisites:
     level: 11
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warlock
   activities: {}
   enchant: {}
   identifier: mystic-arcanum
   advancement:
-    - type: ItemChoice
-      title: Mystic Arcanum (6th level)
-      _id: vU3Qgfor0qryKp5Q
+    bidwV9ancvt7yMMn:
+      name: Choose Level 6 Spell
+      type: ItemChoice
+      _id: bidwV9ancvt7yMMn
       configuration:
         allowDrops: true
         choices:
@@ -78,7 +80,9 @@ system:
         restriction:
           list:
             - class:warlock
+          school: []
           level: '6'
+        sorting: a
         spell:
           ability: []
           method: atwill
@@ -86,17 +90,20 @@ system:
             max: '1'
             per: lr
             requireSlot: false
-          prepared: 0
+          prepared: 2
         type: spell
+      flags: {}
       value:
         added: {}
         replaced: {}
       hint: >-
-        Choose one level 6 Warlock spell as this arcanum. You can cast your
-        arcanum spell without expending a spell slot, and you must finish a Long
-        Rest before you can cast it this way again.
-    - type: ItemChoice
-      title: Mystic Arcanum (7th level)
+        <p>Your patron grants you a magical secret called an arcanum. Choose one
+        level 6 Warlock spell as this arcanum.</p><p>You can cast your arcanum
+        spell once without expending a spell slot, and you must finish a Long
+        Rest before you can cast it in this way again.</p>
+    hV2gBwZvAiky8P1e:
+      name: Choose Level 7 Spell
+      type: ItemChoice
       configuration:
         allowDrops: true
         choices:
@@ -128,7 +135,9 @@ system:
         restriction:
           list:
             - class:warlock
+          school: []
           level: '7'
+        sorting: a
         spell:
           ability: []
           method: atwill
@@ -136,18 +145,21 @@ system:
             max: '1'
             per: lr
             requireSlot: false
-          prepared: 0
+          prepared: 2
         type: spell
+      flags: {}
       value:
         added: {}
         replaced: {}
       hint: >-
-        Choose one level 7 Warlock spell as this arcanum. You can cast your
-        arcanum spell without expending a spell slot, and you must finish a Long
-        Rest before you can cast it this way again.
-      _id: QYz2YofPZodLOxWE
-    - type: ItemChoice
-      title: Mystic Arcanum (8th level)
+        <p>Your patron grants you a magical secret called an arcanum. Choose one
+        level 7 Warlock spell as this arcanum.</p><p>You can cast your arcanum
+        spell once without expending a spell slot, and you must finish a Long
+        Rest before you can cast it in this way again.</p>
+      _id: hV2gBwZvAiky8P1e
+    YaKmnEYwyXBi3WHi:
+      name: Choose Level 8 Spell
+      type: ItemChoice
       configuration:
         allowDrops: true
         choices:
@@ -173,7 +185,9 @@ system:
         restriction:
           list:
             - class:warlock
+          school: []
           level: '8'
+        sorting: a
         spell:
           ability: []
           method: atwill
@@ -181,18 +195,21 @@ system:
             max: '1'
             per: lr
             requireSlot: false
-          prepared: 0
+          prepared: 2
         type: spell
+      flags: {}
       value:
         added: {}
         replaced: {}
       hint: >-
-        Choose one level 8 Warlock spell as this arcanum. You can cast your
-        arcanum spell without expending a spell slot, and you must finish a Long
-        Rest before you can cast it this way again.
-      _id: IpPxk9slDo87T3Pj
-    - type: ItemChoice
-      title: Mystic Arcanum (9th level)
+        <p>Your patron grants you a magical secret called an arcanum. Choose one
+        level 8 Warlock spell as this arcanum.</p><p>You can cast your arcanum
+        spell once without expending a spell slot, and you must finish a Long
+        Rest before you can cast it in this way again.</p>
+      _id: YaKmnEYwyXBi3WHi
+    6ZTc3KSWn0Ug1Kx7:
+      name: Choose Level 9 Spell
+      type: ItemChoice
       configuration:
         allowDrops: true
         choices:
@@ -212,7 +229,9 @@ system:
         restriction:
           list:
             - class:warlock
+          school: []
           level: '9'
+        sorting: a
         spell:
           ability: []
           method: atwill
@@ -220,29 +239,28 @@ system:
             max: '1'
             per: lr
             requireSlot: false
-          prepared: 0
+          prepared: 2
         type: spell
+      flags: {}
       value:
         added: {}
         replaced: {}
       hint: >-
-        Choose one level 9 Warlock spell as this arcanum. You can cast your
-        arcanum spell without expending a spell slot, and you must finish a Long
-        Rest before you can cast it this way again.
-      _id: 1KvdZINFnTrQEsqx
+        <p>Your patron grants you a magical secret called an arcanum. Choose one
+        level 6 Warlock spell as this arcanum.</p><p>You can cast your arcanum
+        spell once without expending a spell slot, and you must finish a Long
+        Rest before you can cast it in this way again.</p>
+      _id: 6ZTc3KSWn0Ug1Kx7
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1753389468976
+  systemVersion: 6.1.0
+  createdTime: 1793665206277
+  modifiedTime: 1793665206277
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

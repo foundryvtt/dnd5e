@@ -5,19 +5,16 @@ img: icons/magic/perception/silhouette-stealth-shadow.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
-      see normally in Dim Light and Darkness—both magical and nonmagical—within
-      120 feet of yourself.</p><section class="secret"
-      id="secret-RVsijULbRFU2b9ZU"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect that grants you darkvision to 120
-      feet.</p></section>
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 2+ Warlock</p></div><p>You can see normally in Dim Light and
+      Darkness—both magical and nonmagical—within 120 feet of yourself.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -27,12 +24,15 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: devils-sight
+  advancement: {}
+  crewed: false
 effects:
   - name: Devil's Sight
     img: icons/magic/perception/silhouette-stealth-shadow.webp
@@ -45,7 +45,19 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: Y3sm1odZBkelbI5r
+          _id: Zw2dBCm0mzmK0luo
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -62,11 +74,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102182
-      modifiedTime: 1783544102182
+      systemVersion: 6.1.0
+      createdTime: 1793665214341
+      modifiedTime: 1793665214341
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -74,18 +86,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvDevilsSigh.Qfe7snyNHXLJHp4G'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102182
+  systemVersion: 6.1.0
+  createdTime: 1793665214341
+  modifiedTime: 1793665214341
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

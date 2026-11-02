@@ -14,9 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -26,9 +27,10 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fiend Patron
   activities:
     p3YSnjGDlLIbiLpC:
       type: heal
@@ -47,14 +49,16 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: ft
+        units: any
         special: ''
         value: '10'
       target:
@@ -62,6 +66,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -81,24 +86,36 @@ system:
           - temphp
         custom:
           enabled: true
-          formula: max(1, @abilities.cha.mod + @classes.warlock.levels)
+          formula: max(1, @classes.warlock.levels + @abilities.cha.mod)
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: dark-ones-blessing
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866551616
-  modifiedTime: 1758300960100
+  systemVersion: 6.1.0
+  createdTime: 1793665209034
+  modifiedTime: 1793665209034
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
