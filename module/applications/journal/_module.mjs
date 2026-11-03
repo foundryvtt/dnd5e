@@ -6,6 +6,7 @@ export {default as JournalSheet5e} from "./journal-sheet.mjs";
 export {default as JournalEntrySheet5e} from "./journal-entry-sheet.mjs";
 export {default as JournalSpellListPageSheet} from "./spells-page-sheet.mjs";
 export {default as TableOfContentsCompendium} from "./table-of-contents.mjs";
+export {default as TableOfContentsFolder} from "./table-of-contents-folder.mjs";
 
 export {default as CompendiumTOCConfig} from "./config/compendium-toc-config.mjs";
 export {default as JournalNavigationConfig} from "./config/journal-navigation-config.mjs";
