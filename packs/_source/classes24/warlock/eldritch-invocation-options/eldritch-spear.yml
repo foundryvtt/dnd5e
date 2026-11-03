@@ -5,24 +5,26 @@ img: icons/weapons/ammunition/arrowhead-glowing-blue.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 2+ Warlock, a Warlock Cantrip That
-      Deals Damage</p></blockquote><p>Choose one of your known Warlock cantrips
-      that deals damage and has a range of 10+ feet. When you cast that spell,
-      its range increases by a number of feet equal to 30 times your Warlock
-      level.</p><p><strong>Repeatable.</strong> You can gain this invocation
-      more than once. Each time you do so, choose a different eligible
-      cantrip.</p><section id="secret-7hr3xIfya7IOq7pj"
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 2+ Warlock, a Warlock Cantrip That Deals Damage</p></div><p>Choose
+      one of your known Warlock cantrips that deals damage and has a range of
+      10+ feet. When you cast that spell, its range increases by a number of
+      feet equal to 30 times your Warlock
+      level.</p><p><em><strong>Repeatable.</strong></em> You can gain this
+      invocation more than once. Each time you do so, choose a different
+      eligible cantrip.</p><section id="secret-7hr3xIfya7IOq7pj"
       class="secret"><p><strong>Foundry Note</strong></p><p>Use the
       <strong>Increase Range</strong> enchantment activity and drag your chosen
-      cantrip to the chat card to increase its range and append ", Eldritch
-      Spear" for easier identification.</p></section>
+      cantrip to the chat card to increase its range and append "(Eldritch
+      Spear)" for easier identification.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -33,6 +35,7 @@ system:
   prerequisites:
     level: 2
     repeatable: true
+    items: []
   properties: []
   requirements: Warlock Cantrip That Deals Damage
   activities:
@@ -53,10 +56,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: IY7BiUpe3kGLWk9L
           level:
@@ -66,6 +71,7 @@ system:
             activity: []
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -75,6 +81,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -86,14 +93,24 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories: []
         properties: []
         type: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: eldritch-spear
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Eldritch Spear
@@ -107,13 +124,38 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: PMBB1qMoHKjwHiqA
+          _id: GBuWMarI8h1XT8A9
+          conditions: '{}'
+          replacement: ''
         - key: name
-          value: ', Eldritch Spear'
+          value: '{} (Eldritch Spear)'
           priority: null
-          type: add
+          type: override
           phase: initial
-          _id: 8o3sE4vmp1Zuv3wI
+          _id: BDnCZUMJ2hLx1ZPn
+          conditions: '{}'
+          replacement: ''
+        - key: system.description.value
+          type: override
+          value: >-
+            {}<hr><p>When you cast that spell, its range increases by a number
+            of feet equal to 30 times your Warlock level.</p>
+          phase: initial
+          _id: vdijOkbQljI0Xgql
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: true
+      rider:
+        activities: []
+        effects: []
+        items: []
     duration:
       value: null
       units: seconds
@@ -122,18 +164,18 @@ effects:
     description: ''
     origin: null
     tint: '#ffffff'
-    transfer: true
+    transfer: false
     statuses: []
     sort: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102237
-      modifiedTime: 1783544102237
+      systemVersion: 6.1.0
+      createdTime: 1793665214342
+      modifiedTime: 1793665214342
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -141,18 +183,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvEldritchSp.IY7BiUpe3kGLWk9L'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102236
+  systemVersion: 6.1.0
+  createdTime: 1793665214342
+  modifiedTime: 1793665214342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

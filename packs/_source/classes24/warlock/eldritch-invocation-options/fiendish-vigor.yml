@@ -5,12 +5,13 @@ img: icons/magic/death/undead-zombie-grave-green.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplFalseLife0]{False Life} on
-      yourself without expending a spell slot. When you cast the spell with this
-      feature, you don't roll the die for the Temporary Hit Points; you
-      automatically get the highest number on the die.</p><section
-      class="secret" id="secret-9kRkRSKEmbOaga6L"><p><strong>Foundry
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 2+ Warlock</p></div><p>You can cast
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFalseLife0]{False
+      Life}</em> on yourself without expending a spell slot. When you cast the
+      spell with this feature, you don't roll the die for the Temporary Hit
+      Points; you automatically get the highest number on the die.</p><section
+      id="secret-9kRkRSKEmbOaga6L" class="secret"><p><strong>Foundry
       Note</strong></p><p>The <strong>False Life</strong> activity includes the
       maximum amount of healing.</p></section>
     chat: ''
@@ -18,8 +19,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -29,8 +30,10 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: ''
   activities:
     fORgQlbeidLbJ4lv:
@@ -50,10 +53,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -64,6 +69,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -77,7 +83,7 @@ system:
         max: ''
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - temphp
         custom:
@@ -86,22 +92,32 @@ system:
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
   enchant: {}
   identifier: fiendish-vigor
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762189
+  systemVersion: 6.1.0
+  createdTime: 1793665214339
+  modifiedTime: 1793665214339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

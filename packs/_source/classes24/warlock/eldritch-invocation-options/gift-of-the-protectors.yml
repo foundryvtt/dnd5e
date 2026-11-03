@@ -5,9 +5,10 @@ img: icons/sundries/books/book-open-red.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 9+ Warlock,
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 9+ Warlock,
       @UUID[Compendium.dnd5e.classes24.Item.phbinvPactTome00]{Pact of the Tome}
-      Invocation</p></blockquote><p>A new page appears in your
+      Invocation</p></div><p>A new page appears in your
       @UUID[Compendium.dnd5e.items.Item.CwWbeQ6XyqFzbMYw]{Book of Shadows} when
       you conjure it. With your permission, a creature can take an action to
       write its name on that page, which can contain a number of names equal to
@@ -15,8 +16,8 @@ system:
       whose name is on the page is reduced to 0 Hit Points but not killed
       outright, the creature magically drops to 1 Hit Point instead. Once this
       magic is triggered, no creature can benefit from it until you finish a
-      Long Rest.</p><p>As a Magic action, you can erase a name on the page by
-      touching it.</p><section id="secret-VzLQ7nRPLs0fIkvE"
+      Long Rest.</p><p>As a &amp;Reference[Magic] action, you can erase a name
+      on the page by touching it.</p><section id="secret-VzLQ7nRPLs0fIkvE"
       class="secret"><p><strong>Foundry Note</strong></p><p>The
       <strong>Protect</strong> activity consumes a use of its activity which
       refreshes every Long Rest.</p><p>The <strong>Write Name</strong> activity
@@ -28,11 +29,12 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
-    max: (max(1,@abilities.cha.mod))
+    max: max(1, @abilities.cha.mod)
     spent: 0
     recovery: []
   type:
@@ -40,9 +42,9 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 9
-    repeatable: false
     items:
-      - pact-of-the-tome
+      - feat:pact-of-the-tome
+    repeatable: false
   properties: []
   requirements: ''
   activities:
@@ -67,10 +69,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -81,6 +85,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -101,6 +106,13 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/activity/save.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     OpTVpSocFQtVBROc:
       type: utility
       name: Write Name
@@ -121,10 +133,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -135,6 +149,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -152,6 +167,13 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     cRjGFIPOcDcUcsjl:
       type: utility
       name: Erase Name
@@ -172,10 +194,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -186,6 +210,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -203,22 +228,27 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-languages.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: gift-of-the-protectors
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706841844
+  systemVersion: 6.1.0
+  createdTime: 1793665214340
+  modifiedTime: 1793665214340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

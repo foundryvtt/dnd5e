@@ -12,31 +12,27 @@ system:
       @UUID[Compendium.dnd5e.classes24.Item.phbinvPactTome00]{Pact of the Tome}.
       Invocations are described in the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000.JournalEntryPage.FA4hxx49eazhISIt]{Eldritch
-      Invocation Options} section.</p><p><strong>Prerequisites.</strong> If an
-      invocation has a prerequisite, you must meet it to learn that invocation.
-      For example, if an invocation requires you to be a level 5+ Warlock, you
-      can select the invocation once you reach Warlock level
-      5.</p><p><strong>Replacing and Gaining Invocations.</strong> Whenever you
-      gain a Warlock level, you can replace one of your invocations with another
-      one for which you qualify. You can't replace an invocation if it's a
-      prerequisite for another invocation that you have.</p><p>When you gain
-      certain Warlock levels, you gain more invocations of your choice, as shown
-      in the Invocations column of the Warlock Features
-      table.</p><p><strong>Current Max Eldritch Invocations:</strong> [[lookup
-      @scale.warlock.invocations-known]]</p><p>You can't pick the same
-      invocation more than once unless its description says
-      otherwise.</p><section class="secret"
-      id="secret-Oe1om6AaBjTtabpK"><p><strong>Foundry Note</strong></p><p>You
-      will be prompted for your choices as you level up. The advancement system
-      does not prevent you from taking any invocations so be sure that you meet
-      the requirements before selecting one.</p></section>
+      Invocation Options}
+      section.</p><p><em><strong>Prerequisites.</strong></em> If an invocation
+      has a prerequisite, you must meet it to learn that invocation. For
+      example, if an invocation requires you to be a level 5+ Warlock, you can
+      select the invocation once you reach Warlock level
+      5.</p><p><em><strong>Replacing and Gaining Invocations.</strong></em>
+      Whenever you gain a Warlock level, you can replace one of your invocations
+      with another one for which you qualify. You can't replace an invocation if
+      it's a prerequisite for another invocation that you have.</p><p>When you
+      gain certain Warlock levels, you gain more invocations of your choice, as
+      shown in the Invocations column of the Warlock Features table.</p><p>You
+      can't pick the same invocation more than once unless its description says
+      otherwise.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -46,25 +42,108 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warlock
   activities: {}
   enchant: {}
   identifier: eldritch-invocations
+  advancement:
+    xMtpuEuf5g6C8cqA:
+      _id: xMtpuEuf5g6C8cqA
+      type: ItemChoice
+      configuration:
+        choices:
+          '1':
+            count: 1
+            replacement: false
+          '2':
+            count: 2
+            replacement: true
+          '3':
+            count: null
+            replacement: true
+          '4':
+            count: null
+            replacement: true
+          '5':
+            count: 2
+            replacement: true
+          '6':
+            count: null
+            replacement: true
+          '7':
+            count: 1
+            replacement: true
+          '8':
+            count: null
+            replacement: true
+          '9':
+            count: 1
+            replacement: true
+          '10':
+            count: null
+            replacement: true
+          '11':
+            count: null
+            replacement: true
+          '12':
+            count: 1
+            replacement: true
+          '13':
+            count: null
+            replacement: true
+          '14':
+            count: null
+            replacement: true
+          '15':
+            count: 1
+            replacement: true
+          '16':
+            count: null
+            replacement: true
+          '17':
+            count: null
+            replacement: true
+          '18':
+            count: 1
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        allowDrops: true
+        type: feat
+        pool: []
+        spell: null
+        restriction:
+          type: class
+          subtype: eldritchInvocation
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You have unearthed Eldritch Invocations, pieces of forbidden
+        knowledge that imbue you with an abiding magical ability or other
+        lessons.</p>
+      name: Choose Eldritch Invocation
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256766833
+  systemVersion: 6.1.0
+  createdTime: 1793665206277
+  modifiedTime: 1793665206277
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

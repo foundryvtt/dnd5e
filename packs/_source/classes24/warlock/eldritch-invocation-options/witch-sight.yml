@@ -10,61 +10,76 @@ system:
     max: ''
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 15+ Warlock</p></blockquote><p>You have
-      Truesight with a range of 30 feet.</p><section
-      id="secret-yUE0N1X1QX3kZHcx" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect which
-      automatically grants you Truesight.</p></section>
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 15+ Warlock</p></div><p>You have &amp;Reference[Truesight] with a
+      range of 30 feet.</p>
     chat: ''
   source:
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: 15
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: witch-sight
+  advancement: {}
+  crewed: false
 effects:
-  - name: Witch Sight
+  - name: Truesight
     img: icons/magic/perception/eye-tendrils-web-purple.webp
     _id: CkC8PmrUFz70FTwS
     type: base
     system:
       changes:
-        - key: system.attributes.senses.truesight
+        - key: system.attributes.senses.ranges.truesight
           value: 30
           priority: null
           type: upgrade
           phase: initial
-          _id: dZHxAl71SrC0zWEY
+          _id: a9xo8ef2PZaQu8uJ
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
-    description: ''
+    description: <p>You have &amp;Reference[Truesight] with a range of 30 feet.</p>
     origin: null
     tint: '#ffffff'
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102512
-      modifiedTime: 1783544102512
+      systemVersion: 6.1.0
+      createdTime: 1793665214343
+      modifiedTime: 1793665214343
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -72,18 +87,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvWitchSight.CkC8PmrUFz70FTwS'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102512
+  systemVersion: 6.1.0
+  createdTime: 1793665214343
+  modifiedTime: 1793665214343
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

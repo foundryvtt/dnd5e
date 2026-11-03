@@ -5,23 +5,22 @@ img: icons/skills/melee/strike-axe-energy-pink.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 5+ Warlock,
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 5+ Warlock,
       @UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of the Blade}
-      Invocation</p></blockquote><p>Once per turn when you hit a creature with
-      your pact weapon, you can expend a Pact Magic spell slot to deal an extra
-      1d8 Force damage to the target, plus another 1d8 per level of the spell
-      slot, and you can give the target the &amp;Reference[Prone] condition if
-      it is Huge or smaller.</p><section class="secret"
-      id="secret-AoE71IXdo0xg5OKe"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Smite</strong> activity consumes a Pact Magic spell slot and
-      increases the damage based on your pact spell level.</p></section>
+      Invocation</p></div><p>Once per turn when you hit a creature with your
+      pact weapon, you can expend a Pact Magic spell slot to deal an extra 1d8
+      Force damage to the target, plus another 1d8 per level of the spell slot,
+      and you can give the target the &amp;Reference[Prone] condition if it is
+      Huge or smaller.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -31,10 +30,11 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
-    repeatable: false
     items:
       - pact-of-the-blade
-  properties: []
+    repeatable: false
+  properties:
+    - mgc
   requirements: ''
   activities:
     CXJlzDUkMYU9w9i9:
@@ -43,10 +43,10 @@ system:
       _id: CXJlzDUkMYU9w9i9
       sort: 0
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: Hit a creature with your pact weapon
+        condition: When you hit a creature with your pact weapon
       consumption:
         scaling:
           allowed: false
@@ -59,20 +59,26 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+        expiry: null
+      effects:
+        - _id: sRASBojxNuREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.UVtVRNlaslbMIsuH
+          level: {}
       range:
         override: false
-        units: self
+        units: any
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -86,7 +92,8 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
               enabled: true
@@ -96,24 +103,34 @@ system:
             bonus: ''
             types:
               - force
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: eldritch-smite
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706793505
+  systemVersion: 6.1.0
+  createdTime: 1793665214339
+  modifiedTime: 1793665214339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
