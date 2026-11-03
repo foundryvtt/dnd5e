@@ -112,9 +112,10 @@
 
 /**
  * @typedef ModifyItemModifiedItemValue
- * @property {string} change  ID of the change that was applied (referencing entry in `configuration.changes`).
- * @property {string} effect  ID of the enchantment that was created on the item.
- * @property {string} item    ID of the item that was modified.
+ * @property {string} change    ID of the change that was applied (referencing entry in `configuration.changes`).
+ * @property {string} effect    ID of the enchantment that was created on the item.
+ * @property {string} item      ID of the item that was modified.
+ * @property {string[]} riders  Relative UUIDs for riders created by the enchantment.
  */
 
 /* -------------------------------------------- */

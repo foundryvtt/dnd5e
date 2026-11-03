@@ -285,7 +285,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     if ( !this.isApplied ) return [];
 
     const operations = [];
-    let item;
+    let item = options.dnd5e?.item;
     let profile;
     const chatMessageOrigin = options?.chatMessageOrigin ?? this.origin.message?.slice(12);
     const { activity: activityUuid, profile: enchantmentProfile } = this.origin;
