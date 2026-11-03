@@ -9,7 +9,7 @@ system:
       name: Find Familiar
       sort: 0
       activation:
-        type: hour
+        type: action
         value: 1
         override: false
         condition: ''
@@ -99,7 +99,7 @@ system:
       name: Find Familiar (Expanded Options)
       sort: 0
       activation:
-        type: hour
+        type: action
         value: 1
         override: false
         condition: ''
@@ -162,7 +162,7 @@ system:
         - count: ''
           name: ''
           _id: Rr8F49wXgEzvI3Je
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobImp0000000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmImp00000000000
           level:
             min: null
             max: null
@@ -170,7 +170,7 @@ system:
         - count: ''
           name: ''
           _id: Cg8B2qkwRo7qh7oZ
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobPseudodrag
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmPseudodragon00
           level:
             min: null
             max: null
@@ -178,7 +178,7 @@ system:
         - count: ''
           name: ''
           _id: 8NAn0ZR5HRnRJvqs
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobQuasit0000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmQuasit00000000
           level:
             min: null
             max: null
@@ -186,7 +186,7 @@ system:
         - count: ''
           name: ''
           _id: Gik7lMg53Gno0nSf
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSphinxofWo
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSphinxOfWonder
           level:
             min: null
             max: null
@@ -194,7 +194,7 @@ system:
         - count: ''
           name: ''
           _id: m5hfZoWAcEjKrkxo
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSkeleton00
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSkeleton000000
           level:
             min: null
             max: null
@@ -202,7 +202,7 @@ system:
         - count: ''
           name: ''
           _id: mDue5EQkMxi5G6Pf
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSlaadTadpo
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSlaadTadpole00
           level:
             min: null
             max: null
@@ -210,7 +210,7 @@ system:
         - count: ''
           name: ''
           _id: U60QGv6hzjT15bFK
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSprite0000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSprite00000000
           level:
             min: null
             max: null
@@ -218,7 +218,7 @@ system:
         - count: ''
           name: ''
           _id: ZtrQLBrDRmN97IvI
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobVenomousSn
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmVenomousSnake0
           level:
             min: null
             max: null
@@ -299,8 +299,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793665214340
-  modifiedTime: 1793665214340
+  createdTime: 1793728084034
+  modifiedTime: 1793728084034
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

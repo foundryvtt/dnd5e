@@ -36,10 +36,7 @@ system:
         uuid: Compendium.dnd-players-handbook.spells.Item.phbsplJump000000
         challenge:
           override: false
-        properties:
-          - vocal
-          - somatic
-          - material
+        properties: []
         spellbook: true
         ability: ''
         level: 1
@@ -64,6 +61,7 @@ system:
       range:
         units: self
         override: true
+        special: ''
       target:
         template:
           contiguous: false
@@ -104,8 +102,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793665214342
-  modifiedTime: 1793665214342
+  createdTime: 1793727779521
+  modifiedTime: 1793727779521
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

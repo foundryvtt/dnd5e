@@ -184,7 +184,7 @@ system:
       name: Find Familiar
       sort: -100000
       activation:
-        type: hour
+        type: action
         value: 1
         override: false
         condition: ''
@@ -284,7 +284,7 @@ system:
       name: Find Familiar (Expanded Options)
       sort: -50000
       activation:
-        type: hour
+        type: action
         value: 1
         override: false
         condition: ''
@@ -304,13 +304,15 @@ system:
         expiry: null
       effects:
         - _id: Ziuu5P6LoAvevtuN
+          uuid: null
           level:
             min: null
             max: null
-          uuid: null
         - _id: VxM3FsirIcd3Of7q
           uuid: null
-          level: {}
+          level:
+            min: null
+            max: null
       range:
         override: false
         value: '10'
@@ -355,7 +357,7 @@ system:
         - count: ''
           name: ''
           _id: Rr8F49wXgEzvI3Je
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobImp0000000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmImp00000000000
           level:
             min: null
             max: null
@@ -363,7 +365,7 @@ system:
         - count: ''
           name: ''
           _id: Cg8B2qkwRo7qh7oZ
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobPseudodrag
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmPseudodragon00
           level:
             min: null
             max: null
@@ -371,7 +373,7 @@ system:
         - count: ''
           name: ''
           _id: 8NAn0ZR5HRnRJvqs
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobQuasit0000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmQuasit00000000
           level:
             min: null
             max: null
@@ -379,7 +381,7 @@ system:
         - count: ''
           name: ''
           _id: Gik7lMg53Gno0nSf
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSphinxofWo
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSphinxOfWonder
           level:
             min: null
             max: null
@@ -387,7 +389,7 @@ system:
         - count: ''
           name: ''
           _id: m5hfZoWAcEjKrkxo
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSkeleton00
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSkeleton000000
           level:
             min: null
             max: null
@@ -395,7 +397,7 @@ system:
         - count: ''
           name: ''
           _id: mDue5EQkMxi5G6Pf
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSlaadTadpo
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSlaadTadpole00
           level:
             min: null
             max: null
@@ -403,7 +405,7 @@ system:
         - count: ''
           name: ''
           _id: U60QGv6hzjT15bFK
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSprite0000
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmSprite00000000
           level:
             min: null
             max: null
@@ -411,7 +413,7 @@ system:
         - count: ''
           name: ''
           _id: ZtrQLBrDRmN97IvI
-          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobVenomousSn
+          uuid: Compendium.dnd-monster-manual.actors.Actor.mmVenomousSnake0
           level:
             min: null
             max: null
@@ -544,8 +546,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -599,8 +601,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -650,8 +652,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -700,8 +702,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: SzrV0ZUdpHCl8ury
@@ -751,8 +753,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: dNB2b7C34xZ8f1VC
@@ -802,8 +804,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: J9HrAcFSX8Oiz5Os
@@ -853,8 +855,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 931L7kMtCmfeKCke
@@ -904,8 +906,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: ftnhEVvBRxrbAfa3
@@ -955,8 +957,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: wNoq81xzNrVLdSGT
@@ -1006,8 +1008,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 8tJH6UHt7riDLp1q
@@ -1057,8 +1059,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: W1jLBRVt0gryqFMJ
@@ -1108,8 +1110,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XYrQSl0kdJtV6Bf0
@@ -1159,8 +1161,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: hNA4gzQMT9cM2ALU
@@ -1210,8 +1212,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: QDl6CxMONYK8Kru1
@@ -1261,8 +1263,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793665214345
-      modifiedTime: 1793665214345
+      createdTime: 1793728084034
+      modifiedTime: 1793728084034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 0vsrMfL3s6IQtWcM
@@ -1277,8 +1279,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793665214345
-  modifiedTime: 1793665214345
+  createdTime: 1793728084034
+  modifiedTime: 1793728084034
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
