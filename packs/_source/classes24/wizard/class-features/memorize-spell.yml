@@ -31,7 +31,7 @@ system:
   requirements: Wizard
   activities:
     H9IV5ewIosO3hRsh:
-      type: enchant
+      type: utility
       name: Memorize
       _id: H9IV5ewIosO3hRsh
       img: ''
@@ -83,13 +83,9 @@ system:
         requireIdentification: false
         requireMagic: false
         identifier: ''
-      enchant:
-        self: false
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: ''
+      roll:
+        prompt: false
+        visible: false
   enchant: {}
   identifier: memorize-spell
   advancement: {}
@@ -101,8 +97,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793656986115
-  modifiedTime: 1793656986115
+  createdTime: 1793666237313
+  modifiedTime: 1793666237313
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -95,9 +95,7 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: >-
-                (sign(@item.uses.value - 1) * 2 * @scaling + @item.uses.value -
-                1)d12
+              formula: (sign(@item.uses.value - 1) * @scaling * @item.uses.value)d12
             number: null
             denomination: null
             bonus: ''
@@ -131,8 +129,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793656988851
-  modifiedTime: 1793656988851
+  createdTime: 1793666161941
+  modifiedTime: 1793666161941
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
