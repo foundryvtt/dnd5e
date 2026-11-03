@@ -30,6 +30,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const source = this.advancement.value;
     const value = source[this.level];
     const hp = this.advancement.actor.system.attributes.hp;
@@ -51,10 +52,7 @@ export default class HitPointsFlow extends AdvancementFlow {
           label: CONFIG.DND5E.abilities[abilityId]?.abbreviation ?? "",
           value: mod
         },
-        previous: Object.keys(this.advancement.value).reduce((total, level) => {
-          if ( parseInt(level) === this.level ) return total;
-          return total + Math.max(this.advancement.valueForLevel(parseInt(level)) + mod, 1) + bonus;
-        }, 0),
+        previous: hp.max - (value ? Math.max(this.advancement.valueForLevel(this.level) + mod, 1) : 0) - bonus,
         total: value ? hp.max : "—"
       },
       hitDie: this.advancement.hitDie,
