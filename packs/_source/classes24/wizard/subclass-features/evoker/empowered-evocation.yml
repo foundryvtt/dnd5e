@@ -8,18 +8,19 @@ system:
     value: >-
       <p>Whenever you cast a Wizard spell from the Evocation school, you can add
       your Intelligence modifier to one damage roll of that spell.</p><section
-      class="secret" id="secret-3cdT0RlurgG5XV4o"><p><strong>Foundry
+      id="secret-3cdT0RlurgG5XV4o" class="secret"><p><strong>Foundry
       Note</strong></p><p>You can add your Intelligence modifier to the spell's
       Situational Bonus in the damage dialog or use this feature's
-      <strong>Damage</strong> activity which allows you to select the type in
-      the damage dialog.</p></section>
+      <strong>Extra</strong> <strong>Damage</strong> activity which allows you
+      to select the type in the damage dialog.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,15 +30,16 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Evoker
   activities:
     24lZHflqzcwoBev5:
       type: damage
       _id: 24lZHflqzcwoBev5
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: Whenever you cast a Wizard spell from the Evocation school
@@ -48,20 +50,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: any
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -79,43 +84,53 @@ system:
           allow: false
         parts:
           - custom:
-              enabled: false
-              formula: ''
+              enabled: true
+              formula: '@abilities.int.mod'
             number: null
-            denomination: 0
-            bonus: '@abilities.int.mod'
+            denomination: null
+            bonus: ''
+            modifiers: []
             types:
-              - acid
               - bludgeoning
+              - piercing
+              - slashing
+              - acid
               - cold
               - fire
               - force
               - lightning
               - necrotic
-              - piercing
               - poison
               - psychic
               - radiant
-              - slashing
               - thunder
             scaling:
               number: 1
-      name: ''
+      name: Extra Damage
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: empowered-evocation
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256768696
+  systemVersion: 6.1.0
+  createdTime: 1793656988851
+  modifiedTime: 1793656988851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
