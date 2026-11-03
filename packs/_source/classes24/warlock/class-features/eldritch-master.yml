@@ -7,17 +7,15 @@ system:
   description:
     value: >-
       <p>When you use your Magical Cunning feature, you regain all your expended
-      Pact Magic spell slots.</p><section id="secret-Ei3yWRJ5hdPjWIH0"
-      class="secret"><p><strong>Foundry Note</strong></p><p>Use this feature to
-      restore all expended Pact Magic spell slots. It will consume the free use
-      from your Magical Cunning feature.</p></section>
+      Pact Magic spell slots.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -27,79 +25,24 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
-  activities:
-    ySE8596WjBPyBt2W:
-      type: utility
-      name: Eldritch Master
-      _id: ySE8596WjBPyBt2W
-      activation:
-        type: ''
-        value: null
-        override: false
-        condition: When you use Magical Cunning
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets:
-          - type: itemUses
-            value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbwlkMagicalCun
-            scaling: {}
-          - type: attribute
-            value: -(@spells.pact.max)
-            target: spells.pact.value
-            scaling: {}
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-        units: self
-        special: ''
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: ''
-        affects:
-          choice: false
-          count: ''
-          type: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+  requirements: Warlock
+  activities: {}
   enchant: {}
   identifier: eldritch-master
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256767072
+  systemVersion: 6.1.0
+  createdTime: 1793665206277
+  modifiedTime: 1793665206277
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

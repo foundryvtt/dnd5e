@@ -5,28 +5,22 @@ img: icons/skills/melee/strike-sword-blood-red.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 9+ Warlock,
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 9+ Warlock,
       @UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of the Blade}
-      Invocation</p></blockquote><p>Once per turn when you hit a creature with
-      your pact weapon, you can deal an extra 1d6 Necrotic, Psychic, or Radiant
+      Invocation</p></div><p>Once per turn when you hit a creature with your
+      pact weapon, you can deal an extra 1d6 Necrotic, Psychic, or Radiant
       damage (your choice) to the creature, and you can expend one of your Hit
       Point Dice to roll it and regain a number of Hit Points equal to the roll
-      plus your Constitution modifier (minimum of 1 Hit Point).</p><section
-      class="secret" id="secret-1Hta9I4donszrwIQ"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Damage</strong> activity allows you to
-      choose the type of damage in the roll's dialog. It will remember your
-      choice going forward.</p><p>The <strong>Heal (Largest Hit Die)</strong>
-      and <strong>Smallest Hit Die</strong> activities expends the relevant Hit
-      Die and provides a healing roll with your Constitution modifier included.
-      Which you choose only matters if you are multi-classed with multiple hit
-      die types.</p></section>
+      plus your Constitution modifier (minimum of 1 Hit Point).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -36,21 +30,21 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 9
-    repeatable: false
     items:
-      - pact-of-the-blade
+      - feat:pact-of-the-blade
+    repeatable: false
   properties: []
   requirements: ''
   activities:
     LDIKT3JVs25qBVuL:
       type: damage
-      name: ''
+      name: Extra Damage
       _id: LDIKT3JVs25qBVuL
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: Once per turn when you hit a creature with your pact weapon
+        condition: When you hit a creature with your pact weapon
       consumption:
         scaling:
           allowed: false
@@ -58,20 +52,26 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>Once per turn when you hit a creature with your pact weapon, you
+          can deal an extra 1d6 Necrotic, Psychic, or Radiant damage (your
+          choice) to the creature.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: any
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -86,7 +86,8 @@ system:
       sort: 0
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
               enabled: false
@@ -98,19 +99,32 @@ system:
               - necrotic
               - psychic
               - radiant
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     emx17h6kO4xmSqC6:
       type: heal
       name: Heal (Largest Hit Die)
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: Once per turn when you hit a creature with your pact weapon
       consumption:
         scaling:
           allowed: false
+          max: ''
         spellSlot: true
         targets:
           - type: hitDice
@@ -119,10 +133,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can expend one of your Hit Point Dice to roll it and regain a
+          number of Hit Points equal to the roll plus your Constitution modifier
+          (minimum of 1 Hit Point).</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -133,6 +152,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -147,21 +167,34 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '@attributes.hd.largestAvailable + (max(1,@abilities.con.mod))'
+          formula: '@consumed.hd + max(1, @abilities.con.mod)'
         scaling:
           number: 1
+          mode: ''
         bonus: ''
+        modifiers: []
       _id: emx17h6kO4xmSqC6
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     oMHxbcnQh38wZEKU:
       type: heal
       name: Heal (Smallest Hit Die)
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: Once per turn when you hit a creature with your pact weapon
@@ -176,10 +209,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can expend one of your Hit Point Dice to roll it and regain a
+          number of Hit Points equal to the roll plus your Constitution modifier
+          (minimum of 1 Hit Point).</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -190,6 +228,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -204,32 +243,42 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '@attributes.hd.smallestAvailable + (max(1,@abilities.con.mod))'
+          formula: '@consumed.hd + max(1, @abilities.con.mod)'
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
       _id: oMHxbcnQh38wZEKU
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: lifedrinker
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706873052
+  systemVersion: 6.1.0
+  createdTime: 1793665214340
+  modifiedTime: 1793665214340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

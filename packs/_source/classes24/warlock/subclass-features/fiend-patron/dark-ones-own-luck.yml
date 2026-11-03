@@ -18,10 +18,10 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
-    max: (max(1,@abilities.cha.mod))
+    max: max(1, @abilities.cha.mod)
     spent: 0
     recovery:
       - period: lr
@@ -31,9 +31,10 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fiend Patron
   activities:
     4A1lkH3i3azHU1YQ:
       type: utility
@@ -55,10 +56,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -69,6 +72,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -83,24 +87,32 @@ system:
       roll:
         prompt: false
         visible: false
-        name: Bonus
+        name: Check or Save Bonus
         formula: 1d10
       img: systems/dnd5e/icons/svg/dice/d10.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: dark-ones-own-luck
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866551616
-  modifiedTime: 1745256766626
+  systemVersion: 6.1.0
+  createdTime: 1793665209034
+  modifiedTime: 1793665209034
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -5,20 +5,20 @@ img: icons/creatures/magical/humanoid-giant-forest-blue.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You have
-      received knowledge from an elder entity of the multiverse, allowing you to
-      gain one
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 2+ Warlock</p></div><p>You have received knowledge from an elder
+      entity of the multiverse, allowing you to gain one
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
-      feat} of your choice.</p><p><strong>Repeatable. </strong>You can gain this
-      invocation more than once. Each time you do so, choose a different Origin
-      feat.</p>
+      feat} of your choice.</p><p><em><strong>Repeatable.</strong></em><strong>
+      </strong>You can gain this invocation more than once. Each time you do so,
+      choose a different Origin feat.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -29,25 +29,51 @@ system:
   prerequisites:
     level: 2
     repeatable: true
+    items: []
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: lessons-of-the-first-ones
+  advancement:
+    ysQ48LtppKVlaYwB:
+      type: ItemChoice
+      _id: ysQ48LtppKVlaYwB
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool: []
+        restriction:
+          list: []
+          type: feat
+          subtype: origin
+          school: []
+        spell: null
+        type: feat
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You to gain one
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
+        feat} of your choice.</p>
+      name: Choose Origin Feat
+      flags: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706862177
+  systemVersion: 6.1.0
+  createdTime: 1793665214340
+  modifiedTime: 1793665214340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
