@@ -422,8 +422,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
 
     // Handle `<=` when adding and `>=` when subtracting from number fields
     if ( (field instanceof NumberField)
-      && (((change.type === "add") && change.value.includes?.("<="))
-      || ((change.type === "subtract") && change.value.includes?.(">="))) ) {
+      && (((change.type === "add") && change.value?.includes?.("<="))
+      || ((change.type === "subtract") && change.value?.includes?.(">="))) ) {
       let [delta, limit] = change.value.split(/<=|>=/);
       try {
         delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
