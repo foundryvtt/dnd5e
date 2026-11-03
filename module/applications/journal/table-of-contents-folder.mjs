@@ -1,4 +1,3 @@
-import TableOfContentsCompendium from "./table-of-contents.mjs";
 import TableOfContentsMixin from "./table-of-contents-mixin.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -78,29 +77,4 @@ export default class TableOfContentsFolder extends TableOfContentsMixin(Handleba
       }
     });
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * When using 'importAll' on a table of contents pack, flag the top-level folder as being capable of rendering as a
-   * table of contents also.
-   */
-  static patchImportAll() {
-    const { CompendiumCollection } = foundry.documents.collections;
-    const { importAll } = CompendiumCollection.prototype;
-    CompendiumCollection.prototype.importAll = async function(options={}) {
-      if ( (this.applicationClass !== TableOfContentsCompendium) || options.folderId ) {
-        return importAll.call(this, options);
-      }
-      const folder = await Folder.implementation.create({
-        name: options.folderName || this.title,
-        type: this.documentName,
-        color: this.folder?.color ?? null,
-        flags: { dnd5e: { display: "table-of-contents" } }
-      });
-      return importAll.call(this, { ...options, folderId: folder.id });
-    };
-  }
 }
-
-TableOfContentsFolder.patchImportAll();
