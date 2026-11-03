@@ -735,6 +735,7 @@ Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRender
 
 Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
 Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
+Hooks.on("getFolderContextOptions", applications.journal.TableOfContentsFolder.addFolderContextOptions);
 
 Hooks.on("preImportAdventure", (adventure, options, toCreate, toUpdate) => {
   for ( const scene of toUpdate.Scene ?? [] ) {
