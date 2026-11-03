@@ -101,8 +101,9 @@ export async function bulkFromUuid(uuids, { relative }={}) {
 
   const _fromUuid = async uuid => {
     let doc = await fromUuid(uuid, { relative });
-    if ( !doc && relative && uuid.startsWith(".") ) {
-      const { embedded } = foundry.utils.parseUuid(uuid, { relative });
+    if ( !doc && relative?.parent && uuid.startsWith(".") ) {
+      const resolved = foundry.utils.parseUuid(uuid, { relative }).uuid;
+      const embedded = resolved.slice(relative.parent.uuid.length + 1).split(".");
       doc = relative.parent;
       while ( doc && (embedded.length > 1) ) {
         const [embeddedName, embeddedId] = embedded.splice(0, 2);

@@ -69,21 +69,19 @@ export default class ModifyItemAdvancement extends Advancement {
         const newEffect = item.effects.get(clone._id);
         const operations = await newEffect.system.collectRiders({ dnd5e: { item: effect.item } });
         const riders = [];
-        if ( operations.length ) {
-          newEffect.system.applyRidersSource(operations);
-          for ( const operation of operations ) {
-            if ( operation.action === "create" ) {
-              const collectionName = getDocumentClass(operation.documentName).metadata.collection;
-              riders.push(...operation.data.map(({ _id }) =>
-                foundry.utils.buildRelativeUuid(operation.parent[collectionName].get(_id), this.actor)
-              ));
-            } else if ( operation.action === "update" ) {
-              riders.push(...operation.updates.flatMap(update => {
-                const activities = foundry.utils.getProperty(update, "system.activities") ?? {};
-                const prefix = foundry.utils.buildRelativeUuid(operation.parent.items.get(update._id), this.actor);
-                return Object.keys(activities).map(id => `${prefix}.Activity.${id}`);
-              }));
-            }
+        newEffect.system.applyRidersSource(operations);
+        for ( const operation of operations ) {
+          if ( operation.action === "create" ) {
+            const collectionName = getDocumentClass(operation.documentName).metadata.collection;
+            riders.push(...operation.data.map(({ _id }) =>
+              foundry.utils.buildRelativeUuid(operation.parent[collectionName].get(_id), this.actor)
+            ));
+          } else if ( operation.action === "update" ) {
+            riders.push(...operation.updates.flatMap(update => {
+              const activities = foundry.utils.getProperty(update, "system.activities") ?? {};
+              const prefix = foundry.utils.buildRelativeUuid(operation.parent.items.get(update._id), this.actor);
+              return Object.keys(activities).map(id => `${prefix}.Activity.${id}`);
+            }));
           }
         }
 
@@ -119,10 +117,10 @@ export default class ModifyItemAdvancement extends Advancement {
 
       // Remove dependents added as riders
       for ( const uuid of change.riders ) {
-        const doc = fromUuidSync(uuid, { relative: this.actor });
-        if ( doc instanceof Item ) this.actor.items.delete(doc.id);
-        else if ( doc instanceof ActiveEffect ) item.effects.delete(doc.id);
-        else item.updateSource({ [`system.activities.${doc.id}`]: _del });
+        const { id, type } = foundry.utils.parseUuid(uuid, { relative: this.actor });
+        if ( type === "Item" ) this.actor.items.delete(id);
+        else if ( type === "ActiveEffect" ) item.effects.delete(id);
+        else if ( type === "Activity" ) item.updateSource({ [`system.activities.${id}`]: _del });
       }
     }
 
