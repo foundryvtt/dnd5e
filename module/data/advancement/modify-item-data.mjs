@@ -1,6 +1,6 @@
 import IdentifierField from "../fields/identifier-field.mjs";
 
-const { ArrayField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
+const { ArrayField, DocumentIdField, DocumentUUIDField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ModifyItemAdvancementConfigurationData, ModifyItemAdvancementValueData } from "./_types.mjs";
@@ -47,7 +47,8 @@ export class ModifyItemValueData extends foundry.abstract.DataModel {
       modified: new ArrayField(new SchemaField({
         change: new DocumentIdField(),
         effect: new DocumentIdField(),
-        item: new DocumentIdField()
+        item: new DocumentIdField(),
+        riders: new ArrayField(new StringField())
       }))
     };
   }
