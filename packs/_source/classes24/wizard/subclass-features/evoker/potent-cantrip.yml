@@ -5,14 +5,19 @@ folder: ZHJ6ibjd1J4CSyNw
 img: icons/magic/earth/projectiles-fire-stone-salvo.webp
 system:
   description:
-    value: "<p>Your damaging cantrips affect even creatures that avoid the brunt of the effect. When you cast a cantrip at a creature and you miss with the attack roll or the target succeeds on a saving throw against the cantrip, the target takes half the cantrip's damage (if any) but suffers no additional effect from the cantrip.</p><section id=\"secret-fJby40y1vz8RXGG4\" class=\"secret\"><p><strong>Foundry Note</strong></p><p>With their token selected you can either right click on the damage roll's chat card and select <span class=\"reference\"><em class=\"fas fa-user-shield\">\_</em>Apply Half Damage</span> or click the \"1/2\" button and then the <span class=\"reference\"><em class=\"fa-solid fa-reply-all\">\_</em>Apply</span> button.</p></section>"
+    value: >-
+      <p>Your damaging cantrips affect even creatures that avoid the brunt of
+      the effect. When you cast a cantrip at a creature and you miss with the
+      attack roll or the target succeeds on a saving throw against the cantrip,
+      the target takes half the cantrip's damage (if any) but suffers no
+      additional effect from the cantrip.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -22,25 +27,24 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Evoker
   activities: {}
   enchant: {}
   identifier: potent-cantrip
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256769468
+  systemVersion: 6.1.0
+  createdTime: 1793656988851
+  modifiedTime: 1793656988851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

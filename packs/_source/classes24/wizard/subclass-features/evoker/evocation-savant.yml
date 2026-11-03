@@ -19,8 +19,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -30,25 +30,24 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Evoker
   activities: {}
   enchant: {}
   identifier: evocation-savant
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256768817
+  systemVersion: 6.1.0
+  createdTime: 1793656988851
+  modifiedTime: 1793656988851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

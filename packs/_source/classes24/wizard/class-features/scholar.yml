@@ -14,9 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -26,25 +27,46 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Wizard
   activities: {}
   enchant: {}
   identifier: scholar
+  advancement:
+    S1H3INPWaAiRkB6G:
+      _id: S1H3INPWaAiRkB6G
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:arc
+              - skills:his
+              - skills:inv
+              - skills:med
+              - skills:nat
+              - skills:rel
+      value:
+        chosen: []
+      level: 2
+      hint: <p>@Embed[Compendium.dnd5e.classes24.Item.phbwzdScholar000 inline]</p>
+      name: Expertise
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866273692
-  modifiedTime: 1745256769660
+  systemVersion: 6.1.0
+  createdTime: 1793656986115
+  modifiedTime: 1793656986115
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

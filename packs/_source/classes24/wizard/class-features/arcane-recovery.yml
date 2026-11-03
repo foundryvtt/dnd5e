@@ -13,19 +13,19 @@ system:
       higher. For example, if you're a level 4 Wizard, you can recover up to two
       levels' worth of spell slots, regaining either one level 2 spell slot or
       two level 1 spell slots.</p><p>Once you use this feature, you can't do so
-      again until you finish a Long Rest.</p><p><strong>Combined Level
-      Available:</strong> [[ceil(@classes.wizard.levels / 2)]]</p><section
-      class="secret" id="secret-cO6X083GFJ1W4071"><p><strong>Foundry
+      again until you finish a Long Rest.</p><section
+      id="secret-cO6X083GFJ1W4071" class="secret"><p><strong>Foundry
       Note</strong></p><p>Since you can select the slots you will have to
       manually adjust your available slots. This feature can be used to track
-      the one-time use though.</p></section>
+      the one-time use though.</p><p><strong>Combined Level Available:</strong>
+      [[ceil(@classes.wizard.levels / 2)]]</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     spent: 0
@@ -37,15 +37,15 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Wizard
   activities:
     eSo3M84A3t6rwozM:
       type: utility
       name: Recover
-      _id: eSo3M84A3t6rwozM
-      img: ''
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
       sort: 0
       activation:
         type: shortRest
@@ -59,12 +59,15 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       flags: {}
       range:
@@ -99,17 +102,21 @@ system:
         visible: false
         name: Combined Spell Levels
         formula: ceil(@classes.wizard.levels / 2)
+      _id: eSo3M84A3t6rwozM
+      behaviors: []
   enchant: {}
   identifier: arcane-recovery
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.3.2
-  createdTime: 1735866273692
-  modifiedTime: 1778017154684
+  systemVersion: 6.1.0
+  createdTime: 1793656986115
+  modifiedTime: 1793656986115
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
