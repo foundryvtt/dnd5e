@@ -70,7 +70,10 @@ export default class ModifyItemConfig extends AdvancementConfig {
       name: this.advancement._source.name || this.item.name,
       img: this.advancement._source.img || this.item.img,
       type: "enchantment",
-      transfer: false
+      transfer: false,
+      system: {
+        magical: false
+      }
     };
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData], { render: false });
     this.advancement.update({
