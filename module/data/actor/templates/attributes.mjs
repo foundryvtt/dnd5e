@@ -277,13 +277,18 @@ export default class AttributesFields {
       return obj;
     }, { armors: [], shields: [] });
 
+    const armorValue = item => {
+      const { magicAvailable, armor: { magicalBonus, value } } = item.system;
+      return value + (magicAvailable ? simplifyBonus(magicalBonus, rollData) : 0);
+    };
+
     // Equipped Armor
     if ( armors.length ) {
       if ( armors.length > 1 ) this.parent._preparationWarnings.push({
         message: _loc("DND5E.WarnMultipleArmor"), type: "warning"
       });
       ac.equippedArmor = armors[0];
-      ac.armor = ac.equippedArmor.system.armor.value ?? ac.armor;
+      ac.armor = armorValue(ac.equippedArmor);
       if ( ac.equippedArmor.system.properties.has("stealthDisadvantage")
         && ("ste" in CONFIG.DND5E.skills)
         && this.skills ) {
@@ -297,7 +302,7 @@ export default class AttributesFields {
         message: _loc("DND5E.WarnMultipleShields"), type: "warning"
       });
       ac.equippedShield = shields[0];
-      ac.shield = ac.equippedShield.system.armor.value ?? 0;
+      ac.shield = armorValue(ac.equippedShield);
     }
 
     // If armor is equipped, prepare clamped abilities
