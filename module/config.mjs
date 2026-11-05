@@ -1686,7 +1686,8 @@ DND5E.armorClasses = {
   unarmoredBard: {
     label: "DND5E.ARMORCLASS.Calculation.UnarmoredBard",
     formula: "10 + @abilities.dex.mod + @abilities.cha.mod",
-    armored: false
+    armored: false,
+    shielded: false
   }
 };
 preLocalize("armorClasses", { key: "label" });
