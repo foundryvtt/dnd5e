@@ -284,16 +284,11 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.prepareIdentifiable();
     this.preparePhysicalData();
     this.prepareMountableData();
-    const magicalBonus = simplifyBonus(this.armor.magicalBonus, this.parent.getRollData());
-    if ( this.magicAvailable && magicalBonus ) this.armor.value += magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? _loc(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"
       ? CONFIG.DND5E.shieldIds[this.type.baseItem]
       : CONFIG.DND5E.armorIds[this.type.baseItem];
-
-    const labels = this.parent.labels ??= {};
-    labels.armor = this.armor.value ? `${this.armor.value} ${_loc("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */
@@ -302,6 +297,10 @@ export default class EquipmentData extends ItemDataModel.mixin(
   prepareFinalData() {
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
     this.prepareFinalEquippableData();
+    const magicalBonus = simplifyBonus(this.armor.magicalBonus, this.parent.getRollData());
+    if ( this.magicAvailable && magicalBonus ) this.armor.value += magicalBonus;
+    const labels = this.parent.labels ??= {};
+    labels.armor = this.armor.value ? `${this.armor.value} ${_loc("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */
