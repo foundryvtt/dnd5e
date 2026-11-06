@@ -1768,7 +1768,12 @@ DND5E.consumableTypes = {
     }
   },
   food: {
-    label: "DND5E.CONSUMABLE.Type.Food.Label"
+    label: "DND5E.CONSUMABLE.Type.Food.Label",
+    subtypes: {
+      food: "DND5E.CONSUMABLE.Type.Food.Food",
+      water: "DND5E.CONSUMABLE.Type.Food.Water",
+      foodAndWater: "DND5E.CONSUMABLE.Type.Food.FoodAndWater"
+    }
   },
   scroll: {
     label: "DND5E.CONSUMABLE.Type.Scroll.Label"
@@ -1788,6 +1793,7 @@ DND5E.consumableTypes = {
 };
 preLocalize("consumableTypes", { key: "label", sort: true });
 preLocalize("consumableTypes.ammo.subtypes", { sort: true });
+preLocalize("consumableTypes.food.subtypes", { sort: true });
 preLocalize("consumableTypes.poison.subtypes", { sort: true });
 
 /* -------------------------------------------- */
