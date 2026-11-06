@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -34,15 +34,19 @@
 
 `@abilities.*.dc` - Feature DC based on this ability, equals `8 + prof + modifier`
 
-`@abilities.*.checkBonus` - Flat ability check bonus, combining ability-specific bonuses with global check bonuses
+`@abilities.*.attack.bonus` - Flat ability attack bonus combining ability-specific bonuses with global attack bonuses
 
-`@abilities.*.checkProf` - Ability check [proficiency](Roll-Formulas#proficiency) details
+`@abilities.*.attack.value` - Flat attack modifier (without any dice bonuses)
+
+`@abilities.*.check.bonus` - Flat ability check bonus, combining ability-specific bonuses with global check bonuses
+
+`@abilities.*.check.prof` - Ability check [proficiency](Roll-Formulas#proficiency) details
 
 `@abilities.*.save.value` - Flat ability save modifier (without any dice bonuses)
 
-`@abilities.*.saveBonus` - Flat ability save bonus, combining ability-specific bonuses with global save bonuses
+`@abilities.*.save.bonus` - Flat ability save bonus, combining ability-specific bonuses with global save bonuses
 
-`@abilities.*.saveProf` - Ability save [proficiency](Roll-Formulas#proficiency) details
+`@abilities.*.save.prof` - Ability save [proficiency](Roll-Formulas#proficiency) details
 
 
 ### Attributes
@@ -77,7 +81,7 @@
 
 #### Concentration
 
-`@attributes.concentration.limit` - Maximimum number of effects the actor can sustain concentration on.
+`@attributes.concentration.limit` - Maximum number of effects the actor can sustain concentration on.
 
 `@attributes.concentration.save` - The final bonus an actor has to concentration saving throws.
 

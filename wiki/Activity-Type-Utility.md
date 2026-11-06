@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Use activity allows for rolling an arbitrary formula, adding effects, or simply indicating something occurs without specific functionality. It acts as a catch-all activity for any case where a more specific activity doesn’t make sense.
 

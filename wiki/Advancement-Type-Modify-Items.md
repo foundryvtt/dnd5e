@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Modify Items advancement allows for applying an [enchantment](Enchantment.md) to one or more items on the actor sheet, changing how that item operates.
 
@@ -9,6 +9,8 @@ The Modify Items advancement allows for applying an [enchantment](Enchantment.md
 Configuring a Modify Items advancement first involves adding an enchantment. This can be done directly using the plus button to create an enchantment directly on this item, selecting an existing enchantment on the item from the dropdown, or dropping an enchantment from a compendium onto the configuration dialog.
 
 Once an enchantment is specified, the items it applies to can be controlled using the "Modified Items" input. This field takes either plain identifiers (e.g. `wild-shape` or `bane`) or typed identifiers (e.g. `feat:wild-shape` or `spell:bane`). The provided enchantment will be applied to all items that match the provided identifier, so it is usually better to include the type to avoid any potential over-application.
+
+When the enchantment is applied, any riders specified on the enchantment Active Effect itself will also be applied.
 
 ## Usage
 
@@ -38,14 +40,15 @@ For local enchantment, the `_id` property will match the ID of the enchantment t
 
 ### Value Schema
 
-The Modify Items advancement stores a `modified` property which is an array of objects each containing a `change` ID matching one of the entries in the `changes` array in configuration, the `effect` ID for the enchantment created on a specific item, and the `item` ID for the item that was modified.
+The Modify Items advancement stores a `modified` property which is an array of objects each containing a `change` ID matching one of the entries in the `changes` array in configuration, the `effect` ID for the enchantment created on a specific item, and the `item` ID for the item that was modified. The `riders` array contains relative UUIDs for any rider items, activities, or effects automatically added by the enchantment.
 
 ```javascript
 {
   modified: [{
     change: "M7eo7scau0y8yqck",
     effect: "uZuT5u0Qgg57vYNj",
-    item: "SLH3RALzZIpNULQI"
+    item: "SLH3RALzZIpNULQI",
+    riders: [".Item.SLH3RALzZIpNULQI.Activity.H60mbylQobW7Uynt", ".Item.SLH3RALzZIpNULQI.ActiveEffect.sXye0W8xjj7b6OdU"]
   }]
 }
 ```

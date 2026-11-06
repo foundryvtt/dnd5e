@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Filters system is used in several places throughout the system to allow for defining a condition that is evaluated base on provided data. Most prominently it is used for [active effect conditions](Active-Effects.md#conditions). It is also used internally when performing filtering in the [compendium browser](Compendium-Browser.md).
 
@@ -33,23 +33,24 @@ Another useful comparison is `in`, which behaves like `exact` but accepts an arr
 
 If the base value to check against happens to have multiple values, the `has` comparison can be used to see if any of the data matches the provided value (e.g. checking `"k": "item.properties"` with `"v": "mgc"` would identify whether the item has the magical property). The `hasany` and `hasall` comparisons act the same way, but accept multiple values similar to `in` (e.g. checking `"k": "item.properties"` with `"v": ["fin", "lgt"]` would be valid using `hasany` if the weapon was finesse or light, but only be valid using `hasall` if the weapon was *both* finesse and light).
 
-| Function    | Accepted Value  | Description                                                |
-| ----------- | --------------- | ---------------------------------------------------------- |
-| exact       | Any             | Both values exactly match.                                 |
-| contains    | Text            | Base value contains exact provided value.                  |
-| icontains   | Text            | Base value contains provided value, ignoring case.         |
-| startswith  | Text            | Base value starts with exact provided value.               |
-| istartswith | Text            | Base value starts with provided value, ignoring case.      |
-| endswith    | Text            | Base value ends with exact provided value.                 |
-| iendswith   | Text            | Base value ends with provided value, ignoring case.        |
+| Function    | Accepted Value  | Description                                                           |
+| ----------- | --------------- | --------------------------------------------------------------------- |
+| exact       | Any             | Both values exactly match.                                            |
+| contains    | Text            | Base value contains exact provided value.                             |
+| icontains   | Text            | Base value contains provided value, ignoring case.                    |
+| startswith  | Text            | Base value starts with exact provided value.                          |
+| istartswith | Text            | Base value starts with provided value, ignoring case.                 |
+| endswith    | Text            | Base value ends with exact provided value.                            |
+| iendswith   | Text            | Base value ends with provided value, ignoring case.                   |
+| empty       | None            | Base value is `null`, `undefined`, or empty string, object, or array. |
 | has         | Any or Filter   | One entry within base value exactly matches provided value. If provided value is a Filter, then it is evaluated against each entry. |
-| hasany      | Array or Filter | Entries within base value match any provided value.        |
-| hasall      | Array or Filter | Entries within base value match all provided values.       |
-| in          | Array           | Base value exactly matches one of the provided values.     |
-| gt          | Number          | Base value is greater than the provided value.             |
-| gte         | Number          | Base value if greater than or equal to the provided value. |
-| lt          | Number          | Base value is less than the provided value.                |
-| lte         | Number          | Base value is less than or equal to the provided value.    |
+| hasany      | Array or Filter | Entries within base value match any provided value.                   |
+| hasall      | Array or Filter | Entries within base value match all provided values.                  |
+| in          | Array           | Base value exactly matches one of the provided values.                |
+| gt          | Number          | Base value is greater than the provided value.                        |
+| gte         | Number          | Base value if greater than or equal to the provided value.            |
+| lt          | Number          | Base value is less than the provided value.                           |
+| lte         | Number          | Base value is less than or equal to the provided value.               |
 
 ### Operator Functions
 
@@ -93,6 +94,17 @@ Effect only applies when the actor is bloodied:
 {
   "k": "statuses.bloodied",
   "v": 1
+}
+```
+
+### Only when not Bloodied
+
+Effect only applies when the actor isn't bloodied:
+
+```json
+{
+  "k": "statuses.bloodied",
+  "o": "empty"
 }
 ```
 

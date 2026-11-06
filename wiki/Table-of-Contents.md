@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The table of contents system allows modules to take advantage of automatic generation of table of contents view for their journal compendiums. There are a few flags that must be set by the module creator in order to take advantage of this system, but once set up the system will handle the rest and no additional code is required from the module.
 
@@ -87,6 +87,13 @@ Special entries appended to chapters or appendices will not display any of their
 #### Hidden Pages
 
 Whenever an entry is displaying its pages, this control allows hiding specific pages.
+
+
+## Table of Contents Folders
+
+Folders within the Journal tab of the world can take an additional flag to enable viewing them as Table of Contents. When the `dnd5e.display` flag is set to `table-of-contents` on a folder, it gains a context option to view the folder in a Table of Contents application. This flag is useful for folders of journal entries imported as part of an Adventure.
+
+The configuration application isn't available when using table of contents in the world. To configure these journals, either create & configure them in a compendium first before importing or set the flags directly as described below.
 
 
 ## Setting up Using Flags
