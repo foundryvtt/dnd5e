@@ -41,6 +41,8 @@ export default class SubclassFlow extends AdvancementFlow {
   /** @override */
   async _prepareContentContext(context, options) {
     context.subclass = this.advancement.value.document;
+    context.canDelete = (this.advancement.value?.uuid !== this.advancement.configuration.suggested?.uuid)
+      || !this.advancement.configuration.suggested?.fixed;
     return context;
   }
 

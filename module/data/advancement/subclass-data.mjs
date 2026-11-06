@@ -1,10 +1,27 @@
 import LocalDocumentField from "../fields/local-document-field.mjs";
 
-const { DocumentUUIDField } = foundry.data.fields;
+const { BooleanField, DocumentUUIDField, SchemaField } = foundry.data.fields;
 
 /**
  * @import { SubclassAdvancementValueData } from "./_types.mjs";
  */
+
+/**
+ * Configuration data for the subclass advancement type.
+ * @extends {foundry.abstract.DataModel<SubclassAdvancementConfigurationData>}
+ * @mixes SubclassAdvancementConfigurationData
+ */
+export class SubclassConfigurationData extends foundry.abstract.DataModel {
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      suggested: new SchemaField({
+        fixed: new BooleanField(),
+        uuid: new DocumentUUIDField({ embedded: false, type: "Item" })
+      }, { required: false })
+    };
+  }
+}
 
 /**
  * Value data for Subclass advancement.
