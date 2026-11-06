@@ -1,5 +1,5 @@
 import SubclassFlow from "../../applications/advancement/subclass-flow.mjs";
-import { SubclassValueData } from "../../data/advancement/subclass-data.mjs";
+import { SubclassConfigurationData, SubclassValueData } from "../../data/advancement/subclass-data.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -16,6 +16,7 @@ export default class SubclassAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
+        configuration: SubclassConfigurationData,
         value: SubclassValueData
       },
       order: 70,
@@ -62,7 +63,10 @@ export default class SubclassAdvancement extends Advancement {
 
   /** @inheritDoc */
   async apply(level, { retainedData={}, uuid }={}, options={}) {
-    if ( options.initial ) return;
+    if ( options.initial ) {
+      uuid = this.configuration.suggested?.uuid;
+      if ( !uuid ) return;
+    }
     const useRetained = uuid === foundry.utils.getProperty(retainedData, "flags.dnd5e.sourceId");
     let itemData = useRetained ? retainedData : null;
     if ( !itemData ) {
