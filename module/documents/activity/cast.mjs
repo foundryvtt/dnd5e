@@ -161,6 +161,9 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
       const data = source[type];
       delete data.override;
       changes.push({ key: `system.${type}`, type: "override", value: JSON.stringify(data) });
+      if ( type === "duration" ) changes.push({
+        key: "system.properties", type: data.concentration ? "add" : "subtract", value: "concentration"
+      });
     }
 
     // Set the casting ability
