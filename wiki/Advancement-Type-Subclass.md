@@ -20,7 +20,16 @@ The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1407) for the
 
 ### Configuration Schema
 
-None
+The Subclass advancement contains an optional `suggested` object that defines a subclass that will be pre-filled by the advancement. That object has a `uuid` string to define which subclass is suggested and a `fixed` boolean to control whether the player can select a different subclass than suggested.
+
+```javascript
+{
+  suggested: {
+    fixed: true,
+    uuid: "Compendium.dnd5e.classes24.Item.phbmnkOpenHandWa"
+  }
+}
+```
 
 ### Value Schema
 
