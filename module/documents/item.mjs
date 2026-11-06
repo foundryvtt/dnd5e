@@ -1215,14 +1215,14 @@ export default class Item5e extends SystemDocumentMixin(foundry.documents.Item) 
 
   /**
    * Track changes to rider activities & effects and store values in flag.
-   * @param {{ activity: Set<string>, effect: Set<string> }} [activityRiders]  Prepared riders from activities.
-   * @param {object} [changes]                                                 Ongoing change from a pre-update.
+   * @param {object} [changes]  Ongoing change from a pre-update.
    */
-  updateRiderFlags(activityRiders, changes) {
-    const riders = activityRiders ?? { activity: new Set(), effect: new Set() };
+  updateRiderFlags(changes) {
+    const item = changes ? this.clone(foundry.utils.deepClone(changes)) : this;
+    const riders = { activity: new Set(), effect: new Set() };
 
     // Consolidate riders from included enchantments
-    for ( const effect of this.effects ) {
+    for ( const effect of item.effects ) {
       if ( !effect.system.trackRiders ) continue;
       effect.system.rider.activities?.forEach(a => riders.activity.add(a));
       effect.system.rider.effects?.forEach(e => {
@@ -1230,14 +1230,13 @@ export default class Item5e extends SystemDocumentMixin(foundry.documents.Item) 
       });
     }
 
-    // Consolidate riders from activities if not already provided
-    if ( !activityRiders && this.system.activities ) {
-      for ( const activity of this.system.activities.getByType("enchant") ) {
-        activity.effects.forEach(profile => {
-          profile.riders.activity.forEach(a => riders.activity.add(a));
-          profile.riders.effect.forEach(e => riders.effect.add(e));
-        });
-      }
+    // Consolidate riders from activities
+    for ( const activity of item.system.activities ?? [] ) {
+      if ( !activity.metadata.hasRiders ) continue;
+      activity.effects.forEach(profile => {
+        profile.riders.activity.forEach(a => riders.activity.add(a));
+        profile.riders.effect.forEach(e => riders.effect.add(e));
+      });
     }
 
     // Completely remove flag if no riders set
