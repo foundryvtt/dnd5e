@@ -256,15 +256,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
-    const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+    const { maximum, minimum, modifiers } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       `abilities.${ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({
+      maximum, minimum, modifiers,
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
-        && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
-      maximum,
-      minimum
+        && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability)
     }, config.options);
     if ( ability !== undefined ) options.ability = ability;
     if ( ammunition !== undefined ) options.ammunition = ammunition;
