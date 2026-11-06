@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Foundry provides an [enricher](Enrichers) that allows embedding a document within a journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
 
@@ -125,6 +125,24 @@ There are some situations where a value in a stat block from a book might not cl
 ```
 
 Keys are available to override everything in the upper section of the stat block (except the ability scores) using the following keys: `tag` (itself composed of `size`, `type`, and `alignment`), `ac`, `hp`, `speed`, `senses`, `cr`, `xp`, `pb`, `gear`, `languages`, `vulnerabilities`, `resistances`, `immunities`, `conditionImmunities`, `initiative`, and `skills`. Not all of these will be used depending on the rules version used when embedding.
+
+There are two special keys that change the formatting of the stat block. The `tempHP` override will replace the normal HP line with a Temporary HP line. The `abilities` override allows replacing the entire abilities table with a custom list of abilities and descriptions. Both of these keys can be used for Wild Shape-specific stat blocks.
+
+```javascript
+{
+  "abilities": [
+    {
+      "abilities": ["str", "dex"],
+      "description": "Your Strength and Dexterity scores are equal to your Wisdom score."
+    },
+    {
+      "abilities": ["con", "int", "wis", "cha"],
+      "description": "Your Constitution, Intelligence, Wisdom, and Charisma don’t change."
+    }
+  ],
+  "tempHP": "3 times your Druid level"
+}
+```
 
 ### Spells
 

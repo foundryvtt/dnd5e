@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Enchant activity allows for applying [enchantments](Enchantment.md) to items. These enchantments can modify the stats of an item (such as *Magic Weapon* giving a mundane weapon a +1 magical bonus), carry effects that apply to an actor (such as the *Fire Rune* granting a player double proficiency on tool checks), and carry items that are added to the actor (such as the *Arcane Propulsive Armor* give the player a set of gauntlets that can be used to attack).
 
@@ -43,6 +43,8 @@ When enchanting, profiles can be given additional activities, effects, and items
 ![Enchant Sheet - Enchantments Tab, Additional Activities, Effects, & Items](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enchantment/enchant-enchantments-riders.jpg)
 
 In the above example, the "Arcane Propulsive Armor" infusion from *Tasha’s Cauldron of Everything*, the profile includes a "Arcane Propulsive Armor" active effect to grant the player a boost to their walking speed and an "Arcane Propulsion Gauntlets" item that gives the player a way to attack using the armor.
+
+If any additional items, activities, or effects are specified directly on the enchantment Active Effect those will be applied alongside any specified by the activity.
 
 ### Restrictions
 

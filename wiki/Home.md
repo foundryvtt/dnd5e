@@ -19,6 +19,7 @@
     - [Activity Type: Teleport](Activity-Type-Teleport.md)
     - [Activity Type: Transform](Activity-Type-Transform.md)
     - [Activity Type: Use](Activity-Type-Utility.md)
+  - [Activity Behaviors](Activity-Behaviors.md)
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
   - Advancement Types

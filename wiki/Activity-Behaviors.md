@@ -1,6 +1,10 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Area of effect behaviors are a way to attach a subset of [scene region behaviors](https://foundryvtt.com/article/scene-regions/#behaviors) to the area of effect templates created by activities.
+
+### Antimagic
+
+The **Antimagic** behavior turns the region into an are of antimagic. Characters and NPCs within the region cannot cast spells, benefit from ongoing magical effects, or use magic items or features.
 
 ### Apply Active Effect
 

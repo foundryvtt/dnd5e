@@ -1,6 +1,6 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
-[Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets) | [Other](#other)
+[Activities](#activities) | [Actor](#actor) | [Advancement](#advancement) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets) | [Other](#other)
 
 
 ## Activities
@@ -658,6 +658,15 @@ Fires before source data is initialized for an Actor in a compendium.
 
 ## Advancement
 
+### `dnd5e.advancementCreateItemData`
+
+Fires when an advancement prepares an item from a compendium.
+
+| Name        | Type        | Description                                     |
+| ----------- | ----------- | ----------------------------------------------- |
+| advancement | Advancement | The advancement being run.                      |
+| item        | Item5e      | Cloned item being created.                      |
+
 ### `dnd5e.preAdvancementManagerRender`
 
 Fires when an `AdvancementManager` is about to be processed. Returning `false` will prevent the normal rendering process.
@@ -977,6 +986,19 @@ A hook event that fires after a roll config has been built using the roll prompt
 
 
 ## Sheets
+
+### `dnd5e.dropCreateItems` (actor sheets)
+
+Fires when items are dropped onto the actor sheet to be created. Returning `false` will prevent the normal drop handling.
+
+| Name             | Type            | Description                                    |
+| ---------------- | --------------- | ---------------------------------------------- |
+| sheet            | BaseActorSheet  | The sheet.                                     |
+| items            | Item5e[]        | The items being dropped.                       |
+| options          | object          |                                                |
+| options.behavior | DropEffectValue | The drag behavior.                             |
+| options.event    | Event           | The event which triggered the item creation.   |
+
 
 ### `dnd5e.dropItemSheetData` (all item sheets)
 

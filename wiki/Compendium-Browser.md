@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The compendium browser is an application for finding content from across multiple compendiums using searching and filtering. The browser can be accessed using the "Open Compendium Browser" button at the top of the Compendium Packs sidebar tab.
 
@@ -22,6 +22,8 @@ GMs have the option to modify what sources appear in the compendium browser, cus
 
 ![Compendium Browser - Configure Sources](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/compendium-browser/configure-sources.jpg)
 
+When the rules version setting is changed, sources that don't match the current rules version will be automatically disabled. These sources can be re-enabled in the source configuration dialog.
+
 ## Module Support
 
 The compendium browser will automatically pick up content from any enabled modules, displaying results to players so long as they are able to view a given compendium pack. There is no need for modules to do anything for their users to gain access to content through the compendium browser, but additional hints may be provided to aid in its functionality.
@@ -37,6 +39,7 @@ When searching for content the compendium browser will use type hints on compend
   "type": "Item",
   "flags": {
     "dnd5e": {
+      "rulesVersion": "legacy",
       "types": ["spell"]
     }
   }
@@ -44,3 +47,8 @@ When searching for content the compendium browser will use type hints on compend
 ```
 
 The flag `flags.dnd5e.types` on a compendium pack in `module.json` should contain an array with the specific item or actor types in that compendium. Providing an empty array here will prevent the browser from searching that pack.
+
+Use `flags.dnd5e.rulesVersion` to specify what rules this compendium pack contains and opt into the automatic rules support
+
+>[!NOTE]
+> The `rulesVersion` flag should only be used in modules that ship both 5e and 5.5e content, since if a module only contains content for a single rules version then the user enabling the module should be seen as them choosing to see that content.

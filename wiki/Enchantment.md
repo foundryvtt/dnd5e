@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 
@@ -7,7 +7,14 @@ Enchantments are a special type of Active Effect that makes changes on the item 
 In the example above, the spell "Magic Weapon" is configured to modify the name of the item to add `+1` to the end, add the magical property, and set the magical bonus. The name is set using a change format that allows for referencing the original name using a pair of curly brackets (`{}`) and the `override` change mode. This allows for more complex changes to the item's name than would normally be possible with active effects.
 
 
-## Enchantment Changes
+## Additional Changes
+
+The additional changes section of an Enchantment allows associating Activities, Active Effects, and Items with the Enchantment. When the Enchantment is applied to an Item, the Activities and Active Effects specified here will be automatically added to that Item. If the Item is on an Actor, then the Additional Items will be added to that Actor.
+
+When the Enchantment is disabled or made unavailable by a condition, all additional changes become unavailable. When the Enchantment is removed from the Item, all additional changes are deleted with it.
+
+
+## Enchantment Change Guide
 
 This describes how to create Active Effects used as Enchantments. This differs from the [Active Effect Guide](Active-Effect-Guide) in that these are changes to items instead of the actors. If you're creating an Active Effect to add to the Additional Effects section when configuring an Enchantment, then use that guide.
 

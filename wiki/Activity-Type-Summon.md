@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Summon activity is designed to automatically bring summoned creatures into your world. This allows for summoning based on a pre-determined list of creatures or allowing the player to select a creature to summon based on CR and creature type. This activity can modify the summoned creatures before they are brought into the world and includes an interface for players to place them as desired in the scene.
 
