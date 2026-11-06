@@ -875,7 +875,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         ...save,
         ability: save.ability?.size
           ? save.ability.size === 1
-            ? CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
+            ? save.ability.first() === "concentration" ? _loc("DND5E.CONCENTRATION.Abbreviation")
+              : CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
             : _loc("DND5E.AbbreviationDC")
           : null
       } : null,
@@ -909,7 +910,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Save
     ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
     ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
-      ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
+      ? ctx.save.ability.first() === "concentration" ? _loc("DND5E.CONCENTRATION.Abbreviation")
+        : CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
       : _loc("DND5E.AbbreviationDC") : null;
 
     // Linked Uses
