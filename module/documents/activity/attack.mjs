@@ -143,10 +143,6 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         attackModeOptions,
         buildConfig,
         masteryOptions: (masteryOptions?.length > 1) && !config.mastery ? masteryOptions : [],
-        position: {
-          top: config.event ? config.event.clientY - 80 : null,
-          left: window.innerWidth - 710
-        },
         window: {
           title: _loc("DND5E.AttackRoll"),
           subtitle: this.item.name,
@@ -288,7 +284,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollAttack(event, target, message) {
-    this.rollAttack({ event });
+    this.rollAttack({ event }, { autoPosition: true });
   }
 
   /* -------------------------------------------- */
@@ -304,7 +300,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const lastAttack = message.getAssociatedRolls("attack").pop();
     const { ability, ammunitionItem: ammunition, mode: attackMode } = lastAttack?.system ?? {};
     const isCritical = lastAttack?.rolls[0]?.isCritical;
-    const dialogConfig = {};
+    const dialogConfig = { autoPosition: true };
     if ( isCritical ) dialogConfig.options = { defaultButton: "critical" };
 
     this.rollDamage({ event, ability, ammunition, attackMode, isCritical }, dialogConfig);

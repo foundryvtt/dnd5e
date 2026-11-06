@@ -125,6 +125,6 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollFormula(event, target, message) {
-    this.rollFormula({ event });
+    this.rollFormula({ event }, { autoPosition: true });
   }
 }
