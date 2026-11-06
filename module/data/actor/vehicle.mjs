@@ -379,7 +379,9 @@ export default class VehicleData extends CommonTemplate {
     }, 0);
     const { weight } = this.traits;
     if ( weight.value ) {
-      encumbrance.max = Math.max(0, encumbrance.max - convertWeight(weight.value, weight.units, units));
+      encumbrance.max = Math.max(0, encumbrance.max - convertWeight(weight.value, weight.units, {
+        to: units, legacy: false
+      }).value);
     }
     if ( encumbrance.max ) encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
     return encumbrance;
