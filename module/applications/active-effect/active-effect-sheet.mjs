@@ -1,12 +1,17 @@
+import { nextSortValue } from "../../utils.mjs";
 import ApplicationV2Mixin from "../api/application-v2-mixin.mjs";
+import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import EffectChangeConfig from "./effect-change-config.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Extension of the default active effect sheet to add conditional fields & dnd5e styling.
  */
-export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffectConfig, { handlebars: false }) {
+export default class ActiveEffectSheet5e extends DragDropApplicationMixin(
+  ApplicationV2Mixin(ActiveEffectConfig, { handlebars: false })
+) {
 
   /** @override */
   static DEFAULT_OPTIONS = {
@@ -84,9 +89,9 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareChangesContext(context, options) {
-    context.changes = await Promise.all(
+    context.changes = (await Promise.all(
       context.document.system.changes.map(c => this.document.getSheetChangeContext(c))
-    );
+    )).sort((lhs, rhs) => lhs.sort - rhs.sort);
     return context;
   }
 
@@ -182,6 +187,16 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     this.element.querySelectorAll("[data-context-menu]").forEach(control =>
       control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
     );
+
+    new CONFIG.ux.DragDrop({
+      dragSelector: "[data-change-id]",
+      dropSelector: null,
+      callbacks: {
+        dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
   }
 
   /* -------------------------------------------- */
@@ -291,7 +306,10 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
         system: {
           changes: [
             ...this.document.system.toObject().changes,
-            this.document.system.schema.fields.changes.element.getInitialValue()
+            {
+              ...this.document.system.schema.fields.changes.element.getInitialValue(),
+              sort: nextSortValue(this.document.system.changes)
+            }
           ]
         }
       }
@@ -320,5 +338,97 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    */
   static async #onEditChange(event, target) {
     this._onAction(target, "edit", { event });
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _allowedDropBehaviors(event, data) {
+    return new Set(["copy", "link", "move"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    return data.parent === this.document.uuid ? "move" : "copy";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle beginning drag events on the sheet.
+   * @param {DragEvent} event  The initiating drag start event.
+   * @protected
+   */
+  _onDragStart(event) {
+    const li = event.currentTarget;
+    if ( event.target.classList.contains("content-link") ) return;
+
+    const change = this.document.system._source.changes.find(c => c._id === li.dataset.changeId);
+    if ( !change ) return;
+
+    const dragData = {
+      type: "ActiveEffectChange",
+      data: change,
+      parent: this.document.uuid
+    };
+
+    // Set data transfer
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    if ( !this.document.isOwner || this.document.collection?.locked ) {
+      event.dataTransfer.effectAllowed = "copyLink";
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping items onto the sheet.
+   * @param {DragEvent} event  The concluding drag event.
+   * @returns {any}
+   * @protected
+   */
+  async _onDrop(event) {
+    event._behavior = this._dropBehavior(event);
+    const data = TextEditor.getDragEventData(event);
+
+    // Reorder changes when dragging on same effect document
+    if ( (event._behavior === "move") && (data.parent === this.document.uuid) ) {
+      const targetId = event.target.closest("[data-change-id]")?.dataset.changeId;
+      const target = this.document.system.changes.find(c => c._id === targetId);
+      if ( !target || (target._id === data.data._id) ) return;
+      const siblings = this.document.system.changes.filter(c => c._id !== data.data._id);
+      const sortUpdates = foundry.utils.performIntegerSort(data.data, { target, siblings });
+      const updateData = this.document.system.toObject().changes.map(c => {
+        const update = sortUpdates.find(u => u.target._id === c._id);
+        if ( update ) c.sort = update.update.sort;
+        return c;
+      });
+      await this.document.update({ "system.changes": updateData });
+      return sortUpdates.length > 0 ? this.document : null;
+    }
+
+    // Create new change
+    const change = { ...data.data, _id: foundry.utils.randomID(), sort: nextSortValue(this.document.system.changes) };
+    await this.submit({
+      updateData: {
+        system: {
+          changes: [...this.document.system.toObject().changes, change]
+        }
+      }
+    });
+
+    // Delete old change if moved
+    if ( event._behavior === "move" ) {
+      const parent = await fromUuid(data.parent);
+      const changes = parent.system.toObject().changes;
+      changes.findSplice(c => c._id === data.data._id);
+      parent.update({ system: { changes } });
+    }
+
+    return this.document;
   }
 }
