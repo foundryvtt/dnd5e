@@ -1744,11 +1744,26 @@
   },
   "Activities": "Activities",
   "Button": {
-    "rollAttack": "Attack",
-    "rollCheck": "Ability Check",
-    "rollDamage": "Damage",
-    "rollFormula": "Roll",
-    "rollSave": "Saving Throw"
+    "rollAttack": {
+      "Full": "Attack",
+      "Short": "Attack"
+    },
+    "rollCheck": {
+      "Full": "Ability Check",
+      "Short": "Check"
+    },
+    "rollDamage": {
+      "Full": "Damage",
+      "Short": "Damage"
+    },
+    "rollFormula": {
+      "Full": "Roll",
+      "Short": "Roll"
+    },
+    "rollSave": {
+      "Full": "Saving Throw",
+      "Short": "Save"
+    }
   },
   "Deltas": {
     "Created": "Item Created",
@@ -1767,6 +1782,7 @@
   },
   "Row": {
     "Actions": "Item actions",
+    "Additional": "Additional actions",
     "Items": "Items",
     "Properties": "Item properties",
     "Roll": "Die roll",
@@ -1982,7 +1998,10 @@
 "DND5E.CONCENTRATION": {
   "Abbreviation": "C",
   "Action": {
-    "Break": "Break Concentration",
+    "Break": {
+      "Full": "Break Concentration",
+      "Short": "Break"
+    },
     "End": "End Concentration"
   },
   "Description": "You are maintaining concentration on the effects of the '{name}' {type}.",
@@ -2203,10 +2222,16 @@
     }
   },
   "Action": {
-    "ConsumeResource": "Consume Resource",
+    "ConsumeResource": {
+      "Full": "Consume Resource",
+      "Short": "Consume"
+    },
     "Create": "Create Consumption Target",
     "Delete": "Delete Consumption Target",
-    "RefundResource": "Refund Resource"
+    "RefundResource": {
+      "Full": "Refund Resource",
+      "Short": "Refund"
+    }
   },
   "Empty": "No associated consumption. Use the <i class=\"fas fa-plus\"></i> button above to add consumption targets.",
   "Scaling": {
@@ -3718,7 +3743,10 @@
       }
     }
   },
-  "HealingButton": "Healing",
+  "HealingButton": {
+    "Full": "Healing",
+    "Short": "Heal"
+  },
   "HealingRoll": "Healing Roll",
   "Hint": "Heal a creature",
   "Title": "Heal",
@@ -4045,7 +4073,10 @@
 
 "DND5E.LegendaryResistance": {
   "Action": {
-    "Resist": "Legendary Resistance"
+    "Resist": {
+      "Full": "Legendary Resistance",
+      "Short": "Resist"
+    }
   },
   "Label": "Legendary Resistance",
   "LabelPl": "Legendary Resistances",
@@ -5396,7 +5427,10 @@
 
 "DND5E.TARGET": {
   "Action": {
-    "PlaceTemplate": "Place Measured Template"
+    "PlaceTemplate": {
+      "Full": "Place Measured Template",
+      "Short": "Area"
+    }
   },
   "Count": {
     "Any": "Any",

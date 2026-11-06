@@ -52,12 +52,12 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const buttons = [{
       action: "rollAttack",
       icon: "fa-solid fa-sword",
-      label: { value: "DND5E.Attack" }
+      label: { short: "DND5E.Attack", value: "DND5E.Attack" }
     }];
     if ( this.damage.parts.length || this.item.system.properties?.has("amm") ) buttons.push({
       action: "rollDamage",
       icon: "fa-solid fa-burst",
-      label: { value: "DND5E.Damage" }
+      label: { short: "DND5E.Damage", value: "DND5E.Damage" }
     });
     return buttons.concat(super._usageChatButtons(message));
   }

@@ -138,12 +138,18 @@ export default class SaveMessageData extends RollMessageData {
     if ( !resisted && canResist ) buttons.resist = { entries: [{
       action: "resistSave",
       icon: "fa-solid fa-dragon",
-      label: "DND5E.LegendaryResistance.Action.Resist"
+      label: {
+        short: "DND5E.LegendaryResistance.Action.Resist.Short",
+        value: "DND5E.LegendaryResistance.Action.Resist.Full"
+      }
     }] };
     if ( !concentrationBroken && canBreakConcentration ) buttons.concentration = { entries: [{
       action: "breakConcentration",
       icon: "fa-solid fa-ban",
-      label: "DND5E.CONCENTRATION.Action.Break"
+      label: {
+        short: "DND5E.CONCENTRATION.Action.Break.Short",
+        value: "DND5E.CONCENTRATION.Action.Break.Full"
+      }
     }] };
     if ( !foundry.utils.isEmpty(buttons) ) context.buttonGroups = buttons;
     return context;

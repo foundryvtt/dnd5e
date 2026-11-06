@@ -41,7 +41,7 @@ export default class DamageActivity extends ActivityMixin(BaseDamageActivityData
     return [{
       action: "rollDamage",
       icon: "fa-solid fa-burst",
-      label: { value: "DND5E.Damage" }
+      label: { short: "DND5E.Damage", value: "DND5E.Damage" }
     }].concat(super._usageChatButtons(message));
   }
 

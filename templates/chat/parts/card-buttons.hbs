@@ -1,14 +1,17 @@
 {{#if buttonGroups}}
 <section class="icon-row">
-    <i class="fa-solid fa-fw fa-circle-play" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Actions" }}"></i>
+    <i class="fa-solid fa-fw {{ ifThen rowIcon rowIcon "fa-circle-play" }}"
+       aria-label="{{ localize (ifThen rowLabel rowLabel "DND5E.CHATMESSAGE.Row.Actions") }}"></i>
     <ul class="unlist">
     {{#each buttonGroups}}
     {{#each entries}}
     <li>
-        <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
+        <button type="button" class="{{ ifThen label.short "labelled" "icon" }}"
+            data-tooltip aria-label="{{ localize label.value }}"
             {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action}}"
             {{else}}{{ dnd5e-dataset dataset }} data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
             {{ dnd5e-icon icon }}
+            {{#if label.short}}<span>{{ localize label.short }}</span>{{/if}}
         </button>
     </li>
     {{/each}}
