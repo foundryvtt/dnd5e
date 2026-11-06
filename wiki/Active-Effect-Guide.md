@@ -36,7 +36,7 @@ Useful examples:
 
 ## Modify Roll Mode
 
-Various places in the system allow for setting the advantage mode for rolls, such as `system.dex.check.roll.mode` or `system.rolls.attack.mwak.mode`. In these cases there is some special handling for the change type and value.
+Various places in the system allow for setting the advantage mode for rolls, such as `system.abilities.dex.check.roll.mode` or `system.rolls.attack.mwak.mode`. In these cases there is some special handling for the change type and value.
 
 ### Change Value
 - `0`: Normal
