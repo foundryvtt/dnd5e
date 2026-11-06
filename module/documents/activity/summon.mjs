@@ -82,7 +82,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     return [{
       action: "placeSummons",
       icon: "fa-solid fa-spaghetti-monster-flying",
-      label: { value: "DND5E.SUMMON.Action.Summon" }
+      label: { short: "DND5E.SUMMON.Action.Summon", value: "DND5E.SUMMON.Action.Summon" }
     }].concat(super._usageChatButtons(message));
   }
 

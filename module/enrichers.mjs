@@ -1628,7 +1628,7 @@ export function createRollLabel(config) {
       label = _loc(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;
     case "endConcentration":
-      label = _loc("DND5E.CONCENTRATION.Action.Break");
+      label = _loc("DND5E.CONCENTRATION.Action.Break.Full");
       break;
     default:
       return "";

@@ -205,8 +205,16 @@
       --button-size: 24px;
       box-shadow: none;
 
-      &.target-source-toggle, &.icon { block-size: var(--button-size); }
+      &.target-source-toggle, &.icon, &.labelled { block-size: var(--button-size); }
       &.icon:not(.target-source-toggle) { padding: 0; }
+
+      &.labelled {
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-11);
+        font-weight: normal;
+        padding-inline: 4px;
+        text-transform: none;
+      }
 
       &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--dnd5e-color-gold); }
       &[hidden] { display: none; }

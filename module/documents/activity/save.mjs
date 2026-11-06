@@ -73,7 +73,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     if ( this.damage.parts.length ) buttons.push({
       action: "rollDamage",
       icon: "fa-solid fa-burst",
-      label: { value: "DND5E.Damage" }
+      label: { short: "DND5E.Damage", value: "DND5E.Damage" }
     });
     return buttons.concat(super._usageChatButtons(message));
   }

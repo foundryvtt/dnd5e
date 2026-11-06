@@ -50,7 +50,10 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
     return [{
       action: "rollHealing",
       icon: "systems/dnd5e/icons/svg/damage/healing.svg",
-      label: { value: "DND5E.HEAL.HealingButton" }
+      label: {
+        short: "DND5E.HEAL.HealingButton.Short",
+        value: "DND5E.HEAL.HealingButton.Full"
+      }
     }].concat(super._usageChatButtons(message));
   }
 

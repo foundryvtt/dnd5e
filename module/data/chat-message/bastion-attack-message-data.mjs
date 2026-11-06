@@ -91,7 +91,7 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
       buttons.resolve = { entries: [{
         dataset: { action: "resolve" },
         icon: "fa-solid fa-bolt",
-        label: "DND5E.Bastion.Attack.Automatic"
+        label: { value: "DND5E.Bastion.Attack.Automatic" }
       }] };
     }
     if ( this.damaged ) {

@@ -85,6 +85,7 @@
  * @property {string} icon                        FontAwesome classes or a path to an icon image.
  * @property {object} label                       Labels displayed on the button.
  * @property {string} [label.hidden]              Label displayed when challenge details are concealed from the viewer.
+ * @property {string} [label.short]               A short button label.
  * @property {string} label.value                 Localization key or label text.
  * @property {"all"|"creator"|"gm"} [visibility]  Which users can see this button.
  */
