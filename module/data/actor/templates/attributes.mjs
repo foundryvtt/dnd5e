@@ -234,7 +234,24 @@ export default class AttributesFields {
    * Initialize derived AC fields for Active Effects to target.
    * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareBaseArmorClass() {}
+  static prepareBaseArmorClass() {
+    const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
+      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes) ) return obj;
+      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
+      else obj.armors.push(equip);
+      return obj;
+    }, { armors: [], shields: [] });
+
+    this.attributes.ac.equippedArmor = armors[0] ?? null;
+    this.attributes.ac.equippedShield = shields[0] ?? null;
+
+    if ( armors.length > 1 ) this.parent._preparationWarnings.push({
+      message: _loc("DND5E.WarnMultipleArmor"), type: "warning"
+    });
+    if ( shields.length > 1 ) this.parent._preparationWarnings.push({
+      message: _loc("DND5E.WarnMultipleShields"), type: "warning"
+    });
+  }
 
   /* -------------------------------------------- */
 
@@ -269,25 +286,13 @@ export default class AttributesFields {
       .map(([id, data]) => ({ ...data, id, type: "base" }));
     ac.formulas.unshift(...baseFormulas);
 
-    // Identify Equipped Items
-    const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes) ) return obj;
-      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, { armors: [], shields: [] });
-
     const armorValue = item => {
       const { magicAvailable, armor: { magicalBonus, value } } = item.system;
       return value + (magicAvailable ? simplifyBonus(magicalBonus, rollData) : 0);
     };
 
     // Equipped Armor
-    if ( armors.length ) {
-      if ( armors.length > 1 ) this.parent._preparationWarnings.push({
-        message: _loc("DND5E.WarnMultipleArmor"), type: "warning"
-      });
-      ac.equippedArmor = armors[0];
+    if ( ac.equippedArmor ) {
       ac.armor = armorValue(ac.equippedArmor);
       if ( ac.equippedArmor.system.properties.has("stealthDisadvantage")
         && ("ste" in CONFIG.DND5E.skills)
@@ -297,13 +302,7 @@ export default class AttributesFields {
     }
 
     // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) this.parent._preparationWarnings.push({
-        message: _loc("DND5E.WarnMultipleShields"), type: "warning"
-      });
-      ac.equippedShield = shields[0];
-      ac.shield = armorValue(ac.equippedShield);
-    }
+    if ( ac.equippedShield ) ac.shield = armorValue(ac.equippedShield);
 
     // If armor is equipped, prepare clamped abilities
     const isHeavy = ac.equippedArmor?.system.type.value === "heavy";
