@@ -245,7 +245,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
    */
   getSourceActor() {
     const o = this.system.origin ?? {};
-    const origin = fromUuidSync(o.actor ?? o.item ?? o.activity ?? this.origin, { strict: false });
+    const origin = fromUuidSync(o.actor, { strict: false })
+      ?? fromUuidSync(o.item, { strict: false })?.actor
+      ?? fromUuidSync(o.activity, { strict: false })?.actor
+      ?? fromUuidSync(this.origin, { strict: false });
     return (origin instanceof dnd5e.documents.Actor5e) ? origin : (origin?.actor || null);
   }
 
