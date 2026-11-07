@@ -262,22 +262,22 @@
     {{/if}}
 
     {{!-- Resistances --}}
-    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dr key="dr" color="green"
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dr key="dr"
         icon="fa-solid fa-shield-halved" label="DND5E.Resistances" }}
 
     {{!-- Immunities --}}
     {{#if editable}}
-    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di"
         icon="fa-solid fa-shield" label="DND5E.TRAIT.Damage.Immunity.title" }}
     {{else}}
-    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di"
         icon="fa-solid fa-shield" label="DND5E.Immunities" }}
     {{/if}}
-    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.ci key="ci" color="green"
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.ci key="ci"
         svg="rosa-shield" label="DND5E.TRAIT.Condition.Immunity.title" }}
 
     {{!-- Vulnerabilities --}}
-    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dv key="dv" color="maroon"
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dv key="dv"
         icon="fa-solid fa-heart-crack" label="DND5E.Vulnerabilities" }}
 
 </aside>

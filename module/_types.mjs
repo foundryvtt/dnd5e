@@ -304,9 +304,9 @@
 
 /**
  * @typedef DamageResistanceConfiguration
- * @property {string} label   Localized label.
- * @property {string} icon    Icon representing this type.
- * @property {Filter} filter  Filter checked against the damage description to decide if the resistance should apply.
+ * @property {string} label     Localized label.
+ * @property {string} icon      Icon representing this type.
+ * @property {Filter} [filter]  Filter checked against the damage description to decide if the resistance should apply.
  */
 
 /* -------------------------------------------- */
