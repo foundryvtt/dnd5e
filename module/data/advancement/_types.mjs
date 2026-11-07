@@ -112,9 +112,10 @@
 
 /**
  * @typedef ModifyItemModifiedItemValue
- * @property {string} change  ID of the change that was applied (referencing entry in `configuration.changes`).
- * @property {string} effect  ID of the enchantment that was created on the item.
- * @property {string} item    ID of the item that was modified.
+ * @property {string} change    ID of the change that was applied (referencing entry in `configuration.changes`).
+ * @property {string} effect    ID of the enchantment that was created on the item.
+ * @property {string} item      ID of the item that was modified.
+ * @property {string[]} riders  Relative UUIDs for riders created by the enchantment.
  */
 
 /* -------------------------------------------- */
@@ -187,6 +188,13 @@
  */
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef SubclassAdvancementConfigurationData
+ * @property {object} [suggested]
+ * @property {boolean} [suggested.fixed]  Prevent selecting any other class than the suggested one.
+ * @property {string} [suggested.uuid]    Subclass to select automatically during advancement.
+ */
 
 /**
  * @typedef SubclassAdvancementValueData

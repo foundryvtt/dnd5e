@@ -65,9 +65,27 @@ export default class ModifyItemAdvancement extends Advancement {
           transfer: true
         }, { keepId: true }).toObject();
         item.updateSource({ effects: [clone] });
-        modified.push({ change: change._id, effect: clone._id, item: item._id });
 
-        // TODO: Add support for riders once https://github.com/foundryvtt/dnd5e/issues/6357 is resolved
+        const newEffect = item.effects.get(clone._id);
+        const operations = await newEffect.system.collectRiders({ dnd5e: { item: effect.item } });
+        const riders = [];
+        newEffect.system.applyRidersSource(operations);
+        for ( const operation of operations ) {
+          if ( operation.action === "create" ) {
+            const collectionName = getDocumentClass(operation.documentName).metadata.collection;
+            riders.push(...operation.data.map(({ _id }) =>
+              foundry.utils.buildRelativeUuid(operation.parent[collectionName].get(_id), this.actor)
+            ));
+          } else if ( operation.action === "update" ) {
+            riders.push(...operation.updates.flatMap(update => {
+              const activities = foundry.utils.getProperty(update, "system.activities") ?? {};
+              const prefix = foundry.utils.buildRelativeUuid(operation.parent.items.get(update._id), this.actor);
+              return Object.keys(activities).map(id => `${prefix}.Activity.${id}`);
+            }));
+          }
+        }
+
+        modified.push({ change: change._id, effect: clone._id, item: item._id, riders });
       }
     }
 
@@ -96,6 +114,14 @@ export default class ModifyItemAdvancement extends Advancement {
       const item = this.actor.items.get(change.item);
       if ( !item?.effects.has(change.effect) ) continue;
       item.effects.delete(change.effect);
+
+      // Remove dependents added as riders
+      for ( const uuid of change.riders ) {
+        const { id, type } = foundry.utils.parseUuid(uuid, { relative: this.actor });
+        if ( type === "Item" ) this.actor.items.delete(id);
+        else if ( type === "ActiveEffect" ) item.effects.delete(id);
+        else if ( type === "Activity" ) item.updateSource({ [`system.activities.${id}`]: _del });
+      }
     }
 
     const modified = this.value.toObject().modified;

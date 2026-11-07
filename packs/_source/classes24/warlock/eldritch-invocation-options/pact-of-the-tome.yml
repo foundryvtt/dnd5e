@@ -16,43 +16,42 @@ system:
       (you determine its appearance) contains eldritch magic that only you can
       access, granting you the benefits below. The book disappears if you
       conjure another book with this feature or if you
-      die.</p><p><strong>Cantrips and Rituals.</strong> When the book appears,
-      choose three cantrips, and choose two level 1 spells that have the Ritual
-      tag. The spells can be from any class's spell list, and they must be
-      spells you don't already have prepared. While the book is on your person,
-      you have the chosen spells prepared, and they function as Warlock spells
-      for you.</p><p><strong>Spellcasting Focus.</strong> You can use the book
-      as a Spellcasting Focus.</p>
+      die.</p><p><em><strong>Cantrips and Rituals.</strong></em> When the book
+      appears, choose three cantrips, and choose two level 1 spells that have
+      the Ritual tag. The spells can be from any class's spell list, and they
+      must be spells you don't already have prepared. While the book is on your
+      person, you have the chosen spells prepared, and they function as Warlock
+      spells for you.</p><p><em><strong>Spellcasting Focus.</strong></em> You
+      can use the book as a Spellcasting Focus.</p>
     chat: ''
   source:
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: pact-of-the-tome
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762530
+  systemVersion: 6.1.0
+  createdTime: 1793665214340
+  modifiedTime: 1793665214340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

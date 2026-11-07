@@ -5,22 +5,18 @@ img: icons/magic/unholy/silhouette-robe-evil-power.webp
 system:
   description:
     value: >-
-      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>While
-      you're in an area of &amp;Reference[Dim Light] or
-      &amp;Reference[Darkness], you can cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility} on
-      yourself without expending a spell slot.</p><section class="secret"
-      id="secret-SvwkLQLYzHCKzuss"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Cast</strong> activity can be used in place of the Invisibility
-      spell and includes an Active Effect that sets the Invisible status
-      effect.</p></section>
+      <div class="item-entry-details"><p class="item-entry-tag">Prerequisite:
+      Level 5+ Warlock</p></div><p>While you're in an area of &amp;Reference[Dim
+      Light] or &amp;Reference[Darkness], you can cast
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplInvisibili]{Invisibility}</em>
+      on yourself without expending a spell slot.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -30,112 +26,85 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    uF0beZxnJDJ6LQp8:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplInvisibili
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 2
+      _id: uF0beZxnJDJ6LQp8
+      sort: 0
       activation:
         type: action
-        value: null
-        override: false
-        condition: ''
+        override: true
+        condition: When in Dim Light or Darkness
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
+        concentration: false
         override: false
-        concentration: true
-        value: '1'
-      effects:
-        - _id: 9svfDetqjhsFP3ey
+        expiry: null
       range:
+        units: self
         override: false
-        units: touch
-        special: ''
       target:
-        prompt: false
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
           type: self
           special: ''
-        override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: one-with-shadows
-effects:
-  - name: Invisible
-    origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
-    duration:
-      value: 3600
-      units: seconds
-      expiry: turnStart
-      expired: false
-    disabled: false
-    flags: {}
-    img: systems/dnd5e/icons/svg/statuses/invisible.svg
-    _id: 9svfDetqjhsFP3ey
-    type: base
-    system:
-      changes: []
-    description: >-
-      <p>The spell ends early immediately after the target makes an attack roll,
-      deals damage, or casts a spell.</p>
-    tint: '#ffffff'
-    transfer: false
-    statuses:
-      - invisible
-    sort: 0
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    showIcon: 2
-    start: null
-    folder: null
-    _key: '!items.effects!phbinvOnewithSha.9svfDetqjhsFP3ey'
+  advancement: {}
+  crewed: false
+effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762447
+  systemVersion: 6.1.0
+  createdTime: 1793665214342
+  modifiedTime: 1793665214342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

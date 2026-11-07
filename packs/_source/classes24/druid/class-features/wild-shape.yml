@@ -12,74 +12,75 @@ system:
       of hours equal to half your Druid level (currently [[lookup
       @classes.druid.levels]]) or until you use Wild Shape again, have the
       Incapacitated condition, or die. You can also leave the form early as a
-      Bonus Action.</p><p><strong>Number of Uses.</strong> You can use Wild
-      Shape twice. You regain one expended use when you finish a Short Rest, and
-      you regain all expended uses when you finish a Long Rest.</p><p>You gain
-      additional uses when you reach certain Druid levels, as shown in the Wild
-      Shape column of the
+      Bonus Action.</p><p><em><strong>Number of Uses.</strong></em> You can use
+      Wild Shape twice. You regain one expended use when you finish a Short
+      Rest, and you regain all expended uses when you finish a Long
+      Rest.</p><p>You gain additional uses when you reach certain Druid levels,
+      as shown in the Wild Shape column of the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.UCOh3zlvGxyk5jLr#class-features]{Druid
-      Features} table.</p><p><strong>Current Number of Uses:</strong> [[lookup
-      @scale.druid.wild-shape-uses]]</p><p><strong>Known Forms. </strong>You
-      know four Beast forms for this feature, chosen from among Beast stat
-      blocks that have a maximum Challenge Rating of 1/4 and that lack a Fly
-      Speed. The @UUID[Compendium.dnd5e.actors24.Actor.mmRat00000000000]{Rat},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding Horse},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmSpider00000000]{Spider}, and
-      @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
-      recommended. Whenever you finish a Long Rest, you can replace one of your
-      known forms with another eligible form.</p><section class="fvtt
-      advice"><figure class="icon"><img class="vtt-outline"
-      src="icons/vtt-512.png" /></figure><article><h3>Wild Shape
-      Automation</h3><p>When you've selected the creature you would like to wild
-      shape into you can drag it onto your character sheet, select the Wild
-      Shape option, and Foundry will automatically update your sheet. You can
-      revert the transformation at the top of your sheet or by right clicking on
-      your Actor in the sidebar.</p></article></section><p>When you reach
-      certain Druid levels, your number of known forms and the maximum Challenge
-      Rating for those forms increases, as shown in the Beast Shapes table. In
+      Features} table.</p><p><em><strong>Known Forms.</strong></em><strong>
+      </strong>You know four Beast forms for this feature, chosen from among
+      Beast stat blocks that have a maximum Challenge Rating of 1/4 and that
+      lack a Fly Speed. The
+      @UUID[Compendium.dnd-monster-manual.actors.Actor.mmRat00000000000]{Rat},
+      @UUID[Compendium.dnd-monster-manual.actors.Actor.mmRidingHorse000]{Riding
+      Horse},
+      @UUID[Compendium.dnd-monster-manual.actors.Actor.mmSpider00000000]{Spider},
+      and
+      @UUID[Compendium.dnd-monster-manual.actors.Actor.mmWolf0000000000]{Wolf}
+      are recommended. Whenever you finish a Long Rest, you can replace one of
+      your known forms with another eligible form.</p><section class="fvtt
+      advice"><figure class="icon"><img
+      src="icons/vtt-512.png"></figure><article><h3>Wild Shape
+      Automation</h3><p>This feature includes a <strong>Transform</strong>
+      activity. When you use it you can select the creature you'd like to Wild
+      Shape into using the Compendium Browser. You can revert the transformation
+      at the top of your sheet by clicking on the kebab menu (three vertical
+      dots) and selecting <strong>Restore
+      Transformation</strong>.</p></article></section><p>When you reach certain
+      Druid levels, your number of known forms and the maximum Challenge Rating
+      for those forms increases, as shown in the Beast Shapes table. In
       addition, starting at level 8, you can adopt a form that has a Fly
       Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
-      @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
-      [[lookup @scale.druid.wild-shape]]</p><p>When choosing known forms, you
+      @scale.wild-shape.forms]]{4}</p><p><strong>Current CR Limit:</strong>
+      [[lookup @scale.wild-shape.cr]]{1/4}</p><p>When choosing known forms, you
       may look in the <em>Monster Manual</em> or elsewhere for eligible Beasts
-      if the Dungeon Master permits you to do so.</p><table><caption>Beast
-      Shapes</caption><thead><tr><td>Druid Level</td><td>Known Forms</td><td>Max
-      CR</td><td>Fly
-      Speed</td></tr></thead><tbody><tr><td>2</td><td>4</td><td>1/4</td><td>No</td></tr><tr><td>4</td><td>6</td><td>1/2</td><td>No</td></tr><tr><td>8</td><td>8</td><td>1</td><td>Yes</td></tr></tbody></table><p><strong>Rules
-      While Shape-Shifted.</strong> While in a form, you retain your
+      if the Dungeon Master permits you to do so.</p><table><caption><p>Beast
+      Shapes</p></caption><thead><tr><td><p>Druid Level</p></td><td><p>Known
+      Forms</p></td><td><p>Max CR</p></td><td><p>Fly
+      Speed</p></td></tr></thead><tbody><tr><td><p>2</p></td><td><p>4</p></td><td><p>1/4</p></td><td><p>No</p></td></tr><tr><td><p>4</p></td><td><p>6</p></td><td><p>1/2</p></td><td><p>No</p></td></tr><tr><td><p>8</p></td><td><p>8</p></td><td><p>1</p></td><td><p>Yes</p></td></tr></tbody></table><p><em><strong>Rules
+      While Shape-Shifted.</strong></em> While in a form, you retain your
       personality, memories, and ability to speak, and the following rules
-      apply:</p><p><strong>Temporary Hit Points. </strong>When you assume a Wild
-      Shape form, you gain a number of Temporary Hit Points equal to your Druid
-      level.</p><p><strong>Game Statistics.</strong> Your game statistics are
-      replaced by the Beast's stat block, but you retain your creature type; Hit
-      Points; Hit Point Dice; Intelligence, Wisdom, and Charisma scores; class
-      features; languages; and feats. You also retain your skill and saving
-      throw proficiencies and use your Proficiency Bonus for them, in addition
-      to gaining the proficiencies of the creature. If a skill or saving throw
-      modifier in the Beast's stat block is higher than yours, use the one in
-      the stat block.</p><p><strong>No Spellcasting.</strong> You can't cast
-      spells, but shape-shifting doesn't break your Concentration or otherwise
-      interfere with a spell you've already cast.</p><p><strong>Objects.
-      </strong>Your ability to handle objects is determined by the form's limbs
-      rather than your own. In addition, you choose whether your equipment falls
-      in your space, merges into your new form, or is worn by it. Worn equipment
+      apply:</p><div class="subfeature"><p><strong>Temporary Hit Points.
+      </strong>When you assume a Wild Shape form, you gain a number of Temporary
+      Hit Points equal to your Druid level.</p><p><strong>Game
+      Statistics.</strong> Your game statistics are replaced by the Beast's stat
+      block, but you retain your creature type; Hit Points; Hit Point Dice;
+      Intelligence, Wisdom, and Charisma scores; class features; languages; and
+      feats. You also retain your skill and saving throw proficiencies and use
+      your Proficiency Bonus for them, in addition to gaining the proficiencies
+      of the creature. If a skill or saving throw modifier in the Beast's stat
+      block is higher than yours, use the one in the stat
+      block.</p><p><strong>No Spellcasting.</strong> You can't cast spells, but
+      shape-shifting doesn't break your Concentration or otherwise interfere
+      with a spell you've already cast.</p><p><strong>Objects. </strong>Your
+      ability to handle objects is determined by the form's limbs rather than
+      your own. In addition, you choose whether your equipment falls in your
+      space, merges into your new form, or is worn by it. Worn equipment
       functions as normal, but the DM decides whether it's practical for the new
       form to wear a piece of equipment based on the creature's size and shape.
       Your equipment doesn't change size or shape to match the new form, and any
       equipment that the new form can't wear must either fall to the ground or
       merge with the form. Equipment that merges with the form has no effect
-      while you're in that form.</p><section class="secret"
-      id="secret-FZNGONDktXDnwY0x"><p><strong>Foundry Note</strong></p><p>You
-      can activate this feature to track uses of your Wild Shape.</p><p>It will
-      automatically restore a use on a Short Rest and all uses on a Long
-      Rest.</p></section>
+      while you're in that form.</p></div>
     chat: ''
   source:
     custom: ''
-    revision: 1
+    revision: 3
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: '@scale.druid.wild-shape-uses'
     recovery:
@@ -94,13 +95,14 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities:
-    FsDnynyqno8XNHgf:
+    46YUClJmy4DjUyW7:
       type: transform
-      _id: FsDnynyqno8XNHgf
+      _id: 46YUClJmy4DjUyW7
       sort: 0
       activation:
         type: bonus
@@ -114,12 +116,16 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: inst
+        units: hour
         concentration: false
         override: false
+        value: floor(@classes.druid.levels / 2)
+        expiry: null
       effects: []
       range:
         units: self
@@ -130,6 +136,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           type: self
@@ -143,8 +150,8 @@ system:
       profiles:
         - cr: '0.25'
           name: CR ¼
-          _id: xUPf0uISOwKy3mhO
-          uuid: ''
+          _id: 1bmphNX1PGLZiPM5
+          uuid: null
           sizes: []
           types:
             - beast
@@ -155,8 +162,8 @@ system:
             max: 3
         - cr: '0.5'
           name: CR ½
-          _id: yu86xk21fVzHg9r5
-          uuid: ''
+          _id: 6SSHRda5Pf6fCKCf
+          uuid: null
           sizes: []
           types:
             - beast
@@ -167,8 +174,8 @@ system:
             max: 7
         - cr: '1'
           name: CR 1
-          _id: ZFqKHYlY9JhLYnx0
-          uuid: ''
+          _id: BBW6hlzISRpioLLK
+          uuid: null
           sizes: []
           types:
             - beast
@@ -179,25 +186,73 @@ system:
       settings: null
       transform:
         customize: false
-        identifier: druid
+        mode: cr
         preset: wildshape
+        formless: false
       name: ''
-      img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+      img: ''
       visibility:
+        identifier: druid
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: wild-shape
+  advancement:
+    EoM7g9kruaS8VvhA:
+      _id: EoM7g9kruaS8VvhA
+      type: ScaleValue
+      configuration:
+        identifier: forms
+        type: number
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 4
+          '4':
+            value: 6
+          '8':
+            value: 8
+      value: {}
+      hint: ''
+      name: Known Forms
+      flags: {}
+      classRestriction: ''
+    pIfdGSkqdp00omkE:
+      _id: pIfdGSkqdp00omkE
+      type: ScaleValue
+      configuration:
+        identifier: cr
+        type: cr
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 0.25
+          '4':
+            value: 0.5
+          '8':
+            value: 1
+      value: {}
+      hint: ''
+      name: Wild Shape CR
+      flags: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866366918
-  modifiedTime: 1768923594518
+  systemVersion: 6.1.0
+  createdTime: 1793658068677
+  modifiedTime: 1793658068677
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

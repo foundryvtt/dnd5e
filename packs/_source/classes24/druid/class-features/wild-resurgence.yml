@@ -10,19 +10,14 @@ system:
       can give yourself one use by expending a spell slot (no action
       required).</p><p>In addition, you can expend one use of Wild Shape (no
       action required) to give yourself a level 1 spell slot, but you can't do
-      so again until you finish a Long Rest.</p><section class="secret"
-      id="secret-b0eq9t1Lkei4tN53"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Regain Wild Shape</strong> activity consumes a spell slot and
-      grants you another use of Wild Shape.</p><p>The <strong>Regain Spell
-      Slot</strong> activity will consume a use of Wild Shape and grant you a
-      level 1 spell slot.</p></section>
+      so again until you finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -34,6 +29,7 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
@@ -44,7 +40,7 @@ system:
       activation:
         type: ''
         value: null
-        condition: Once on each of your turns
+        condition: ''
         override: false
       consumption:
         targets:
@@ -54,7 +50,7 @@ system:
             scaling: {}
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            target: feat:wild-shape
             scaling: {}
           - type: spellSlots
             value: '-1'
@@ -66,12 +62,17 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can expend one use of Wild Shape (no action required) to give
+          yourself a level 1 spell slot, but you can't do so again until you
+          finish a Long Rest.</p>
       duration:
         value: ''
         units: inst
         special: ''
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         units: self
@@ -85,7 +86,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -105,6 +107,16 @@ system:
       sort: 0
       name: Regain Spell Slot
       img: systems/dnd5e/icons/svg/trait.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
     7nAgPNN2dth7SR0D:
       type: utility
       activation:
@@ -116,7 +128,7 @@ system:
         targets:
           - type: itemUses
             value: '-1'
-            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            target: feat:wild-shape
             scaling:
               mode: ''
           - type: spellSlots
@@ -131,12 +143,17 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>Once on each of your turns, if you have no uses of Wild Shape left,
+          you can give yourself one use by expending a spell slot (no action
+          required).</p>
       duration:
         value: ''
         units: inst
         special: ''
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         units: self
@@ -150,7 +167,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -171,21 +189,29 @@ system:
       name: Regain Wild Shape
       _id: 7nAgPNN2dth7SR0D
       img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: wild-resurgence
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1740680082812
+  systemVersion: 6.1.0
+  createdTime: 1793647058189
+  modifiedTime: 1793647058189
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1000000

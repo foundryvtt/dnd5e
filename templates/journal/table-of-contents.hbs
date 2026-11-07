@@ -4,8 +4,8 @@
     {{#unless flags.dnd5e.tocHidden}}
     <li class="{{#if (and showPages pages.length)}}child-pages{{/if}} {{#if entry}}special-entry{{/if}}">
         <a class="journal-entry-page-link" data-action="activateEntry"
-           {{~#if entry}} data-document-id="{{ id }}" data-entry-id="{{ id }}"
-           {{~else}} data-page-id="{{ id }}" {{#if entryId}}data-entry-id="{{ entryId }}"{{/if}}{{/if}}>{{ name }}</a>
+           {{~#if entry}} data-document-id="{{ id }}" data-entry-id="{{ id }}" data-entry-uuid="{{ uuid }}"
+           {{~else}} data-page-id="{{ id }}" {{#if entryId}}data-entry-id="{{ entryId }}" data-entry-uuid="{{ entryUuid }}"{{/if}}{{/if}}>{{ name }}</a>
         {{#if (and showPages pages.length)}}{{> "pages" }}{{/if}}
     </li>
     {{/unless}}
@@ -28,7 +28,7 @@
         </header>
         <section>
             {{#each chapters}}
-            <div class="chapter" data-document-id="{{ id }}" data-entry-id="{{ id }}">
+            <div class="chapter" data-document-id="{{ id }}" data-entry-id="{{ id }}" data-entry-uuid="{{ uuid }}">
                 <h3><a class="journal-entry-link" data-action="activateEntry">{{ name }}</a></h3>
                 {{#if pages.length}}{{> "pages" }}{{/if}}
             </div>

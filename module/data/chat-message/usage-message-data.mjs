@@ -38,6 +38,7 @@ export default class UsageMessageData extends ItemMessageData {
         icon: new StringField(),
         label: new SchemaField({
           hidden: new StringField(),
+          short: new StringField(),
           value: new StringField()
         }),
         visibility: new StringField({ choices: ["all", "creator", "gm"], initial: "creator", required: true })
@@ -203,7 +204,8 @@ export default class UsageMessageData extends ItemMessageData {
     return this._prepareButtons()
       .filter(b => b.canGroup && !b.hidden && (b.action === forwardAction))
       .map(({ icon, index, label }) => ({
-        icon, label,
+        icon,
+        label: label.value,
         onClick: (event, group) => {
           group.dataset.index = index;
           return activity.onChatAction(event, group, this.parent);
@@ -268,10 +270,14 @@ export default class UsageMessageData extends ItemMessageData {
         hidden = (visibility === "gm") && !game.user.isGM;
         hidden ||= !isCreator || activity?.shouldHideChatButton(button, this.parent);
       }
-      const label = this.parent.shouldDisplayChallenge
+      const value = this.parent.shouldDisplayChallenge
         ? button.label.value
         : (button.label.hidden || button.label.value);
-      return { ...button, hidden, index, label, dataset: { ...button.dataset, /** @deprecated */ action } };
+      return {
+        ...button, hidden, index,
+        dataset: { ...button.dataset, /** @deprecated */ action },
+        label: { value, short: button.label.short }
+      };
     });
   }
 
@@ -283,24 +289,35 @@ export default class UsageMessageData extends ItemMessageData {
    * @protected
    */
   _prepareButtonGroups(context) {
-    context.buttonGroups = context.buttons.reduce((obj, button) => {
+    context.buttonGroups = {};
+    context.additionalButtons = {};
+    const genericActions = ["placeTemplate", "consumeResource", "refundResource"];
+    for ( const button of context.buttons ) {
       const { action, canGroup, hidden, icon, label } = button;
-      if ( hidden ) return obj;
-      obj[action] ??= { icon, entries: [] };
+      if ( hidden ) continue;
+      const group = context[genericActions.includes(action) ? "additionalButtons" : "buttonGroups"];
+      group[action] ??= { icon, entries: [] };
       if ( canGroup ) {
         context.rows[action] ??= { icon, entries: [], label: `DND5E.CHATMESSAGE.Row.${action}` };
-        context.rows[action].entries.push({ label });
-        if ( obj[action].entries.length ) {
-          obj[action].entries[0].singleton = false;
-          return obj;
+        context.rows[action].entries.push({ label: label.value });
+        if ( group[action].entries.length ) {
+          group[action].entries[0].singleton = false;
+          continue;
         }
-        obj[action].entries.push({ ...button, label: `DND5E.CHATMESSAGE.Button.${action}`, singleton: true });
+        group[action].entries.push({
+          ...button,
+          label: {
+            short: `DND5E.CHATMESSAGE.Button.${action}.Short`,
+            value: `DND5E.CHATMESSAGE.Button.${action}.Full`
+          },
+          singleton: true
+        });
       } else {
-        obj[action].entries.push(button);
+        group[action].entries.push(button);
       }
-      return obj;
-    }, {});
+    }
     if ( foundry.utils.isEmpty(context.buttonGroups) ) delete context.buttonGroups;
+    if ( foundry.utils.isEmpty(context.additionalButtons) ) delete context.additionalButtons;
   }
 
   /* -------------------------------------------- */

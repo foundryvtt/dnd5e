@@ -59,7 +59,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     return [{
       action: "planTeleport",
       icon: "fa-solid fa-person-walking-dashed-line-arrow-right",
-      label: { value: "DND5E.TELEPORT.Action.Teleport" }
+      label: { short: "DND5E.TELEPORT.Action.Teleport", value: "DND5E.TELEPORT.Action.Teleport" }
     }].concat(super._usageChatButtons(message));
   }
 
@@ -153,7 +153,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     const sceneUnits = canvas.grid?.units;
     if ( !(this.teleport.units in CONFIG.DND5E.movementUnits) || !(this.teleport.value > 0)
       || !(sceneUnits in CONFIG.DND5E.movementUnits) ) return null;
-    return convertLength(this.teleport.value, this.teleport.units, sceneUnits);
+    return convertLength(this.teleport.value, this.teleport.units, { to: sceneUnits, legacy: false }).value;
   }
 
   /* -------------------------------------------- */

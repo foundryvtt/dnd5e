@@ -14,8 +14,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -25,25 +25,80 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
-  activities: {}
+  requirements: Wizard
+  activities:
+    H9IV5ewIosO3hRsh:
+      type: utility
+      name: Memorize
+      _id: H9IV5ewIosO3hRsh
+      img: ''
+      sort: 0
+      activation:
+        type: shortRest
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
   enchant: {}
   identifier: memorize-spell
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866273692
-  modifiedTime: 1745256769083
+  systemVersion: 6.1.0
+  createdTime: 1793666237313
+  modifiedTime: 1793666237313
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

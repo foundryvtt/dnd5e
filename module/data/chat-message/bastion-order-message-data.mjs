@@ -149,12 +149,12 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
       buttons.pay = { entries: [{
         dataset: { action: "pay", method: "automatic" },
         icon: "fa-solid fa-coins",
-        label: "DND5E.FACILITY.Costs.Automatic"
+        label: { value: "DND5E.FACILITY.Costs.Automatic" }
       }] };
       buttons.mark = { entries: [{
         dataset: { action: "pay", method: "manual" },
         icon: "fa-solid fa-clipboard-check",
-        label: "DND5E.FACILITY.Costs.Manual"
+        label: { value: "DND5E.FACILITY.Costs.Manual" }
       }] };
     }
 

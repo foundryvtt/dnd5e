@@ -7,29 +7,22 @@ system:
   description:
     value: >-
       <p>The vitality of nature constantly blooms within you, granting you the
-      following benefits.</p><p><strong>Evergreen Wild Shape.</strong> Whenever
-      you roll Initiative and have no uses of Wild Shape left, you regain one
-      expended use of it.</p><p><strong>Nature Magician.</strong> You can
-      convert uses of Wild Shape into a spell slot (no action required). Choose
-      a number of your unexpended uses of Wild Shape and convert them into a
-      single spell slot, with each use contributing 2 spell levels. For example,
-      if you convert two uses of Wild Shape, you produce a level 4 spell slot.
-      Once you use this benefit, you can't do so again until you finish a Long
-      Rest.</p><p><strong>Longevity.</strong> The primal magic that you wield
-      causes you to age more slowly. For every ten years that pass, your body
-      ages only one year.</p><section class="secret"
-      id="secret-qKoW7fFZUwKC0IOG"><p><strong>Foundry Note</strong></p><p>This
-      feature does not automate regaining a use of Wild Shape when rolling
-      initiative but it does include an activity which will restore a use when
-      activated.</p><p>The <strong>Nature Magician</strong> activity can be used
-      to convert Wild Shape uses to spell slots.</p></section>
+      following
+      benefits.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbdrdArchdruid0.Activity.xqLZdQ13RBZkeACB
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbdrdArchdruid0.Activity.dnd5eactivity000
+      caption=false cite=false
+      nameStyle=inline]</p><p><em><strong>Longevity.</strong></em> The primal
+      magic that you wield causes you to age more slowly. For every ten years
+      that pass, your body ages only one year.</p>
     chat: ''
   source:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -41,6 +34,7 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
@@ -62,9 +56,10 @@ system:
               mode: ''
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            target: feat:wild-shape
             scaling:
               mode: amount
+              formula: ''
           - type: spellSlots
             value: '-1'
             target: '2'
@@ -77,12 +72,20 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can convert uses of Wild Shape into a spell slot (no action
+          required). Choose a number of your unexpended uses of Wild Shape and
+          convert them into a single spell slot, with each use contributing 2
+          spell levels. For example, if you convert two uses of Wild Shape, you
+          produce a level 4 spell slot. Once you use this benefit, you can't do
+          so again until you finish a Long Rest.</p>
       duration:
         value: ''
         units: inst
         special: ''
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         units: self
@@ -96,7 +99,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -113,14 +117,25 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 200000
       name: Nature Magician
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
     xqLZdQ13RBZkeACB:
       type: utility
-      name: Recharge on Initiative
+      name: Evergreen Wild Shape
       _id: xqLZdQ13RBZkeACB
       activation:
-        type: ''
+        type: encounter
         value: null
         override: false
         condition: ''
@@ -128,17 +143,21 @@ system:
         targets:
           - type: itemUses
             value: '-1'
-            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            target: feat:wild-shape
             scaling: {}
         scaling:
           allowed: false
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>Whenever you roll Initiative and have no uses of Wild Shape left,
+          you regain one expended use of it.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -149,6 +168,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -160,28 +180,36 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       roll:
         prompt: false
         visible: false
         name: ''
         formula: ''
-      img: systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: archdruid
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1740680082199
+  systemVersion: 6.1.0
+  createdTime: 1793647058189
+  modifiedTime: 1793647058189
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

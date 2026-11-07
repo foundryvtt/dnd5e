@@ -425,17 +425,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
   async preUpdateActivities(changed, options, user) {
     if ( !foundry.utils.hasProperty(changed, "system.activities") ) return;
 
-    // Track changes to rider activities & effects and store in item flags
-    const cloneChanges = foundry.utils.deepClone(changed);
-    const riders = this.parent.clone(cloneChanges).system.activities.reduce((riders, a) => {
-      if ( a.metadata.hasRiders ) a.effects.forEach(e => {
-        e.riders.activity.forEach(activity => riders.activity.add(activity));
-        e.riders.effect.forEach(effect => riders.effect.add(effect));
-      });
-      return riders;
-    }, { activity: new Set(), effect: new Set() });
-    this.parent.updateRiderFlags(riders, changed);
-
+    this.parent.updateRiderFlags(changed);
     if ( !this.parent.isEmbedded ) return;
 
     // Track changes to cached spells on cast activities

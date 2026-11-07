@@ -5,14 +5,16 @@ folder: ymTkGscp5QEOwDlv
 img: icons/skills/movement/feet-winged-sandals-tan.webp
 system:
   description:
-    value: "<p>When an attacker that you can see hits you with an attack roll, you can take a Reaction to halve the attack's damage against you (round down).</p><section class=\"secret\" id=\"secret-fLqTNntX7T0swRsu\"><p><strong>Foundry Note</strong></p><p>With your token selected you can either right click on the damage roll's chat card and select <span class=\"reference\"><em class=\"fas fa-user-shield\">\_</em>Apply Half Damage</span> or click the \"1/2\" button and then the <span class=\"reference\"><em class=\"fa-solid fa-reply-all\">\_</em>Apply</span> button.</p></section>"
+    value: >-
+      <p>When an attacker that you can see hits you with an attack roll, you can
+      take a Reaction to halve the attack's damage against you (round down).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -22,13 +24,14 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Rogue
   activities:
     7krJIcGhZl9RqzYl:
       type: utility
-      name: Uncanny Dodge
+      name: Dodge
       _id: 7krJIcGhZl9RqzYl
       activation:
         type: reaction
@@ -42,10 +45,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -56,6 +61,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -72,21 +78,30 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: uncanny-dodge
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764649
+  systemVersion: 6.1.0
+  createdTime: 1793387103833
+  modifiedTime: 1793387103833
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

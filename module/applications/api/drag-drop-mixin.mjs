@@ -15,7 +15,7 @@ export default function DragDropApplicationMixin(Base) {
     /** @override */
     _onDragOver(event) {
       const data = DragDrop5e.getPayload(event);
-      DragDrop5e.dropEffect = event.dataTransfer.dropEffect = (foundry.utils.getType(data) === "Object")
+      DragDrop5e.dropEffect = event.dataTransfer.dropEffect = foundry.utils.isPlainObject(data)
         ? this._dropBehavior(event, data) : "copy";
     }
 
@@ -31,14 +31,10 @@ export default function DragDropApplicationMixin(Base) {
     _dropBehavior(event, data) {
       data ??= DragDrop5e.getPayload(event);
       const allowed = this._allowedDropBehaviors(event, data);
-      let behavior = DragDrop5e.dropEffect ?? event.dataTransfer?.dropEffect;
-
-      if ( event.type === "dragover" ) {
-        if ( areKeysPressed(event, "dragMove") ) behavior = "move";
-        else if ( areKeysPressed(event, "dragCopy") ) behavior = "copy";
-        else behavior = this._defaultDropBehavior(event, data);
-      }
-
+      let behavior;
+      if ( areKeysPressed(event, "dragMove") ) behavior = "move";
+      else if ( areKeysPressed(event, "dragCopy") ) behavior = "copy";
+      else behavior = foundry.utils.isPlainObject(data) ? this._defaultDropBehavior(event, data) : "copy";
       if ( (behavior !== "none") && !allowed.has(behavior) ) return allowed.first() ?? "none";
       return behavior || "copy";
     }

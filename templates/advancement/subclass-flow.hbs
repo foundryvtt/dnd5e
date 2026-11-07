@@ -5,10 +5,12 @@
     <div class="name-stacked">
         <div class="title">{{ subclass.name }}</div>
     </div>
+    {{#if canDelete}}
     <button type="button" class="unbutton control-button item-control" data-action="deleteItem"
             data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
         <i class="fas fa-trash" inert></i>
     </button>
+    {{/if}}
     {{else}}
     {{ localize "DND5E.ADVANCEMENT.Subclass.Action.Select" }}
     {{/if}}

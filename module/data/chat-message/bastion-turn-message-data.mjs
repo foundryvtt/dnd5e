@@ -127,7 +127,7 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
       gold: { entries: [{
         action: "claimGold",
         icon: "fa-solid fa-coins",
-        label: "DND5E.Bastion.Gold.Claim"
+        label: { value: "DND5E.Bastion.Gold.Claim" }
       }] }
     };
 

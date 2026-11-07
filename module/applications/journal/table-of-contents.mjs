@@ -1,22 +1,18 @@
 import CompendiumTOCConfig from "./config/compendium-toc-config.mjs";
+import TableOfContentsMixin from "./table-of-contents-mixin.mjs";
+
+const { Compendium } = foundry.applications.sidebar.apps;
 
 /**
  * Compendium that renders pages as a table of contents.
  */
-export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
+export default class TableOfContentsCompendium extends TableOfContentsMixin(Compendium) {
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      activateEntry: this.prototype._onClickLink,
       configureTableOfContents: TableOfContentsCompendium.#onConfigureTableOfContents
     },
-    classes: ["table-of-contents"],
-    position: {
-      width: 800,
-      height: 950
-    },
     window: {
-      contentTag: "article",
       controls: [
         {
           action: "configureTableOfContents",
@@ -24,44 +20,9 @@ export default class TableOfContentsCompendium extends foundry.applications.side
           label: "DND5E.TABLEOFCONTENTS.Action.Configure",
           visible: TableOfContentsCompendium.#canConfigureTableOfContents
         }
-      ],
-      resizable: true
+      ]
     }
   };
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static PARTS = {
-    article: {
-      root: true,
-      template: "systems/dnd5e/templates/journal/table-of-contents.hbs"
-    }
-  };
-
-  /* -------------------------------------------- */
-
-  /**
-   * Position of pages based on type.
-   * @enum {number}
-   */
-  static TYPES = {
-    chapter: 0,
-    appendix: 100
-  };
-
-  /* -------------------------------------------- */
-
-  /**
-   * Options allowed for entry types.
-   * @type {FormSelectOption[]}
-   */
-  static TYPE_OPTIONS = [
-    { value: "chapter", label: "DND5E.TABLEOFCONTENTS.Type.Chapter" },
-    { value: "appendix", label: "DND5E.TABLEOFCONTENTS.Type.Appendix" },
-    { value: "header", label: "DND5E.TABLEOFCONTENTS.Type.Header" },
-    { value: "special", label: "DND5E.TABLEOFCONTENTS.Type.Special" }
-  ];
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -82,6 +43,13 @@ export default class TableOfContentsCompendium extends foundry.applications.side
 
   /* -------------------------------------------- */
 
+  /** @override */
+  async _getEntries() {
+    return this.collection.getDocuments();
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
@@ -97,75 +65,6 @@ export default class TableOfContentsCompendium extends foundry.applications.side
         drop: this._onDrop.bind(this)
       }
     }).bind(this.element);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    const documents = await this.collection.getDocuments();
-
-    context.chapters = [];
-    const specialEntries = [];
-    for ( const entry of documents ) {
-      const flags = entry.flags?.dnd5e;
-      if ( !flags ) continue;
-      const keys = Object.keys(flags);
-      if ( flags.tocHidden || !keys.length || ((keys.length === 1) && (keys[0] === "navigation")) ) continue;
-      const type = flags.type ?? "chapter";
-
-      if ( type === "header" ) {
-        const page = entry.pages.contents[0];
-        context.header = {
-          title: flags.title ?? page?.name,
-          content: page?.text.content
-        };
-        continue;
-      }
-
-      const data = {
-        type, flags,
-        id: entry.id,
-        name: flags.title ?? entry.name,
-        pages: Array.from(entry.pages).map(({ flags, id, name, sort }) => ({
-          id, sort, flags,
-          name: flags.dnd5e?.title ?? name,
-          entryId: entry.id
-        }))
-      };
-
-      if ( type === "special" ) {
-        data.showPages = flags.showPages ?? !flags.append;
-        specialEntries.push(data);
-      } else {
-        data.order = (this.constructor.TYPES[type] ?? 200) + (flags.position ?? 0);
-        data.showPages = (flags.showPages !== false) && ((flags.showPages === true) || (type === "chapter"));
-        context.chapters.push(data);
-      }
-    }
-
-    context.chapters.sort((lhs, rhs) => lhs.order - rhs.order);
-    for ( const entry of specialEntries ) {
-      const append = entry.flags.append;
-      const order = entry.flags.order;
-      if ( append && (append <= context.chapters.length) ) {
-        context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
-      } else {
-        context.chapters.push(entry);
-      }
-    }
-
-    for ( const chapter of context.chapters ) {
-      chapter.pages = chapter.pages
-        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
-        .sort((lhs, rhs) => lhs.sort - rhs.sort);
-      for ( const page of chapter.pages ) {
-        if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
-      }
-    }
-
-    return context;
   }
 
   /* -------------------------------------------- */
@@ -200,23 +99,6 @@ export default class TableOfContentsCompendium extends foundry.applications.side
    */
   static async #onConfigureTableOfContents(event, target) {
     new CompendiumTOCConfig({ compendium: this.collection }).render({ force: true });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicking a link to a journal entry or page.
-   * @param {PointerEvent} event  The triggering click event.
-   * @param {HTMLElement} target  The action target.
-   * @protected
-   */
-  async _onClickLink(event, target) {
-    const entryId = target.closest("[data-entry-id]")?.dataset.entryId;
-    if ( !entryId ) return;
-    const entry = await this.collection.getDocument(entryId);
-    entry?.sheet.render(true, {
-      pageId: target.closest("[data-page-id]")?.dataset.pageId
-    });
   }
 
   /* -------------------------------------------- */

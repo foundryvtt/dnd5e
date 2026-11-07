@@ -38,13 +38,11 @@ export class DetectionModeBlindsight extends foundry.canvas.perception.Detection
 
   /** @override */
   _testLOS(visionSource, mode, target, test) {
-    return !CONFIG.Canvas.polygonBackends.sight.testCollision(
-      { x: visionSource.x, y: visionSource.y },
-      test.point,
+    return !this.constructor._testCollision(
+      visionSource,
+      test,
       {
         type: "sight",
-        mode: "any",
-        source: visionSource,
         // Blindsight is restricted by total cover and therefore cannot see
         // through windows. So we do not want blindsight to see through
         // a window as we get close to it. That's why we ignore thresholds.

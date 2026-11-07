@@ -11,24 +11,23 @@ system:
       finish a Long Rest before you do so again.</p><p>In addition, when you
       finish a Short Rest, you can choose expended spell slots to recover. The
       spell slots can have a combined level that is equal to or less than half
-      your Druid level (round up, currently [[lookup @classes.druid.levels]]),
-      and none of them can be level 6+. For example, if you're a level 6 Druid,
-      you can recover up to three levels' worth of spell slots. You can recover
-      a level 3 spell slot, a level 2 and a level 1 spell slot, or three level 1
-      spell slots. Once you recover spell slots with this feature, you can't do
-      so again until you finish a Long Rest.</p><section class="secret"
-      id="secret-xLFXthYlJ7wwFlSS"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Cast Spell</strong> activity can be used to track its single free
-      use.</p><p>The <strong>Recover Spell Slot</strong> activity does not
-      automate the restoration of spell slots but can be used for tracking its
-      own single use.</p></section>
+      your Druid level (round up), and none of them can be level 6+. For
+      example, if you're a level 6 Druid, you can recover up to three levels'
+      worth of spell slots. You can recover a level 3 spell slot, a level 2 and
+      a level 1 spell slot, or three level 1 spell slots. Once you recover spell
+      slots with this feature, you can't do so again until you finish a Long
+      Rest.</p><section id="secret-xLFXthYlJ7wwFlSS"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Recover
+      Spell Slot</strong> activity does not automate the restoration of spell
+      slots but can be used for tracking its own single use.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     recovery:
@@ -40,8 +39,10 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Circle of Land
   activities:
     dnd5eactivity000:
@@ -63,11 +64,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can cast one of the level 1+ spells that you have prepared from
+          your Circle Spells feature without expending a spell slot, and you
+          must finish a Long Rest before you do so again.</p>
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -82,7 +88,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -103,15 +110,26 @@ system:
         max: '1'
       sort: 0
       name: Cast Spell
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
     u0UF6WePUutyp6e6:
       type: utility
       name: Recover Spell Slots
       _id: u0UF6WePUutyp6e6
       activation:
-        type: ''
+        type: shortRest
         value: null
         override: false
-        condition: When you finish a Short Rest
+        condition: ''
       consumption:
         targets:
           - type: activityUses
@@ -123,10 +141,21 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>When you finish a Short Rest, you can choose expended spell slots
+          to recover. The spell slots can have a combined level that is equal to
+          or less than half your Druid level (round up, currently [[lookup
+          @classes.druid.levels]]), and none of them can be level 6+. For
+          example, if you're a level 6 Druid, you can recover up to three
+          levels' worth of spell slots. You can recover a level 3 spell slot, a
+          level 2 and a level 1 spell slot, or three level 1 spell slots. Once
+          you recover spell slots with this feature, you can't do so again until
+          you finish a Long Rest.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -137,6 +166,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -156,21 +186,30 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
   enchant: {}
   identifier: natural-recovery
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866583501
-  modifiedTime: 1745256761226
+  systemVersion: 6.1.0
+  createdTime: 1793647063851
+  modifiedTime: 1793647063851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

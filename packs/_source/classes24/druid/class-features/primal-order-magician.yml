@@ -9,19 +9,14 @@ system:
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU#cantrip]{Druid
       spell list}. In addition, your mystical connection to nature gives you a
       bonus to your Intelligence (Arcana or Nature) checks. The bonus equals
-      your Wisdom modifier (minimum bonus of +1, currently [[lookup
-      @abilities.wis.mod]]).</p><section class="secret"
-      id="secret-adiIB9wCX5zZdZ9F"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which automates the increase to your
-      known cantrips and the bonus to your Arcane and Nature
-      checks.</p></section>
+      your Wisdom modifier (minimum bonus of +1).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -31,22 +26,27 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: primal-order-magician
+  advancement: {}
+  crewed: false
 effects:
-  - name: Magician
-    origin: Item.phbPrimalOrderMa
+  - name: Magician Checks & Cantrip
+    origin: null
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/magic/nature/leaf-hand-green.webp
     _id: IqjrvuQ2ORv65hxB
     type: base
@@ -57,32 +57,51 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: ROAaa6PRPzYP0amw
-        - key: system.skills.arc.bonuses.check
-          value: (max(1,@abilities.wis.mod))
+          _id: UYE3E5CCxDZx7mr5
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.arc.roll.bonus
+          value: max(1, @abilities.wis.mod)
           priority: null
           type: add
           phase: initial
-          _id: aHCG0XFzOWjTQ2PI
-        - key: system.skills.nat.bonuses.check
-          value: (max(1,@abilities.wis.mod))
+          _id: XeZnMHylW05siYZo
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.nat.roll.bonus
+          value: max(1, @abilities.wis.mod)
           priority: null
           type: add
           phase: initial
-          _id: PxjoSQM4D78bD1En
-    description: ''
+          _id: FZVGKxvO4CyUjcMj
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Item.phbPrimalOrderMa
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    description: >-
+      <p>Your mystical connection to nature gives you a bonus to your
+      Intelligence (Arcana or Nature) checks. The bonus equals your Wisdom
+      modifier (minimum bonus of +1).</p>
     tint: '#ffffff'
     transfer: true
     statuses: []
     sort: 0
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.zxFq5nqzLiznWTeu
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544100960
-      modifiedTime: 1783544100960
+      systemVersion: 6.1.0
+      createdTime: 1793647058190
+      modifiedTime: 1793647058190
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -90,18 +109,14 @@ effects:
     folder: null
     _key: '!items.effects!phbPrimalOrderMa.IqjrvuQ2ORv65hxB'
 folder: EXYmwRGoNyMbByN1
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1783544100960
+  systemVersion: 6.1.0
+  createdTime: 1793647058190
+  modifiedTime: 1793647058190
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

@@ -21,10 +21,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: QElum2XYhYUYQ5l2
           level:
@@ -35,6 +37,7 @@ system:
               - UTEfakL3rBtTIu1K
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -44,6 +47,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -55,7 +59,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -63,6 +67,14 @@ system:
           - martialM
         properties: []
         type: weapon
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     UTEfakL3rBtTIu1K:
       type: attack
       name: Spellcasting Attack
@@ -79,10 +91,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -93,6 +107,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -119,6 +134,13 @@ system:
         parts: []
       img: systems/dnd5e/icons/svg/properties/magical.svg
       _id: UTEfakL3rBtTIu1K
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -141,19 +163,23 @@ system:
   source:
     rules: '2024'
     custom: ''
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: pact-of-the-blade
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Pact Weapon
@@ -163,59 +189,64 @@ effects:
     system:
       changes:
         - key: name
-          value: ', Pact Weapon'
+          value: '{} (Pact Weapon)'
           priority: null
-          type: add
+          type: override
           phase: initial
-          _id: y94nZgqUe7Yy9geT
+          _id: quNTqo9NtHRqTU1C
+          conditions: '{}'
+          replacement: ''
         - key: system.proficient
           value: 1
           priority: null
           type: override
           phase: initial
-          _id: X5sk4LXtZX779wDd
+          _id: BYtlwtQNkPFafHRU
+          conditions: '{}'
+          replacement: ''
         - key: system.properties
           value: foc
           priority: null
           type: add
           phase: initial
-          _id: iU6EUPSr8U4EA1fP
-        - key: system.damage.base.types
+          _id: B0oZTr61sMVBrG1g
+          conditions: '{}'
+          replacement: ''
+        - key: system.damage.types
           value: necrotic
           priority: null
           type: add
           phase: initial
-          _id: eWzOUfbK9gxtOOgq
-        - key: system.damage.base.types
+          _id: KxYz80m2i8zeO5Sd
+          conditions: '{}'
+          replacement: ''
+        - key: system.damage.types
           value: psychic
           priority: null
           type: add
           phase: initial
-          _id: 0qgzJL2k4P8exBWM
-        - key: system.damage.base.types
+          _id: fm4BZlpYaFfyWh9C
+          conditions: '{}'
+          replacement: ''
+        - key: system.damage.types
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: aaqOjsd1b6V8asuQ
-        - key: system.damage.versatile.types
-          value: necrotic
-          priority: null
-          type: add
-          phase: initial
-          _id: Psluz2LyOW7mzZe6
-        - key: system.damage.versatile.types
-          value: psychic
-          priority: null
-          type: add
-          phase: initial
-          _id: WFN1Sfc4ID6yXFZj
-        - key: system.damage.versatile.types
-          value: radiant
-          priority: null
-          type: add
-          phase: initial
-          _id: HJI3JBaaU5eLBE7S
+          _id: olxwiOykhfclQ4Pi
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: true
+      rider:
+        activities: []
+        effects: []
+        items: []
     duration:
       value: null
       units: seconds
@@ -224,18 +255,18 @@ effects:
     description: ''
     origin: null
     tint: '#ffffff'
-    transfer: true
+    transfer: false
     statuses: []
     sort: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102422
-      modifiedTime: 1783544102422
+      systemVersion: 6.1.0
+      createdTime: 1793665214343
+      modifiedTime: 1793665214343
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -248,14 +279,13 @@ flags:
     riders:
       activity:
         - UTEfakL3rBtTIu1K
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102422
+  systemVersion: 6.1.0
+  createdTime: 1793665214343
+  modifiedTime: 1793665214343
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

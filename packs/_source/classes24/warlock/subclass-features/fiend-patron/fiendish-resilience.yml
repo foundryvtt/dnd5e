@@ -18,8 +18,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -29,16 +29,19 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Fiend Patron
   activities: {}
   enchant: {}
   identifier: fiendish-resilience
+  advancement: {}
+  crewed: false
 effects:
   - name: 'Fiendish Resilience: Acid'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     _id: JdULzod722VVpgZx
     type: base
@@ -49,7 +52,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: z415mxiWjxWG4tXN
+          _id: k1KV4msaD1mNVNBW
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -62,13 +77,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.jZGIulxQFLY7uRDe
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -77,7 +92,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.JdULzod722VVpgZx'
   - name: 'Fiendish Resilience: Bludgeoning'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -87,7 +102,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: iejyHQc5YYkE2Rgr
+          _id: aEtbEavdtgaGrXb7
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -100,13 +127,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.HybTLXiZgGa3t61e
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: JjA9Jda2qeK6Tpxk
@@ -116,7 +143,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.JjA9Jda2qeK6Tpxk'
   - name: 'Fiendish Resilience: Cold'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -126,7 +153,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: QHHWssstkd3WkB99
+          _id: KjJoDO6KGhAb36sx
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -139,13 +178,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.6z5fLOHiOiHHcuac
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: rhUc7IVz5XTphPRp
@@ -155,7 +194,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.rhUc7IVz5XTphPRp'
   - name: 'Fiendish Resilience: Fire'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -165,7 +204,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: YLsts1KjYvMLWiaN
+          _id: F0IASxhIuZwUGM52
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -178,13 +229,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.DW6JJBsbBtR1Z75R
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: GvzW5wzRBfjFqye7
@@ -194,7 +245,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.GvzW5wzRBfjFqye7'
   - name: 'Fiendish Resilience: Lightning'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -204,7 +255,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 30KEmQfya7mwPvGR
+          _id: 30cxe8K9p0pSeAFx
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -217,13 +280,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.5ZizSWuVy8cy77K1
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: UZ00jXoUKfevQhxQ
@@ -233,7 +296,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.UZ00jXoUKfevQhxQ'
   - name: 'Fiendish Resilience: Necrotic'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -243,7 +306,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: pgMs36HB9d6S0MWh
+          _id: FPxMCyhg5dAwsrUB
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -256,13 +331,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.fcFLysPw4llFTQsg
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: iMBfFAs7UwqdgSI5
@@ -272,7 +347,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.iMBfFAs7UwqdgSI5'
   - name: 'Fiendish Resilience: Piercing'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -282,7 +357,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: ozDfAmpMjgqm0rQS
+          _id: aOTLcT6Wb5Uw9HPv
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -295,13 +382,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.8Uf0Dw8A3l7CI8Fd
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: G0Ed5szAi1vUFCf7
@@ -311,7 +398,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.G0Ed5szAi1vUFCf7'
   - name: 'Fiendish Resilience: Poison'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -321,7 +408,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Hdn0bOTRRdUnJZ5i
+          _id: pe7gbn9pAgxbbrHi
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -334,13 +433,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.PpWYucbhugNEIBJ7
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 3Uw7a9ldJtxHam1x
@@ -350,7 +449,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.3Uw7a9ldJtxHam1x'
   - name: 'Fiendish Resilience: Psychic'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -360,7 +459,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: j0n4A6nz7jj3J7HL
+          _id: PGTb4OWv8FnZ5sEy
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -373,13 +484,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.BbvC3rh4RDmi06XI
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: loTaIaBwUsMSzpdW
@@ -389,7 +500,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.loTaIaBwUsMSzpdW'
   - name: 'Fiendish Resilience: Radiant'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -399,7 +510,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: V39lgvx01qbPhTqh
+          _id: Kxtjv6EZ6jeBwkGZ
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -412,13 +535,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.IFg9ae4ZyhMDPa3m
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: F8szMcfuxVxXJ7sf
@@ -428,7 +551,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.F8szMcfuxVxXJ7sf'
   - name: 'Fiendish Resilience: Slashing'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -438,7 +561,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 4LLUDWhx6LN3hVeR
+          _id: fpjcLvqf2yq3HGve
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -451,13 +586,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.30KWef6vBjF8RChr
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 7oATkYAfEZzx6F5P
@@ -467,7 +602,7 @@ effects:
     _key: '!items.effects!phbwlkFiendishRe.7oATkYAfEZzx6F5P'
   - name: 'Fiendish Resilience: Thunder'
     img: icons/magic/defensive/armor-stone-skin.webp
-    origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+    origin: null
     transfer: true
     type: base
     system:
@@ -477,7 +612,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Cs8vZTbrBXicD6Ib
+          _id: BBKXJOl5x4ABwnFa
+          conditions: '{}'
+          replacement: ''
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -490,13 +637,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.P7YUT6Y1NXGpo5Er
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      systemVersion: 6.1.0
+      createdTime: 1793665209035
+      modifiedTime: 1793665209035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 6BHlD7hrfHUEfum5
@@ -504,18 +651,14 @@ effects:
     showIcon: 1
     folder: null
     _key: '!items.effects!phbwlkFiendishRe.6BHlD7hrfHUEfum5'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866551616
-  modifiedTime: 1783544103803
+  systemVersion: 6.1.0
+  createdTime: 1793665209035
+  modifiedTime: 1793665209035
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

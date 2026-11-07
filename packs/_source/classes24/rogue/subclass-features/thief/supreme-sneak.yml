@@ -6,18 +6,16 @@ img: icons/magic/perception/shadow-stealth-eyes-purple.webp
 system:
   description:
     value: >-
-      <p>You gain the following Cunning Strike option.</p><p><strong>Stealth
-      Attack (Cost: 1d6).</strong> If you have the &amp;Reference[Hide] action's
-      Invisible condition, this attack doesn't end that condition on you if you
-      end the turn behind &amp;Reference[Three-Quarters Cover] or
-      &amp;Reference[Total Cover].</p>
+      <p>You gain the following Cunning Strike
+      option.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgeSupremeSne.Activity.3Icy3muzMz9BWS1C
+      caption=false cite=false nameStyle=inline]{Stealth Attack (Cost: 1d6)}</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -27,25 +25,87 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
-  activities: {}
+  requirements: Thief
+  activities:
+    3Icy3muzMz9BWS1C:
+      type: utility
+      name: Stealth Attack
+      _id: 3Icy3muzMz9BWS1C
+      img: ''
+      sort: 0
+      activation:
+        type: special
+        override: false
+        condition: When you deal Sneak Attack damage
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>If you have the &amp;Reference[Hide] action’s
+          &amp;Reference[Invisible apply=false] condition, this attack doesn’t
+          end that condition on you if you end the turn behind
+          &amp;Reference[Three-Quarters Cover] or &amp;Reference[Total
+          Cover].</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   enchant: {}
   identifier: supreme-sneak
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866560489
-  modifiedTime: 1745256764562
+  systemVersion: 6.1.0
+  createdTime: 1793387106482
+  modifiedTime: 1793387106482
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

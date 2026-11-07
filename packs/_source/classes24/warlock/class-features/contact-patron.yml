@@ -8,22 +8,20 @@ system:
     value: >-
       <p>In the past, you usually contacted your patron through intermediaries.
       Now you can communicate directly; you always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplContactOth]{Contact Other
-      Plane} spell prepared. With this feature, you can cast the spell without
-      expending a spell slot to contact your patron, and you automatically
-      succeed on the spell's saving throw.</p><p>Once you cast the spell with
-      this feature, you can't do so in this way again until you finish a Long
-      Rest.</p><section class="secret"
-      id="secret-ZobRIiK6iB3SlCis"><p><strong>Foundry Note</strong></p><p>The
-      spell is granted to you automatically at this level with a free
-      use.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplContactOth]{Contact
+      Other Plane} spell prepared. With this feature, you can cast the spell
+      without expending a spell slot to contact your patron, and you
+      automatically succeed on the spell's saving throw.</p><p>Once you cast the
+      spell with this feature, you can't do so in this way again until you
+      finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -33,25 +31,50 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warlock
   activities: {}
   enchant: {}
   identifier: contact-patron
+  advancement:
+    pNAJJ0MCkjHO2ZK1:
+      _id: pNAJJ0MCkjHO2ZK1
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplContactOth
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 9
+      hint: >-
+        <p>In the past, you usually contacted your patron through
+        intermediaries. Now you can communicate directly; you always have the
+        Contact Other Plane spell prepared.</p>
+      name: Contact Other Plane
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256765718
+  systemVersion: 6.1.0
+  createdTime: 1793665206277
+  modifiedTime: 1793665206277
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
