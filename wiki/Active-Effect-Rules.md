@@ -48,7 +48,7 @@ This also accepts deterministic formulas, so you can enter a minimum of `@prof` 
 
 ### Damage Application *(damage rolls only)*
 
-The four damage application rules affect how a damage roll is applied to a target from the chat. The three ignore rules allow ignoring resistance, immunity, or vulnerability to a specific damage type while the downgrade rules treats immunity to that damage type by the target as resistance and ignores existing resistance.
+The four damage application rules affect how a damage roll is applied to a target from the chat. The three ignore rules allow ignoring resistance, immunity, or vulnerability to a specific damage type while the downgrade rule treats immunity to that damage type by the target as resistance and ignores existing resistance.
 
 The value can be the key for any damage type or `ALL` to affect all damage types.
 

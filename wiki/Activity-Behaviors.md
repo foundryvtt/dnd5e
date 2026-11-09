@@ -4,7 +4,7 @@ Area of effect behaviors are a way to attach a subset of [scene region behaviors
 
 ### Antimagic
 
-The **Antimagic** behavior turns the region into an are of antimagic. Characters and NPCs within the region cannot cast spells, benefit from ongoing magical effects, or use magic items or features.
+The **Antimagic** behavior turns the region into an area of antimagic. Characters and NPCs within the region cannot cast spells, benefit from ongoing magical effects, or use magic items or features.
 
 ### Apply Active Effect
 
