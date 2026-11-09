@@ -50,6 +50,13 @@ system:
       _id: 2txtXcXiPUM87Yb7
       group: FIqxCvfdb4YPaDyl
       sort: 600000
+    - type: currency
+      count: 16
+      key: gp
+      requiresProficiency: false
+      _id: p3Vt9LwK6sDn4RfH
+      group: FIqxCvfdb4YPaDyl
+      sort: 700000
   identifier: criminal
   advancement:
     - _id: 8gFHAigaFboVUSgH
@@ -73,9 +80,9 @@ system:
       title: Background Ability Score Improvement
       hint: >-
         Your background allows you to increase your Dexterity, Constitution, and
-        Charisma scores; increase one of them by 2 and a different one by 1, or
-        increase all three by 1. None of these increases can raise a score above
-        20.
+        Intelligence scores; increase one of them by 2 and a different one by 1,
+        or increase all three by 1. None of these increases can raise a score
+        above 20.
     - _id: WJA48TLxfqlc3ygz
       type: ItemGrant
       configuration:

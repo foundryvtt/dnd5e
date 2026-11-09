@@ -16,7 +16,7 @@ system:
       Set (same as above),
       @UUID[Compendium.dnd5e.equipment24.Item.phbagHealersKit0]{Healer's Kit},
       @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver},
-      @UUID[Compendium.dnd5e.items.Item.SsAmWV6YBqeOFihT]{Traveler's Clothes},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagClothesTrav]{Traveler's Clothes},
       14 GP; or (B) 50
       GP</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixBackg.JournalEntryPage.phbbgSoldier0000
       inline classes="free-rules-embed"]</p>
@@ -77,11 +77,18 @@ system:
       sort: 700000
     - type: linked
       count: null
-      key: Compendium.dnd5e.items.Item.SsAmWV6YBqeOFihT
+      key: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
       requiresProficiency: false
       _id: pgQLCuuBfGxbMKTl
       group: tjUkY8Vnhv56vBSI
       sort: 800000
+    - type: currency
+      count: 14
+      key: gp
+      requiresProficiency: false
+      _id: r5Hs8WnD2kVc6MpQ
+      group: tjUkY8Vnhv56vBSI
+      sort: 900000
   identifier: soldier
   advancement:
     - _id: 5hLHlmqxzoAta0uf
