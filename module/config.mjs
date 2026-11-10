@@ -1967,6 +1967,9 @@ DND5E.itemProperties = {
   hvy: {
     label: "DND5E.ITEM.Property.Heavy"
   },
+  hydrating: {
+    label: "DND5E.ITEM.Property.Hydrating"
+  },
   lgt: {
     label: "DND5E.ITEM.Property.Light"
   },
@@ -1982,6 +1985,9 @@ DND5E.itemProperties = {
     label: "DND5E.ITEM.Property.Magical",
     icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
+  },
+  nutritious: {
+    label: "DND5E.ITEM.Property.Nutritious"
   },
   rch: {
     label: "DND5E.ITEM.Property.Reach"
@@ -2107,6 +2113,7 @@ DND5E.validProperties = {
 };
 
 DND5E.validProperties.consumable.ammo = new Set(["ret"]);
+DND5E.validProperties.consumable.food = new Set(["hydrating", "nutritious"]);
 
 /* -------------------------------------------- */
 
