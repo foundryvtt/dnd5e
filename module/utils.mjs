@@ -525,7 +525,7 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
   const item = model.item ?? model.parent;
   const property = _loc(label);
   try {
-    const formula = replaceFormulaData(value, rollData, { item, property });
+    const formula = replaceFormulaData(value, rollData, { item, property, warn: !model.isRider });
     const roll = new Roll(formula);
     foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
   } catch ( err ) {
@@ -551,13 +551,15 @@ const MISSING = Symbol("missingReferences");
  * @param {Actor5e} [options.actor]            Actor for which the value is being prepared.
  * @param {Item5e} [options.item]              Item for which the value is being prepared.
  * @param {string|null} [options.missing="0"]  Value to use when replacing missing references, or `null` to not replace.
+ * @param {boolean} [options.warn=true]        Add preparation warning to actor if references are missing.
  * @param {string} [options.property]          Name of the property to which this formula belongs.
  * @param {boolean} [options.recursive=true]   Recursively replace data references.
  * @returns {string}                 Formula with replaced data.
  */
 export function replaceFormulaData(formula, data, options={}) {
   let {
-    actor, item, missing="0", property, recursive=true, [DEPTH]: depth=0, [MISSING]: missingReferences=new Set()
+    actor, item, missing="0", property, recursive=true, warn=true,
+    [DEPTH]: depth=0, [MISSING]: missingReferences=new Set()
   } = options;
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
   formula = String(formula).replace(dataRgx, (match, term) => {
@@ -579,7 +581,7 @@ export function replaceFormulaData(formula, data, options={}) {
     }
   });
   actor ??= item?.parent;
-  if ( (depth < 1) && (missingReferences.size > 0) && actor && property ) {
+  if ( warn && (depth < 1) && (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
     const message = _loc("DND5E.FormulaMissingReferenceWarn", {
       property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
