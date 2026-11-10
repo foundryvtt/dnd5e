@@ -1,4 +1,4 @@
-import { formatNumber, linkForUuid } from "../../utils.mjs";
+import { bulkFromUuid, formatNumber, linkForUuid } from "../../utils.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -244,12 +244,6 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression?.cols?.length ) cols.push(...spellProgression.cols);
 
-    const prepareFeature = uuid => {
-      const index = fromUuidSync(uuid);
-      if ( index?.type !== "feat" ) return null;
-      return linkForUuid(uuid);
-    };
-
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
       let features = [];
@@ -260,11 +254,21 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
+            features.push(...advancement.configuration.items
+              .map(data => {
+                const index = fromUuidSync(data.uuid);
+                if ( index?.type !== "feat" ) return null;
+                return { link: linkForUuid(data.uuid), name: index.name, sort: data.sort };
+              })
+              .filter(_ => _)
+              .sort((lhs, rhs) => advancement.configuration.sorting === "m"
+                ? lhs.sort - rhs.sort
+                : lhs.name.localeCompare(rhs.name))
+              .map(f => f.link)
+            );
             break;
         }
       }
-      features = features.filter(_ => _);
 
       // Level & proficiency bonus
       const cells = [{class: "level", content: modernStyle ? level : level.ordinalString()}];
@@ -399,12 +403,6 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       { class: "features", span: 1 }
     ];
 
-    const prepareFeature = uuid => {
-      const index = fromUuidSync(uuid);
-      if ( index?.type !== "feat" ) return null;
-      return linkForUuid(uuid);
-    };
-
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
       let features = [];
@@ -412,11 +410,21 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...await Promise.all(advancement.configuration.items.map(i => prepareFeature(i.uuid))));
+            features.push(...advancement.configuration.items
+              .map(data => {
+                const index = fromUuidSync(data.uuid);
+                if ( index?.type !== "feat" ) return null;
+                return { link: linkForUuid(data.uuid), name: index.name, sort: data.sort };
+              })
+              .filter(_ => _)
+              .sort((lhs, rhs) => advancement.configuration.sorting === "m"
+                ? lhs.sort - rhs.sort
+                : lhs.name.localeCompare(rhs.name))
+              .map(f => f.link)
+            );
             break;
         }
       }
-      features = features.filter(_ => _);
       if ( !features.length ) continue;
 
       // Level & proficiency bonus
@@ -443,26 +451,56 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
    * @protected
    */
   async _getFeatures(item, { modernStyle, optional=false }) {
-    const prepareFeature = async (f, level) => {
-      const document = await fromUuid(f.uuid);
-      if ( document?.type !== "feat" ) return null;
+    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? [])
+      .filter(a => a.configuration.optional === optional);
+    const uuids = itemGrants.flatMap(a => a.configuration.items.map(i => i.uuid));
+    const docs = await bulkFromUuid(uuids);
+
+    const prepareFeature = (f, level) => {
+      const feature = docs.get(f.uuid);
+      if ( feature?.type !== "feat" ) return null;
       return {
-        document, level,
+        level,
+        description: TextEditor.enrichHTML(feature.system.description.value, {
+          relativeTo: feature, secrets: false
+        }),
+        document: feature,
         name: modernStyle ? _loc("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
-          name: document.name, level: formatNumber(level)
-        }) : document.name,
-        description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: document, secrets: false
-        })
+          name: feature.name, level: formatNumber(level)
+        }) : feature.name,
+        sort: f.sort
       };
     };
 
     let features = [];
-    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []);
     for ( const advancement of itemGrants ) {
-      if ( !!advancement.configuration.optional !== optional ) continue;
-      features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
+      const newFeatures = advancement.configuration.items
+        .map(f => prepareFeature(f, advancement.level))
+        .filter(_ => _)
+        .sort((lhs, rhs) => advancement.configuration.sorting === "m"
+          ? lhs.sort - rhs.sort
+          : lhs.document.name.localeCompare(rhs.document.name));
+      features.push(...newFeatures);
     }
+
+    if ( !optional ) features.push(...await this._getSpecialAdvancementFeatures(item, { modernStyle }));
+
+    features = await Promise.all(features.map(async f => ({ ...f, description: await f.description })));
+    return features.filter(_ => _).sort((lhs, rhs) => lhs.level - rhs.level);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get descriptions for special feature entries added by advancement.
+   * @param {Item5e} item                       Class or subclass item belonging to this journal.
+   * @param {object} options
+   * @param {boolean} options.modernStyle       Is the modern style being displayed?
+   * @returns {object[]}   Prepared features.
+   * @protected
+   */
+  async _getSpecialAdvancementFeatures(item, { modernStyle }) {
+    const features = [];
 
     const asi = (item.advancement.byType.AbilityScoreImprovement ?? []).reduce((obj, advancement) => {
       if ( advancement.isEpicBoon ) obj.boons.push(advancement);
@@ -505,8 +543,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       });
     }
 
-    features = await Promise.all(features);
-    return features.filter(f => f).sort((lhs, rhs) => lhs.level - rhs.level);
+    return features;
   }
 
   /* -------------------------------------------- */
