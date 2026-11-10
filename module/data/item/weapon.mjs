@@ -185,8 +185,7 @@ export default class WeaponData extends ItemDataModel.mixin(
       });
     }
 
-    const isLight = this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
-      && ((this.attackType === "melee") && !this.properties.has("two")));
+    const isLight = this.hasOffhandAttack;
 
     // Weapons with the "Light" property will have Offhand attack
     // If player has the "Enhanced Dual Wielding" flag, then allow any melee weapon without the "Two-Handed" property
@@ -281,6 +280,17 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @override */
   get hasProficiency() {
     return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this weapon be used to make an offhand attack?
+   * @type {boolean}
+   */
+  get hasOffhandAttack() {
+    return this.properties.has("lgt") || (this.parent.actor?.getFlag("dnd5e", "enhancedDualWielding")
+      && ((this.attackType === "melee") && !this.properties.has("two")));
   }
 
   /* -------------------------------------------- */
