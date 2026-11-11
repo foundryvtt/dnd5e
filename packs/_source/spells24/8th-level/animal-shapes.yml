@@ -21,8 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -30,6 +31,7 @@ system:
   duration:
     value: '24'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
@@ -37,9 +39,10 @@ system:
       type: willing
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -58,16 +61,13 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
-    LvwieXlKiCmNPEZW:
-      type: utility
-      _id: LvwieXlKiCmNPEZW
+    sFpkfZbsgXmgIQFL:
+      type: transform
+      _id: sFpkfZbsgXmgIQFL
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
         scaling:
@@ -76,17 +76,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
+        units: self
         override: false
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -95,16 +99,140 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
-      name: ''
+      profiles:
+        - cr: '4'
+          name: ''
+          _id: IuNuGdvCtYrAX4YW
+          uuid: null
+          sizes:
+            - tiny
+            - sm
+            - med
+            - lg
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - spell
+        keep:
+          - mental
+          - languages
+          - type
+          - hp
+        tempFormula: '@source.attributes.hp.max'
+        preset: polymorph
+        merge: []
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: polymorph
+        formless: false
+      name: Initial Transformation
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    jVBz7hcvy2hq3QQO:
+      type: transform
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: '4'
+          name: ''
+          _id: IuNuGdvCtYrAX4YW
+          uuid: null
+          sizes:
+            - tiny
+            - sm
+            - med
+            - lg
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - spell
+        keep:
+          - mental
+          - languages
+          - type
+          - hp
+        tempFormula: ''
+        preset: polymorph
+        merge: []
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: polymorph
+        formless: false
+      name: Follow Up Transformations
+      _id: jVBz7hcvy2hq3QQO
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: animal-shapes
+  method: spell
+  prepared: 0
 _id: phbsplAnimalShap
 type: spell
 img: icons/creatures/mammals/goat-horned-blue.webp
@@ -113,18 +241,14 @@ folder: M5CvwK9zVtzx6Dnn
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1724425940527
-  modifiedTime: 1746119500443
+  systemVersion: 6.1.0
+  createdTime: 1794251151567
+  modifiedTime: 1794251151567
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAnimalShap'

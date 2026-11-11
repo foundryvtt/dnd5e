@@ -17,8 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
     revision: 2
   activation:
     type: action
@@ -27,15 +28,17 @@ system:
   duration:
     value: '1'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
       count: ''
-      type: ''
+      type: self
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -53,9 +56,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -69,20 +69,28 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects:
         - _id: SrIb7dbaZs5F4zi9
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -98,15 +106,80 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects:
-        - SrIb7dbaZs5F4zi9
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    k2GfiYk7bu9RAouZ:
+      type: check
+      name: Study
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: Study Action taken by other creature
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: any
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: k2GfiYk7bu9RAouZ
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: disguise-self
+  method: spell
+  prepared: 0
 _id: phbsplDisguiseSe
 type: spell
 img: icons/equipment/head/mask-carved-bird-grey-pink.webp
 effects:
   - name: Disguised
-    origin: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
+    origin: null
     duration:
       value: 3600
       units: seconds
@@ -120,11 +193,19 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     description: >-
-      <p><span style="font-family:Signika, sans-serif">To discern that you are
-      disguised, a creature must take the Study action to inspect your
-      appearance and succeed on an [[/check ability=int skill=inv]] check
-      against your spell save DC.</span></p>
+      <p>To discern that you are disguised, a creature must take the Study
+      action to inspect your appearance and succeed on an [[/check ability=int
+      skill=inv]] check against your spell save DC.</p>
     tint: '#ffffff'
     transfer: false
     statuses: []
@@ -132,11 +213,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783543974652
-      modifiedTime: 1783543974652
+      systemVersion: 6.1.0
+      createdTime: 1794254305023
+      modifiedTime: 1794254305023
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -147,18 +228,14 @@ folder: pBaAAtXBCq9FVEnL
 sort: 3900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425949918
-  modifiedTime: 1783543974651
+  systemVersion: 6.1.0
+  createdTime: 1794254305023
+  modifiedTime: 1794254305023
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDisguiseSe'

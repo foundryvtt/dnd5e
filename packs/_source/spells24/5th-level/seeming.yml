@@ -21,8 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
     revision: 2
   activation:
     type: action
@@ -31,6 +32,7 @@ system:
   duration:
     value: '8'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
@@ -38,9 +40,10 @@ system:
       type: creature
       special: visible creature
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -59,9 +62,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     1efMIDdQ8pGH6Es8:
       type: save
@@ -75,18 +75,24 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -98,14 +104,25 @@ system:
       sort: 0
       damage:
         parts: []
-        onSave: half
+        onSave: none
       save:
-        ability: cha
+        ability:
+          - cha
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Kj4uSe5OC1nTcoyZ:
       type: utility
       _id: Kj4uSe5OC1nTcoyZ
@@ -117,19 +134,27 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects:
         - _id: WY574kvdnuPlNGfU
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -146,21 +171,96 @@ system:
         formula: ''
       name: Change Appearance
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    21AavUeuhvb6EmUC:
+      type: check
+      name: Study
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: Study Action taken by other creature
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: any
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: 21AavUeuhvb6EmUC
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: seeming
+  method: spell
+  prepared: 0
 _id: phbsplSeeming000
 type: spell
 img: icons/equipment/head/mask-wooden-feathered-blue.webp
 effects:
   - name: Changed Appearance
     img: icons/equipment/head/mask-carved-face-orange.webp
-    origin: Compendium.dnd5e.spells24.Item.phbsplSeeming000
+    origin: null
     transfer: false
     _id: WY574kvdnuPlNGfU
     type: base
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplSeeming000
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     disabled: false
     duration:
       value: 28800
@@ -178,11 +278,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1724436996987
-      modifiedTime: 1783543976727
+      systemVersion: 6.1.0
+      createdTime: 1794259057257
+      modifiedTime: 1794259057257
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -193,18 +293,14 @@ folder: beZ8MTpWY2cMEUlp
 sort: 300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425970014
-  modifiedTime: 1783543976727
+  systemVersion: 6.1.0
+  createdTime: 1794259057257
+  modifiedTime: 1794259057257
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSeeming000'

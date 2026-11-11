@@ -15,8 +15,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -24,14 +25,19 @@ system:
   duration:
     value: '10'
     units: minute
+    expiry: null
   target:
     affects:
       choice: false
+      type: self
     template:
-      units: ''
+      units: ft
       contiguous: false
+      type: ''
+      stationary: false
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -47,9 +53,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -63,21 +66,35 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects:
         - _id: YbUr13GTnMrootmf
+          uuid: null
+          level:
+            min: null
+            max: null
         - _id: CMEUOmIT16kjGT5J
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -89,14 +106,98 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      name: Cast Spell
+    ZNDW6cWg63TV9nKO:
+      type: damage
+      name: Flame Eruption
+      _id: ZNDW6cWg63TV9nKO
+      sort: 0
+      activation:
+        type: special
+        override: true
+        condition: a creature within 5 feet hits you with a melee attack
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: attacking creature
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - cold
+              - fire
+            scaling:
+              mode: ''
+              number: 1
+            modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: fire-shield
+  method: spell
+  prepared: 0
 _id: phbsplFireShield
 type: spell
 img: icons/equipment/shield/heater-stone-orange.webp
 effects:
   - name: Warm Shield
-    origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+    origin: null
     duration:
       value: 600
       units: seconds
@@ -114,8 +215,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: E6MJetHYpN4maTCD
+          _id: RZGGdcz6S4RQcjGw
+          conditions: '{}'
+          replacement: ''
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplFireShield
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     description: >-
       <p>Whenever a creature within 5 feet of you hits you with a melee attack
       roll, the attacker takes [[/damage 2d8 type=fire]] damage.</p>
@@ -126,11 +238,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783543975145
-      modifiedTime: 1783543975145
+      systemVersion: 6.1.0
+      createdTime: 1794255159113
+      modifiedTime: 1794255159113
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -138,7 +250,7 @@ effects:
     folder: null
     _key: '!items.effects!phbsplFireShield.YbUr13GTnMrootmf'
   - name: Chill Shield
-    origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+    origin: null
     duration:
       value: 600
       units: seconds
@@ -156,8 +268,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: c7c8UKEFlUljMzxR
+          _id: uAUwAh6EpCb0H4H6
+          conditions: '{}'
+          replacement: ''
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplFireShield
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     description: >-
       <p>Whenever a creature within 5 feet of you hits you with a melee attack
       roll, the attacker takes [[/damage 2d8 type=cold]] damage.</p>
@@ -168,11 +291,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783543975146
-      modifiedTime: 1783543975146
+      systemVersion: 6.1.0
+      createdTime: 1794255159113
+      modifiedTime: 1794255159113
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -183,18 +306,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 2200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425953913
-  modifiedTime: 1783543975145
+  systemVersion: 6.1.0
+  createdTime: 1794255159113
+  modifiedTime: 1794255159113
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFireShield'

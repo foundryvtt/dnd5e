@@ -21,8 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
     revision: 2
   activation:
     type: action
@@ -31,6 +32,7 @@ system:
   duration:
     value: '1'
     units: day
+    expiry: null
   target:
     affects:
       choice: false
@@ -38,9 +40,10 @@ system:
       type: space
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: mi
     special: ''
@@ -59,11 +62,8 @@ system:
   materials:
     value: a statuette of yourself worth 5+ GP
     consumed: false
-    cost: 0
+    cost: 5
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     KCmy0ulLA1RPR3eF:
       type: summon
@@ -79,16 +79,20 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -111,9 +115,13 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        disposition: true
+        ability: ''
       profiles:
-        - uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
-          _id: kqU6YKom2tUYYBDe
+        - count: ''
+          name: ''
+          _id: hTayqLhBmPziy135
+          uuid: Compendium.dnd5e.actors24.Actor.phbiluCreature00
           level:
             min: null
             max: null
@@ -121,10 +129,80 @@ system:
       summon:
         prompt: false
         mode: ''
-        identifier: ''
       name: Create Illusion
       img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      tempHP: ''
+      behaviors: []
+      effects: []
+      flags: {}
+    dxXbCPIoPczOrjrA:
+      type: check
+      name: Study
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: Study Action taken by other creature
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: any
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: dxXbCPIoPczOrjrA
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: project-image
+  method: spell
+  prepared: 0
 _id: phbsplProjectIma
 type: spell
 img: icons/creatures/magical/construct-golem-stone-blue.webp
@@ -133,18 +211,14 @@ folder: EdAGMG8IF26PLkD3
 sort: 900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425967562
-  modifiedTime: 1745256797264
+  systemVersion: 6.1.0
+  createdTime: 1794269738945
+  modifiedTime: 1794269738945
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplProjectIma'

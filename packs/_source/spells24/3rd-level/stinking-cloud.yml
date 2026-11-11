@@ -6,9 +6,9 @@ system:
       on a point within range. The cloud is &amp;Reference[heavilyobscured]. The
       cloud lingers in the air for the duration or until a strong wind (such as
       the one created by
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
-      Wind}</em>) disperses it.</p><p>Each creature that starts its turn in the
-      Sphere must succeed on a Constitution saving throw or have the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGustofWind]{Gust
+      of Wind}</em>) disperses it.</p><p>Each creature that starts its turn in
+      the Sphere must succeed on a Constitution saving throw or have the
       &amp;Reference[poisoned apply=false] condition until the end of the
       current turn. While Poisoned in this way, the creature can't take an
       action or a Bonus Action.</p>
@@ -16,8 +16,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -25,6 +26,7 @@ system:
   duration:
     value: '1'
     units: minute
+    expiry: null
   target:
     affects:
       choice: false
@@ -37,6 +39,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '90'
     units: ft
@@ -57,69 +60,10 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
-      activation:
-        type: ''
-        value: null
-        override: true
-        condition: ''
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: false
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        override: true
-      effects:
-        - _id: gFid0DG5HydORpr3
-          onSave: false
-      range:
-        override: true
-        units: any
-        special: ''
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-          type: ''
-        affects:
-          choice: false
-          count: '1'
-          type: creature
-          special: ''
-        override: true
-      damage:
-        onSave: none
-        parts: []
-      save:
-        ability: con
-        dc:
-          calculation: spellcasting
-          formula: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 200000
-      name: Start of Turn Save
-      img: ''
-      appliedEffects:
-        - gFid0DG5HydORpr3
-    b4WUwQ8fDL83FwYC:
+    UNmK4NzLyiQsdD1S:
       type: utility
-      _id: b4WUwQ8fDL83FwYC
-      sort: 100000
+      sort: 0
       activation:
         type: action
         value: null
@@ -131,17 +75,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -157,18 +105,95 @@ system:
         formula: ''
       name: Create Cloud
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: UNmK4NzLyiQsdD1S
+    pyaS54TcG7kx15V2:
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        override: true
+        expiry: null
+        concentration: false
+      effects:
+        - _id: gFid0DG5HydORpr3
+          onSave: false
+          uuid: null
+          level: {}
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Start of Turn Save
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: pyaS54TcG7kx15V2
   identifier: stinking-cloud
+  method: spell
+  prepared: 0
 _id: phbsplStinkingCl
 type: spell
 img: icons/magic/air/fog-gas-smoke-dense-green.webp
 effects:
   - name: Stinking Poison
-    origin: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+    origin: null
     duration:
       value: 1
       units: turns
-      expiry: turnStart
+      expiry: turnEnd
       expired: false
     disabled: false
     flags: {}
@@ -178,6 +203,15 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     description: >-
       <p>While &amp;Reference[poisoned apply=false] in this way, the creature
       can’t take an action or a Bonus Action.</p>
@@ -189,11 +223,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783543977223
-      modifiedTime: 1783543977223
+      systemVersion: 6.1.0
+      createdTime: 1794266640955
+      modifiedTime: 1794266640955
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -204,18 +238,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 100782
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425972615
-  modifiedTime: 1783543977223
+  systemVersion: 6.1.0
+  createdTime: 1794266640955
+  modifiedTime: 1794266640955
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStinkingCl'

@@ -39,6 +39,7 @@ system:
   duration:
     value: '1'
     units: minute
+    expiry: null
   target:
     affects:
       choice: false
@@ -46,9 +47,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -69,9 +71,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     5LLVXOLZf1fTstUw:
       type: save
@@ -89,15 +88,20 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: QyPQcXhcl8sTDQ3d
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
@@ -105,6 +109,7 @@ system:
           type: cube
           size: '10'
           count: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -125,6 +130,15 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     QCUpctimdMH6E6F8:
       type: damage
       name: Phantasm Damage
@@ -142,10 +156,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: true
+        expiry: null
       effects: []
       range:
         override: true
@@ -157,6 +173,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -182,17 +199,95 @@ system:
             scaling:
               mode: ''
               number: 1
+            modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    ffUmsOEgNdJuBbkv:
+      type: check
+      name: Study
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: Study Action taken by other creature
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: any
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: ffUmsOEgNdJuBbkv
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: phantasmal-force
+  method: spell
+  prepared: 0
 effects:
   - name: Seeing Illusions
     img: icons/magic/control/hypnosis-mesmerism-eye.webp
-    origin: Compendium.dnd5e.spells24.Item.phbPhantasmalFor
+    origin: null
     transfer: false
     _id: QyPQcXhcl8sTDQ3d
     type: base
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbPhantasmalFor
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      conditions: '{}'
     disabled: false
     duration:
       value: 60
@@ -211,11 +306,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783543973729
-      modifiedTime: 1783543973729
+      systemVersion: 6.1.0
+      createdTime: 1794251747627
+      modifiedTime: 1794251747627
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -223,21 +318,17 @@ effects:
     folder: null
     _key: '!items.effects!phbPhantasmalFor.QyPQcXhcl8sTDQ3d'
 folder: 3SjcO2acsFnWegp4
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745433110943
-  modifiedTime: 1783543973728
+  systemVersion: 6.1.0
+  createdTime: 1794251747627
+  modifiedTime: 1794251747627
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 100782
+sort: 5800000
 ownership:
   default: 0
 _key: '!items!phbPhantasmalFor'

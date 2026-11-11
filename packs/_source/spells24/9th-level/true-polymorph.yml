@@ -33,16 +33,14 @@ system:
       wearing and carrying into that form, as long as the object's size is no
       larger than the creature's size. The creature's statistics become those of
       the object, and the creature has no memory of time spent in this form
-      after the spell ends and it returns to normal.</p><section class="secret"
-      id="secret-IB4vzIqK9EZU3ho1"><p><strong>Foundry Note</strong></p><p>An
-      Actor can be dragged onto the polymorphed creature's sheet by the
-      Gamemaster to handle the transformation.</p></section>
+      after the spell ends and it returns to normal.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -50,6 +48,7 @@ system:
   duration:
     value: '1'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
@@ -57,9 +56,10 @@ system:
       type: creatureOrObject
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -80,9 +80,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     SYK6P8qPM8WsZN7U:
       type: save
@@ -98,17 +95,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -122,14 +123,113 @@ system:
         parts: []
         onSave: none
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    dTnl6qCSxErJC8Wg:
+      type: transform
+      _id: dTnl6qCSxErJC8Wg
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: ''
+          name: Creature into Creature
+          _id: iZoC7NaBJVaV9vTW
+          uuid: null
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+        - cr: '9'
+          name: Object into Creature
+          _id: 5t6cE9zB8RN6WzmS
+          uuid: null
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - spell
+        keep:
+          - hp
+        tempFormula: '@source.attributes.hp.max'
+        preset: polymorph
+        merge: []
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: polymorph
+        formless: false
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: true-polymorph
+  method: spell
+  prepared: 0
 _id: phbsplTruePolymo
 type: spell
 img: icons/creatures/slimes/slime-giant-face-eyes.webp
@@ -138,18 +238,14 @@ folder: iG0Zia8jh6uK39TB
 sort: 100049
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1724425976104
-  modifiedTime: 1746119773121
+  systemVersion: 6.1.0
+  createdTime: 1794267577907
+  modifiedTime: 1794267577907
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTruePolymo'

@@ -33,7 +33,39 @@ system:
   activities: {}
   enchant: {}
   identifier: primal-order-magician
-  advancement: {}
+  advancement:
+    5q6BGNFGfbiofo4a:
+      name: Extra Druid Cantrip
+      type: ItemChoice
+      _id: 5q6BGNFGfbiofo4a
+      configuration:
+        allowDrops: true
+        choices:
+          '1':
+            count: 1
+            replacement: false
+        pool: []
+        restriction:
+          list:
+            - class:druid
+          school: []
+          level: '0'
+        sorting: a
+        spell:
+          ability:
+            - wis
+          method: spell
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+        type: spell
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>You know one extra cantrip from the druid spell list.</p>
   crewed: false
 effects:
   - name: Magician Checks & Cantrip
@@ -97,11 +129,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.369'
+      coreVersion: '14.370'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1793647058190
-      modifiedTime: 1793647058190
+      createdTime: 1794349983570
+      modifiedTime: 1794349983570
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -112,11 +144,11 @@ folder: EXYmwRGoNyMbByN1
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.369'
+  coreVersion: '14.370'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793647058190
-  modifiedTime: 1793647058190
+  createdTime: 1794349983570
+  modifiedTime: 1794349983570
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

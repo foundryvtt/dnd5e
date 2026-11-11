@@ -30,6 +30,7 @@ system:
   duration:
     value: '10'
     units: minute
+    expiry: null
   target:
     affects:
       choice: true
@@ -69,33 +70,30 @@ system:
       activation:
         type: ''
         value: null
-        override: false
+        override: true
         condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
         value: ''
       duration:
         units: inst
-        override: false
+        override: true
         concentration: false
-      effects:
-        - _id: Q3CLqX7crfusAxkj
-          onSave: true
-          uuid: null
-          level: {}
+        expiry: null
+      effects: []
       range:
-        override: false
+        override: true
         units: ft
         special: ''
         value: '15'
       target:
-        prompt: true
+        prompt: false
         template:
           contiguous: false
           units: ft
@@ -106,7 +104,7 @@ system:
           count: '1'
           type: creature
           special: ''
-        override: false
+        override: true
       damage:
         onSave: half
         parts:
@@ -131,20 +129,89 @@ system:
           calculation: spellcasting
           formula: ''
         visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 200000
-      name: Cast and Save
+      sort: 400000
+      name: Spirit Guardians Save
       img: ''
       behaviors: []
       flags: {}
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
+    tevaatMC9LZxVPLS:
+      type: utility
+      name: Cast Spell
+      _id: tevaatMC9LZxVPLS
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      sort: 300000
+      activation:
+        type: action
+        override: false
+      behaviors:
+        - name: ''
+          _id: Ipp0J6BB2H5UcJ9o
+          type: applyActiveEffect
+          config:
+            effects: []
+            sizes: []
+            types: []
+          level:
+            min: null
+            max: null
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects:
+        - _id: Q3CLqX7crfusAxkj
+          uuid: null
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: spirit-guardians
   method: spell
   prepared: 0
@@ -153,7 +220,7 @@ type: spell
 img: icons/magic/light/orb-hands-humanoid-yellow.webp
 effects:
   - name: Half Speed
-    origin: Compendium.dnd5e.spells24.Item.phbsplSpiritGuar
+    origin: null
     duration:
       value: 600
       units: seconds
@@ -175,9 +242,16 @@ effects:
           phase: initial
           _id: UWErnBwYMRBgOtap
           conditions: '{}'
+          replacement: ''
       magical: true
       rider:
         statuses: []
+      origin:
+        item: Compendium.dnd5e.spells24.Item.phbsplSpiritGuar
+        actor: null
+        behavior: null
+        effect: null
+        message: null
       conditions: '{}'
     description: <p>The creature's speed is halved while within the Emanation.</p>
     tint: '#ffffff'
@@ -187,11 +261,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.370'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1786481154204
-      modifiedTime: 1786481154204
+      systemVersion: 6.1.0
+      createdTime: 1794262242665
+      modifiedTime: 1794262242665
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -205,11 +279,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.365'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 6.0.0
-  createdTime: 1786481154204
-  modifiedTime: 1786481154204
+  systemVersion: 6.1.0
+  createdTime: 1794262242665
+  modifiedTime: 1794262242665
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpiritGuar'
