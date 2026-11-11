@@ -257,24 +257,34 @@
       }
 
       .d20die {
+        block-size: 24px;
+        display: grid;
+        inline-size: 22px;
+        inset-block-start: 50%;
         inset-inline-end: 8px;
-        padding-block-start: 3px;
+        place-items: center;
         position: absolute;
+        transform: translateY(-50%);
+
+        > * {
+          grid-area: 1 / -1;
+          line-height: 1;
+        }
 
         > i {
           color: var(--dnd5e-chat-color-die);
-          font-size: var(--font-size-16);
+          font-size: var(--font-size-20);
         }
 
         .roll {
           color: var(--dnd5e-color-black);
           font-size: var(--font-size-12);
+          font-variant-numeric: proportional-nums;
           font-weight: bold;
-          inset: 0 0 0 -2px;
-          letter-spacing: -1px;
-          line-height: 22px;
-          position: absolute;
-          text-align: center;
+          letter-spacing: -0.5px;
+          padding-block: 1px 0;
+          padding-inline: 0 .5px;
+          z-index: 2;
         }
       }
 
