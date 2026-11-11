@@ -258,22 +258,26 @@
 
       .d20die {
         block-size: 24px;
-        display: grid;
         inline-size: 22px;
         inset-block-start: 50%;
         inset-inline-end: 8px;
-        place-items: center;
         position: absolute;
         transform: translateY(-50%);
 
-        > * {
-          grid-area: 1 / -1;
+        > i, .roll {
+          align-items: center;
+          display: flex;
+          inset: 0;
+          justify-content: center;
           line-height: 1;
+          position: absolute;
         }
 
         > i {
+          block-size: auto;
           color: var(--dnd5e-chat-color-die);
           font-size: var(--font-size-20);
+          inline-size: auto;
         }
 
         .roll {
@@ -282,8 +286,8 @@
           font-variant-numeric: proportional-nums;
           font-weight: bold;
           letter-spacing: -0.5px;
-          padding-block: 1px 0;
           padding-inline: 0 .5px;
+          text-box: trim-both cap alphabetic;
           z-index: 2;
         }
       }
