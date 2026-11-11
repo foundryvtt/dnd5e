@@ -175,6 +175,8 @@ export default class ItemDataModel extends SystemDataModel {
       const sourceId = this.parent._stats.compendiumSource ?? this.parent.flags.dnd5e?.sourceId;
       if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
+    this.type ??= {};
+    this.type.document = this.parent.type;
   }
 
   /* -------------------------------------------- */
