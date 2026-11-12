@@ -198,12 +198,15 @@ system:
           formula: ''
         ability: ''
         visible: true
+        bonus: ''
       _id: FTWjXbzpiLNqiIMp
-      img: null
+      img: systems/dnd5e/icons/svg/action/study.svg
       behaviors: []
       flags: {}
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
@@ -224,8 +227,8 @@ _stats:
   coreVersion: '14.370'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1794269665856
-  modifiedTime: 1794269665856
+  createdTime: 1794458990344
+  modifiedTime: 1794458990344
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMinorIllus'

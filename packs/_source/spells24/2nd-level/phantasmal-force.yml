@@ -257,12 +257,15 @@ system:
           formula: ''
         ability: ''
         visible: true
+        bonus: ''
       _id: ffUmsOEgNdJuBbkv
-      img: null
+      img: systems/dnd5e/icons/svg/action/study.svg
       behaviors: []
       flags: {}
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
@@ -309,8 +312,8 @@ effects:
       coreVersion: '14.370'
       systemId: dnd5e
       systemVersion: 6.1.0
-      createdTime: 1794251747627
-      modifiedTime: 1794251747627
+      createdTime: 1794458947125
+      modifiedTime: 1794458947125
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -324,8 +327,8 @@ _stats:
   coreVersion: '14.370'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1794251747627
-  modifiedTime: 1794251747627
+  createdTime: 1794458947125
+  modifiedTime: 1794458947125
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 5800000
