@@ -192,19 +192,17 @@ export default class AttributesFields {
     if ( !ac.calc ) return;
     switch ( ac.calc ) {
       case "custom":
-        ac.formulas ??= [];
-        ac.formulas.push({ formula: ac.formula });
+        ac.formulas ??= [{ formula: ac.formula }];
         break;
       case "flat":
-        ac.override = ac.flat;
+        if ( !("override" in ac) ) ac.override = ac.flat;
         break;
       case "default": break;
       case "natural":
-        ac.calcs = ["natural"];
+        ac.calcs ??= ["natural"];
         break;
       default:
-        ac.calcs ??= ["unarmored", "armored"];
-        ac.calcs.push(ac.calc);
+        ac.calcs ??= ["unarmored", "armored", ac.calc];
         break;
     }
     delete ac.calc;
