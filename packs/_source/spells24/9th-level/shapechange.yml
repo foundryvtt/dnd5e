@@ -20,8 +20,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -29,6 +30,7 @@ system:
   duration:
     value: '1'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
@@ -36,9 +38,10 @@ system:
       type: self
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -56,18 +59,15 @@ system:
   materials:
     value: a jade circlet worth 1,500+ GP
     consumed: false
-    cost: 0
+    cost: 1500
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
-    xLGk73cwKfSx5rhK:
-      type: utility
-      _id: xLGk73cwKfSx5rhK
+    4wdOr9lSUcfNLbuQ:
+      type: transform
+      _id: 4wdOr9lSUcfNLbuQ
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
         scaling:
@@ -76,17 +76,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
+        units: self
         override: false
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -95,16 +99,170 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
-      name: ''
+      profiles:
+        - cr: max(@details.level, @details.cr)
+          name: ''
+          _id: lEOG9YHpwTngHf8F
+          uuid: null
+          sizes: []
+          types:
+            - aberration
+            - beast
+            - celestial
+            - dragon
+            - elemental
+            - fey
+            - fiend
+            - giant
+            - humanoid
+            - monstrosity
+            - ooze
+            - plant
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - spell
+        keep:
+          - mental
+          - saves
+          - skills
+          - gearProf
+          - languages
+          - class
+          - items
+          - spells
+          - type
+          - hp
+        tempFormula: '@source.attributes.hp.max'
+        preset: polymorph
+        merge: []
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: polymorph
+        formless: false
+      name: Initial Transformation
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    pD5inzm9XHzRpi2z:
+      type: transform
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+        expiry: null
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: max(@details.level, @details.cr)
+          name: ''
+          _id: lEOG9YHpwTngHf8F
+          uuid: null
+          sizes: []
+          types:
+            - aberration
+            - beast
+            - celestial
+            - dragon
+            - elemental
+            - fey
+            - fiend
+            - giant
+            - humanoid
+            - monstrosity
+            - ooze
+            - plant
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - spell
+        keep:
+          - mental
+          - saves
+          - skills
+          - gearProf
+          - languages
+          - class
+          - items
+          - spells
+          - type
+          - hp
+        tempFormula: ''
+        preset: polymorph
+        merge: []
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: polymorph
+        formless: false
+      name: Follow Up Transformations
+      _id: pD5inzm9XHzRpi2z
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: shapechange
+  method: spell
+  prepared: 0
 _id: phbsplShapechang
 type: spell
 img: icons/magic/unholy/hand-fire-skeleton-pink.webp
@@ -113,18 +271,14 @@ folder: iG0Zia8jh6uK39TB
 sort: 100391
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1724425970292
-  modifiedTime: 1746119739082
+  systemVersion: 6.1.0
+  createdTime: 1794260090030
+  modifiedTime: 1794260090030
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplShapechang'

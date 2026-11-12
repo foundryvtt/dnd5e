@@ -19,8 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,6 +29,7 @@ system:
   duration:
     value: '1'
     units: minute
+    expiry: null
   target:
     affects:
       choice: false
@@ -41,6 +43,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '120'
     units: ft
@@ -61,9 +64,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -77,14 +77,19 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
@@ -95,6 +100,7 @@ system:
           width: '1'
           height: '20'
           count: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -108,7 +114,7 @@ system:
               enabled: false
               formula: ''
             number: 5
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - fire
@@ -116,11 +122,14 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
@@ -128,7 +137,13 @@ system:
       sort: 0
       name: Create Wall
       img: icons/magic/fire/flame-burning-fence.webp
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     aLgpPe1PPRQ0zIrL:
       type: save
       activation:
@@ -143,13 +158,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
@@ -160,6 +178,7 @@ system:
           size: '10'
           width: '1'
           height: '20'
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -173,7 +192,7 @@ system:
               enabled: false
               formula: ''
             number: 5
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - fire
@@ -181,11 +200,14 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
@@ -194,10 +216,15 @@ system:
       name: Create Ring
       _id: aLgpPe1PPRQ0zIrL
       img: icons/magic/fire/barrier-wall-flame-ring-yellow.webp
-      appliedEffects: []
-    xHKGvC597exYwpc5:
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    Qu6qpp1MJvc3BeIJ:
       type: damage
-      _id: xHKGvC597exYwpc5
       activation:
         type: ''
         value: null
@@ -210,10 +237,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: true
@@ -225,6 +254,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -236,7 +266,7 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       damage:
         critical:
           allow: false
@@ -245,7 +275,7 @@ system:
               enabled: false
               formula: ''
             number: 5
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - fire
@@ -253,10 +283,20 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       name: ''
       img: icons/magic/fire/flame-burning-skeleton-explosion.webp
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: Qu6qpp1MJvc3BeIJ
   identifier: wall-of-fire
+  method: spell
+  prepared: 0
 _id: phbsplWallofFire
 type: spell
 img: icons/magic/fire/flame-burning-fence.webp
@@ -265,18 +305,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425976932
-  modifiedTime: 1745256799701
+  systemVersion: 6.1.0
+  createdTime: 1794251856457
+  modifiedTime: 1794251856457
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWallofFire'

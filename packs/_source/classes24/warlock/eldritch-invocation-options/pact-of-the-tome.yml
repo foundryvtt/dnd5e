@@ -40,18 +40,82 @@ system:
   properties: []
   requirements: ''
   identifier: pact-of-the-tome
-  advancement: {}
+  advancement:
+    vYKqiJHtrZhgyLHW:
+      name: Book of Shadows Cantrips
+      type: ItemChoice
+      _id: vYKqiJHtrZhgyLHW
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 3
+            replacement: false
+        pool: []
+        restriction:
+          list: []
+          school: []
+          level: '0'
+        sorting: a
+        spell:
+          ability:
+            - cha
+          method: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+        type: spell
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>When the book appears, choose three cantrips.</p>
+    JP4eK9lQUkuWeupg:
+      name: Book of Shadows Rituals
+      type: ItemChoice
+      _id: JP4eK9lQUkuWeupg
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 2
+            replacement: false
+        pool: []
+        restriction:
+          list: []
+          school: []
+          level: '1'
+        sorting: a
+        spell:
+          ability:
+            - cha
+          method: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: true
+          prepared: 2
+        type: spell
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>When the book appears, choose two level 1 spells that have the Ritual
+        tag.</p>
   crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.369'
+  coreVersion: '14.370'
   systemId: dnd5e
   systemVersion: 6.1.0
-  createdTime: 1793665214340
-  modifiedTime: 1793665214340
+  createdTime: 1794347172136
+  modifiedTime: 1794347172136
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
