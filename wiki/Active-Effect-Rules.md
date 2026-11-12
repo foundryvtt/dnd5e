@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Rules are a special type of active effect changes provided by the system. Rather than being applied directly to data on an actor or item, these rules are evaluated at roll time and modify only a specific roll.
 
@@ -6,14 +6,14 @@ Rules are a special type of active effect changes provided by the system. Rather
 
 Rules are grouped into several categories to control what types of rolls they affect. These categories are entered in the "Attribute Key" field in the change configuration window.
 
-| Category  | Description                                                                   | Valid Rule Types |
-| --------- | ----------------------------------------------------------------------------- | ---------------- |
-| `attack`  | Affects the d20 roll for attacks.                                             | All              |
-| `check`   | Affects the d20 roll for ability checks.                                      | All              |
-| `d20`     | Affects the d20 roll for any attack, check, or save.                          | All              |
-| `damage`  | Affects the first matching damage part.                                       | Bonus            |
-| `save`    | Affects the d20 roll for ability saves, death saves, and concentration saves. | All              |
-| `healing` | Same as with damage, but for healing.                                         | Bonus            |
+| Category       | Key       | Description                                                                   | Valid Rule Types          |
+| -------------- | --------- | ----------------------------------------------------------------------------- | ------------------------- |
+| D20 Tests      | `d20`     | Affects the d20 roll for any attack, check, or save.                          | All Normal Rules          |
+| Attack Rolls   | `attack`  | Affects the d20 roll for attacks.                                             | All Normal Rules          |
+| Ability Checks | `check`   | Affects the d20 roll for ability checks.                                      | All Normal Rules          |
+| Saving Throws  | `save`    | Affects the d20 roll for ability saves, death saves, and concentration saves. | All Normal Rules          |
+| Damage Rolls   | `damage`  | Affects the damage rolled, bonus applies to first damage part.                | Bonus, Damage Application |
+| Healing Rolls  | `healing` | Same as with damage, but for healing.                                         | Bonus                     |
 
 
 ## Types
@@ -44,6 +44,13 @@ For damage rolls this can also include a damage type annotation. Normally a dama
 The maximum and minimum rules affect the range of the d20 rolled. This affects strictly the value on the die before any modifiers are applied. Setting a minimum of `10` for example, results in `1d20min10` being rolled and any results on the die below that value become `10`.
 
 This also accepts deterministic formulas, so you can enter a minimum of `@prof` and that will resolve to the proficiency modifier of the person rolling the die.
+
+
+### Damage Application *(damage rolls only)*
+
+The four damage application rules affect how a damage roll is applied to a target from the chat. The three ignore rules allow ignoring resistance, immunity, or vulnerability to a specific damage type while the downgrade rule treats immunity to that damage type by the target as resistance and ignores existing resistance.
+
+The value can be the key for any damage type or `ALL` to affect all damage types.
 
 
 ## Conditions
@@ -171,4 +178,18 @@ The [active effect conditions page](Active-Effects.md#Conditions) goes over the 
   "k": "roll.ability",
   "v": "cha"
 }]
+```
+
+### Bonus to Damage from Spells or Features from Specific Class
+
+- **Key**: damage
+- **Type**: Bonus
+- **Value**: @abilities.wis.mod
+- **Condition**:
+
+```json
+{
+  "k": "item.classIdentifier",
+  "v": "cleric"
+}
 ```

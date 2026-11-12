@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Unlike most information listed on a spell, there is no field even in edit mode to list the eligible classes. This guide provides a walkthrough for how to define eligible classes for a spell, either for a new spell or for new classes (this also works for any Subclass, Background, or Species that may want a spell list, however those will only be visible in the Compendium Browser and will not appear on the spell sheet).
 

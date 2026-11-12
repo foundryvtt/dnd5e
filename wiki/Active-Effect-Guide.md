@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
@@ -715,6 +715,8 @@ system.traits.ci.value
 > | Radiant     | `radiant`     |
 > | Slashing    | `slashing`    |
 > | Thunder     | `thunder`     |
+> |             |               |
+> | Falling     | `falling`     |
 >
 > Source: `CONFIG.DND5E.damageTypes`
 > </details>

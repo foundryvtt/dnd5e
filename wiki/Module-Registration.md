@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The system includes a number of features allowing modules and worlds to register information for the system directly in their manifests, rather than requiring separate scripts.
 
@@ -29,6 +29,13 @@ The `dnd5e.display` flag can be used to specify that a specific compendium shoul
 ### Document Types
 
 The `dnd5e.types` flag indicates what types of items or actors a compendium contains. This is used to aid the Compendium Browser in quickly searching for content. More information about how this is set up can be found on the [Compendium Browser guide](Compendium-Browser.md#module-support).
+
+### Rules Version
+
+The `dnd5e.rulesVersion` flag indicates whether a compendium contains 5.5e (`modern`) or 5e (`legacy`) content and allows the compendium source filtering to automatically control the visibility of this compendium when the rules version is changed.
+
+>[!NOTE]
+> The `rulesVersion` flag should only be used in modules that ship both 5e and 5.5e content, since if a module only contains content for a single rules version then the user enabling the module should be seen as them choosing to see that content.
 
 ### Sorting
 

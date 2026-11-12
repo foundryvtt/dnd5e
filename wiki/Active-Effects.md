@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 Active effects are documents that can be used to define changes applied to a different document. There are two primary types of active effects used by the system: Base effects that apply changes to an actor, and Enchantment effects that apply changes to an item. A general overview of how active effects work can be found on the [Foundry knowledge base](https://foundryvtt.com/article/active-effects/).
 

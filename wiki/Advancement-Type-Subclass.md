@@ -1,4 +1,4 @@
-![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+![Up to date as of 6.1.0](https://img.shields.io/static/v1?label=dnd5e&message=6.1.0&color=informational)
 
 The Subclass advancement allows for indicating the level at which a class takes it subclass and providing a custom subclass name (such as "Martial Archetype") that will be used in the class journal. This advancement can only be added to classes and each class can only have a single advancement of this type.
 
@@ -20,7 +20,16 @@ The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1407) for the
 
 ### Configuration Schema
 
-None
+The Subclass advancement contains an optional `suggested` object that defines a subclass that will be pre-filled by the advancement. That object has a `uuid` string to define which subclass is suggested and a `fixed` boolean to control whether the player can select a different subclass than suggested.
+
+```javascript
+{
+  suggested: {
+    fixed: true,
+    uuid: "Compendium.dnd5e.classes24.Item.phbmnkOpenHandWa"
+  }
+}
+```
 
 ### Value Schema
 
