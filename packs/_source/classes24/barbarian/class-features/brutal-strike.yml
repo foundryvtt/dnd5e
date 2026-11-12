@@ -69,7 +69,7 @@ system:
       effects: []
       range:
         override: false
-        units: any
+        units: self
         special: ''
       target:
         template:
@@ -398,84 +398,6 @@ system:
         requireMagic: false
         identifier: barbarian
       _id: MP1qQsApCj19F2M5
-    3QNxkTJnulkXMLDB:
-      type: enchant
-      name: Activate Improved Brutal Strike
-      _id: 3QNxkTJnulkXMLDB
-      img: ''
-      sort: 500000
-      activation:
-        type: ''
-        override: false
-        condition: ''
-      behaviors: []
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: inst
-        expiry: null
-        concentration: false
-        override: false
-      effects:
-        - _id: tgQO3kbV4XKTLb22
-          uuid: null
-          level:
-            min: 13
-            max: 16
-          riders:
-            activity: []
-            effect: []
-            item: []
-        - _id: a4EuGL5bc8WLazSu
-          uuid: null
-          level:
-            min: 17
-            max: null
-          riders:
-            activity: []
-            effect: []
-            item: []
-      flags: {}
-      range:
-        units: self
-        override: false
-        special: ''
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-          type: ''
-        affects:
-          choice: false
-          type: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: 13
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-        identifier: barbarian
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: ''
   enchant: {}
   identifier: brutal-strike
   advancement:
@@ -506,7 +428,7 @@ effects:
       units: turns
       expiry: sourceStart
       expired: false
-    origin: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
     transfer: false
     flags:
       dnd5e:
@@ -520,11 +442,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.370'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.1.0
-      createdTime: 1794426392597
-      modifiedTime: 1794426392597
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-axe-blood-red.webp
@@ -539,14 +461,14 @@ effects:
           _id: gFTJuyGkMWRCzpmE
           conditions: '{}'
           replacement: ''
+      rider:
+        statuses: []
       origin:
-        item: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
         actor: null
         behavior: null
         effect: null
+        item: null
         message: null
-      rider:
-        statuses: []
       conditions: '{}'
       magical: false
     sort: 0
@@ -589,14 +511,13 @@ effects:
     statuses: []
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.L9N4evZo1jt46dap
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.L9N4evZo1jt46dap
       duplicateSource: null
-      coreVersion: '14.370'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.1.0
-      createdTime: 1794426392597
-      modifiedTime: 1794426392597
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -637,200 +558,28 @@ effects:
     statuses: []
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.tUyuyTQGmpUqMcFe
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS.ActiveEffect.tUyuyTQGmpUqMcFe
       duplicateSource: null
-      coreVersion: '14.370'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.1.0
-      createdTime: 1794426392597
-      modifiedTime: 1794426392597
+      systemVersion: 6.0.6
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrbBrutalStri.Q0ou16II1WEcCdyW'
-  - type: enchantment
-    name: Improved Brutal Strike (13)
-    img: icons/skills/melee/strike-axe-blood-red.webp
-    disabled: true
-    transfer: false
-    _id: tgQO3kbV4XKTLb22
-    system:
-      changes:
-        - key: name
-          type: override
-          value: Improved Brutal Strike
-          phase: initial
-          _id: OxSSkfesxWtxse5S
-          conditions: '{}'
-          replacement: ''
-          priority: null
-        - key: system.description.value
-          type: override
-          value: >-
-            <p>If you use [[/item Reckless Attack]], you can forgo any Advantage
-            on one Strength-based attack roll of your choice on your turn. The
-            chosen attack roll mustn't have Disadvantage. If the chosen attack
-            roll hits, the target takes an extra [[lookup
-            @scale.brutal-strike.damage]]{1d10} damage of the same type dealt by
-            the weapon or Unarmed Strike, and you can cause one Brutal Strike
-            effect of your choice. You have the following effect options.</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.WKgVJp5AQRLqOlDh
-            caption=false cite=false nameStyle=inline]</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.l33Ty0yfpOXRiLve
-            caption=false cite=false nameStyle=inline]</p>  <p>You have honed
-            new ways to attack furiously. The following effects are now among
-            your Brutal Strike options.</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.vcAdrcmUKQWA68QT
-            caption=false cite=false nameStyle=inline]</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.MP1qQsApCj19F2M5
-            caption=false cite=false nameStyle=inline]</p>
-          phase: initial
-          _id: F3TZfIJl4LH3dWUi
-          conditions: '{}'
-          replacement: ''
-          priority: null
-        - key: activities[enchant].name
-          type: override
-          value: Deactivate Improved Brutal Strike
-          phase: initial
-          _id: er8mrTVqhSDhmRs2
-          conditions: '{}'
-          replacement: ''
-          priority: null
-      origin:
-        actor: null
-        behavior: null
-        effect: null
-        item: null
-        message: null
-      magical: false
-      rider:
-        activities: []
-        effects: []
-        items: []
-    start: null
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    description: ''
-    origin: null
-    tint: '#ffffff'
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags: {}
-    _stats:
-      coreVersion: '14.370'
-      systemId: dnd5e
-      systemVersion: 6.1.0
-      createdTime: 1794426392597
-      modifiedTime: 1794426392597
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!phbbrbBrutalStri.tgQO3kbV4XKTLb22'
-  - type: enchantment
-    name: Improved Brutal Strike (17)
-    img: icons/skills/melee/strike-axe-blood-red.webp
-    disabled: true
-    transfer: false
-    _id: a4EuGL5bc8WLazSu
-    system:
-      changes:
-        - key: name
-          type: override
-          value: Improved Brutal Strike
-          phase: initial
-          _id: Def7dAWTvTsMoiZN
-          conditions: '{}'
-          replacement: ''
-          priority: null
-        - key: system.description.value
-          type: override
-          value: >-
-            <p>If you use [[/item Reckless Attack]], you can forgo any Advantage
-            on one Strength-based attack roll of your choice on your turn. The
-            chosen attack roll mustn't have Disadvantage. If the chosen attack
-            roll hits, the target takes an extra [[lookup
-            @scale.brutal-strike.damage]]{2d10} damage of the same type dealt by
-            the weapon or Unarmed Strike, and you can cause two different Brutal
-            Strike effects of your choice. You have the following effect
-            options.</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.WKgVJp5AQRLqOlDh
-            caption=false cite=false nameStyle=inline]</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.l33Ty0yfpOXRiLve
-            caption=false cite=false nameStyle=inline]</p>  <p>You have honed
-            new ways to attack furiously. The following effects are now among
-            your Brutal Strike options.</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.vcAdrcmUKQWA68QT
-            caption=false cite=false nameStyle=inline]</p>
-            <p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.MP1qQsApCj19F2M5
-            caption=false cite=false nameStyle=inline]</p>
-          phase: initial
-          _id: VEQeMATKZSBSCmpl
-          conditions: '{}'
-          replacement: ''
-          priority: null
-        - key: activities[enchant].name
-          type: override
-          value: Deactivate Improved Brutal Strike
-          phase: initial
-          _id: BjBEWPWX1A4fMqvH
-          conditions: '{}'
-          replacement: ''
-          priority: null
-      origin:
-        actor: null
-        behavior: null
-        effect: null
-        item: null
-        message: null
-      magical: false
-      rider:
-        activities: []
-        effects: []
-        items: []
-    start: null
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    description: ''
-    origin: null
-    tint: '#ffffff'
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags: {}
-    _stats:
-      coreVersion: '14.370'
-      systemId: dnd5e
-      systemVersion: 6.1.0
-      createdTime: 1794426392597
-      modifiedTime: 1794426392597
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!phbbrbBrutalStri.a4EuGL5bc8WLazSu'
 folder: p6WDpW0gzmKfhGad
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.370'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 6.1.0
-  createdTime: 1794426392597
-  modifiedTime: 1794426392597
+  systemVersion: 6.0.6
+  createdTime: 1792692286451
+  modifiedTime: 1792692286451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

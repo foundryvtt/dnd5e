@@ -124,7 +124,7 @@ system:
       level: 1
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     vbNdqiHqN2qTbnUw:
       _id: vbNdqiHqN2qTbnUw
       type: ItemGrant
@@ -143,7 +143,7 @@ system:
       level: 2
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     MUU3y634K3edUdyL:
       _id: MUU3y634K3edUdyL
       type: ItemGrant
@@ -159,7 +159,7 @@ system:
       level: 3
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     YzgEeP9pAA0c3bbn:
       _id: YzgEeP9pAA0c3bbn
       type: AbilityScoreImprovement
@@ -199,7 +199,7 @@ system:
       level: 5
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     ALO7yStJ7IHDxOss:
       _id: ALO7yStJ7IHDxOss
       type: ItemGrant
@@ -218,7 +218,7 @@ system:
       level: 7
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     Xl4k2CTxTMhAZbGt:
       _id: Xl4k2CTxTMhAZbGt
       type: AbilityScoreImprovement
@@ -255,7 +255,7 @@ system:
       level: 9
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     5S7821U8Dtg9egZu:
       _id: 5S7821U8Dtg9egZu
       type: ItemGrant
@@ -271,7 +271,7 @@ system:
       level: 11
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     5hgfh1Zcyct9PXLy:
       _id: 5hgfh1Zcyct9PXLy
       type: AbilityScoreImprovement
@@ -293,6 +293,22 @@ system:
       flags: {}
       hint: ''
       name: ''
+    zqXib0MKbaqrTTVR:
+      _id: zqXib0MKbaqrTTVR
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+            optional: false
+            sort: 0
+        optional: false
+        spell: null
+        sorting: m
+      value: {}
+      level: 13
+      flags: {}
+      hint: ''
+      name: Class Features
     YYXyPXHTKRgnPswF:
       _id: YYXyPXHTKRgnPswF
       type: ItemGrant
@@ -308,7 +324,7 @@ system:
       level: 15
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     SI7lbuRXd2YfXXEi:
       _id: SI7lbuRXd2YfXXEi
       type: AbilityScoreImprovement
@@ -330,6 +346,22 @@ system:
       flags: {}
       hint: ''
       name: ''
+    e5XIkDQYhqNDImgs:
+      _id: e5XIkDQYhqNDImgs
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
+            optional: false
+            sort: 0
+        optional: false
+        spell: null
+        sorting: m
+      value: {}
+      level: 17
+      flags: {}
+      hint: ''
+      name: Class Features
     WlOoBbYeEoCTcD0t:
       _id: WlOoBbYeEoCTcD0t
       type: ItemGrant
@@ -345,7 +377,7 @@ system:
       level: 18
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     vsCiTVHhgLseNJjr:
       _id: vsCiTVHhgLseNJjr
       type: ItemGrant
@@ -361,7 +393,7 @@ system:
       level: 20
       flags: {}
       hint: ''
-      name: ''
+      name: Class Features
     WB74p7CaIJKZVoNK:
       _id: WB74p7CaIJKZVoNK
       type: HitPoints
@@ -560,11 +592,11 @@ folder: ZzMJGIp9Rxhr2hDV
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.370'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 6.1.0
-  createdTime: 1794426392593
-  modifiedTime: 1794426392593
+  systemVersion: 6.0.6
+  createdTime: 1792692286446
+  modifiedTime: 1792692286446
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
