@@ -19,8 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,6 +29,7 @@ system:
   duration:
     value: '10'
     units: minute
+    expiry: null
   target:
     affects:
       type: space
@@ -35,9 +37,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '60'
     units: ft
@@ -57,9 +60,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -73,18 +73,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -101,6 +107,7 @@ system:
         saves: true
         attacks: false
         proficiency: false
+        disposition: false
       profiles:
         - count: ''
           name: ''
@@ -111,13 +118,21 @@ system:
             max: null
           types: []
       summon:
-        identifier: ''
         mode: ''
         prompt: false
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      effects: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     dnd5eactivity100:
       _id: dnd5eactivity100
       type: save
@@ -130,24 +145,30 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts:
           - number: 3
             denomination: 10
@@ -161,16 +182,34 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      name: ''
   identifier: conjure-animals
+  method: spell
+  prepared: 0
 _id: phbsplConjureAni
 type: spell
 img: icons/creatures/abilities/wolf-heads-swirl-purple.webp
@@ -179,18 +218,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 3100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425946370
-  modifiedTime: 1745256788677
+  systemVersion: 6.1.0
+  createdTime: 1794334504318
+  modifiedTime: 1794334504318
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplConjureAni'

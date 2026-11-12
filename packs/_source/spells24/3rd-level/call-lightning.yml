@@ -14,13 +14,18 @@ system:
       spell, the spell gives you control over that storm instead of creating a
       new one. Under such conditions, the spell's damage increases by
       1d10.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
-      increases by 1d10 for each spell slot level above 3.</p>
+      increases by 1d10 for each spell slot level above 3.</p><section
+      id="secret-UISNs3WQbYOUh9Zp" class="secret
+      hide-in-embed"><p><strong>Foundry Note</strong></p><p>For later lightning
+      strikes, select the spell level used for the original casting. The strike
+      activities do not consume another spell slot.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,17 +33,25 @@ system:
   duration:
     value: '10'
     units: minute
+    expiry: null
   target:
     affects:
       choice: false
+      type: creature
+      count: ''
+      special: ''
     template:
       units: ft
       type: cylinder
       size: '60'
       contiguous: false
+      height: '10'
+      count: ''
+      stationary: false
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -54,9 +67,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -64,28 +74,46 @@ system:
       activation:
         type: action
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
+        spellSlot: false
       description:
-        chatFlavor: ''
+        chatFlavor: Bolt strikes a point under the cloud in a 5-ft. radius
+        value: >-
+          <p>Call down lightning at a point beneath the storm cloud. Creatures
+          within 5 feet of that point make the spell's Dexterity saving throw
+          against 3d10 Lightning damage.</p>
       duration:
         units: inst
-        override: false
+        override: true
+        concentration: false
+        expiry: null
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: Under the storm cloud
+        value: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: sphere
+          size: '5'
+          count: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
@@ -101,64 +129,173 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
+        max: ''
+      sort: 200000
+      name: Lightning Strike
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    sPDfCSoPWxrz2niL:
+      type: utility
+      name: Cast Spell
+      _id: sPDfCSoPWxrz2niL
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
+        spellSlot: true
+        targets: []
       description:
+        value: >-
+          <p>Summon a towering storm cloud overhead, gathering thunder and
+          lightning above the battlefield as you take control of the storm.</p>
         chatFlavor: ''
       duration:
         units: inst
+        expiry: null
+        concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    8DvTC5lYcdKn1Q3r:
+      type: save
+      name: Lightning Strike (Storm)
+      _id: 8DvTC5lYcdKn1Q3r
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Use this activity for a strike from a storm-enhanced casting.
+          Creatures within 5 feet of the chosen point make the spell's Dexterity
+          saving throw against 4d10 Lightning damage.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: Under the storm cloud
+        value: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: sphere
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
-        critical:
-          allow: false
-          bonus: ''
+        onSave: half
         parts:
-          - number: 4
-            denomination: 10
-            bonus: ''
-            types: []
-            custom:
+          - custom:
               enabled: false
               formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            modifiers: []
+            types:
+              - lightning
             scaling:
               mode: whole
               number: 1
               formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: call-lightning
+  method: spell
+  prepared: 0
 _id: phbsplCallLightn
 type: spell
 img: icons/magic/lightning/bolt-strike-cloud-gray.webp
@@ -167,18 +304,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 3300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425944252
-  modifiedTime: 1745256787363
+  systemVersion: 6.1.0
+  createdTime: 1794253859001
+  modifiedTime: 1794253859001
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplCallLightn'

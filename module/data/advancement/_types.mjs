@@ -190,6 +190,13 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef SubclassAdvancementConfigurationData
+ * @property {object} [suggested]
+ * @property {boolean} [suggested.fixed]  Prevent selecting any other class than the suggested one.
+ * @property {string} [suggested.uuid]    Subclass to select automatically during advancement.
+ */
+
+/**
  * @typedef SubclassAdvancementValueData
  * @property {Item5e} document  Copy of the subclass on the actor.
  * @property {string} uuid      UUID of the remote subclass source.

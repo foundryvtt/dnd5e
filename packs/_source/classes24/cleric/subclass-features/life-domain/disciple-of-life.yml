@@ -9,10 +9,10 @@ system:
       <p>When a spell you cast with a spell slot restores Hit Points to a
       creature, that creature regains additional Hit Points on the turn you cast
       the spell. The additional Hit Points equal 2 plus the spell slot's
-      level.</p><section class="secret"
-      id="secret-Gy6bYP3AKuabnUlQ"><p><strong>Foundry Note</strong></p><p>This
-      feature includes a healing activity. Set the scale to the spell slot level
-      you cast and it will provide a healing roll for you.</p></section>
+      level.</p><section id="secret-Gy6bYP3AKuabnUlQ"
+      class="secret"><p><strong>Foundry Note</strong></p><p>Use the Enchant
+      Healing Spell activity to apply Disciple of Life to qualifying healing
+      spells on your character.</p></section>
     chat: ''
   source:
     custom: ''
@@ -35,85 +35,152 @@ system:
   properties: []
   requirements: Life Domain
   activities:
-    Dm91WPfNiRty1bXv:
-      type: heal
+    7BzRpy5Nw0guVN1y:
+      type: enchant
+      name: Enchant Healing Spell
+      _id: 7BzRpy5Nw0guVN1y
+      img: ''
+      sort: 100000
       activation:
         type: ''
-        value: null
         override: false
         condition: ''
+      behaviors: []
       consumption:
-        targets: []
         scaling:
-          allowed: true
-          max: '9'
+          allowed: false
         spellSlot: true
+        targets: []
       description:
+        value: >-
+          <p>Apply the Disciple of Life enchantment to a qualifying healing
+          spell on your character.</p>
         chatFlavor: ''
-        value: ''
       duration:
         units: inst
+        expiry: null
         concentration: false
         override: false
-        expiry: null
-      effects: []
+      effects:
+        - _id: SJswY9WWGfmNXW2E
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
       range:
+        units: any
         override: false
-        units: self
         special: ''
       target:
         template:
           contiguous: false
+          stationary: false
           units: ft
           type: ''
-          stationary: false
         affects:
           choice: false
-          count: '1'
-          type: creature
-          special: Creature you cast a healing spell on
+          type: ''
+          count: ''
+          special: ''
         override: false
-        prompt: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      healing:
-        number: null
-        denomination: 0
-        types:
-          - healing
-        custom:
-          enabled: true
-          formula: '@scaling + 2'
-        scaling:
-          number: 1
-        bonus: ''
-        modifiers: []
-      name: ''
-      _id: Dm91WPfNiRty1bXv
-      img: null
-      behaviors: []
-      flags: {}
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
   enchant: {}
   identifier: disciple-of-life
   advancement: {}
   crewed: false
-effects: []
+effects:
+  - type: enchantment
+    name: Disciple of Life
+    img: icons/magic/life/cross-beam-green.webp
+    disabled: true
+    transfer: false
+    _id: SJswY9WWGfmNXW2E
+    system:
+      changes:
+        - key: activities[heal].healing.bonus
+          type: add
+          value: 2 + @item.level
+          phase: initial
+          _id: WijaADyu08C6CTKe
+          conditions: '{}'
+          replacement: ''
+          priority: null
+        - key: name
+          type: override
+          value: '{} (Enchanted)'
+          phase: initial
+          _id: o0oHTXMwOBSUE1DJ
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: true
+      rider:
+        activities: []
+        effects: []
+        items: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.370'
+      systemId: dnd5e
+      systemVersion: 6.1.0
+      createdTime: 1794357072037
+      modifiedTime: 1794357072037
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbclcDiscipleOf.SJswY9WWGfmNXW2E'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.368'
+  coreVersion: '14.370'
   systemId: dnd5e
-  systemVersion: 6.0.5
-  createdTime: 1791496339685
-  modifiedTime: 1791496339685
+  systemVersion: 6.1.0
+  createdTime: 1794357072037
+  modifiedTime: 1794357072037
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

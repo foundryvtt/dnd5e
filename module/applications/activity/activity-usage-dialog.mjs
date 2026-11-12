@@ -330,7 +330,7 @@ export default class ActivityUsageDialog extends Dialog5e {
     if ( this.activity.target?.template?.type && this._shouldDisplay("create.measuredTemplate") ) {
       context.hasCreation = true;
       context.template = {
-        field: new BooleanField({ label: _loc("DND5E.TARGET.Action.PlaceTemplate") }),
+        field: new BooleanField({ label: _loc("DND5E.TARGET.Action.PlaceTemplate.Full") }),
         name: "create.measuredTemplate",
         value: this.config.create?.measuredTemplate
       };

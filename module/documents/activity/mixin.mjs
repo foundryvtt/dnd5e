@@ -725,17 +725,26 @@ export default function ActivityMixin(Base) {
       if ( this.target?.template?.type ) buttons.push({
         action: "placeTemplate",
         icon: "fa-solid fa-bullseye",
-        label: { value: "DND5E.TARGET.Action.PlaceTemplate" }
+        label: {
+          short: "DND5E.TARGET.Action.PlaceTemplate.Short",
+          value: "DND5E.TARGET.Action.PlaceTemplate.Full"
+        }
       });
 
       if ( message.hasConsumption ) buttons.push({
         action: "consumeResource",
         icon: "fa-solid fa-cubes-stacked",
-        label: { value: "DND5E.CONSUMPTION.Action.ConsumeResource" }
+        label: {
+          short: "DND5E.CONSUMPTION.Action.ConsumeResource.Short",
+          value: "DND5E.CONSUMPTION.Action.ConsumeResource.Full"
+        }
       }, {
         action: "refundResource",
         icon: "fa-solid fa-clock-rotate-left",
-        label: { value: "DND5E.CONSUMPTION.Action.RefundResource" }
+        label: {
+          short: "DND5E.CONSUMPTION.Action.RefundResource.Short",
+          value: "DND5E.CONSUMPTION.Action.RefundResource.Full"
+        }
       });
 
       return buttons;

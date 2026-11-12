@@ -29,13 +29,6 @@
   .journal-entry-content,
   &.journal-entry-page .window-content {
 
-    h1 { font-size: var(--dnd5e-journal-h1-size); }
-    h2 { font-size: var(--dnd5e-journal-h2-size); }
-    h3 { font-size: var(--dnd5e-journal-h3-size); }
-    h4 { font-size: var(--dnd5e-journal-h4-size); }
-    h5 { font-size: var(--dnd5e-journal-h5-size); }
-    h6 { font-size: var(--dnd5e-journal-h6-size); }
-
     /* Page Title */
     .journal-header .title {
       border: 1px transparent;
@@ -54,6 +47,41 @@
         background: none;
         color: var(--color-text-primary);
       }
+    }
+  }
+
+  article.journal-entry-page {
+    .journal-page-content {
+      font-family: var(--font-body);
+      font-size: var(--font-size-15);
+      line-height: 1.45;
+    }
+
+    .statblock { font-size: var(--font-size-14); }
+
+    h1, h2, h3 {
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      border-bottom: none;
+    }
+
+    h1 { font-size: var(--dnd5e-journal-h1-size); }
+    h2 { font-size: var(--dnd5e-journal-h2-size); }
+    h3 { font-size: var(--dnd5e-journal-h3-size); }
+
+    h4 {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: var(--dnd5e-journal-h4-size);
+    }
+
+    h5 {
+      font-family: var(--font-h5);
+      font-size: var(--dnd5e-journal-h5-size);
+    }
+
+    h6 {
+      font-family: var(--font-h6);
+      font-size: var(--dnd5e-journal-h6-size);
     }
   }
 

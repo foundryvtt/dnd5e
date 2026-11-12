@@ -18,6 +18,7 @@
       opacity: 0.75;
       transition: opacity 250ms ease;
       margin-right: 0.25em;
+      text-indent: 0;
     }
 
     &.broken {
@@ -389,15 +390,9 @@
   }
 
   /** System Rich Text Blocks **/
-  :is(.journal-entry-content, .journal-page-content) {
-    h1, h2, h3 {
-      font-family: var(--dnd5e-font-modesto);
-      font-weight: bold;
-      border-bottom: none;
-    }
-  }
-
   :is(.editor-content, .card-content, .card-description, .item-summary) {
+    font-family: var(--dnd5e-font-roboto-condensed);
+
     h1, h2, h3 { font-family: var(--dnd5e-font-roboto-slab); }
     h1 { font-size: 1.5em; }
     h2 { font-size: 1.4em; }
@@ -405,7 +400,7 @@
     h3 {
       font-size: 1.25em;
       padding-bottom: 0;
-      border-bottom: 1px solid var(--dnd5e-color-black);
+      border-bottom: none;
     }
     h5, h6 {
       font-family: var(--font-sans);
@@ -417,8 +412,6 @@
   :is(
     .journal-entry-content, .journal-page-content, .editor-content, .card-content, .card-description, .item-summary
   ) {
-    font-family: var(--dnd5e-font-roboto-condensed);
-
     h1, h2, h3, h4, h5, h6 { color: var(--color-text-emphatic); }
 
     h1, h2, h3, h4 {

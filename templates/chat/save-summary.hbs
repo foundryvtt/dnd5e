@@ -8,10 +8,12 @@
     {{/each}}
     {{#with buttonGroups.resist}}
     {{#each entries}}
-    <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
+    <button type="button" class="{{ ifThen label.short "labelled" "icon" }}"
+        data-tooltip aria-label="{{ localize label.value }}"
         {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action}}"
         {{else}}data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
         {{ dnd5e-icon icon }}
+        {{#if label.short}}<span>{{ localize label.short }}</span>{{/if}}
     </button>
     {{/each}}
     {{/with}}
