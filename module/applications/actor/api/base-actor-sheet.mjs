@@ -1755,6 +1755,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _onDropActiveEffect(event, effect) {
+    if ( !this.actor.isOwner || !this.isEditable ) return null;
+    if ( effect.actor === this.actor ) {
+      const result = EffectsElement.sortActiveEffect(event, effect);
+      return result?.length ? effect : null;
+    }
+    return super._onDropActiveEffect(event, effect);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _onDropActor(event, actor) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
