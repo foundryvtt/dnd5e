@@ -36,6 +36,17 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Find the next valid sort value for a new document in a collection which places it after all existing documents.
+ * @param {Array<{ sort: number }>|Collection<{ sort: number }>|Iterator<{ sort: number }>} collection
+ * @returns {number}
+ */
+export function nextSortValue(collection) {
+  return collection.reduce((s, v) => Math.max(s, v.sort), -CONST.SORT_INTEGER_DENSITY) + CONST.SORT_INTEGER_DENSITY;
+}
+
+/* -------------------------------------------- */
 /*  Currencies                                  */
 /* -------------------------------------------- */
 
