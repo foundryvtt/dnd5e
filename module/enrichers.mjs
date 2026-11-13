@@ -802,7 +802,9 @@ export async function enrichSave(config, label, options) {
 
   config = { type: config._isConcentration ? "concentration" : "save", ...config };
   if ( label ) label = createRollLink(label);
-  else if ( config.ability.length <= 1 ) label = createRollLink(createRollLabel(config));
+  else if ( config.ability.length <= 1 ) label = createRollLink(createRollLabel({
+    ...config, ability: config.ability[0]
+  }));
   else {
     label = game.i18n.getListFormatter({ type: "disjunction" }).format(config.ability.map(ability =>
       createRollLink(createRollLabel({ type: "save", ability }), { ability }).outerHTML
@@ -898,7 +900,7 @@ async function rollCheckSave(config, event) {
         await actor.rollConcentration(options);
         break;
       case "save":
-        await actor.rollSavingThrow(options);
+        await actor[ability === "concentration" ? "rollConcentration" : "rollSavingThrow"](options);
         break;
       case "skill":
         await actor.rollSkill({ skill, tool: config.usingTool, ...options });
@@ -1594,6 +1596,9 @@ function createPassiveTag(label, dataset) {
  * @returns {string}
  */
 export function createRollLabel(config) {
+  if ( (config.type === "save") && (config.ability === "concentration") ) {
+    config = { ...config, type: "concentration", ability: undefined };
+  }
   const { label: ability, abbreviation } = CONFIG.DND5E.enrichmentLookup.abilities[config.ability] ?? {};
   const skill = CONFIG.DND5E.enrichmentLookup.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
