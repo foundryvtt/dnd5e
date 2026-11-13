@@ -103,4 +103,19 @@ export default class BasicDie extends Die {
     if ( selection.length ) this.modifiers = rerolls.concat(selection, remaining);
     return super._evaluateModifiers();
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Add or remove the provided modifier from the Die.
+   * @param {string} modifier         Modifier to toggle.
+   * @param {boolean} [enabled=true]  Whether to enable or disable the modifier.
+   */
+  toggleModifier(modifier, enabled=true) {
+    const index = this.modifiers.findIndex(m => m === modifier);
+    if ( enabled && (index === -1) ) this.modifiers.push(modifier);
+    else if ( !enabled && (index !== -1) ) this.modifiers.splice(index, 1);
+  }
 }
