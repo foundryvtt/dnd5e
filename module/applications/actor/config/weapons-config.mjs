@@ -34,8 +34,8 @@ export default class WeaponsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    super._processChoice(data, key, choice, categoryChosen);
+  _processChoice(data, key, choice, category) {
+    super._processChoice(data, key, choice, category);
     choice.mastery = {
       chosen: data.mastery.value?.includes(key),
       disabled: !choice.chosen

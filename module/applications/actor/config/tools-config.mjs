@@ -28,8 +28,8 @@ export default class ToolsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    super._processChoice(data, key, choice, categoryChosen);
+  _processChoice(data, key, choice, category) {
+    super._processChoice(data, key, choice, category);
     const tool = data[key];
     if ( tool ) {
       choice.hasEntry = true;

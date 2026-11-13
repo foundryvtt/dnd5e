@@ -74,7 +74,7 @@ export async function actorValues(actor, trait) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
-  } else if ( trait === "dm" ) {
+  } else if ( (trait === "dm") || (trait === "hm") ) {
     Object.entries(data.amount).forEach(([k, d]) => setValue(k, d));
   } else {
     data.value?.forEach(v => setValue(v, 1));

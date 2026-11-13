@@ -107,13 +107,17 @@ export default class TraitsConfig extends BaseConfigSheet {
    * masteries are only enabled if character has proficiency.
    * @param {object} data                     Traits data.
    * @param {SelectChoices} choices           Choices object.
-   * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @param {object} [category]
+   * @param {boolean} [category.chosen=false]  Is the category above this one selected?
+   * @param {string} [category.key]            Key for the category containing these choice.
    * @protected
    */
-  _processChoices(data, choices, categoryChosen=false) {
+  _processChoices(data, choices, category) {
     for ( const [key, choice] of Object.entries(choices) ) {
-      this._processChoice(data, key, choice, categoryChosen);
-      if ( choice.children ) this._processChoices(data, choice.children, choice.chosen && (key !== "OTHER"));
+      this._processChoice(data, key, choice, category);
+      if ( choice.children ) this._processChoices(data, choice.children, {
+        key, chosen: choice.chosen && (key !== "OTHER")
+      });
     }
   }
 
@@ -121,14 +125,16 @@ export default class TraitsConfig extends BaseConfigSheet {
 
   /**
    * Perform any modification on a choice.
-   * @param {object} data                     Traits data.
-   * @param {string} key                      Choice key.
-   * @param {object} choice                   Data for the choice.
-   * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @param {object} data                      Traits data.
+   * @param {string} key                       Choice key.
+   * @param {object} choice                    Data for the choice.
+   * @param {object} [category={}]
+   * @param {boolean} [category.chosen=false]  Is the category above this one selected?
+   * @param {string} [category.key]            Key for the category containing this choice.
    * @protected
    */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    if ( ((data.value?.includes?.("ALL") && (key !== "ALL")) || categoryChosen) && (choice.selectable !== false) ) {
+  _processChoice(data, key, choice, category) {
+    if ( ((data.value?.includes?.("ALL") && (key !== "ALL")) || category?.chosen) && (choice.selectable !== false) ) {
       choice.chosen = true;
       choice.disabled = true;
     }
