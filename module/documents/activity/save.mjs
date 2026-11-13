@@ -126,6 +126,8 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
       const rollData = {
         event,
+        activity: this,
+        item: this.item,
         ability: ability ?? this.save.ability.first(),
         target: Number.isFinite(dc) ? dc : this.save.dc.value
       };
