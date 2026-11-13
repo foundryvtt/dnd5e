@@ -6,6 +6,7 @@ import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import BastionTurnMessageData from "../data/chat-message/bastion-turn-message-data.mjs";
 import ClassData from "../data/item/class.mjs";
+import ConsumableData from "../data/item/consumable.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
@@ -498,7 +499,7 @@ export default class Item5e extends SystemDocumentMixin(foundry.documents.Item) 
   get areEffectsSuppressed() {
     if ( this.isHidden ) return true;
     const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.type.value);
+      || ConsumableData.EQUIPPABLE.has(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     if ( this.parent?.system?.isGroup ) return true;
     return !this.system.attuned && (this.system.attunement === "required");
