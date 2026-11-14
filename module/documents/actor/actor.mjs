@@ -366,7 +366,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
 
   /* --------------------------------------------- */
 
- /** @inheritDoc */
+  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     this._embeddedPreparation = true;
     try {
