@@ -370,19 +370,11 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
   prepareEmbeddedDocuments() {
     this._embeddedPreparation = true;
     try {
-      // Prepare conditions first so statuses such as antimagic are available to item enchantments.
-      const conditions = new Set(this.effects.documentsByType.condition);
-      for ( const effect of conditions ) effect._safePrepareData();
-      for ( const effect of conditions ) {
-        if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+      for ( const effect of this.effects.documentsByType.condition ) {
+        if ( !effect.active ) continue;
+        for ( const status of effect.statuses ) this.statuses.add(status);
       }
-      // Reproduce core's embedded preparation here to avoid preparing conditions twice.
-      for ( const collectionName of Object.keys(this.constructor.hierarchy) ) {
-        for ( const document of this.getEmbeddedCollection(collectionName) ) {
-          if ( !conditions.has(document) ) document._safePrepareData();
-        }
-      }
-      this.applyActiveEffects("initial");
+      super.prepareEmbeddedDocuments();
     } finally {
       delete this._embeddedPreparation;
     }
