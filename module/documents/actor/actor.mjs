@@ -3099,7 +3099,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       // Set armor class
       const minimumAC = simplifyBonus(settings.minimumAC, rollData);
       if ( minimumAC > source.system.attributes.ac.value ) {
-        d.system.attributes.ac.calc = "natural";
+        d.system.attributes.ac.calcs = ["natural"];
         d.system.attributes.ac.flat = minimumAC;
       }
 

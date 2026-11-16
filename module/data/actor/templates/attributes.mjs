@@ -41,7 +41,7 @@ export default class AttributesFields {
       }),
       calc: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calc.label" }),
       calcs: new SetField(new StringField(), {
-        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.label",
+        initial: () => ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.hint"
       }),
       cover: new NumberField({

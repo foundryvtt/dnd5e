@@ -295,8 +295,9 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       const acBonus = new Roll(this.bonuses.ac, rollData);
       await acBonus.evaluate();
       if ( acBonus.total ) {
-        if ( actor.system.attributes.ac.calc === "flat" ) {
-          actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
+        const { override } = actor.system.attributes.ac;
+        if ( Number.isFinite(override) ) {
+          actorUpdates["system.attributes.ac.override"] = override + acBonus.total;
         } else {
           actorUpdates.effects.push((new ActiveEffect.implementation({
             _id: staticID("dnd5eACBonus"),
