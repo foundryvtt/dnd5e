@@ -112,6 +112,14 @@ export default class ConsumableData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The consumable categories that can be equipped, and must be equipped for attunement purposes.
+   * @type {Set<string>}
+   */
+  static EQUIPPABLE = new Set(["rod", "trinket", "wand"]);
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 

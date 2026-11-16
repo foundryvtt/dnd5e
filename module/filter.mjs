@@ -340,6 +340,7 @@ export function has(data, value) {
     switch ( foundry.utils.getType(data) ) {
       case "Array":
       case "Set": return !!data.find(d => performCheck(d, value));
+      case "Object": return foundry.utils.objectValues(data).some(d => performCheck(d, value));
       default: return false;
     }
   } else return in_(value, data);

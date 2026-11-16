@@ -369,8 +369,15 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     this._embeddedPreparation = true;
-    super.prepareEmbeddedDocuments();
-    delete this._embeddedPreparation;
+    try {
+      for ( const effect of this.effects.documentsByType.condition ) {
+        if ( !effect.active ) continue;
+        for ( const status of effect.statuses ) this.statuses.add(status);
+      }
+      super.prepareEmbeddedDocuments();
+    } finally {
+      delete this._embeddedPreparation;
+    }
   }
 
   /* -------------------------------------------- */
@@ -3099,7 +3106,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       // Set armor class
       const minimumAC = simplifyBonus(settings.minimumAC, rollData);
       if ( minimumAC > source.system.attributes.ac.value ) {
-        d.system.attributes.ac.calc = "natural";
+        d.system.attributes.ac.calcs = ["natural"];
         d.system.attributes.ac.flat = minimumAC;
       }
 

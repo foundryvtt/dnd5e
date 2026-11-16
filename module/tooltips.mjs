@@ -81,13 +81,15 @@ export default class Tooltips5e {
 
     // General content links
     if ( isContentLink ) {
-      const doc = await fromUuid(game.tooltip.element.dataset.uuid);
+      const doc = await fromUuid(element.dataset.uuid);
+      if ( game.tooltip.element !== element ) return;
       return this._onHoverContentLink(doc, { extras });
     }
 
     // Sheet-specific tooltips
     if ( isSheetTooltip ) {
       const doc = await fromUuid(loading.dataset.uuid);
+      if ( game.tooltip.element !== element ) return;
       if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
       return this._onHoverContentLink(doc, { extras });
     }
@@ -112,9 +114,12 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverActor(actor) {
-    const { attribution, attributionCaption } = game.tooltip.element.dataset;
+    const { element } = game.tooltip;
+    const { attribution, attributionCaption } = element.dataset;
     if ( !attribution ) return;
-    this.tooltip.innerHTML = await actor.getAttributionData(attribution, { title: attributionCaption });
+    const html = await actor.getAttributionData(attribution, { title: attributionCaption });
+    if ( game.tooltip.element !== element ) return;
+    this.tooltip.innerHTML = html;
   }
 
   /* -------------------------------------------- */
@@ -132,11 +137,12 @@ export default class Tooltips5e {
     //  message-specific logic here.
     if ( !doc ) return game.tooltip.deactivate();
     if ( extras ) extras = foundry.utils.cleanHTML(extras);
+    const { element } = game.tooltip;
     const { content, classes } = await (doc.richTooltip?.({ extras }) ?? doc.system?.richTooltip?.({ extras }) ?? {});
-    if ( !content ) return;
+    if ( !content || (game.tooltip.element !== element) ) return;
     this.tooltip.innerHTML = content;
     if ( classes?.length ) this.tooltip.classList.add(...classes);
-    const { tooltipDirection } = game.tooltip.element.dataset;
+    const { tooltipDirection } = element.dataset;
     requestAnimationFrame(() => this._positionItemTooltip(tooltipDirection));
   }
 
@@ -233,9 +239,12 @@ export default class Tooltips5e {
     }
 
     this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2");
-    this.tooltip.innerHTML = await foundry.applications.handlebars.renderTemplate(
+    const { element } = game.tooltip;
+    const html = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/journal/passive-tooltip.hbs", context
     );
+    if ( game.tooltip.element !== element ) return;
+    this.tooltip.innerHTML = html;
     game.tooltip._setAnchor(TooltipManager.TOOLTIP_DIRECTIONS.DOWN);
   }
 

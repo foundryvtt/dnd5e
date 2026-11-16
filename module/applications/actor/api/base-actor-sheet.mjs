@@ -425,7 +425,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Character Flags
     for ( const [key, config] of Object.entries(CONFIG.DND5E.characterFlags) ) {
-      const flag = { ...config, name: `flags.dnd5e.${key}`, value: foundry.utils.getProperty(flags.data, key) };
+      const flag = {
+        ...config, disabled: flags.disabled,
+        name: `flags.dnd5e.${key}`, value: foundry.utils.getProperty(flags.data, key)
+      };
       const fieldOptions = { label: config.name, hint: config.hint };
       if ( config.type === Boolean ) {
         flag.field = new BooleanField(fieldOptions);
@@ -445,7 +448,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const addBonus = (field, checkName=false) => {
       if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f, checkName));
       else if ( !checkName || (field.name === "bonus") ) globals.push({
-        field, disabled: context.flags.disabled, localize: true, name: field.fieldPath,
+        field, disabled: flags.disabled, localize: true, name: field.fieldPath,
         value: foundry.utils.getProperty(source, field.fieldPath)
       });
     };

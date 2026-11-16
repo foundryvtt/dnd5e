@@ -364,7 +364,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
   buildTargetListEntry(targetList, { uuid, name }) {
     const token = fromUuidSync(uuid);
     if ( !token ) return;
-    if ( !token.isOwner ) return targetList.buildTargetListEntry({ name, uuid });
+    if ( !token.isOwner || !token.actor ) return targetList.buildTargetListEntry({ name, uuid });
 
     const options = this.getMergedOptions(uuid);
     const damage = this.calculateDamage(token.actor, options);

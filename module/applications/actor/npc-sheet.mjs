@@ -411,6 +411,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.flags.sections.unshift({
       label: _loc("DND5E.NPC.Label"),
       fields: [{
+        disabled: context.flags.disabled,
         field: fields.identifier,
         hint: "DND5E.IdentifierError",
         localize: true,
@@ -418,6 +419,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         placeholder: this.document.identifier,
         value: context.source.identifier
       }, {
+        disabled: context.flags.disabled,
         field: fields.traits.fields.important,
         input: createCheckboxInput,
         name: "system.traits.important",
@@ -429,12 +431,14 @@ export default class NPCActorSheet extends BaseActorSheet {
         },
         fields: [{
           classes: "label-top",
+          disabled: context.flags.disabled,
           field: fields.attributes.fields.price.fields.value,
           name: "system.attributes.price.value",
           value: context.source.attributes.price.value
         }, {
           choices: CONFIG.DND5E.currencies,
           classes: "label-top",
+          disabled: context.flags.disabled,
           field: fields.attributes.fields.price.fields.denomination,
           name: "system.attributes.price.denomination",
           value: context.source.attributes.price.denomination

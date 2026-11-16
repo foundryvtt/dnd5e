@@ -109,7 +109,10 @@ system:
   weight:
     value: 0
     units: lb
-  rarity: ''
+  rarities:
+    - uncommon
+    - rare
+    - veryRare
   attunement: ''
   attuned: false
   equipped: false
