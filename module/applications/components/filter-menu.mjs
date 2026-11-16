@@ -1,4 +1,6 @@
-import ItemListControlsElement from "./item-list-controls.mjs";
+/**
+ * @import ItemListControlsElement from "./item-list-controls.mjs";
+ */
 
 export default class FilterMenu extends foundry.applications.ux.ContextMenu {
   /**
@@ -28,7 +30,7 @@ export default class FilterMenu extends foundry.applications.ux.ContextMenu {
     await super.render(target, options);
     this.element.classList.add("dnd5e2");
     const controls = options.event?.currentTarget;
-    if ( !(controls instanceof ItemListControlsElement) ) return;
+    if ( !(controls instanceof customElements.get("item-list-controls")) ) return;
     this.#renderEntries(controls);
     this._setPosition(this.element, target, options);
     game.tooltip.deactivate();

@@ -1,7 +1,6 @@
 import { loadingTooltip } from "../../utils.mjs";
 import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import CheckboxElement from "../components/checkbox.mjs";
-import ItemSheet5e from "../item/item-sheet.mjs";
 
 /**
  * @import { FilterState5e, ItemListComparator5e } from "../components/_types.mjs";
@@ -517,7 +516,7 @@ export default function PrimarySheetMixin(Base) {
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
-      this._openDocumentSheet(doc, { mode: ItemSheet5e.MODES[mode] });
+      this._openDocumentSheet(doc, { mode: this.constructor.MODES[mode] });
     }
 
     /* -------------------------------------------- */
