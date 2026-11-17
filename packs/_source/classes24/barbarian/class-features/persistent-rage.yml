@@ -52,7 +52,7 @@ system:
             target: ''
             scaling: {}
           - type: itemUses
-            value: -@scale.barbarian.rage
+            value: -@scale.barbarian.rages
             target: feat:rage
             scaling: {}
         scaling:
