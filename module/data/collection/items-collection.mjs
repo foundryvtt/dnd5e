@@ -22,7 +22,10 @@ export default class Items5e extends foundry.documents.collections.Items {
       const toCreate = await Item5e.createWithContents(contents, {
         container: created, keepId: options.keepId, transformAll: item => this.fromCompendium(item, fromOptions)
       });
-      await Item5e.createDocuments(toCreate, {fromCompendium: true, keepId: true});
+      if ( Item5e.createOrReplaceDocuments ) {
+        await Item5e.createOrReplaceDocuments(toCreate, { fromCompendium: true, preserve: ["folder", "ownership"] });
+      }
+      else await Item5e.createDocuments(toCreate, { fromCompendium: true, keepId: true });
     }
 
     return created;
