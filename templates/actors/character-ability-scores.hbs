@@ -23,16 +23,20 @@
                     aria-label="{{ localize 'DND5E.AbilityConfigure' ability=label }}">
                 <i class="fas fa-cog" inert></i>
             </button>
-            {{else}}
+            {{else if valid}}
             {{ dnd5e-formatModifier mod }}
+            {{else}}
+            &mdash;
             {{/if}}
         </div>
         <div class="score">
             {{#if @root.editable}}
-            <input type="text" name="system.abilities.{{ key }}.value" value="{{ source.value }}" placeholder="10"
+            <input type="text" name="system.abilities.{{ key }}.value" value="{{ source.value }}"
                    data-dtype="Number" class="uninput">
-            {{else}}
+            {{else if valid}}
             {{ value }}
+            {{else}}
+            &mdash;
             {{/if}}
         </div>
     </div>

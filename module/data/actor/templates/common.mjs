@@ -32,7 +32,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new SchemaField({
         value: new NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore",
+          required: true, integer: true, min: 0, label: "DND5E.AbilityScore",
           labelFormatter: "DND5E.ABILITY.Formatter.Score"
         }),
         proficient: new NumberField({
@@ -305,6 +305,15 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   /* -------------------------------------------- */
 
   /**
+   * Set the validity of each ability score.
+   */
+  prepareBaseAbilities() {
+    Object.values(this.abilities).forEach(a => a.valid = a.value !== null);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare modifiers and other values for abilities.
    * @param {object} [options={}]
    * @param {ActorRollData} [options.rollData={}]  Roll data used to calculate bonuses.
@@ -313,7 +322,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   prepareAbilities({ rollData={}, originalSaves }={}) {
     const flags = this.parent.flags.dnd5e ?? {};
     const { prof = 0, ac } = this.attributes ?? {};
-    Object.values(this.abilities).forEach(a => a.mod = Math.floor((a.value - 10) / 2));
+    Object.values(this.abilities).forEach(a => a.mod = a.valid ? Math.floor((a.value - 10) / 2) : 0);
     const checkBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
     const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);

@@ -92,8 +92,7 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "intelligence",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.WzWWcTIppki35YvF",
-    icon: "systems/dnd5e/icons/svg/abilities/intelligence.svg",
-    defaults: { vehicle: 0 }
+    icon: "systems/dnd5e/icons/svg/abilities/intelligence.svg"
   },
   wis: {
     label: "DND5E.AbilityWis",
@@ -101,8 +100,7 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "wisdom",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.v3IPyTtqvXqN934s",
-    icon: "systems/dnd5e/icons/svg/abilities/wisdom.svg",
-    defaults: { vehicle: 0 }
+    icon: "systems/dnd5e/icons/svg/abilities/wisdom.svg"
   },
   cha: {
     label: "DND5E.AbilityCha",
@@ -110,15 +108,14 @@ DND5E.abilities = {
     type: "mental",
     fullKey: "charisma",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.9FyghudYFV5QJOuG",
-    icon: "systems/dnd5e/icons/svg/abilities/charisma.svg",
-    defaults: { vehicle: 0 }
+    icon: "systems/dnd5e/icons/svg/abilities/charisma.svg"
   },
   hon: {
     label: "DND5E.AbilityHon",
     abbreviation: "DND5E.AbilityHonAbbr",
     type: "mental",
     fullKey: "honor",
-    defaults: { npc: "cha", vehicle: 0 },
+    defaults: { npc: "cha" },
     improvement: false
   },
   san: {
@@ -126,7 +123,7 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilitySanAbbr",
     type: "mental",
     fullKey: "sanity",
-    defaults: { npc: "wis", vehicle: 0 },
+    defaults: { npc: "wis" },
     improvement: false
   }
 };

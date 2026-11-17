@@ -397,6 +397,7 @@ export default class NPCData extends CreatureTemplate {
       this.attributes.spell.level = Math.max(this.details.cr, 1);
     }
 
+    this.prepareBaseAbilities();
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);

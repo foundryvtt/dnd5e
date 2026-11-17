@@ -107,12 +107,12 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         initial: sourceValue + fixed,
         delta: (sourceValue - initial) ? formatter.format(sourceValue - initial) : null,
         showDelta: true,
-        isDisabled: context.lockImprovement,
+        isDisabled: context.lockImprovement || !ability.valid,
         isFixed: !!locked || (sourceValue >= abilityMax),
         isLocked: locked,
         canIncrease: (sourceValue < max) && (assignment < context.points.cap) && !locked
-          && !context.lockImprovement,
-        canDecrease: (sourceValue > (initial + fixed)) && !locked && !context.lockImprovement,
+          && !context.lockImprovement && ability.valid,
+        canDecrease: (sourceValue > (initial + fixed)) && !locked && !context.lockImprovement && ability.valid,
         effectedValue: actor.overrides.system?.abilities?.[key]?.value !== undefined ? ability.value : null
       };
       return obj;
