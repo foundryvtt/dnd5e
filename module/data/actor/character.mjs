@@ -1,6 +1,6 @@
 import HitDice from "../../documents/actor/hit-dice.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
-import { defaultUnits, simplifyBonus } from "../../utils.mjs";
+import { defaultUnits, nextSortValue, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
@@ -341,12 +341,8 @@ export default class CharacterData extends CreatureTemplate {
       throw new Error(`The item with id ${favorite.id} is not owned by actor ${this.parent.id}`);
     }
 
-    let maxSort = 0;
-    const favorites = this.favorites.map(f => {
-      if ( f.sort > maxSort ) maxSort = f.sort;
-      return { ...f };
-    });
-    favorites.push({ ...favorite, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
+    const favorites = this.toObject().favorites;
+    favorites.push({ ...favorite, sort: nextSortValue(this.favorites) });
     return this.parent.update({ "system.favorites": favorites });
   }
 
