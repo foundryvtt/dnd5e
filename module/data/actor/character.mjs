@@ -195,6 +195,7 @@ export default class CharacterData extends CreatureTemplate {
       xp.pct = 100;
     }
 
+    this.prepareBaseAbilities();
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);

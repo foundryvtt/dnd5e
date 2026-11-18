@@ -191,7 +191,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       for ( let [key, delta] of Object.entries(data.assignments) ) {
         const ability = this.actor.system.abilities[key];
         const source = this.actor.system._source.abilities[key] ?? {};
-        if ( !ability || !this.canImprove(key) ) continue;
+        if ( !ability?.valid || !this.canImprove(key) ) continue;
         const max = Math.max(ability.max, this.configuration.max ?? -Infinity);
         delta = Math.min(delta, max - source.value);
         if ( delta ) {
