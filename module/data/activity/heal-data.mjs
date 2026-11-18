@@ -57,6 +57,10 @@ export default class BaseHealActivityData extends BaseActivityData {
 
     const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
     rollData ??= this.getRollData({ roll: true });
+    rollData.roll ??= {};
+    rollData.roll.properties ??= [];
+    if ( this.item.system.properties?.has("mgc") ) rollData.roll.properties.push("mgc");
+    if ( this.isSpell ) rollData.roll.properties.push("spell");
     const rules = {
       bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
       consumed: new Set()
