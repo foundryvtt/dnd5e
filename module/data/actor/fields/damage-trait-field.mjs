@@ -9,7 +9,8 @@ export default class DamageTraitField extends SimpleTraitField {
     super({
       bypasses: new SetField(new StringField(), {
         label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint", initial: initialBypasses
-      })
+      }),
+      ...fields
     }, options);
   }
 }
