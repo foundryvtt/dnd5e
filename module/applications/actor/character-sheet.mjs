@@ -1014,10 +1014,14 @@ export default class CharacterActorSheet extends BaseActorSheet {
       };
     }
 
-    const result = await CompendiumBrowser.selectOne({ filters }, this._detachOptions());
-    if ( result ) this._onDropCreateItems(event, [new Item.implementation(
-      game.items.fromCompendium(await fromUuid(result), { keepId: true })
-    )]);
+    // Allow picking one facility per open slot, or a single one when the only option is to build
+    const max = type === "facility" ? target.parentElement.querySelectorAll('[data-action="findItem"]').length : 1;
+    const result = await CompendiumBrowser.select({ filters, selection: { min: 1, max } }, this._detachOptions());
+    if ( !result ) return;
+    const items = await Promise.all(Array.from(result, async uuid => new Item.implementation(
+      game.items.fromCompendium(await fromUuid(uuid), { keepId: true })
+    )));
+    this._onDropCreateItems(event, items);
   }
 
   /* -------------------------------------------- */
