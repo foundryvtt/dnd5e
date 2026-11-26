@@ -171,12 +171,13 @@ export default class HitPointsAdvancement extends Advancement {
     }
 
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
-    if ( value === undefined ) return;
+    if ( value === null ) return;
     if ( this.value[level] !== undefined ) await this.reverse(level);
     this.updateSource({ value: data });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
     });
+    this.actor.reset();
   }
 
   /* -------------------------------------------- */
@@ -200,12 +201,13 @@ export default class HitPointsAdvancement extends Advancement {
   /** @inheritDoc */
   async reverse(level, options={}) {
     let value = this.valueForLevel(level);
-    if ( value === undefined ) return;
+    if ( value === null ) return;
     const source = { [level]: this.value[level] };
     this.updateSource({ [`value.${level}`]: _del });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
     });
+    this.actor.reset();
     return source;
   }
 }
