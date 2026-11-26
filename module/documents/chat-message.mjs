@@ -98,6 +98,15 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
   _trayStates;
 
   /* -------------------------------------------- */
+
+  /**
+   * Store the state of the main chat card description.
+   * @type {boolean}
+   * @protected
+   */
+  _expanded;
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -148,7 +157,7 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
       await this.system.getHTML(html, options);
     } else {
-      if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+      if ( !(this._expanded ?? !game.settings.get("dnd5e", "autoCollapseItemCards")) ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
       await this._enrichChatCard(html);
