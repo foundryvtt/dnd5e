@@ -1,4 +1,5 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
+import RollMessageData from "../data/chat-message/roll-message-data.mjs";
 import TargetsField from "../data/chat-message/fields/targets-field.mjs";
 import ContextMenu5e from "../applications/context-menu.mjs";
 
@@ -772,7 +773,8 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
    * @type {ChatMessage5e}
    */
   getOriginatingMessage() {
-    return this.system.origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
+    const origin = this.system instanceof RollMessageData ? this.system.origin : null;
+    return origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
   }
 
   /* -------------------------------------------- */
