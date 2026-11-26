@@ -144,7 +144,8 @@ system:
           - number: 1
             denomination: 8
             bonus: ''
-            types: []
+            types:
+              - radiant
             custom:
               enabled: false
               formula: ''
