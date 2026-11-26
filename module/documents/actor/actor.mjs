@@ -2864,7 +2864,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( (ActiveEffect5e.SHIM_FIELDS[change.key]?.key ?? change.key) !== target ) return n;
-        if ( change.type !== "add" ) return n;
+        if ( (change.type !== "add") || !change.applied ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
       if ( value ) attributions.push({ value, label: source, document: e, type: "add" });
