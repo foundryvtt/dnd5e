@@ -53,6 +53,8 @@ export default class D20Roll extends BasicRoll {
     config.options.halflingLucky ??= process.halflingLucky;
     config.options.reliableTalent ??= process.reliableTalent;
     config.options.target ??= process.target;
+    if ( process.modifiers ) config.options.modifiers = config.options.modifiers
+      ? config.options.modifiers.union(process.modifiers) : process.modifiers;
     return new this(formula, config.data, config.options);
   }
 
@@ -264,6 +266,7 @@ export default class D20Roll extends BasicRoll {
     this.d20.applyFlag("halflingLucky", this.options.halflingLucky === true);
     this.d20.applyAdvantage(this.options.advantageMode);
     this.d20.applyRange({ minimum, maximum: this.options.maximum });
+    this.d20.applyModifiers(this.options.modifiers);
 
     // Assign critical and fumble thresholds
     if ( this.options.criticalSuccess ) this.d20.options.criticalSuccess = this.options.criticalSuccess;
@@ -300,6 +303,8 @@ export default class D20Roll extends BasicRoll {
     merged.disadvantage = original.disadvantage || other.disadvantage;
     merged.maximum = Math.min(original.maximum ?? Infinity, other.maximum ?? Infinity);
     merged.minimum = Math.max(original.minimum ?? -Infinity, other.minimum ?? -Infinity);
+    merged.modifiers = original.modifiers && other.modifiers ? original.modifiers.union(other.modifiers)
+      : (original.modifiers ?? other.modifiers);
     return merged;
   }
 }
