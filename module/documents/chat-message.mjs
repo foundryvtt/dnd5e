@@ -1,4 +1,5 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
+import RollMessageData from "../data/chat-message/roll-message-data.mjs";
 import TargetsField from "../data/chat-message/fields/targets-field.mjs";
 import ContextMenu5e from "../applications/context-menu.mjs";
 
@@ -97,6 +98,15 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
   _trayStates;
 
   /* -------------------------------------------- */
+
+  /**
+   * Store the state of the main chat card description.
+   * @type {boolean}
+   * @protected
+   */
+  _expanded;
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -147,7 +157,7 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
       await this.system.getHTML(html, options);
     } else {
-      if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+      if ( !(this._expanded ?? !game.settings.get("dnd5e", "autoCollapseItemCards")) ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
       await this._enrichChatCard(html);
@@ -772,7 +782,8 @@ export default class ChatMessage5e extends foundry.documents.ChatMessage {
    * @type {ChatMessage5e}
    */
   getOriginatingMessage() {
-    return this.system.origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
+    const origin = this.system instanceof RollMessageData ? this.system.origin : null;
+    return origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
   }
 
   /* -------------------------------------------- */

@@ -81,7 +81,7 @@ export default class PropertyAttribution extends Application5e {
       sources: sources.map(entry => {
         if ( entry.label.startsWith("@") ) entry.label = this.getPropertyLabel(entry.label.slice(1));
         if ( (entry.type === "add") && (entry.value < 0) ) {
-          entry.negative = true;
+          entry.type = "subtract";
           entry.value = entry.value * -1;
         }
         return entry;

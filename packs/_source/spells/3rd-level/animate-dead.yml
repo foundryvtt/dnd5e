@@ -146,17 +146,17 @@ system:
         ability: ''
       profiles:
         - count: 1 + @scaling.increase * 2
-          name: ''
+          name: Skeleton (bones)
           _id: kF8801zzzposi50s
-          uuid: null
+          uuid: Compendium.dnd5e.monsters.Actor.nU8GN8La8DCt8SDb
           level:
             min: null
             max: null
           types: []
         - count: 1 + @scaling.increase * 2
-          name: ''
+          name: Zombie (corpse)
           _id: dnyb5YF9Kl4QGRAd
-          uuid: null
+          uuid: Compendium.dnd5e.monsters.Actor.NAISFPoNNgUCsEyW
           level:
             min: null
             max: null

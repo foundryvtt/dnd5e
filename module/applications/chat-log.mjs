@@ -55,11 +55,15 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
   async updateMessage(message, notify=false) {
     const trayTypes = CONFIG.ChatMessage.documentClass.TRAY_TYPES ?? ChatMessage5e.TRAY_TYPES;
     const card = this.element.querySelector(`.message[data-message-id="${message.id}"]`);
-    if ( card ) message._trayStates = new Map([
-      ...Array.from(card.querySelectorAll(".card-tray"))
-        .map(t => [t.className.replace(" collapsed", ""), t.classList.contains("collapsed")]),
-      ...Array.from(card.querySelectorAll(trayTypes.join(", "))).map(t => [t.tagName, t.open])
-    ]);
+    if ( card ) {
+      message._trayStates = new Map([
+        ...Array.from(card.querySelectorAll(".card-tray"))
+          .map(t => [t.className.replace(" collapsed", ""), t.classList.contains("collapsed")]),
+        ...Array.from(card.querySelectorAll(trayTypes.join(", "))).map(t => [t.tagName, t.open])
+      ]);
+      const header = card.querySelector(".card-header");
+      if ( header ) message._expanded = !header.classList.contains("collapsed");
+    }
     await super.updateMessage(message, notify);
   }
 

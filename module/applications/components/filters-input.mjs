@@ -210,7 +210,7 @@ export class FilterOperatorElement extends HTMLElement {
     const operator = this.getAttribute("operator");
     const symbol = operator?.endsWith("AND") ? _loc("DND5E.FILTER.Operator.And")
       : operator?.endsWith("OR") ? _loc("DND5E.FILTER.Operator.Or") : null;
-    if ( symbol ) this.querySelectorAll(":is(filter-comparison, filter-operator):not(:last-child)").forEach(e =>
+    if ( symbol ) this.querySelectorAll("& > :is(filter-comparison, filter-operator):not(:last-child)").forEach(e =>
       e.insertAdjacentHTML("afterend", `<span class="separator">${symbol}</span>`)
     );
     if ( operator?.startsWith("N") ) this.insertAdjacentHTML(

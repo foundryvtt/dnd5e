@@ -90,7 +90,7 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flavor: `${this.item.name} - ${this.roll.label || _loc("DND5E.OtherFormula")}`,
+        flavor: `${this.item.name} - ${this.roll.name || _loc("DND5E.OtherFormula")}`,
         type: "generic",
         system: { ...this.messageSources, targets: TargetsField.getDescriptors() }
       }

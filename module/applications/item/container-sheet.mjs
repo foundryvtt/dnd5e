@@ -256,12 +256,13 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Transform physical item from NPCs to its gear version
+    let gear = item;
     if ( this.item.actor && item.actor?.system.isNPC && (item.actor !== this.item.actor) && item.system.asGear ) {
-      item = await item.system.asGear();
+      gear = await item.system.asGear();
     }
 
     // Otherwise, create a new item & contents in this context
-    const toCreate = await Item5e.createWithContents([item], {
+    const toCreate = await Item5e.createWithContents([gear], {
       container: this.item,
       transformAll: (itemData, options) => this._onDropSingleItem(itemData, { ...options, event })
     });

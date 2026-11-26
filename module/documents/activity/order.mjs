@@ -87,8 +87,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
    */
   _finalizeCraft(usageConfig, updates) {
     const { craft } = usageConfig;
-    updates["system.craft"] = { item: craft.item, quantity: 1 };
-    if ( this.order === "harvest" ) updates["system.craft"].quantity = craft.quantity;
+    updates["system.craft"] = { item: craft.item, quantity: craft.quantity ?? 1 };
   }
 
   /* -------------------------------------------- */
@@ -110,11 +109,14 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+  async _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    await super._finalizeMessageConfig(usageConfig, messageConfig, results);
     const { costs, craft, trade } = usageConfig;
     const system = { costs: costs ?? {}, order: this.order };
-    if ( craft?.item ) system.craft = { item: craft.item, quantity: craft.quantity };
+    if ( craft?.item ) {
+      if ( this.order === "craft" ) craft.quantity = (await fromUuid(craft.item))?.system.quantity || 1;
+      system.craft = { item: craft.item, quantity: craft.quantity };
+    }
     if ( trade ) system.trade = {
       creatures: this._resolveTradedLivestock(trade),
       sell: trade.sell === true,

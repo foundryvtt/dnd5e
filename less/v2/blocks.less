@@ -216,7 +216,10 @@
   }
 
   .item-entry-details {
-    .item-entry-tag { font-style: italic; }
+    .item-entry-tag {
+      font-style: italic;
+      em { font-style: normal; }
+    }
     .item-entry-specifics {
       :is(dt, dd) { display: inline; }
       dt {

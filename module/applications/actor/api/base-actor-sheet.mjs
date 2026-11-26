@@ -1825,12 +1825,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Transform physical items from NPCs to their gear versions
+    let gear = item;
     if ( item.actor?.system.isNPC && (item.actor !== this.actor) && item.system.asGear ) {
-      item = await item.system.asGear();
+      gear = await item.system.asGear();
     }
 
     // Otherwise, create a new copy inside the container
-    const toCreate = await Item5e.createWithContents([item], {
+    const toCreate = await Item5e.createWithContents([gear], {
       container,
       transformFirst: itemData => {
         const options = { container: container.id };
@@ -1911,12 +1912,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     items = items.filter(i => !containers.has(i.system.container));
 
     // Transform physical items from NPCs to their gear versions
-    items = await Promise.all(items.map(i =>
+    const gear = await Promise.all(items.map(i =>
       i.actor?.system.isNPC && (i.actor !== this.actor) && i.system.asGear ? i.system.asGear() : i
     ));
 
     // Create the owned items & contents as normal
-    const toCreate = await Item5e.createWithContents(items, {
+    const toCreate = await Item5e.createWithContents(gear, {
       transformFirst: item => {
         const options = {};
         if ( item.pack ) options.compendiumUuid = item.uuid;

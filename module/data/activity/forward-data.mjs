@@ -34,7 +34,7 @@ export default class BaseForwardActivityData extends BaseActivityData {
   /** @inheritDoc */
   prepareFinalData(rollData) {
     const activity = this.item.system.activities.get(this.activity.id);
-    if ( activity && activity.activation.override ) this.activation = activity.toObject().activation;
+    if ( activity?.activation.override && !this.activation.override ) this.activation = activity.toObject().activation;
 
     super.prepareFinalData(rollData);
 

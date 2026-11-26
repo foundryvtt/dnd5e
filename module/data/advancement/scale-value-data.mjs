@@ -303,9 +303,9 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
   /** @inheritDoc */
   get display() {
     switch ( this.value ) {
-      case 0.125: return "&frac18;";
-      case 0.25: return "&frac14;";
-      case 0.5: return "&frac12;";
+      case 0.125: return "⅛";
+      case 0.25: return "¼";
+      case 0.5: return "½";
       default: return super.display;
     }
   }

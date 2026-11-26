@@ -83,8 +83,8 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+  async _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    await super._finalizeMessageConfig(usageConfig, messageConfig, results);
 
     // Store selected enchantment profile in message flag
     if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(
@@ -249,7 +249,8 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       })));
     }
 
-    if ( this.restrictions.categories.size && !this.restrictions.categories.has(item.system.type?.value) ) {
+    if ( this.restrictions.type && this.restrictions.categories.size
+      && !this.restrictions.categories.has(item.system.type?.value) ) {
       const getLabel = key => {
         const config = CONFIG.Item.dataModels[this.restrictions.type]?.itemCategories[key];
         if ( !config ) return key;
@@ -267,7 +268,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       )));
     }
 
-    if ( this.restrictions.properties.size
+    if ( this.restrictions.type && this.restrictions.properties.size
       && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
       errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.MissingProperty", {
         validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(

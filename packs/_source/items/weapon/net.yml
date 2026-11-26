@@ -151,7 +151,7 @@ system:
       sort: 0
     dnd5eactivity100:
       _id: dnd5eactivity100
-      type: save
+      type: check
       activation:
         type: action
         value: 1
@@ -173,8 +173,7 @@ system:
         override: false
       effects: []
       range:
-        value: '5'
-        units: ft
+        units: ''
         special: ''
         override: false
       target:
@@ -193,14 +192,14 @@ system:
           special: ''
         prompt: true
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
+      check:
         ability: str
+        associated: []
+        bonus: ''
         dc:
           calculation: ''
-          formula: ''
+          formula: '10'
+        visible: true
       uses:
         spent: 0
         recovery: []

@@ -222,9 +222,9 @@ effects:
           value: 0.5
           phase: initial
           priority: null
-        - key: system.abilities.dex.save.roll.mode
+        - key: system.abilities.dex.bonuses.save
           type: add
-          value: -1
+          value: -2
           phase: initial
           priority: null
     sort: 0
