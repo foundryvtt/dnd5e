@@ -178,7 +178,7 @@ export default class Bastion {
   #evaluateCraftOrder(facility, updates) {
     const { craft } = facility.system;
     updates["system.craft.item"] = null;
-    return { items: [{ uuid: craft.item, quantity: 1 }] };
+    return { items: [{ uuid: craft.item, quantity: craft.quantity }] };
   }
 
   /* -------------------------------------------- */

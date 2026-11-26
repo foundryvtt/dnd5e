@@ -290,7 +290,7 @@ export default function ActivityMixin(Base) {
       }
 
       // Create chat message
-      activity._finalizeMessageConfig(usageConfig, messageConfig, results);
+      await activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
 
       // Perform any final usage steps
@@ -703,7 +703,7 @@ export default function ActivityMixin(Base) {
      * @param {ActivityUsageResults} results                Final details on the activation.
      * @protected
      */
-    _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    async _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
       if ( this.metadata.usage.applyEffectsInChat ) {
         const effects = this.applicableEffects?.map(e => e.relativeUUID);

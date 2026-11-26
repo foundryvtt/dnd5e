@@ -83,8 +83,8 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+  async _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    await super._finalizeMessageConfig(usageConfig, messageConfig, results);
 
     // Store selected enchantment profile in message flag
     if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(
