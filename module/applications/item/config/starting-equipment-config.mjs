@@ -1,5 +1,6 @@
 import PhysicalItemTemplate from "../../../data/item/templates/physical-item.mjs";
 import { EquipmentEntryData } from "../../../data/item/templates/starting-equipment.mjs";
+import { nextSortValue } from "../../../utils.mjs";
 import DocumentSheet5e from "../../api/document-sheet.mjs";
 
 /**
@@ -131,13 +132,12 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
     let { action, depth, entryId, linkedUuid, startingEquipment } = submitData;
     startingEquipment = Object.values(startingEquipment ?? {});
 
-    const highestSort = startingEquipment.reduce((sort, i) => i.sort > sort ? i.sort : sort, 0);
     switch ( action ) {
       case "add-entry":
         startingEquipment.push({
           _id: foundry.utils.randomID(),
           group: entryId,
-          sort: highestSort + CONST.SORT_INTEGER_DENSITY,
+          sort: nextSortValue(startingEquipment),
           type: (depth < EquipmentEntryData.MAX_DEPTH) && !linkedUuid ? "OR" : "linked",
           key: linkedUuid
         });
