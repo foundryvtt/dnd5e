@@ -849,6 +849,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
 
+    if ( this.isSpell ) rollData.roll.properties.push("spell");
+
     rollConfig.applicationOptions = AppliedRules
       .collect(`${this.constructor.damageRuleCategory}:damageApplicationOptions`, this.actor, this.item)
       .filterWith(rollData)

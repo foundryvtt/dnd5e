@@ -918,9 +918,9 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       if ( !(d.type in CONFIG.DND5E.healingTypes) && modifications.ALL ) handler(d, "ALL");
     };
     const recordDamage = (d, category, changes, options) => {
-      const source = this.#changeHasEffect(category, d, options);
-      if ( source ) this.#setDamageActive(category, changes, source.type, source.subtype);
-      return !!source;
+      const sources = this.#changeHasEffect(category, d, options);
+      sources.forEach(s => this.#setDamageActive(category, changes, s.type, s.subtype));
+      return sources.length > 0;
     };
 
     for ( const d of damages ) {
@@ -1011,7 +1011,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @param {DamageDescription} damage                       Damage description to consider or a specific type.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
-   * @returns {{ type: "type"|"special", [subtype]: string }|null}
+   * @returns {{ type: "type"|"special", [subtype]: string }[]}
    */
   #changeHasEffect(category, damage, { options={} }={}) {
     const config = this.system.traits?.[`d${category.slice(0, 1)}`];
@@ -1020,32 +1020,36 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     const type = damage.type;
     const isHealingType = type in CONFIG.DND5E.healingTypes;
 
+    const sources = [];
+    const o = { options };
+
+    // Check filters against special resistance types
+    if ( !isHealingType ) {
+      for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
+        if ( !config?.value.has(key) || this.#changeIsIgnored(category, key, o) ) continue;
+        if ( filter.check(damage) ) sources.push({ type: "special", subtype: key });
+      }
+    }
+
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
       if ( downgrade(type) && this.#hasImmunity(type, options) ) return { type: "type" };
       for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
         if ( !downgrade(key) || !this.system.traits?.di?.value.has(key) || !filter.check(damage) ) continue;
-        if ( this.#hasImmunity(key, options) ) return { type: "special", subtype: key };
+        if ( this.#hasImmunity(key, options) ) return [{ type: "special", subtype: key }, ...sources];
       }
     }
 
     // If damage type is physical and bypass present in properties, skip further checks
     if ( CONFIG.DND5E.damageTypes[type]?.isPhysical && damage.properties?.size
-      && config?.bypasses?.intersection(damage.properties)?.size ) return null;
+      && config?.bypasses?.intersection(damage.properties)?.size ) return sources;
 
     // If specific damage type isn't ignored and actor either has all damage in this category
     // (healing types are excluded from "All Damage") or has specific damage type in this category
-    const o = { options };
     if ( !this.#changeIsIgnored(category, type, o)
-      && ((!isHealingType && config?.value.has("ALL")) || config?.value.has(type)) ) return { type: "type" };
+      && ((!isHealingType && config?.value.has("ALL")) || config?.value.has(type)) ) sources.unshift({ type: "type" });
 
-    // Check filters against special resistance types
-    for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
-      if ( !config?.value.has(key) || this.#changeIsIgnored(category, key, o) ) continue;
-      if ( filter.check(damage) ) return { type: "special", subtype: key };
-    }
-
-    return null;
+    return sources;
   }
 
   /* -------------------------------------------- */

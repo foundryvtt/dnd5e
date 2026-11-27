@@ -2451,6 +2451,16 @@ DND5E.damageResistanceTypes = {
     label: "DND5E.DAMAGE.Resistance.Falling",
     icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
     filter: new Filter({ k: "properties", o: "has", v: "falling" })
+  },
+  magical: {
+    label: "DND5E.DAMAGE.Resistance.Magical",
+    icon: "systems/dnd5e/icons/svg/action/magic.svg",
+    filter: new Filter({ k: "properties", o: "has", v: "mgc" })
+  },
+  spells: {
+    label: "DND5E.DAMAGE.Resistance.Spells",
+    icon: "systems/dnd5e/icons/svg/items/spell.svg",
+    filter: new Filter({ k: "properties", o: "has", v: "spell" })
   }
 };
 preLocalize("damageResistanceTypes", { key: "label" });
