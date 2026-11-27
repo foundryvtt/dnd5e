@@ -261,6 +261,7 @@ export default class VehicleData extends CommonTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.prof = 0;
+    this.prepareBaseAbilities();
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);

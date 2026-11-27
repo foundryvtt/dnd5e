@@ -277,6 +277,7 @@ export default class CreatureTemplate extends CommonTemplate {
     ability ??= skillData.ability;
     const abilityData = this.abilities[ability];
     skillData.ability = ability;
+    skillData.valid = abilityData?.valid ?? false;
     const originalSkill = originalSkills?.[skillId];
     if ( originalSkill?.value >= 1 ) {
       skillData.merged = true;
@@ -348,6 +349,7 @@ export default class CreatureTemplate extends CommonTemplate {
     for ( const [id, tool] of Object.entries(this.tools) ) {
       const ability = this.abilities[tool.ability];
       tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
+      tool.valid = ability?.valid ?? false;
 
       // Complete roll data
       rollData = { ...rollData };

@@ -1551,7 +1551,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     ], { rules: { category: "check", actor: this, rollData } });
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
-      mod: ability?.mod,
+      mod: ability?.valid ? ability?.mod : null,
       prof: prof?.hasProficiency ? prof.term : null,
       extraBonus: process.bonus,
       ruleBonus: bonus
@@ -1673,7 +1673,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
     ], { rules: { category: type, actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
-      mod: ability?.mod,
+      mod: ability?.valid ? ability?.mod : null,
       prof: ability?.[type].prof.hasProficiency ? ability[type].prof.term : null,
       ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null

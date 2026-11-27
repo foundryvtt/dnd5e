@@ -358,7 +358,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
         class: "colspan concentration",
         label: _loc("DND5E.Concentration"),
         abbr: _loc("DND5E.Concentration"),
-        save: { value: context.system.attributes.concentration.save }
+        save: { value: context.system.attributes.concentration.save },
+        valid: true
       };
     }
 
