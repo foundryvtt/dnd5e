@@ -32,8 +32,13 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     // Add a source of advantage or disadvantage.
     if ( (delta !== -1) && (delta !== 1) ) return value;
     const counts = this.constructor.getCounts(model, change.key);
-    if ( delta === 1 ) counts.advantages.count++;
-    else counts.disadvantages.count++;
+    if ( delta === 1 ) {
+      counts.advantages.count++;
+      counts.advantages.sources.push(change);
+    } else {
+      counts.disadvantages.count++;
+      counts.disadvantages.sources.push(change);
+    }
     return this.constructor.resolveMode(model, change, counts);
   }
 
@@ -43,8 +48,13 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   _applyChangeSubtract(value, delta, model, change) {
     if ( (delta !== -1) && (delta !== 1) ) return value;
     const counts = this.constructor.getCounts(model, change.key);
-    if ( delta === 1 ) counts.advantages.count--;
-    else counts.disadvantages.count--;
+    if ( delta === 1 ) {
+      counts.advantages.count--;
+      counts.advantages.sources.push(change);
+    } else {
+      counts.disadvantages.count--;
+      counts.disadvantages.sources.push(change);
+    }
     return this.constructor.resolveMode(model, change, counts);
   }
 
@@ -56,7 +66,10 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     if ( (delta !== -1) && (delta !== 0) ) return value;
     const counts = this.constructor.getCounts(model, change.key);
     counts.advantages.suppressed = true;
-    if ( delta === -1 ) counts.disadvantages.count++;
+    if ( delta === -1 ) {
+      counts.disadvantages.count++;
+      counts.disadvantages.sources.push(change);
+    }
     return this.constructor.resolveMode(model, change, counts);
   }
 
@@ -73,7 +86,9 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   _applyChangeOverride(value, delta, model, change) {
     // Force a given roll mode.
     if ( (delta === -1) || (delta === 0) || (delta === 1) ) {
-      this.constructor.getCounts(model, change.key).override = delta;
+      const counts = this.constructor.getCounts(model, change.key);
+      counts.override = delta;
+      counts.overrideSource = change;
       return delta;
     }
     return value;
@@ -87,7 +102,10 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     if ( (delta !== 1) && (delta !== 0) ) return value;
     const counts = this.constructor.getCounts(model, change);
     counts.disadvantages.suppressed = true;
-    if ( delta === 1 ) counts.advantages.count++;
+    if ( delta === 1 ) {
+      counts.advantages.count++;
+      counts.advantages.sources.push(change);
+    }
     return this.constructor.resolveMode(model, change, counts);
   }
 
@@ -100,29 +118,41 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
    * @param {DataModel} model                      The model containing the fields.
    * @param {string[]} keyPaths                    Paths to the individual fields to combine within the model.
    * @param {Partial<AdvantageModeData>} [counts]  External sources of advantage/disadvantage.
-   * @returns {{ advantage: boolean, disadvantage: boolean, mode: number }}
+   * @returns {{ advantage: boolean, disadvantage: boolean, mode: number, counts: AdvantageModeData }}
    */
   static combineFields(model, keyPaths, counts={}) {
     counts = foundry.utils.mergeObject({
       override: null,
-      advantages: { count: 0, suppressed: false },
-      disadvantages: { count: 0, suppressed: false }
+      overrideSource: null,
+      advantages: { count: 0, suppressed: false, sources: [] },
+      disadvantages: { count: 0, suppressed: false, sources: [] }
     }, counts);
     for ( const kp of keyPaths ) {
       const c = this.getCounts(model, kp);
       const src = foundry.utils.getProperty(model._source, kp) ?? 0;
-      if ( c.override !== null ) counts.override = c.override;
+      if ( c.override !== null ) {
+        counts.override = c.override;
+        counts.overrideSource = c.overrideSource;
+      }
       if ( c.advantages.suppressed ) counts.advantages.suppressed = true;
       if ( c.disadvantages.suppressed ) counts.disadvantages.suppressed = true;
       counts.advantages.count += c.advantages.count + Number(src === 1);
       counts.disadvantages.count += c.disadvantages.count + Number(src === -1);
+      counts.advantages.sources.push(...c.advantages.sources);
+      counts.disadvantages.sources.push(...c.disadvantages.sources);
+      if ( src ) {
+        const manual = { key: kp, type: "add", value: src, source: _loc("DND5E.AdvantageModeManual") };
+        if ( src === 1 ) counts.advantages.sources.push(manual);
+        else counts.disadvantages.sources.push(manual);
+      }
     }
     return {
       advantage: (((counts.advantages.count > 0) && (counts.override === null)) || (counts.override === 1))
         && !counts.advantages.suppressed,
       disadvantage: (((counts.disadvantages.count > 0) && (counts.override === null)) || (counts.override === -1))
         && !counts.disadvantages.suppressed,
-      mode: this.resolveMode(model, null, counts)
+      mode: this.resolveMode(model, null, counts),
+      counts
     };
   }
 
@@ -140,8 +170,9 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     const roll = foundry.utils.getProperty(model, parentKey) ?? {};
     return roll.modeCounts ??= {
       override: null,
-      advantages: { count: 0, suppressed: false },
-      disadvantages: { count: 0, suppressed: false }
+      overrideSource: null,
+      advantages: { count: 0, suppressed: false, sources: [] },
+      disadvantages: { count: 0, suppressed: false, sources: [] }
     };
   }
 
@@ -169,15 +200,16 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
 
   /**
    * Helper for setting the advantage mode programmatically.
-   * @param {DataModel} model                   The model the change is applied to.
-   * @param {string} keyPath                    Path to the advantage mode field on the model.
-   * @param {number} value                      An integer in the interval [-1, 1], indicating advantage (1),
-   *                                            disadvantage (-1), or neither (0).
+   * @param {DataModel} model                    The model the change is applied to.
+   * @param {string} keyPath                     Path to the advantage mode field on the model.
+   * @param {number} value                       An integer in the interval [-1, 1], indicating advantage (1),
+   *                                             disadvantage (-1), or neither (0).
    * @param {object} [options={}]
-   * @param {boolean} [options.override=false]  Override the mode rather than following the normal advantage rules.
-   * @returns {number}                          Final advantage value.
+   * @param {boolean} [options.override=false]   Override the mode rather than following the normal advantage rules.
+   * @param {Document|string} [options.source]   Document or localized label responsible for this change.
+   * @returns {number}                           Final advantage value.
    */
-  static setMode(model, keyPath, value, { override=false }={}) {
+  static setMode(model, keyPath, value, { override=false, source=null }={}) {
     const field = keyPath.startsWith("system.") ? model.system.schema.getField(keyPath.slice(7))
       : model.schema.getField(keyPath);
     if ( !field ) {
@@ -185,7 +217,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
       return 0;
     }
     const type = override ? "override" : "add";
-    const change = { key: keyPath, value, type };
+    const change = { key: keyPath, value, type, source };
     const final = field.applyChange(foundry.utils.getProperty(model, keyPath), model, change);
     foundry.utils.setProperty(model, keyPath, final);
     return final;
