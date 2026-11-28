@@ -17,6 +17,8 @@ export default class HitDice {
       this.classes.add(item);
       this.sizes.add(parseInt(item.system.hd.denomination.slice(1)));
     }
+
+    if ( actor.system.attributes?.hd ) Object.assign(this, actor.system.attributes.hd);
   }
 
   /* -------------------------------------------- */

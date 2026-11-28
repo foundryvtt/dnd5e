@@ -55,6 +55,9 @@ export default class CharacterData extends CreatureTemplate {
       attributes: new SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
+        hd: new SchemaField({
+          ...AttributesFields.hitDice
+        }, { label: "DND5E.HitDice", persisted: false }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
           bloodied: new NumberField({
