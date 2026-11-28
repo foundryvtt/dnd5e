@@ -673,7 +673,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( foundry.utils.getType(save?.ability) === "Set" ) save = {
         ...save, ability: save.ability.size > 2
           ? _loc("DND5E.AbbreviationDC")
-          : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k]?.abbreviation).filterJoin(" / ")
+          : Array.from(save.ability).map(k => k === "concentration" ? _loc("DND5E.CONCENTRATION.Abbreviation")
+            : CONFIG.DND5E.abilities[k]?.abbreviation).filterJoin(" / ")
       };
 
       const css = [];

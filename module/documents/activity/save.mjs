@@ -53,7 +53,8 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     const dc = this.save.dc.value;
 
     for ( const abilityId of this.save.ability ) {
-      const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
+      const ability = abilityId === "concentration"
+        ? _loc("DND5E.Concentration") : CONFIG.DND5E.abilities[abilityId]?.label ?? "";
       const promptTitle = _loc("DND5E.SavePromptTitle", { ability });
       const button = {
         action: "rollSave",
@@ -119,6 +120,8 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const { ability, dc } = message.system.getButton(target)?.dataset ?? {};
+    const abilityId = ability ?? this.save.ability.first();
+    const rollMethod = abilityId === "concentration" ? "rollConcentration" : "rollSavingThrow";
     const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.save.bonus ?? "", this.getRollData(), { missing: 0 });
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: bonus });
     for ( const token of targets ) {
@@ -126,11 +129,11 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
       const rollData = {
         event,
-        ability: ability ?? this.save.ability.first(),
         target: Number.isFinite(dc) ? dc : this.save.dc.value
       };
+      if ( abilityId !== "concentration" ) rollData.ability = abilityId;
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
-      await actor.rollSavingThrow(rollData, {}, {
+      await actor[rollMethod](rollData, {}, {
         data: { speaker, system: { ...this.messageSources, origin: message.id } }
       });
     }
